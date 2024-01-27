@@ -1,3 +1,4 @@
+/* ! START GLOBAL */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
 
 *{
@@ -44,7 +45,7 @@ ul{
     background-color: var(--main-color);
 }
 
-/* ! Global */
+/* !END Global */
 
 .page{
     display: flex;
@@ -52,8 +53,11 @@ ul{
 }
 
 /* ! LOGO */
-p.logo{
+img.logo{
     position:absolute;
+    width: 150px;
+    top: 20px;
+    left: 25px;
 }
 /* ! LOGO */
 
@@ -69,6 +73,21 @@ p.logo{
     border-top-right-radius: 70px;
 }
 
+.page .sidebar a.profile{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-top: 40px;
+    color: white;
+}
+
+.page .sidebar .profile img{
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+
 .page .sidebar li{
     margin: 0px 0 0px 10px;
     display: flex;
@@ -81,12 +100,11 @@ p.logo{
 }
 
 .page .sidebar li:nth-child(1){
-    margin-top: 70px;
+    margin-top: 20px;
 }
 
 /* *HOVER */
-.page .sidebar li.btn:hover,
-.page .sidebar li.active:active{
+.page .sidebar li:hover{
     background-color: var(--white);
 }
 /* *HOVER */
@@ -109,26 +127,25 @@ p.logo{
 /* * CURVE OUTSIDE */
 
 .page .sidebar li:hover::before{
-    content: "";
+    content: '';
     position: absolute;
-    width: 90px;
-    height: 90px;
+    width: 80px;
+    height: 80px;
     right: 0;
-    top: -90px;
+    top: -80px;
     border-radius: 50%;
-    box-shadow: 50px 50px 0 10px var(--white);
+    box-shadow: 40px 40px 0 white;
 }
 
 .page .sidebar li:hover::after{
-    content: "";
+    content: '';
     position: absolute;
-    width: 90px;
-    height: 90px;
+    width: 80px;
+    height: 80px;
     right: 0;
-    bottom: -90px;
+    bottom: -80px;
     border-radius: 50%;
-    /* background-color: aqua; */
-    box-shadow: 50px -50px 0 10px var(--white);
+    box-shadow: 40px -40px 0 var(--white);
 }
 /* * CURVE OUTSIDE */
 
@@ -171,7 +188,6 @@ p.logo{
         right: -10px;
         bottom: -50px;
         border-radius: 50%;
-        /* background-color: aqua; */
         box-shadow: 35px -35px 0 10px var(--white);
     }
 }
