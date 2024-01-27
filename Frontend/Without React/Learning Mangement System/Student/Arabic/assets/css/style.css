@@ -236,7 +236,8 @@ header .icons{
     margin-left: 10px;
 }
 
-header .icons i{
+header .icons a i{
+    color: var(--main-color);
     padding: 10px;
     position: relative;
 }

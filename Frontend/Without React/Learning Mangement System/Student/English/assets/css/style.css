@@ -224,13 +224,13 @@ header .current-page{
 }
 
 header .icons{
-    color: var(--main-color);
     margin-right: 10px;
 }
 
-header .icons i{
+header .icons a i{
     padding: 10px;
     position: relative;
+    color: var(--main-color);
 }
 
 /* ! END HEADER  */
