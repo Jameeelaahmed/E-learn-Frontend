@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Material</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- ! Font awesome -->
     <script src="https://kit.fontawesome.com/e2f07e1c8d.js" crossorigin="anonymous"></script>
@@ -14,6 +13,7 @@
 
 <body>
     <div class="page">
+        <!-- ! START SIDEBAR -->
         <img class="logo" src="assets/images/Untitled-65.png" alt="">
         <div id="sidebar" class="sidebar">
             <a href="#profile" class="profile">
@@ -59,7 +59,7 @@
                 </li>
             </ul>
         </div>
-        <!-- ! START SIDEBAR -->
+        <!-- ! END SIDEBAR -->
 
         <div class="content">
             <!-- ! START HEADER -->
@@ -68,9 +68,15 @@
                     <p>Classes / Computer Theory / Material </p>
                 </div>
                 <div class="icons">
-                    <i class="fa-solid fa-message"></i>
-                    <i class="fa-solid fa-bell"></i>
-                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <a href="messages.html">
+                        <i class="fa-solid fa-message"></i>
+                    </a>
+                    <a href="announcements.html">
+                        <i class="fa-solid fa-bell"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </a>
                 </div>
             </header>
             <!-- ! END HEADER -->
@@ -191,18 +197,6 @@
         </div>
     </div>
 
-    <!-- <script>
-        // Add active class to the current button (highlight it)
-        var header = document.getElementById("sidebar");
-        var btns = header.getElementsByClassName("btn");
-        for (var i = 0; i < btns.length; i++) {
-            btns[i].addEventListener("click", function () {
-                var current = document.getElementsByClassName("active");
-                current[0].className = current[0].className.replace(" active", "");
-                this.className += " active";
-            });
-        }
-    </script> -->
 </body>
 
 </html>
