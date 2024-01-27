@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ملحقات</title>
     <link rel="stylesheet" href="assets//css/style.css">
     <!-- ! Font awesome -->
     <script src="https://kit.fontawesome.com/e2f07e1c8d.js" crossorigin="anonymous"></script>
@@ -62,9 +62,15 @@
                     <p>المواد الدراسيه / نظريات الحوسبه / ... </p>
                 </div>
                 <div class="icons">
-                    <i class="fa-solid fa-message"></i>
-                    <i class="fa-solid fa-bell"></i>
-                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <a href="messages.html">
+                        <i class="fa-solid fa-message"></i>
+                    </a>
+                    <a href="announcemnts.html">
+                        <i class="fa-solid fa-bell"></i>
+                    </a>
+                    <a href="#logout">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </a>
                 </div>
             </header>
             <!-- ! END HEADER -->
@@ -185,18 +191,6 @@
         </div>
     </div>
 
-    <!-- <script>
-        // Add active class to the current button (highlight it)
-        var header = document.getElementById("sidebar");
-        var btns = header.getElementsByClassName("btn");
-        for (var i = 0; i < btns.length; i++) {
-            btns[i].addEventListener("click", function () {
-                var current = document.getElementsByClassName("active");
-                current[0].className = current[0].className.replace(" active", "");
-                this.className += " active";
-            });
-        }
-    </script> -->
 </body>
 
 </html>
