@@ -1,3 +1,4 @@
+/* ! START GLOBAL */
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 *{
     padding: 0;
@@ -51,7 +52,7 @@ ul{
     background-color: var(--main-color);
 }
 
-/* ! Global */
+/* ! END Global */
 
 .page{
     display: flex;
@@ -59,8 +60,11 @@ ul{
 }
 
 /* ! LOGO */
-p.logo{
+img.logo{
     position:absolute;
+    width: 150px;
+    top: 20px;
+    right: 25px;
 }
 /* ! LOGO */
 
@@ -115,7 +119,6 @@ p.logo{
 /* *HOVER */
 
 .page .sidebar li i{
-    /* color: var(--white); */
     color: var(--secondry-color);
     margin-left: 10px;
 }
@@ -136,10 +139,10 @@ p.logo{
 	position: absolute;
 	width: 80px;
 	height: 80px;
+    left: 0;
+    top: -80px;
 	border-radius: 50%;
-	top: -80px;
-	left: 0;
-	box-shadow: -40px 40px 0 white;
+	box-shadow: -40px 40px 0 var(--white);
 }
 .page .sidebar li:hover::after{
     content: '';
@@ -149,7 +152,7 @@ p.logo{
 	border-radius: 50%;
 	bottom: -80px;
 	left: 0;
-	box-shadow: -40px -40px 0 white;
+	box-shadow: -40px -40px 0 var(--white);
 }
 /* * CURVE OUTSIDE */
 
