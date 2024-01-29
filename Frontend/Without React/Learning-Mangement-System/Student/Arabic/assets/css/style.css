@@ -22,6 +22,7 @@ body{
     --white:white;
     --transition:0.4s;
     --main-shadow:5px 5px 0 0 var(--main-color);
+    --main-shadow-arabic:-5px 5px 0 0 var(--main-color);
     --grey-shadow: 0px 25px 25px -12px #e0e0ec;
     --title-font-size:24px;
     --subtitle-font-size:20px;
@@ -59,14 +60,6 @@ ul{
     min-height: 100vh;
 }
 
-/* ! LOGO */
-img.logo{
-    position:absolute;
-    width: 150px;
-    top: 20px;
-    right: 25px;
-}
-/* ! LOGO */
 
 /*! START  SIDEBAR */
 
@@ -156,50 +149,7 @@ img.logo{
 }
 /* * CURVE OUTSIDE */
 
-/* ? RESPONSIVE */
-@media(max-width:767px){
-    .page .sidebar{
-        width: 62px;
-        padding: 10px;
-    }
-    .page .sidebar li{
-        display: flex;
-        justify-content: center;
-        margin: 0;
-    }
 
-    .page .sidebar ul li a{
-        justify-content: center;
-    }
-
-    .page .sidebar ul li span{
-        display: none;
-    }
-
-    .page .sidebar li:hover::before{
-        content: "";
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        right: -10px;
-        top: -50px;
-        border-radius: 50%;
-        box-shadow: 35px 35px 0 10px var(--white);
-    }
-    
-    .page .sidebar li:hover::after{
-        content: "";
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        right: -10px;
-        bottom: -50px;
-        border-radius: 50%;
-        /* background-color: aqua; */
-        box-shadow: 35px -35px 0 10px var(--white);
-    }
-}
-/* ? RESPONSIVE */
 /*! END  SIDEBAR */
 
 .content{
@@ -247,36 +197,55 @@ header .icons a i{
 /* ! START CLASSES  */
 .page .content .classes{
     display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
-    margin: 30px;
+    grid-template-columns: repeat(auto-fill,minmax(230px,1fr));
+    margin:60px 30px;
     padding: 20px;
 }
 
 .page .content .classes .class{
-    min-height: 236px;
+    min-height: 220px;
     background-color: var(--light-grey);
-    margin: 0 10px 10px 10px;
-    border-radius:50px;
-    box-shadow:var(--main-shadow) ;
+    margin: 0 40px 60px 10px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    box-shadow:var(--main-shadow-arabic) ;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     transition: var(--transition);
+    position: relative;
 }
 
-.page .content .classes .class:hover{
+.page .content .classes .class::before{
+    content: "";
+    position: absolute;
+    height: 25px;
+    width: 100px;
+    background-color: var(--light-grey);
+    top: -25px;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 50px;
+    transition: var(--transition);
+}
+
+/* *HOVER */
+.page .content .classes .class:hover {
     background-color: var(--main-color);
 }
 
+.page .content .classes .class:hover::before{
+    background-color: var(--main-color);
+}
+/* *HOVER */
 
 .page .content .classes .class p:first-child{
     position: relative;
     top: 40px;
-    left: -30px;
+    left: -15px;
     font-weight: bold;
     color: var(--main-color);
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .page .content .classes .class:not(:last-child) p:last-child{
@@ -292,15 +261,17 @@ header .icons a i{
 .page .content .classes .class:last-child p{
     position: relative;
     top: 40px;
-    left: -30px;
+    left: -15px;
     font-weight: bold;
     color: var(--main-color);
-    font-size: 20px;
+    font-size:18px;
 }
 
+/* *HOVER */
 .page .content .classes .class:hover p{
     color: var(--white) !important;
 }
+/* *HOVER */
 
 
 /* ! END CLASSES  */
@@ -491,7 +462,7 @@ header .icons a i{
     width: 275px;
     background-color: var(--light-grey);
     padding: 15px 30px;
-    margin-top: 80px;
+    margin-top: 60px;
     border-radius: 19px;
     box-shadow: var(--main-shadow);
     height: fit-content;
@@ -525,22 +496,21 @@ header .icons a i{
 
 .right-sidebar .section{
     margin-top: 20px;
-    color: var(--main-color);
-    /* font-weight:; */
 }
 
-.right-sidebar .section p{
+.right-sidebar .section a{
     position: relative;
     display: flex;
     align-items: center;
+    color: var(--main-color);
 }
 
-.right-sidebar .section p:not(:last-child){
+.right-sidebar .section a:not(:last-child){
     margin-bottom: 10px;
 }
 
 
-.right-sidebar .section p:first-child::before{
+.right-sidebar .section a:first-child::before{
     content: "";
     position: absolute;
     height: 30px;
@@ -551,8 +521,81 @@ header .icons a i{
     border-bottom-left-radius: 8px;
 }
 
-
-
-
-
 /* ! LEFT RIGHT SIDEBAR */
+
+
+
+/* ! START ASSIGNMENT */
+.page .content .assingments{
+    /* display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    width: 73%;
+}
+
+
+.page .content .assingments a{
+    color: var(--main-color);
+}
+
+.page .content .assingments .assignment{
+    min-width: 230px;
+    height: 214px;
+    background-color: var(--light-grey);
+    margin: 40px 15px;
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    box-shadow: var(--main-shadow-arabic);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition);
+    position: relative;
+    padding:20px 20px;
+}
+
+/* *HOVER */
+
+.page .content .assingments .assignment:hover,
+.page .content .assingments .assignment:hover::before{
+    background-color: var(--main-color);
+    color: var(--white);
+}
+
+/* *HOVER */
+
+
+.page .content .assingments .assignment::before{
+    content: "";
+    position: absolute;
+    height: 25px;
+    width: 100px;
+    background-color: var(--light-grey);
+    right: 0;
+    top: -25px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 50px;
+    transition: var(--transition);
+}
+
+.page .content .assingments .assignment >p{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.page .content .assingments .assignment .info{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 12px;
+}
+
+.page .content .assingments .assignment .info>p{
+    margin-right: -30px;
+}
+
+/* ! END ASSIGNMENT */
