@@ -1,0 +1,895 @@
+/* ! START GLOBAL */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: "Open Sans", "sans-serif";
+    margin: 0;
+    background-color: var(--white);
+    counter-reset: Numbers;
+}
+
+:root {
+    --main-color: #084C61;
+    --secondry-color: #0E7290;
+    --light-grey: #f1f2f7;
+    --white: white;
+    --transition: 0.4s;
+    --main-shadow: 5px 5px 0 0 var(--main-color);
+    --grey-shadow: 0px 25px 25px -12px #e0e0ec;
+    --title-font-size: 24px;
+    --subtitle-font-size: 20px;
+    --normal-font-size: 18px;
+    --xs-font-size: 16px;
+    --title-font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--light-grey);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--main-color);
+}
+
+/* !END Global */
+
+.page {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ! LOGO */
+img.logo {
+    position: absolute;
+    width: 150px;
+    top: 20px;
+    left: 25px;
+}
+
+/* ! LOGO */
+
+/*! START  SIDEBAR */
+
+.page .sidebar {
+    background-color: var(--main-color);
+    color: var(--white);
+    padding: 20px 0 20px 0px;
+    position: relative;
+    width: 280px;
+    margin-top: 110px;
+    border-top-right-radius: 70px;
+}
+
+.page .sidebar a.profile {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-top: 40px;
+    color: white;
+}
+
+.page .sidebar .profile img {
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+
+.page .sidebar li {
+    margin: 0px 0 0px 10px;
+    display: flex;
+    align-items: center;
+    transition: var(--transition);
+    padding: 18px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    position: relative;
+}
+
+.page .sidebar li:nth-child(1) {
+    margin-top: 20px;
+}
+
+/* *HOVER */
+.page .sidebar li:hover {
+    background-color: var(--white);
+}
+
+/* *HOVER */
+
+.page .sidebar li i {
+    color: var(--secondry-color);
+    margin-right: 10px;
+}
+
+.page .sidebar li a span {
+    color: var(--white);
+    transition: var(--transition);
+}
+
+.page .sidebar li:hover a span {
+    color: var(--main-color);
+}
+
+/* * CURVE OUTSIDE */
+.page .sidebar li::before{
+    content: '';
+    position: absolute;
+    transition: var(--transition);
+}
+
+.page .sidebar li::after{
+    content: '';
+    position: absolute;
+    transition: var(--transition)
+}
+
+.page .sidebar li:hover::before {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    right: 0;
+    top: -80px;
+    border-radius: 50%;
+    box-shadow: 40px 40px 0 white;
+}
+
+.page .sidebar li:hover::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    right: 0;
+    bottom: -80px;
+    border-radius: 50%;
+    box-shadow: 40px -40px 0 var(--white);
+}
+
+/* * CURVE OUTSIDE */
+
+
+/*! END  SIDEBAR */
+
+.content {
+    width: 100%;
+    overflow: hidden;
+}
+
+.main-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ! START HEADER  */
+header {
+    background-color: white;
+    box-shadow: var(--grey-shadow);
+    margin-top: 20px;
+    margin-right: 15px;
+    padding: 15px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .current-page {
+    margin-left: 15px;
+    font-size: 17px;
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+header .icons {
+    margin-right: 10px;
+}
+
+header .icons a i {
+    padding: 10px;
+    position: relative;
+    color: var(--main-color);
+}
+
+/* ! END HEADER  */
+
+/* ! START CLASSES  */
+.page .content .classes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    margin:60px 30px;
+    padding: 20px;
+}
+
+.page .content .classes .class {
+    height: 220px;
+    background-color: var(--light-grey);
+    margin: 0 40px 60px 10px;
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    box-shadow: var(--main-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition);
+    position: relative;
+}
+
+.page .content .classes .class::before{
+    content: "";
+    position: absolute;
+    height: 25px;
+    width: 100px;
+    background-color: var(--light-grey);
+    top: -25px;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 50px;
+    transition: var(--transition);
+}
+
+/* *HOVER */
+.page .content .classes .class:hover {
+    background-color: var(--main-color);
+}
+
+.page .content .classes .class:hover::before{
+    background-color: var(--main-color);
+}
+/* *HOVER */
+
+.page .content .classes .class p:first-child {
+    position: relative;
+    top: 40px;
+    left: 15px;
+    font-weight: bold;
+    color: var(--main-color);
+    font-size: 18px;
+}
+
+.page .content .classes .class:not(:last-child) p:last-child {
+    position: relative;
+    bottom: 25px;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 30px;
+    color: var(--main-color);
+    font-size: 14px;
+}
+
+.page .content .classes .class:last-child p {
+    position: relative;
+    top: 40px;
+    left: 15px;
+    font-weight: bold;
+    color: var(--main-color);
+    font-size: 18px;
+}
+
+
+/* *HOVER */
+.page .content .classes .class:hover p {
+    color: var(--white) !important;
+}
+/* *HOVER */
+
+
+/* ! END CLASSES  */
+
+
+/* ! START MATERIAL */
+.page .content .material {
+    margin: 80px 40px;
+    width: calc(100% - 350px);
+    padding: 10px;
+}
+
+.page .content .material .week1,
+.page .content .material .week2 {
+    background-color: var(--light-grey);
+    box-shadow: var(--main-shadow);
+    border-radius: 8px;
+}
+
+.page .content .material .week1 .head,
+.page .content .material .week2 .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+/* * HOVER */
+.page .content .material .week1 .head:hover,
+.page .content .material .week2 .head:hover {
+    background-color: var(--main-color);
+}
+
+/* * HOVER */
+
+.page .content .material .week1 .head .info,
+.page .content .material .week2 .head .info {
+    display: flex;
+    align-items: center;
+}
+
+
+.page .content .material .week1 .head .info .num,
+.page .content .material .week2 .head .info .num {
+    font-weight: bold;
+    font-size: 30px;
+    color: var(--secondry-color);
+    margin-right: 30px;
+    position: relative;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page .content .material .week1 .head .info .num::before,
+.page .content .material .week2 .head .info .num::before {
+    counter-increment: Numbers;
+    content: counter(Numbers);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--white);
+    border: solid 4px var(--secondry-color);
+    z-index: -1;
+    left: 0;
+}
+
+.page .content .material .week1 .head .info .week,
+.page .content .material .week2 .head .info .week {
+    margin-left: 30px;
+    font-size: 20px;
+    color: var(--main-color);
+    font-weight: bolder;
+    transition: var(--transition);
+}
+
+/* *HOVER */
+.page .content .material .week1 .head:hover .info .week,
+.page .content .material .week2 .head:hover .info .week {
+    color: var(--light-grey);
+}
+
+/* *HOVER */
+
+.page .content .material .week1 .head i,
+.page .content .material .week2 .head i,
+.page .content .material .week2 .data .mat i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    color: var(--main-color);
+    transition: var(--transition);
+}
+
+/* *HOVER */
+.page .content .material .week1 .head:hover i,
+.page .content .material .week2 .head:hover i,
+.page .content .material .week2 .data .mat:hover i {
+    color: var(--light-grey);
+}
+
+/* *HOVER */
+
+.page .content .material .wek:not(:first-child) {
+    margin-top: 35px;
+}
+
+/* *week 2 */
+
+.page .content .material .week2 {
+    height: auto;
+    padding-bottom: 20px;
+}
+
+.page .content .material .week2 .data .mat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--white);
+    margin: 0 20px;
+    padding: 15px;
+    border-radius: 14px;
+    margin-top: 15px;
+}
+
+/* *HOVER */
+.page .content .material .week2 .data .mat:hover {
+    background-color: var(--main-color);
+}
+
+/* *HOVER */
+
+
+.page .content .material .week2 .data .mat p {
+    font-size: 18px;
+    color: var(--main-color);
+    transition: var(--transition);
+}
+
+/* *HOVER */
+.page .content .material .week2 .data .mat:hover p {
+    color: var(--light-grey);
+}
+
+/* *HOVER */
+
+/* *week 2 */
+
+
+/* *week3 */
+
+.page .content .material .week2 .data .main .mat-details {
+    background-color: var(--white);
+    margin: 0 50px;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+}
+
+.page .content .material .week2 .data .main .mat-details .mat-det {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+
+.page .content .material .week2 .data .main .mat-details .mat-det i {
+    font-size: 14px;
+    color: var(--main-color);
+    margin-right: 15px;
+}
+
+.page .content .material .week2 .data .main .mat-details .mat-det p {
+    color: var(--main-color);
+}
+
+/* *week3 */
+
+/* ! END MATERIAL */
+
+/* ! START RIGHT SIDEBAR */
+
+.right-sidebar {
+    width: 275px;
+    background-color: var(--light-grey);
+    padding: 15px 30px;
+    margin-top: 60px;
+    border-radius: 19px;
+    box-shadow: var(--main-shadow);
+    height: fit-content;
+    margin-right: 50px;
+}
+
+.right-sidebar p.title {
+    font-size: 28px;
+    color: var(--main-color);
+    font-weight: bolder;
+    margin-top: 30px;
+}
+
+.right-sidebar .instructor-profile {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+
+.right-sidebar .instructor-profile img {
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.right-sidebar .instructor-profile p {
+    color: var(--main-color);
+    font-weight: bolder;
+}
+
+.right-sidebar .section {
+    margin-top: 20px;
+    color: var(--main-color);
+}
+
+.right-sidebar .section a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: var(--main-color);
+}
+
+.right-sidebar .section a:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+
+.right-sidebar .section a:first-child::before {
+    content: "";
+    position: absolute;
+    height: 30px;
+    width: 8px;
+    background-color: var(--main-color);
+    left: -15px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* ! LEFT RIGHT SIDEBAR */
+
+/* * START SEONDARY SIDEBAR */
+.secondary-sidebar {
+    background-color: var(--white);
+    box-shadow: var(--main-shadow);
+    width: 280px;
+    padding: 20px 0 20px 0px;
+    margin-top: 70px;
+    border-radius: 21px;
+    height: 580px;
+}
+
+.secondary-sidebar li {
+    padding: 20px;
+    background-color: var(--light-grey);
+    margin: 15px 10px;
+    border-radius: 21px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.secondary-sidebar li a {
+    color: var(--main-color);
+    display: flex;
+    align-items: center;
+}
+
+.secondary-sidebar li .info {
+    display: block;
+    margin-left: 10px;
+    font-size: var();
+}
+
+.secondary-sidebar li .info span.name {
+    position: absolute;
+    bottom: 10px;
+    font-size: 12px;
+    right: 15px;
+}
+
+/* *HOVER */
+.secondary-sidebar li:hover {
+    background-color: var(--main-color);
+
+}
+
+.secondary-sidebar li:hover i {
+    color: white;
+}
+
+.secondary-sidebar li:hover span {
+    color: var(--white);
+}
+
+/* *HOVER */
+
+/* * START SEONDARY SIDEBAR */
+
+/* ! START VOTING */
+
+.main-section .container {
+    background-color: var(--light-grey);
+    padding: 20px 0 20px 20px;
+    margin: 40px 20px 0;
+    border-radius: 21px;
+    height: auto;
+    width: calc(100% - 300px);
+    box-shadow: var(--grey-shadow);
+    position: relative;
+
+}
+
+
+/* * START VOTING CONATINER */
+
+.main-section .container .radio-button {
+    margin-top: 30px;
+}
+
+.main-section .container p.description{
+    margin-top: 30px;
+}
+
+.main-section .container p {
+    color: var(--main-color);
+}
+
+.main-section .container .bar {
+    background-color: var(--white);
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 50px;
+    width: 70%;
+    display: flex;
+}
+
+.main-section .container .bar .grey {
+    background-color: var(--light-grey);
+    height: 25px;
+    width: 100%;
+    margin-left: 15px;
+    border-radius: 30px;
+}
+.main-section .container .bar .grey span.main-color{
+    box-shadow: 0 24px 25px -12px #084c61;
+}
+
+.main-section .container .bar .grey span {
+    display: block;
+    height: 100%;
+    background-color: var(--main-color);
+    border-radius: 30px;
+    position: relative;
+}
+
+.main-section .container .bar .grey span::before {
+    content: attr(data-progress);
+    position: absolute;
+    background-color: var(--main-color);
+    color: white;
+    padding: 3px;
+    top: -30px;
+    right: -18px;
+    text-align: center;
+    border-bottom-right-radius: 60px;
+    border-top-right-radius: 60px;
+    border-top-left-radius: 60px;
+    font-size: 12px;
+}
+
+/* * RADIO BUTTON */
+
+.main-section .container label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.375em;
+}
+
+
+.main-section .container label input {
+    display: none;
+}
+
+
+.main-section .container label input:checked+.radio-circle::before {
+    box-shadow: inset 0 0 0 0.4375em var(--main-color);
+}
+
+
+.main-section .container label .radio-circle::before {
+    display: flex;
+    flex-shrink: 0;
+    content: "";
+    background-color: #fff;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    margin-right: 0.375em;
+    transition: 0.25s ease;
+    box-shadow: inset 0 0 0 0.125em var(--main-color);
+}
+/* * RADIO BUTTON */
+
+/* * END VOTING CONATINER */
+
+/* ! END VOTING */
+
+/* ! START SURVEY */
+
+.page-content .container .question .option{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-content .container .question .option p{
+    padding: 20px 20px 20px 80px;
+    background-color: var(--white);
+    margin: 20px;
+    width: 70%;
+    border-radius: 40px;
+    position: relative;
+    transition: var(--transition);
+}
+
+.page-content .container .question .option p::before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 61.6px;
+    background-color: var(--main-color);
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+
+.page-content .container .question .option p:hover{
+    background-color: var(--main-color);
+    color: var(--white);
+}
+.page-content .container .question .option p:hover::before{
+    background-color: var(--white);
+}
+
+
+.button{
+    position: absolute;
+    right: 70px;
+    bottom: 30px;
+    background-color: var(--white);
+    color: var(--white);
+    box-shadow: inset 3.2px 3.2px 8px 0 #c8d0e7,
+                inset -3.2px -3.2px 8px 0 #c8d0e7;
+    padding: 15px 50px;
+    border-radius: 12px;
+}
+
+.button::before{
+    content: "Submit";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: calc(100% - 10%);
+    height: calc(100% - 30%);
+    border-radius: 12px;
+    background-color: var(--main-color);
+}
+
+/* ! END SURVEY */
+
+
+.right{
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+/* ! START QUIZ */
+
+.flag{
+    width: 275px !important;
+    background-color: var(--light-grey) !important;
+    padding: 15px 30px !important;
+    margin-top: 80px;
+    border-radius: 19px;
+    box-shadow: var(--main-shadow);
+    height: fit-content;
+    margin-right: 50px;
+}
+
+.page .content .page-content .right .flag .nums{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: aqua;
+}
+
+/* ! END QUIZ */
+
+
+
+/* ! START ASSIGNMENT */
+.page .content .assingments{
+    /* display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    width: 73%;
+}
+
+.page .content .assingments a{
+    color: var(--main-color);
+}
+
+.page .content .assingments .assignment{
+    min-width: 230px;
+    height: 214px;
+    background-color: var(--light-grey);
+    margin: 40px 15px;
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    box-shadow: var(--main-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition);
+    position: relative;
+    padding:20px 20px;
+}
+
+/* *HOVER */
+
+.page .content .assingments .assignment:hover,
+.page .content .assingments .assignment:hover::before{
+    background-color: var(--main-color);
+    color: var(--white);
+}
+
+/* *HOVER */
+
+
+.page .content .assingments .assignment::before{
+    content: "";
+    position: absolute;
+    height: 25px;
+    width: 100px;
+    background-color: var(--light-grey);
+    left: 0;
+    top: -25px;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 50px;
+    transition: var(--transition);
+}
+
+.page .content .assingments .assignment >p{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.page .content .assingments .assignment .info{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 12px;
+}
+
+.page .content .assingments .assignment .info>p{
+    margin-left: -30px;
+}
+
+/* ! END ASSIGNMENT */
+
