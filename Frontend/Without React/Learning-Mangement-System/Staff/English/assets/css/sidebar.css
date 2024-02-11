@@ -1,3 +1,9 @@
+.bars{
+    color: white;
+    padding: 18px;
+    margin: 0px 0 0px 10px;
+}
+
 .page .sidebar {
     background-color: var(--main-color);
     color: var(--white);
@@ -12,7 +18,7 @@
     display: flex;
     align-items: center;
     margin-left: 10px;
-    margin-top: 40px;
+    margin-top: 10px;
     color: white;
 }
 
@@ -27,6 +33,7 @@
     margin: 0px 0 0px 10px;
     display: flex;
     align-items: center;
+    transition: var(--transition);
     padding: 18px;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
@@ -51,6 +58,7 @@
 
 .page .sidebar li a span {
     color: var(--white);
+    transition: var(--transition);
 }
 
 .page .sidebar li:hover a span {
@@ -61,11 +69,13 @@
 .page .sidebar li::before{
     content: '';
     position: absolute;
+    transition: var(--transition);
 }
 
 .page .sidebar li::after{
     content: '';
     position: absolute;
+    transition: var(--transition)
 }
 
 .page .sidebar li:hover::before {
@@ -96,6 +106,10 @@
 /* !RESPONSIVE */
 
 @media(max-width:767px) {
+    .bars{
+        padding: 10px;
+        margin: 10px 0;
+    }
     .page .sidebar {
         width: 62px;
         padding: 10px;
