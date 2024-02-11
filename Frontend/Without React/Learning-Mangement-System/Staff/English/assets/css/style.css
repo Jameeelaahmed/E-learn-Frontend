@@ -1,0 +1,325 @@
+/* ! START GLOBAL */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: "Open Sans", "sans-serif";
+    margin: 0;
+    background-color: var(--white);
+    counter-reset: Numbers;
+}
+
+:root {
+    --main-color: #084C61;
+    --secondry-color: #0E7290;
+    --light-grey: #f1f2f7;
+    --white: white;
+    --transition: 0.4s;
+    --main-shadow: 5px 5px 0 0 var(--main-color);
+    --grey-shadow: 0px 25px 25px -12px #e0e0ec;
+    --title-font-size: 24px;
+    --subtitle-font-size: 20px;
+    --normal-font-size: 18px;
+    --xs-font-size: 16px;
+    --title-font-weight: bold;
+    --inset-shadow:inset 3.2px 3.2px 8px 0 #c8d0e7,
+    inset -3.2px -3.2px 8px 0 #c8d0e7;
+    --inset-input-shadow:-5px -5px 10px 0 #0a6d8be4 inset,
+                        5px 5px 10px 0 #161b1d1b inset;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+html::-webkit-scrollbar{
+    width: 8px;
+}
+
+html::-webkit-scrollbar-thumb{
+    background-color:var(--main-color);
+    border-radius: 8px;
+    scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar-track{
+    background-color:var(--light-grey);
+}
+
+
+
+/* !END Global */
+
+
+
+/* ! LOGO */
+img.logo {
+    position: absolute;
+    width: 150px;
+    top: 20px;
+    left: 25px;
+}
+
+/* ! LOGO */
+
+.page {
+    display: flex;
+    min-height: 100vh;
+}
+
+.content {
+    width: 100%;
+    overflow: hidden;
+}
+
+.main-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ! START LOGO RESPONSIVE */
+img.logo-responsive{
+    display: none;
+}
+
+@media(max-width:767px){
+    img.logo{
+        display: none;
+    }
+    img.logo-responsive{
+        display:block;
+        position: absolute;
+        width: 100px;
+        left: -18px;
+        top: 30px;
+    }
+}
+/* !END LOGO RESPONSIVE */
+
+
+/* ! START CLASSES  */
+.page .content .classes {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+
+/* ! END CLASSES  */
+
+
+/* ! START MATERIAL */
+.page .content .material {
+    margin: 80px 40px;
+    width: calc(100% - 350px);
+    padding: 10px;
+}
+
+
+.page .content .material .add-week{
+    color: var(--main-color);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-end;
+    font-size: 18px;
+}
+
+.page .content .material .add-week i{
+    margin-right: 10px;
+    font-size: 17px;
+}
+/* ! END MATERIAL */
+
+
+
+/* ! START VOTING */
+
+.main-section .container {
+    background-color: var(--light-grey);
+    padding: 20px 0 20px 20px;
+    margin: 40px 20px 0;
+    border-radius: 21px;
+    height: auto;
+    width: calc(100% - 300px);
+    box-shadow: var(--grey-shadow);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* * START VOTING CONATINER */
+
+
+.main-section .container p.description{
+    margin-top: 30px;
+}
+
+.main-section .container p {
+    color: var(--main-color);
+}
+
+.main-section .container .bar {
+    background-color: var(--white);
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 50px;
+    width: 80%;
+    display: flex;
+}
+
+.main-section .container .bar .grey {
+    background-color: var(--light-grey);
+    height: 25px;
+    width: 100%;
+    margin-left: 15px;
+    border-radius: 30px;
+}
+.main-section .container .bar .grey span.main-color{
+    box-shadow: 0 24px 25px -12px #084c61;
+}
+
+.main-section .container .bar .grey span {
+    display: block;
+    height: 100%;
+    background-color: var(--main-color);
+    border-radius: 30px;
+    position: relative;
+}
+
+.main-section .container .bar .grey span::before {
+    content: attr(data-progress);
+    position: absolute;
+    background-color: var(--main-color);
+    color: white;
+    padding: 3px;
+    top: -30px;
+    right: -18px;
+    text-align: center;
+    border-bottom-right-radius: 60px;
+    border-top-right-radius: 60px;
+    border-top-left-radius: 60px;
+    font-size: 12px;
+}
+
+
+/* * END VOTING CONATINER */
+
+/* ! END VOTING */
+
+
+
+/* ! START SURVEY */
+
+
+.survey-date-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-section .container .survey-date{
+    background-color: var(--main-color);
+    width: fit-content;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: var(--inset-input-shadow);
+}
+
+.main-section .container .survey-date p{
+    color: var(--white);
+    font-size: 11px;
+}
+
+/* ! END SURVEY */
+
+
+.right{
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+
+/* ! START ASSIGNMENT */
+.page .content .assingments{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    width: 73%;
+}
+
+.page .content .assingments a{
+    color: var(--main-color);
+}
+
+.page .content .assingments .assignment{
+    min-width: 230px;
+    height: 214px;
+    background-color: var(--light-grey);
+    margin: 40px 15px;
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    box-shadow: var(--main-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition);
+    position: relative;
+    padding:20px 20px;
+}
+
+/* *HOVER */
+
+.page .content .assingments .assignment:hover,
+.page .content .assingments .assignment:hover::before{
+    background-color: var(--main-color);
+    color: var(--white);
+}
+
+/* *HOVER */
+
+
+.page .content .assingments .assignment::before{
+    content: "";
+    position: absolute;
+    height: 25px;
+    width: 100px;
+    background-color: var(--light-grey);
+    left: 0;
+    top: -25px;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 50px;
+    transition: var(--transition);
+}
+
+.page .content .assingments .assignment >p{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.page .content .assingments .assignment .info{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 12px;
+}
+
+.page .content .assingments .assignment .info>p{
+    margin-left: -30px;
+}
+
+/* ! END ASSIGNMENT */
+

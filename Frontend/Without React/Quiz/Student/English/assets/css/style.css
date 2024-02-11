@@ -108,7 +108,7 @@ img.logo {
     margin: 0px 0 0px 10px;
     display: flex;
     align-items: center;
-    transition: var(--transition);
+    /* transition: var(--transition); */
     padding: 18px;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
@@ -144,13 +144,13 @@ img.logo {
 .page .sidebar li::before {
     content: '';
     position: absolute;
-    transition: var(--transition);
+    /* transition: var(--transition); */
 }
 
 .page .sidebar li::after {
     content: '';
     position: absolute;
-    transition: var(--transition)
+    /* transition: var(--transition); */
 }
 
 .page .sidebar li:hover::before {
