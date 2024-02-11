@@ -61,17 +61,6 @@ html::-webkit-scrollbar-track{
 /* !END Global */
 
 
-
-/* ! LOGO */
-img.logo {
-    position: absolute;
-    width: 150px;
-    top: 20px;
-    left: 25px;
-}
-
-/* ! LOGO */
-
 .page {
     display: flex;
     min-height: 100vh;
@@ -87,24 +76,6 @@ img.logo {
     justify-content: space-between;
 }
 
-/* ! START LOGO RESPONSIVE */
-img.logo-responsive{
-    display: none;
-}
-
-@media(max-width:767px){
-    img.logo{
-        display: none;
-    }
-    img.logo-responsive{
-        display:block;
-        position: absolute;
-        width: 100px;
-        left: -18px;
-        top: 30px;
-    }
-}
-/* !END LOGO RESPONSIVE */
 
 
 /* ! START CLASSES  */
