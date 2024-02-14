@@ -1,0 +1,85 @@
+.right-sidebar {
+    width: 275px;
+    background-color: var(--light-grey);
+    padding: 15px 30px;
+    margin-top: 60px;
+    border-radius: 19px;
+    box-shadow: var(--main-shadow);
+    height: fit-content;
+    margin-right: 50px;
+}
+
+.right-sidebar p.title {
+    font-size: 28px;
+    color: var(--main-color);
+    font-weight: bolder;
+    margin-top: 30px;
+}
+
+.right-sidebar .instructor-profile {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+
+.right-sidebar .instructor-profile img {
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.right-sidebar .instructor-profile p {
+    color: var(--main-color);
+    font-weight: bolder;
+}
+
+.right-sidebar .section {
+    margin-top: 20px;
+    color: var(--main-color);
+}
+
+.right-sidebar .section a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: var(--main-color);
+}
+
+.right-sidebar .section a:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+
+.right-sidebar .section a:first-child::before {
+    content: "";
+    position: absolute;
+    height: 30px;
+    width: 8px;
+    background-color: var(--main-color);
+    left: -15px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+} 
+
+
+/* ! RESPONSIVE*/
+
+@media(max-width:930px){
+    .main-section{
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .right-sidebar{
+        display: none;
+    }
+
+    .page .content .material {
+        width: calc(100% - 10%);
+        margin: 20px 10px;
+    }
+}
