@@ -41,25 +41,25 @@ function Sidebar () {
       <ul>
         <li>
           <a href="#">
-            <i class="fa-solid fa-house"></i>
+            <i className="fa-solid fa-house"></i>
             <span className={!isOpen ? `hidden` : ``}>{ lang("main") }</span>
           </a>
         </li>
         <li>
           <a className="active" href="#">
-            <i class="fa-solid fa-chalkboard-user"></i>
+            <i className="fa-solid fa-chalkboard-user"></i>
             <span className={!isOpen ? `hidden` : ``}>{ lang("classes") }</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <i class="fa-solid fa-square-poll-vertical"></i>
+            <i className="fa-solid fa-square-poll-vertical"></i>
             <span className={!isOpen ? `hidden` : ``}>{ lang("survey") }</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <i class="fa-solid fa-check-to-slot"></i>
+            <i className="fa-solid fa-check-to-slot"></i>
             <span className={!isOpen ? `hidden` : ``}>{ lang("voting") }</span>
           </a>
         </li>

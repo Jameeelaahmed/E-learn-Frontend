@@ -8,6 +8,7 @@
     justify-content: center;
     margin-top: 40px;
     margin: 10px auto;
+    z-index: 100;
 }
 
 .avatar {
@@ -21,7 +22,6 @@
 }
 
 .personal{
-  
     margin: 20px auto;
     width: 1092px;
     height: auto;
