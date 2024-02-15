@@ -47,8 +47,8 @@
         font-weight: bolder;
     }
     .main-section .responsive-bar a{
-       /* padding: 12px;
-       font-size: 10px; */
+       padding: 12px;
+       font-size: 10px;
        width: 200px;
     }
 }
