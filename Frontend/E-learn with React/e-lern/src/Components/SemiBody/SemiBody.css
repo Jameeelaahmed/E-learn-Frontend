@@ -1,0 +1,14 @@
+.semi-body{
+    font-family: "Open Sans", "sans-serif";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 100vh;
+    /* background-color: #084C61; */
+    position: relative;
+    overflow: hidden;
+    background-image: url(../../assets/garden.jpg);
+    background-repeat: no-repeat;
+    background-size:cover ;
+}

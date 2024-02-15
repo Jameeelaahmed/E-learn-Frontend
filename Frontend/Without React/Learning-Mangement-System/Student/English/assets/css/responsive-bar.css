@@ -36,8 +36,20 @@
 @media(max-width:615px){
     .main-section .responsive-bar{
         width: 250px;
-        font-size: 9px;
+        font-size: 18px;
         font-weight: bolder;
+    }
+}
+@media(max-width:580px){
+    .main-section .responsive-bar{
+        width: 200px;
+        font-size: 18px;
+        font-weight: bolder;
+    }
+    .main-section .responsive-bar a{
+       /* padding: 12px;
+       font-size: 10px; */
+       width: 200px;
     }
 }
 
