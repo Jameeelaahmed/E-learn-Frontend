@@ -1,13 +1,13 @@
 .container {
-    width: 1250px;
+    width: 1150px;
     height: auto;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     background-color: #F1F2F7;
     justify-content: center;
-    margin-top: 40px;
-    margin: 10px auto;
+    margin-top: 60px;
+    margin: 20px auto;
 }
 
 .avatar {
@@ -20,56 +20,129 @@
     border-radius: 30px;
 }
 
-.personal{
-  
+.personal {
     margin: 20px auto;
     width: 1092px;
     height: auto;
     border-radius: 9px;
-    border: thin solid rgb(8 76 97 / 69%) ;
+    border: thin solid rgb(8 76 97 / 69%);
 }
-.personal p{
+
+.personal p {
     font-size: 24px;
     font-weight: 500;
-    margin-left: 10px;
+    margin-left: 30px;
     margin-top: 10px;
 }
-.personal .info p:first-child{
+
+.personal .info p:first-child {
     font-size: 20px;
     font-weight: normal;
     color: #084c61;
+
 }
-.personal .info p:not(:first-child){
+
+.personal .info p:not(:first-child) {
     font-size: 20px;
     font-weight: 300;
     color: #3f3f3f;
 }
-.col1{
+
+.col1 {
     display: flex;
     justify-content: center;
     flex-direction: column;
     margin-right: 150px;
+    margin-left: 10px;
 }
-.row
-{
+
+.row {
     display: flex;
     flex-direction: row;
     margin-top: 10px;
 }
-.row-security{
+
+.row-security {
     display: flex;
     flex-direction: row;
     margin-top: 10px;
     margin-bottom: 20px;
     justify-content: space-between;
 }
-.info{
-    margin-bottom: 20px 
+
+.info {
+    margin-bottom: 20px
 }
-.edit{
-    margin-right: 10px;
+
+.edit {
+    width: 90px;
+    height: 40px;
+    margin-right: 22px;
+    margin-top: 5px;
     color: #084c61;
     font-size: 18px;
     border-radius: 5px;
-    border: thin solid rgb(8 76 97 / 69%) ;
+    border: thin solid rgb(8 76 97 / 69%);
+}
+
+@media(max-width:992px) {
+    .container {
+        max-width: 930px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .avatar{
+        margin-left: 300px;
+    }
+    .personal {
+        max-width: 700px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .col1 {
+        margin-right: 60px;
+    }
+}
+@media (max-width:768px){
+    .container {
+        max-width: 520px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .avatar{
+        margin-left: 200px;
+    }
+    .personal {
+        max-width: 500px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .row{
+        flex-direction: column;
+    }
+    .col1 {
+        margin-right: 10px;
+    }
+}
+@media(max-width:576px){
+    .container {
+        max-width: 470px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .avatar{
+        margin-left: 170px;
+    }
+    .personal {
+        max-width: 440px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .row{
+        flex-direction: column;
+    }
+    .col1 {
+        margin-right: 10px;
+    }
 }
