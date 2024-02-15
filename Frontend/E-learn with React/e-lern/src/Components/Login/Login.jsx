@@ -1,51 +1,55 @@
 import { useState } from 'react';
-import './Login.css'
-export default function Login(){
-    // ! request canceled
-    function handleSubmit(event){
-        event.preventDefault();
-    }
-    // ! request canceled
+import './Login.css';
 
-    const [enteredValue,setEnteredValue]=useState({
-        userName:'',
-        password:''
-    })
-    function handleInputChange(indentefier,value){
-        setEnteredValue((preValues)=>({
-            ...preValues,
-            [indentefier]:value
-        }))
+export default function Login() {
+    function handleSubmit(event) {
+        event.preventDefault();
+        // Your login logic can go here
     }
-    return(
+
+    const [enteredValue, setEnteredValue] = useState({
+        userName: '',
+        password: ''
+    });
+
+    function handleInputChange(identifier, value) {
+        setEnteredValue((prevValues) => ({
+            ...prevValues,
+            [identifier]: value
+        }));
+    }
+
+    return (
         <>
-        {/* <!-- <img src="assets/images/undraw_login_re_4vu2.svg" alt=""> --> */}
-        <div className="square-one"></div>
-        <div className="square-two"></div>
-        <div className="login">
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <div className="user-name">
-                    <label htmlFor="">user-name</label>
-                    <input 
-                    type="number"
-                    onChange={(event)=>handleInputChange('userName',event.target.value)}
-                    value={enteredValue.userName}></input>
-                </div>
-                <div className="password">
-                    <label htmlFor="">password</label>
-                    <input 
-                    type="password"
-                    onChange={(event)=>handleInputChange('password',event.target.value)}
-                    value={enteredValue.email}></input>
-                </div>
-                <input type="submit" value="Login"></input>
-                <div className="forget">
-                    <p>forget your Password?</p>
-                    <a href="">Reset Password</a>
-                </div>
-            </form>
-        </div>
+            <img src="../../assets/undraw_login_re_4vu2.svg" alt="" />
+            <div className="square-one"></div>
+            <div className="square-two"></div>
+            <div className="login">
+                <h1>تسجيل دخول</h1>
+                <form onSubmit={handleSubmit}>
+                    <div className="user-name">
+                        <label htmlFor="">اسم المستخدم</label>
+                        <input
+                            type="number"
+                            onChange={(event) => handleInputChange('userName', event.target.value)}
+                            value={enteredValue.userName}
+                        />
+                    </div>
+                    <div className="password">
+                        <label htmlFor="">كلمة المرور</label>
+                        <input
+                            type="password"
+                            onChange={(event) => handleInputChange('password', event.target.value)}
+                            value={enteredValue.password}
+                        />
+                    </div>
+                    <input type="submit" value="Login" />
+                    <div className="forget">
+                        <p>هل نسيت كلمة السر؟</p>
+                        <a href="">اعادة تعيين كلمة المرور</a>
+                    </div>
+                </form>
+            </div>
         </>
-    )
+    );
 }

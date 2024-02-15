@@ -49,17 +49,7 @@ html::-webkit-scrollbar-track{
 }
 
 
-/* body::before{
-    content: "";
-    position: absolute;
-    width: 250px;
-    height: 250px;
-    border-radius: 25px;
-    top: -20px;
-    right: -80px;
-    transform: rotate(70deg);
-    background-color: #d9d9d935;
-}
+
 
 .square-one,
 .square-two{
@@ -68,15 +58,15 @@ html::-webkit-scrollbar-track{
     height: 50px;
     background-color: #d9d9d935;
     border-radius: 10px;
-} */
+}
 
 .square-one{
-    right: 200px;
+    left: 200px;
     transform: rotate(70deg);
 }
 
 .square-two{
-    right: 350px;
+    left: 350px;
     top: 150px;
     transform: rotate(-70deg);
 }
@@ -90,10 +80,11 @@ img{
     position: absolute;
     width: 350px;
     top: 55.5%;
-    left: 25%;
+    right: 25%;
 }
+
 .login{
-    background-color: rgba(255, 255, 255, 0.818);
+    background-color: rgb(255, 255, 255);
     height: 500px;
     padding: 20px;
     width: 370px;
@@ -172,7 +163,7 @@ form{
 }
 
 .login .forget p{
-    margin-right: 5px;
+    margin-left: 5px;
 }
 
 .login .forget a{
@@ -190,11 +181,6 @@ form{
     }
 }
 
-@media(max-width:768px){
-    body::before{
-        display: none;
-    }
-}
 
 @media(max-width:425px){
     .login{
@@ -206,6 +192,4 @@ form{
     .login input[type="password"]{
         width: 250px;
     }
-
-
 }
