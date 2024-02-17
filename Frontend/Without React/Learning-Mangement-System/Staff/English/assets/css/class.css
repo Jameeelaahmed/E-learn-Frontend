@@ -1,4 +1,4 @@
-.page .content .classes .class {
+.page .page-content .classes .class {
     min-width: 230px;
     height: 214px;
     background-color: var(--light-grey);
@@ -15,7 +15,7 @@
     padding:20px 20px;
 }
 
-.page .content .classes .class::before{
+.page .page-content .classes .class::before{
     content: "";
     position: absolute;
     height: 25px;
@@ -29,16 +29,16 @@
 }
 
 /* *HOVER */
-.page .content .classes .class:hover {
+.page .page-content .classes .class:hover {
     background-color: var(--main-color);
 }
 
-.page .content .classes .class:hover::before{
+.page .page-content .classes .class:hover::before{
     background-color: var(--main-color);
 }
 /* *HOVER */
 
-.page .content .classes .class p:first-child {
+.page .page-content .classes .class p:first-child {
     position: relative;
     top: 20px;
     font-weight: bold;
@@ -46,7 +46,7 @@
     font-size: 18px;
 }
 
-.page .content .classes .class:not(:last-child) p:last-child {
+.page .page-content .classes .class:not(:last-child) p:last-child {
     position: relative;
     bottom: 15px;
     display: flex;
@@ -56,7 +56,7 @@
     font-size: 14px;
 }
 
-.page .content .classes .class:last-child p {
+.page .page-content .classes .class:last-child p {
     position: relative;
     top: 20px;
     font-weight: bold;
@@ -66,7 +66,7 @@
 
 
 /* *HOVER */
-.page .content .classes .class:hover p {
+.page .page-content .classes .class:hover p {
     color: var(--white) !important;
 }
 /* *HOVER */
@@ -74,7 +74,7 @@
 
 /* ! START CLASSES RESPONISIVE */
 @media(max-width:767px){
-    .page .content .classes .class{
+    .page .page-content .classes .class{
         height: 150px;
     }
 }
