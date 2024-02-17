@@ -1,0 +1,41 @@
+.vs-navigation-bar-responsive{
+    display: none;
+}
+
+@media(max-width:930px){
+    .main-section .vs-navigation-bar{
+        display: none;
+    }
+
+    .vs-navigation-bar-responsive{
+        display: flex;
+        box-shadow: var(--main-shadow-arabic);
+        overflow-x: auto;
+        height: 110px;
+        margin-top: 60px;
+        width: 88%;
+        border-radius: 20px;
+        padding-top: 15px;
+    }
+
+    .vs-navigation-bar-responsive::-webkit-scrollbar{
+        width: 0px;
+    }
+
+    .vs-navigation-bar-responsive .box{
+        min-width: 130px;
+        height: 80px;
+        background-color: var(--light-grey);
+        margin-left: 10px;
+        padding: 15px;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: var(--main-color);
+    }
+
+    .vs-navigation-bar-responsive .box p:last-child{
+        align-self: flex-end;
+    }
+}

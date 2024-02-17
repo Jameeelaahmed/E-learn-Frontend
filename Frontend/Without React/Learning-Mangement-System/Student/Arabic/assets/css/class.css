@@ -3,10 +3,10 @@
     height: 214px;
     background-color: var(--light-grey);
     margin: 40px 15px;
-    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
-    box-shadow: var(--main-shadow);
+    box-shadow: var(--main-shadow-arabic);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -21,10 +21,10 @@
     height: 25px;
     width: 100px;
     background-color: var(--light-grey);
-    left: 0;
+    right: 0;
     top: -25px;
-    border-top-right-radius: 25px;
-    border-top-left-radius: 50px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 50px;
     transition: var(--transition);
 }
 
@@ -51,7 +51,7 @@
     bottom: 15px;
     display: flex;
     justify-content: flex-end;
-    margin-right: 10px;
+    margin-left: 10px;
     color: var(--main-color);
     font-size: 14px;
 }

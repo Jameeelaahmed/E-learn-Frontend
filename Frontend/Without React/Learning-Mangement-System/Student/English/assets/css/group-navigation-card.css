@@ -1,4 +1,4 @@
-.right-sidebar {
+.group-navigation-card{
     width: 275px;
     background-color: var(--light-grey);
     padding: 15px 30px;
@@ -6,52 +6,52 @@
     border-radius: 19px;
     box-shadow: var(--main-shadow);
     height: fit-content;
-    margin-right: 50px;
+    /* margin-right: 50px; */
 }
 
-.right-sidebar p.title {
+.group-navigation-card p.group-title {
     font-size: 28px;
     color: var(--main-color);
     font-weight: bolder;
     margin-top: 30px;
 }
 
-.right-sidebar .instructor-profile {
+.group-navigation-card .instructor-profile {
     display: flex;
     align-items: center;
     margin-top: 15px;
 }
 
 
-.right-sidebar .instructor-profile img {
+.group-navigation-card .instructor-profile img {
     width: 40px;
     border-radius: 50%;
     margin-right: 20px;
 }
 
-.right-sidebar .instructor-profile p {
+.group-navigation-card .instructor-profile p {
     color: var(--main-color);
     font-weight: bolder;
 }
 
-.right-sidebar .section {
+.group-navigation-card .group-sections{
     margin-top: 20px;
     color: var(--main-color);
 }
 
-.right-sidebar .section a {
+.group-navigation-card .group-sections a {
     position: relative;
     display: flex;
     align-items: center;
     color: var(--main-color);
 }
 
-.right-sidebar .section a:not(:last-child) {
+.group-navigation-card .group-sections a:not(:last-child) {
     margin-bottom: 10px;
 }
 
 
-.right-sidebar .section a:first-child::before {
+.group-navigation-card .group-sections a:first-child::before {
     content: "";
     position: absolute;
     height: 30px;
@@ -74,11 +74,11 @@
         transform: translateX(-50%);
     }
 
-    .right-sidebar{
+    .group-navigation-card{
         display: none;
     }
 
-    .page .content .material {
+    .page .page-content .material {
         width: calc(100% - 10%);
         margin: 20px 10px;
     }

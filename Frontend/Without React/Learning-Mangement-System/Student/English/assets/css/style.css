@@ -66,7 +66,7 @@ html::-webkit-scrollbar-track{
     min-height: 100vh;
 }
 
-.content {
+.page-content {
     width: 100%;
     overflow: hidden;
 }
@@ -79,7 +79,7 @@ html::-webkit-scrollbar-track{
 
 
 /* ! START CLASSES  */
-.page .content .classes {
+.page .page-content .classes {
     display: flex;
     flex-wrap: wrap;
     padding: 20px;
@@ -89,65 +89,45 @@ html::-webkit-scrollbar-track{
 /* ! END CLASSES  */
 
 
-/* ! START MATERIAL */
-.page .content .material {
-    margin: 80px 40px;
-    width: calc(100% - 350px);
-    padding: 10px;
-}
-
-/* ! END MATERIAL */
-
 
 
 /* ! START VOTING */
 
-.main-section .container {
-    background-color: var(--light-grey);
-    padding: 20px 0 20px 20px;
-    margin: 40px 20px 0;
-    border-radius: 21px;
-    height: auto;
-    width: calc(100% - 300px);
-    box-shadow: var(--grey-shadow);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
 
 
 /* * START VOTING CONATINER */
 
 
-.main-section .container p.description{
+.main-section  .question-container p.description{
     margin-top: 30px;
 }
 
-.main-section .container p {
+.main-section  .question-container p {
     color: var(--main-color);
 }
 
-.main-section .container .bar {
+.main-section  .question-container .bar {
     background-color: var(--white);
     margin: 20px 0;
     padding: 20px;
     border-radius: 50px;
     width: 80%;
     display: flex;
+    align-items: center;
 }
 
-.main-section .container .bar .grey {
+.main-section  .question-container .bar .grey {
     background-color: var(--light-grey);
     height: 25px;
     width: 100%;
     margin-left: 15px;
     border-radius: 30px;
 }
-.main-section .container .bar .grey span.main-color{
+.main-section  .question-container .bar .grey span.main-color{
     box-shadow: 0 24px 25px -12px #084c61;
 }
 
-.main-section .container .bar .grey span {
+.main-section  .question-container .bar .grey span {
     display: block;
     height: 100%;
     background-color: var(--main-color);
@@ -155,7 +135,7 @@ html::-webkit-scrollbar-track{
     position: relative;
 }
 
-.main-section .container .bar .grey span::before {
+.main-section  .question-container .bar .grey span::before {
     content: attr(data-progress);
     position: absolute;
     background-color: var(--main-color);
@@ -179,23 +159,9 @@ html::-webkit-scrollbar-track{
 
 /* ! START SURVEY */
 
-
-.survey-date-container{
+.question-footer{
     display: flex;
     justify-content: space-between;
-}
-
-.main-section .container .survey-date{
-    background-color: var(--main-color);
-    width: fit-content;
-    padding: 10px;
-    border-radius: 15px;
-    box-shadow: var(--inset-input-shadow);
-}
-
-.main-section .container .survey-date p{
-    color: var(--white);
-    font-size: 11px;
 }
 
 /* ! END SURVEY */
@@ -204,12 +170,29 @@ html::-webkit-scrollbar-track{
 .right{
     display: flex;
     flex-direction: column;
-    gap: 0px;
+    width: fit-content;
 }
 
 
+/* ! START MATERIAL */
+.page .page-content .weeks {
+    margin: 80px 40px;
+    width: calc(100% - 350px);
+    padding: 10px;
+}
+
+@media(max-width:930px){
+    .page .page-content .weeks{
+        width: calc(100% - 10%);
+        margin: 20px 10px;
+    }
+}
+
+
+/* ! END MATERIAL */
+
 /* ! START ASSIGNMENT */
-.page .content .assingments{
+.page .page-content .assingments{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -217,11 +200,11 @@ html::-webkit-scrollbar-track{
     width: 73%;
 }
 
-.page .content .assingments a{
+.page .page-content .assingments a{
     color: var(--main-color);
 }
 
-.page .content .assingments .assignment{
+.page .page-content .assingments .assignment{
     min-width: 230px;
     height: 214px;
     background-color: var(--light-grey);
@@ -240,8 +223,8 @@ html::-webkit-scrollbar-track{
 
 /* *HOVER */
 
-.page .content .assingments .assignment:hover,
-.page .content .assingments .assignment:hover::before{
+.page .page-content .assingments .assignment:hover,
+.page .page-content .assingments .assignment:hover::before{
     background-color: var(--main-color);
     color: var(--white);
 }
@@ -249,7 +232,7 @@ html::-webkit-scrollbar-track{
 /* *HOVER */
 
 
-.page .content .assingments .assignment::before{
+.page .page-content .assingments .assignment::before{
     content: "";
     position: absolute;
     height: 25px;
@@ -262,19 +245,19 @@ html::-webkit-scrollbar-track{
     transition: var(--transition);
 }
 
-.page .content .assingments .assignment >p{
+.page .page-content .assingments .assignment >p{
     font-size: 20px;
     font-weight: bold;
 }
 
-.page .content .assingments .assignment .info{
+.page .page-content .assingments .assignment .assignment-info{
     display: flex;
     justify-content: space-around;
     align-items: center;
     font-size: 12px;
 }
 
-.page .content .assingments .assignment .info>p{
+.page .page-content .assingments .assignment .assignment-info>p{
     margin-left: -30px;
 }
 

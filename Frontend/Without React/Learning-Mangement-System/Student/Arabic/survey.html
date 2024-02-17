@@ -4,8 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>استطلاع رأي</title>
+    <title>Survey</title>
     <!-- ! CSS -->
+    <link rel="stylesheet" href="assets/css/question-container.css">
+    <link rel="stylesheet" href="assets/css/vs-navigation-bar-reponsive.css">
+    <link rel="stylesheet" href="assets/css/logo.css">
+    <link rel="stylesheet" href="assets/css/button.css">
+    <link rel="stylesheet" href="assets/css/option.css">
+    <link rel="stylesheet" href="assets/css/date-details.css">
+    <link rel="stylesheet" href="assets/css/vs-navigation-bar.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/sidebar.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <!-- ! Font awesome -->
@@ -15,168 +24,170 @@
 </head>
 
 <body>
-
+    <div class="page">
+        <img class="logo" src="assets/images/Untitled-65.png" alt="">
+        <img class="logo-responsive" src="assets/images/Untitled-4.png" alt="">
+        <!-- ! START SIDEBAR -->
+        <div class="sidebar">
+            <a href="#profile" class="profile">
+                <img src="assets/images/avatar.jpg" alt="">
+                <p>جميله احمد</p>
+            </a>
+            <ul>
+                <li>
+                    <a href="main.html">
+                        <i class="fa-solid fa-book"></i>
+                        <span>الصفحة الرئيسية</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="active" href="classes.html">
+                        <i class="fa-solid fa-book"></i>
+                        <span>المواد الدراسية</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="announcements.html">
+                        <i class="fa-solid fa-bullhorn"></i>
+                        <span>اعلانات هامة</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="survey.html">
+                        <i class="fa-solid fa-book"></i>
+                        <span>استطلاعات الرأي</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="voting.html">
+                        <i class="fa-solid fa-book"></i>
+                        <span>تصويت</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- ! END SIDEBAR -->
+    
+        <div class="page-content">
+            <!-- ! START HEADER -->
+            <header>
+                <div class="current-page">
+                    <p>استطلاع رأي</p>
+                </div>
+                <div class="icons">
+                    <a href="messages.html">
+                        <i class="fa-solid fa-message"></i>
+                    </a>
+                    <a href="announcements.html">
+                        <i class="fa-solid fa-bell"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </a>
+                </div>
+            </header>
+            <!-- ! END HEADER -->
+    
+            <!-- ! START VOTING -->
+            <div class="main-section">
+                <!-- *START VS NAVIGATION BAR -->
+                <div class="vs-navigation-bar">
+                    <ul>
+                        <li class="active">
+                            <a href="">
+                                <i class="fa-solid fa-square"></i>
+                                <div class="info">
+                                    <span> 1 استطلاع رأي</span>
+                                    <span class="name">الاسم</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="">
+                                <i class="fa-solid fa-square"></i>
+                                <div class="info">
+                                    <span> 1 استطلاع رأي</span>
+                                    <span class="name">الاسم</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="">
+                                <i class="fa-solid fa-square"></i>
+                                <div class="info">
+                                    <span> 1 استطلاع رأي</span>
+                                    <span class="name">الاسم</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="">
+                                <i class="fa-solid fa-square"></i>
+                                <div class="info">
+                                    <span> 1 استطلاع رأي</span>
+                                    <span class="name">الاسم</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- *END SECONDARY SIDEBAR -->
+    
+                <!-- * vs-navigation-bar-responsive  -->
+                <div class="vs-navigation-bar-responsive">
+                    <div class="box">
+                        <p>عنوان</p>
+                        <p>الاسم</p>
+                    </div>
+                    <div class="box">
+                        <p>عنوان</p>
+                        <p>الاسم</p>
+                    </div>
+                    <div class="box">
+                        <p>عنوان</p>
+                        <p>الاسم</p>
+                    </div>
+                    <div class="box">
+                        <p>عنوان</p>
+                        <p>الاسم</p>
+                    </div>
+                    <div class="box">
+                        <p>عنوان</p>
+                        <p>الاسم</p>
+                    </div>
+                    <div class="box">
+                        <p>عنوان</p>
+                        <p>الاسم</p>
+                    </div>
+                </div>
+                <!-- * vs-navigation-bar-responsive  -->
+    
+                <!-- *START SINGLE SURVEY CONTAINER -->
+                <div class="question-container">
+                    <div class="question">
+                        <p class="description">وصف</p>
+                        <div class="options">
+                            <p class="option">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium distinctio minima
+                                placeat fuga delectus accusamus aspernatur aut ab consequuntur minus, quia dicta</p>
+                            <p class="option">الاختبار 2</p>
+                            <p class="option">الاختبار 3</p>
+                            <p class="option">الاختبار 4</p>
+                        </div>
+                    </div>
+                    <div class="question-footer">
+                        <div class="date-question-container">
+                            <p>تاريخ البدء: التاريخ</p>
+                            <p>تاريخ الانتهاء: التاريخ </p>
+                        </div>
+                        <a href="" class="button">Submit</a>
+                    </div>
+                </div>
+                <!-- *END  SINGLE SURVEY CONTAINER -->
+            </div>
+    
+        </div>
+    
+    </div>
 </body>
 
 </html>
-<div class="page">
-    <img class="logo" src="assets/images/Untitled-65.png" alt="">
-    <img class="logo-responsive" src="assets/images/Untitled-4.png" alt="">
-    <!-- ! START SIDEBAR -->
-    <div class="sidebar">
-        <a href="#profile" class="profile">
-                <img src="assets/images/avatar.jpg" alt="">
-                <p>جميله احمد</p>
-        </a>
-        <ul>
-            <li>
-                <a href="main.html">
-                    <i class="fa-solid fa-book"></i>
-                    <span>الصفحة الرئيسية</span>
-                </a>
-            </li>
-            <li>
-                <a class="active" href="classes.html">
-                    <i class="fa-solid fa-book"></i>
-                    <span>المواد الدراسية</span>
-                </a>
-            </li>
-            <li>
-                <a href="announcements.html">
-                    <i class="fa-solid fa-bullhorn"></i>
-                    <span>اعلانات هامة</span>
-                </a>
-            </li>
-            <li>
-                <a href="survey.html">
-                    <i class="fa-solid fa-book"></i>
-                    <span>استطلاعات الرأي</span>
-                </a>
-            </li>
-            <li>
-                <a href="voting.html">
-                    <i class="fa-solid fa-book"></i>
-                    <span>تصويت</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!-- ! END SIDEBAR -->
-
-    <div class="content">
-        <!-- ! START HEADER -->
-        <header>
-            <div class="current-page">
-                <p>استطلاع رأي</p>
-            </div>
-            <div class="icons">
-                <a href="messages.html">
-                    <i class="fa-solid fa-message"></i>
-                </a>
-                <a href="announcements.html">
-                    <i class="fa-solid fa-bell"></i>
-                </a>
-                <a href="">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                </a>
-            </div>
-        </header>
-        <!-- ! END HEADER -->
-
-        <!-- ! START VOTING -->
-        <div class="main-section">
-            <!-- *START SECONDARY SIDEBAR -->
-            <div class="secondary-sidebar">
-                <ul>
-                    <li class="active">
-                        <a href="">
-                            <i class="fa-solid fa-square"></i>
-                            <div class="info">
-                                <span> 1 استطلاع رأي</span>
-                                <span class="name">الاسم</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="">
-                            <i class="fa-solid fa-square"></i>
-                            <div class="info">
-                                <span> 1 استطلاع رأي</span>
-                                <span class="name">الاسم</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="">
-                            <i class="fa-solid fa-square"></i>
-                            <div class="info">
-                                <span> 1 استطلاع رأي</span>
-                                <span class="name">الاسم</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a href="">
-                            <i class="fa-solid fa-square"></i>
-                            <div class="info">
-                                <span> 1 استطلاع رأي</span>
-                                <span class="name">الاسم</span>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <!-- *END SECONDARY SIDEBAR -->
-
-             <!-- * RESPONSIVE BAR  -->
-             <div class="responsive-scroll-bar">
-                <div class="box">
-                    <p>عنوان</p>
-                    <p>الاسم</p>
-                </div>
-                <div class="box">
-                    <p>عنوان</p>
-                    <p>الاسم</p>
-                </div>
-                <div class="box">
-                    <p>عنوان</p>
-                    <p>الاسم</p>
-                </div>
-                <div class="box">
-                    <p>عنوان</p>
-                    <p>الاسم</p>
-                </div>
-                <div class="box">
-                    <p>عنوان</p>
-                    <p>الاسم</p>
-                </div>
-                <div class="box">
-                    <p>عنوان</p>
-                    <p>الاسم</p>
-                </div>
-            </div>
-            <!-- * RESPONSIVE BAR  -->
-
-            <!-- *START SINGLE SURVEY CONTAINER -->
-            <div class="container">
-                <div class="question">
-                    <p class="description">الوصف</p>
-                    <div class="option">
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium distinctio minima placeat fuga delectus accusamus aspernatur aut ab consequuntur minus, quia dicta</p> 
-                        <p>الاختبار 2</p> 
-                        <p>الاختبار 3</p> 
-                        <p>الاختبار 4</p> 
-                    </div>
-                </div>
-                <div class="survey-date-container">
-                    <div class="survey-date">
-                        <p>تاريخ البدء: التاريخ</p>
-                        <p>تاريخ الانتهاء: التاريخ </p>
-                    </div>
-                    <a href="" class="button"></a>
-                </div>
-            </div>
-            <!-- *END  SINGLE SURVEY CONTAINER -->
-        </div>
-    </div>
-</div>
