@@ -1,9 +1,8 @@
 
 .date-question-container{
     display: flex;
-    /* align-items: flex-end; */
     flex-direction: column;
-    margin-right: 15px;
+    margin-left: 15px;
     width: fit-content;
     padding: 10px;
 }

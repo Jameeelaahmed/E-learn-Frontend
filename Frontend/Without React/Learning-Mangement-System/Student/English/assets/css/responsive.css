@@ -27,11 +27,11 @@
         transform: translateX(-50%);
     }
 
-    .right-sidebar{
+    .group-navigation-card{
         display: none;
     }
 
-    .page .content .material {
+    .page .page-content .material {
         width: calc(100% - 10%);
         margin: 20px 10px;
     }
@@ -42,7 +42,7 @@
 
 /* ! START  ASSIGNment RESPONISIVE */
 @media(max-width:767px){
-    .page .content .assingments .assignment{
+    .page .page-content .assingments .assignment{
         height: 150px;
     }
 }
@@ -60,43 +60,6 @@
     .main-section{
         margin: 0 10px;
     }
-
-    .main-section .secondary-sidebar{
-        display: none;
-    }
-
-    .responsive-scroll-bar{
-        display: flex;
-        box-shadow: var(--main-shadow);
-        overflow-x: auto;
-        height: 110px;
-        margin-top: 60px;
-        width: 88%;
-        border-radius: 20px;
-        padding-top: 15px;
-    }
-
-    .responsive-scroll-bar::-webkit-scrollbar{
-        width: 0px;
-    }
-
-    .responsive-scroll-bar .box{
-        min-width: 130px;
-        height: 80px;
-        background-color: var(--light-grey);
-        margin-right: 10px;
-        padding: 15px;
-        border-radius: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        color: var(--main-color);
-    }
-
-    .responsive-scroll-bar .box p:last-child{
-        align-self: flex-end;
-    }
-
     .main-section .container{
         width: 87%;
     }

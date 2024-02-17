@@ -1,193 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
-
-:root{
-    --main-color:#084C61;
-    --secondry-color:#0E7290;
-    --light-grey:#f1f2f7;
-    --white:white;
-    --transition:0.4s;
-    --main-shadow:5px 5px 0 0 var(--main-color);
-    --main-shadow-arabic:-5px 5px 0 0 var(--main-color);
+:root {
+    --main-color: #084C61;
+    --secondry-color: #0E7290;
+    --light-grey: #f1f2f7;
+    --white: white;
+    --transition: 0.4s;
+    --main-shadow: 5px 5px 0 0 var(--main-color);
     --grey-shadow: 0px 25px 25px -12px #e0e0ec;
-    --title-font-size:24px;
-    --subtitle-font-size:20px;
-    --normal-font-size:18px;
-    --xs-font-size:16px;
-    --title-font-weight:bold;
+    --title-font-size: 24px;
+    --subtitle-font-size: 20px;
+    --normal-font-size: 18px;
+    --xs-font-size: 16px;
+    --title-font-weight: bold;
 }
-
-
-/* ! LOGO */
-img.logo{
-    position:absolute;
-    width: 150px;
-    top: 20px;
-    right: 25px;
-}
-
-img.logo-responsive{
-    display: none;
-}
-
-@media(max-width:767px){
-    img.logo{
-        display: none;
-    }
-    img.logo-responsive{
-        display:block;
-        position: absolute;
-        width: 100px;
-        right: -18px;
-        top: 30px;
-    }
-}
-/* ! LOGO */
-
-/* ! START SIDEBAR */
-@media(max-width:767px){
-    .page .sidebar{
-        width: 62px;
-        padding: 10px;
-    }
-    .page .sidebar li{
-        display: flex;
-        justify-content: center;
-        margin: 0;
-    }
-
-    .page .sidebar ul li a{
-        justify-content: center;
-    }
-
-    .page .sidebar ul li span{
-        display: none;
-    }
-
-    .page .sidebar li:hover::before{
-        content: "";
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        right: -10px;
-        top: -50px;
-        border-radius: 50%;
-        box-shadow: 35px 35px 0 10px var(--white);
-    }
-    
-    .page .sidebar li:hover::after{
-        content: "";
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        right: -10px;
-        bottom: -50px;
-        border-radius: 50%;
-        /* background-color: aqua; */
-        box-shadow: 35px -35px 0 10px var(--white);
-    }
-
-    .page .sidebar .profile img{
-        width: 40px;
-        margin-left: 0px;
-        margin-right: -10px;
-    }
-
-    .page .sidebar a.profile p{
-        display: none;
-    }
-}
-/* ! END SIDEBAR */
-
-/* ! START HEADER */
-header .current-page{
-    font-size: 16px;
-}
-/* ! END HEADER */
-
-
-/* ! START CLASSES RESPONISIVE */
-@media(max-width:767px){
-    .page .content .classes .class{
-        height: 150px;
-    }
-}
-/* ! END CLASSES RESPONISIVE */
 
 
 
 /* !START MATERIAL RESPONSIVE */
-
-.main-section .responsive-bar{
-    display: none;
-}
-
 
 @media(max-width:930px){
     .main-section{
         flex-direction: column;
         align-items: center;
         position: relative;
-        left: 50%;
-        transform: translateX(-50%);
     }
 
-    .right-sidebar{
+    .group-navigation-card{
         display: none;
     }
 
-    .main-section .responsive-bar{
-        margin-top: 50px;
-        display: flex;
-        justify-content: center;
-        
-    }
-
-    .main-section .responsive-bar a{
-        padding: 20px;
-        background-color:var(--light-grey);
-        box-shadow: var(--main-shadow-arabic);
-        color: var(--main-color);
-        transition: var(--transition);
-    }
-
-    .main-section .responsive-bar a:hover{
-        background-color: var(--main-color);
-        color: var(--white);
-    }
-
-    .main-section .responsive-bar a:first-child{
-        border-top-right-radius: 50px;
-        border-bottom-right-radius: 50px;
-    }
-    .main-section .responsive-bar a:last-child{
-        border-top-left-radius: 50px;
-        border-bottom-left-radius: 50px;
-    }
-
-    .page .content .material {
+    .page .page-content .material {
         width: calc(100% - 10%);
         margin: 20px 10px;
-    }
-}
-
-@media(max-width:615px){
-    .main-section .responsive-bar{
-        width: 250px;
-        font-size: 9px;
-        font-weight: bolder;
-    }
-
-    .page .content .material .week1 .head .info .week,
-    .page .content .material .week2 .head .info .week {
-        font-size: 15px;
-    }
-
-    .page .content .material .week2 .data .mat p {
-        font-size: 13px;
-    }
-
-    .page .content .material .week2 .data .main .mat-details .mat-det p{
-        font-size: 12px;
     }
 }
 
@@ -196,7 +40,7 @@ header .current-page{
 
 /* ! START  ASSIGNment RESPONISIVE */
 @media(max-width:767px){
-    .page .content .assingments .assignment{
+    .page .page-content .assingments .assignment{
         height: 150px;
     }
 }
@@ -214,43 +58,6 @@ header .current-page{
     .main-section{
         margin: 0 10px;
     }
-
-    .main-section .secondary-sidebar{
-        display: none;
-    }
-
-    .responsive-scroll-bar{
-        display: flex;
-        box-shadow: var(--main-shadow-arabic);
-        overflow-x: auto;
-        height: 110px;
-        margin-top: 60px;
-        width: 88%;
-        border-radius: 20px;
-        padding-top: 15px;
-    }
-
-    .responsive-scroll-bar::-webkit-scrollbar{
-        width: 0px;
-    }
-
-    .responsive-scroll-bar .box{
-        min-width: 130px;
-        height: 80px;
-        background-color: var(--light-grey);
-        margin-left: 10px;
-        padding: 15px;
-        border-radius: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        color: var(--main-color);
-    }
-
-    .responsive-scroll-bar .box p:last-child{
-        align-self: flex-end;
-    }
-
     .main-section .container{
         width: 87%;
     }
@@ -287,7 +94,7 @@ header .current-page{
     }
 
     .main-section .container .question .option p{
-        padding: 20px 50px 20px 20px;
+        padding: 20px 20px 20px 50px;
         width: 90%;
     }
 
