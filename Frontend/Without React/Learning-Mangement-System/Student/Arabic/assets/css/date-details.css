@@ -1,0 +1,13 @@
+
+.date-question-container{
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+    width: fit-content;
+    padding: 10px;
+}
+
+.main-section .question-container .date-question-container p{
+    color: var(--main-color);
+    font-size: 15px;
+}

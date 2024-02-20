@@ -1,0 +1,85 @@
+.group-navigation-card{
+    width: 275px;
+    background-color: var(--light-grey);
+    padding: 15px 30px;
+    margin-top: 60px;
+    border-radius: 19px;
+    box-shadow: var(--main-shadow-arabic);
+    height: fit-content;
+    margin-left: 50px;
+}
+
+.group-navigation-card p.group-title {
+    font-size: 28px;
+    color: var(--main-color);
+    font-weight: bolder;
+    margin-top: 30px;
+}
+
+.group-navigation-card .instructor-profile {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+
+.group-navigation-card .instructor-profile img {
+    width: 40px;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+.group-navigation-card .instructor-profile p {
+    color: var(--main-color);
+    font-weight: bolder;
+}
+
+.group-navigation-card .group-sections{
+    margin-top: 20px;
+    color: var(--main-color);
+}
+
+.group-navigation-card .group-sections a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: var(--main-color);
+}
+
+.group-navigation-card .group-sections a:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+
+.group-navigation-card .group-sections a:first-child::before {
+    content: "";
+    position: absolute;
+    height: 30px;
+    width: 8px;
+    background-color: var(--main-color);
+    right: -15px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+} 
+
+
+/* ! RESPONSIVE*/
+
+@media(max-width:930px){
+    .main-section{
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        right: 50%;
+        transform: translateX(-50%);
+    }
+
+    .group-navigation-card{
+        display: none;
+    }
+
+    .page .page-content .material {
+        width: calc(100% - 10%);
+        margin: 20px 10px;
+    }
+}

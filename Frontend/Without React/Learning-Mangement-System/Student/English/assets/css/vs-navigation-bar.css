@@ -1,0 +1,60 @@
+.vs-navigation-bar {
+    background-color: var(--white);
+    box-shadow: var(--main-shadow);
+    width: 280px;
+    padding: 20px 0 20px 0px;
+    margin-top: 70px;
+    border-radius: 21px;
+    height: 580px;
+    overflow-y: auto; /* or overflow-x: scroll; */
+    white-space: nowrap; /* This ensures that the content doesn't wrap to the next line */
+}
+
+.vs-navigation-bar::-webkit-scrollbar{
+    width: 0px;
+}
+
+.vs-navigation-bar li {
+    padding: 20px;
+    background-color: var(--light-grey);
+    margin: 15px 10px;
+    border-radius: 21px;
+    transition: var(--transition);
+    position: relative;
+    width: 250px;
+}
+
+.vs-navigation-bar li a {
+    color: var(--main-color);
+    display: flex;
+    align-items: center;
+}
+
+.vs-navigation-bar li .info {
+    display: block;
+    margin-left: 10px;
+    font-size: var();
+}
+
+.vs-navigation-bar li .info span.name {
+    position: absolute;
+    bottom: 10px;
+    font-size: 12px;
+    right: 15px;
+}
+
+/* *HOVER */
+.vs-navigation-bar li:hover {
+    background-color: var(--main-color);
+
+}
+
+.vs-navigation-bar li:hover i {
+    color: white;
+}
+
+.vs-navigation-bar li:hover span {
+    color: var(--white);
+}
+
+/* *HOVER */
