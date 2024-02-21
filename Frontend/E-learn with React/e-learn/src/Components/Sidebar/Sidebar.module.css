@@ -1,0 +1,230 @@
+.sidebar {
+    background-color: var(--main-color);
+    color: var(--white);
+    padding: 20px 0 20px 0px;
+    position: relative;
+    width: 280px;
+    margin-top: 110px;
+    border-top-right-radius: 70px;
+    transition: 850ms;
+}
+
+.sidebar>.icon {
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.sidebar>a {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-top: 15px;
+    color: white;
+}
+
+.sidebar .profile img {
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+
+.sidebar a p {
+    display: flex;
+}
+
+
+.sidebar li {
+    margin: 0px 0 0px 10px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    position: relative;
+    flex-wrap: nowrap;
+}
+
+.sidebar li a {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar li:nth-child(1) {
+    margin-top: 20px;
+}
+
+.sidebar li.active {
+    background-color: var(--white);
+}
+
+.sidebar li .icon {
+    color: var(--white);
+    margin-right: 20px;
+    /* padding-right: 20px; */
+}
+
+.sidebar li.active .icon {
+    color: var(--main-color);
+    margin-right: 10px;
+}
+
+.sidebar li a span {
+    color: var(--white);
+}
+
+.sidebar li.active a span {
+    color: var(--main-color);
+}
+
+/* * CURVE OUTSIDE */
+
+.sidebar li.active::before {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    right: 0;
+    top: -80px;
+    border-radius: 50%;
+    box-shadow: 40px 40px 0 white;
+}
+
+.sidebar li.active::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    right: 0;
+    bottom: -80px;
+    border-radius: 50%;
+    box-shadow: 40px -40px 0 var(--white);
+}
+
+/* * CURVE OUTSIDE */
+
+/* ! ****************  ACTIVE **************** */
+
+.sidebar_active {
+    width: 62px;
+    padding: 20px 0 20px 0px;
+    transition: 350ms;
+    background-color: var(--main-color);
+    color: var(--white);
+    padding: 20px 0 20px 0px;
+    position: relative;
+    margin-top: 110px;
+    border-top-right-radius: 70px;
+}
+
+.sidebar_active>.icon {
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.sidebar_active>a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    margin-top: 15px;
+    color: white;
+}
+
+.sidebar_active .profile img {
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+
+.sidebar_active .profile p {
+    display: none;
+}
+
+
+.sidebar_active li {
+    margin: 0px 0 0px 10px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    position: relative;
+}
+
+.sidebar_active li:nth-child(1) {
+    margin-top: 20px;
+}
+
+.sidebar_active li.active {
+    background-color: var(--white);
+}
+
+.sidebar_active li .icon {
+    color: var(--white);
+    margin-left: -6px;
+    /* display: flex;
+    justify-content: center; */
+}
+
+.sidebar_active li.active .icon {
+    color: var(--main-color);
+    margin-right: 10px;
+}
+
+
+.sidebar_active li span {
+    display: none;
+}
+
+
+.sidebar_active li.active::before {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    right: 0px;
+    top: -50px;
+    border-radius: 50%;
+    box-shadow: 35px 35px 0 10px;
+}
+
+.sidebar_active li.active::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    right: 0px;
+    bottom: -50px;
+    border-radius: 50%;
+    box-shadow: 35px -35px 0 10px var(--white);
+}
+
+/* * CURVE OUTSIDE */
+
+/* ! ****************  ACTIVE **************** */
+
+/* !RESPONSIVE */
+
+@media(max-width:767px) {
+    /* .sidebar {
+        width: 300px;
+        padding: 10px;
+        transition: 0.1s;
+        z-index: 100;
+        position: absolute;
+        bottom: 0;
+        transition: 850ms;
+    } */
+}
+
+/* !SIDEBAR RESPONSIVE */

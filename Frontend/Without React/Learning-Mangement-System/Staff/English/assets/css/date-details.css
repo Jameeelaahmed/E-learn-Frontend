@@ -1,20 +1,14 @@
 
-.date-container{
+.date-question-container{
     display: flex;
-    align-items: flex-end;
+    /* align-items: flex-end; */
     flex-direction: column;
     margin-right: 15px;
-}
-
-.main-section .container .date{
-    background-color: var(--main-color);
     width: fit-content;
     padding: 10px;
-    border-radius: 15px;
-    box-shadow: var(--inset-input-shadow);
 }
 
-.main-section .container .date p{
-    color: var(--white);
+.main-section .question-container .date-question-container p{
+    color: var(--main-color);
     font-size: 15px;
 }

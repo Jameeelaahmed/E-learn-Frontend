@@ -1,0 +1,32 @@
+.semi_body{
+    font-family: "Open Sans", "sans-serif";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 100vh;
+    background-color: #084C61;
+    position: relative;
+    overflow: hidden;
+    /* background-image: url(../../assets/garden.jpg); */
+    background-repeat: no-repeat;
+    background-size:cover ;
+}
+
+.semi_body::before{
+    content: "";
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 25px;
+    top: -20px;
+    left: -80px;
+    transform: rotate(70deg);
+    background-color: #d9d9d935;
+}
+
+@media(max-width:768px){
+    .semi_body::before{
+        display: none;
+    }
+}
