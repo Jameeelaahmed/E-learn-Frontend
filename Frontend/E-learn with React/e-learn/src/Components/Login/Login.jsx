@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './Login.css';
+import classes from './Login.module.css';
 
 export default function Login() {
     function handleSubmit(event) {
@@ -22,12 +22,12 @@ export default function Login() {
     return (
         <>
             <img src="../../assets/undraw_login_re_4vu2.svg" alt="" />
-            <div className="square-one"></div>
-            <div className="square-two"></div>
-            <div className="login">
+            <div className={classes.square_one}></div>
+            <div className={classes.square_two}></div>
+            <div className={classes.login}>
                 <h1>تسجيل دخول</h1>
                 <form onSubmit={handleSubmit}>
-                    <div className="user-name">
+                    <div className={classes.user_name}>
                         <label htmlFor="">اسم المستخدم</label>
                         <input
                             type="number"
@@ -35,7 +35,7 @@ export default function Login() {
                             value={enteredValue.userName}
                         />
                     </div>
-                    <div className="password">
+                    <div className={classes.password}>
                         <label htmlFor="">كلمة المرور</label>
                         <input
                             type="password"
@@ -44,7 +44,7 @@ export default function Login() {
                         />
                     </div>
                     <input type="submit" value="Login" />
-                    <div className="forget">
+                    <div className={classes.forget}>
                         <p>هل نسيت كلمة السر؟</p>
                         <a href="">اعادة تعيين كلمة المرور</a>
                     </div>

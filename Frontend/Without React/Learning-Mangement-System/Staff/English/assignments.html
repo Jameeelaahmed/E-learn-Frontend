@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assingments</title>
     <!-- ! CSS -->
+    <link rel="stylesheet" href="assets/css/pop-up.css">
+    <link rel="stylesheet" href="assets/css/button.css">
+    <link rel="stylesheet" href="assets/css/add-task.css">
     <link rel="stylesheet" href="assets/css/logo.css">
     <link rel="stylesheet" href="assets/css/group-navigation-card-responsive.css">
     <link rel="stylesheet" href="assets/css/group-navigation-card.css">
@@ -164,25 +167,57 @@
                     </a>
                 </div>
                 <!-- ! END Assignments -->
-
-                <!-- ! START group-navigation-card -->
-                <div class="group-navigation-card">
-                    <p class="group-title">Computer Theory</p>
-                    <div class="instructor-profile">
-                        <img src="assets/images/avatar.jpg" alt="">
-                        <p>Dr Nagwa</p>
+                <div class="right-col-container">
+                    <!-- ! START group-navigation-card -->
+                    <div class="group-navigation-card">
+                        <p class="group-title">Computer Theory</p>
+                        <div class="instructor-profile">
+                            <img src="assets/images/avatar.jpg" alt="">
+                            <p>Dr Nagwa</p>
+                        </div>
+                        <div class="group-sections">
+                            <a href="material.html">Material</a>
+                            <a href="assignment.html">Assignment</a>
+                            <a href="quiz.html">Quiz</a>
+                            <a href="participants.html">Participants</a>
+                        </div>
                     </div>
-                    <div class="group-sections">
-                        <a href="material.html">Material</a>
-                        <a href="assignment.html">Assignment</a>
-                        <a href="quiz.html">Quiz</a>
-                        <a href="participants.html">Participants</a>
+                    <!-- ! END group-navigation-card -->
+
+                    <!-- ! add task card  -->
+                    <div class="add-task">
+                        <p>Add Task</p>
+                        <p class="button-container">
+                            <button class="button" onclick="togglePopUp()">Add</button>
+                        </p>
+                    </div>
+                    <!-- ! add task card  -->
+                </div>
+
+                <div class="pop-up" id="pop-up">
+                    <div class="input">
+                        <div class="input-group">
+                            <label for=""></label>
+                            <input type="text">
+                        </div>
+                        <div class="input-group">
+                            <label for=""></label>
+                            <input type="text">
+                        </div>
+
                     </div>
                 </div>
-                <!-- ! END group-navigation-card -->
+
             </div>
         </div>
     </div>
+    <script>
+        function togglePopUp() {
+            var popUp = document.getElementById("pop-up");
+            popUp.style.display = "block";
+        }
+
+    </script>
 </body>
 
 </html>

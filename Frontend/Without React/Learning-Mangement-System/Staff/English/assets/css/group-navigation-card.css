@@ -6,7 +6,7 @@
     border-radius: 19px;
     box-shadow: var(--main-shadow);
     height: fit-content;
-    /* margin-right: 50px; */
+    margin-right: 50px;
 }
 
 .group-navigation-card p.group-title {

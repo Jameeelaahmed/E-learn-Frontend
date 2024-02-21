@@ -1,0 +1,23 @@
+.main-section .right-col-container .add-task{
+    width: 275px;
+    background-color: var(--light-grey);
+    padding: 15px 30px;
+    margin-top: 30px;
+    border-radius: 19px;
+    box-shadow: var(--main-shadow);
+    height: fit-content;
+    margin-right: 50px;
+}
+
+.main-section .right-col-container .add-task p{
+    text-align: center;
+    color: var(--main-color);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.main-section .right-col-container .add-task .button-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}

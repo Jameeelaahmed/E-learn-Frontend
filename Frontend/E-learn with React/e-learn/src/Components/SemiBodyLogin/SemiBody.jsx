@@ -1,8 +1,8 @@
-import './SemiBody.css'
+import classes from './SemiBody.module.css'
 
 export default function SemiBody({children}){
     return(
-        <section className='semi-body'>
+        <section className={classes.semi_body}>
             {children}
         </section>
     )

@@ -1,0 +1,4 @@
+.main_section {
+    display: flex;
+    justify-content: space-between;
+}
