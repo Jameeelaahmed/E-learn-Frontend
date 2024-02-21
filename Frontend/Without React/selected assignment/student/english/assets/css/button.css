@@ -10,7 +10,7 @@
 }
 
 .button::before{
-    content: "Submit";
+    content: "ADD";
     display: flex;
     justify-content: center;
     align-items: center;

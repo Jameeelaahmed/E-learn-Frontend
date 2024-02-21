@@ -84,7 +84,7 @@ body {
 
 .main-section .container .section .attachment-button {
     display: flex;
-    width: 20%;
+    width: 27%;
     height: 40px;
     background-color: var(--light-grey);
     margin-bottom: 5px;
@@ -95,6 +95,28 @@ body {
     justify-content: center;
     align-items: center;
 }
+.main-section .container .section .attachment-button p{
+font-size:smaller;
+}
+
 .main-section .container .section:nth-last-of-type(button){
     margin-bottom:30px;
+}
+.work-sidebar {
+    width: 275px;
+    background-color: var(--light-grey);
+    padding: 15px 30px;
+    margin-top: 60px;
+    border-radius: 19px;
+    box-shadow: var(--main-shadow);
+    height: fit-content;
+    margin-right: 50px;
+}
+.button p{
+    color: var(--white);
+}
+.work{
+    width: 90%;
+    background-color: var(--white);
+    height: 190px;
 }
