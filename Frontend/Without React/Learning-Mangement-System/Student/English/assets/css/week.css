@@ -1,12 +1,12 @@
-.page .content .material .week1,
-.page .content .material .week2 {
+.page .page-content .weeks .week1,
+.page .page-content .weeks .week2 {
     background-color: var(--light-grey);
     box-shadow: var(--main-shadow);
     border-radius: 8px;
 }
 
-.page .content .material .week1 .head,
-.page .content .material .week2 .head {
+.page .page-content .weeks .week1 .week-head,
+.page .page-content .weeks .week2 .week-head {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,22 +17,22 @@
 }
 
 /* * HOVER */
-.page .content .material .week1 .head:hover,
-.page .content .material .week2 .head:hover {
+.page .page-content .weeks .week1 .week-head:hover,
+.page .page-content .weeks .week2 .week-head:hover {
     background-color: var(--main-color);
 }
 
 /* * HOVER */
 
-.page .content .material .week1 .head .info,
-.page .content .material .week2 .head .info {
+.page .page-content .weeks .week1 .week-head .week-title,
+.page .page-content .weeks .week2 .week-head .week-title {
     display: flex;
     align-items: center;
 }
 
 
-.page .content .material .week1 .head .info .num,
-.page .content .material .week2 .head .info .num {
+.page .page-content .weeks .week1 .week-head .week-title .num,
+.page .page-content .weeks .week2 .week-head .week-title .num {
     font-weight: bold;
     font-size: 30px;
     color: var(--secondry-color);
@@ -44,8 +44,8 @@
     align-items: center;
 }
 
-.page .content .material .week1 .head .info .num::before,
-.page .content .material .week2 .head .info .num::before {
+.page .page-content .weeks .week1 .week-head .week-title .num::before,
+.page .page-content .weeks .week2 .week-head .week-title .num::before {
     counter-increment: Numbers;
     content: counter(Numbers);
     position: absolute;
@@ -61,8 +61,8 @@
     left: 0;
 }
 
-.page .content .material .week1 .head .info .week,
-.page .content .material .week2 .head .info .week {
+.page .page-content .weeks .week1 .week-head .week-title p:last-child,
+.page .page-content .weeks .week2 .week-head .week-title p:last-child{
     margin-left: 30px;
     font-size: 20px;
     color: var(--main-color);
@@ -71,16 +71,16 @@
 }
 
 /* *HOVER */
-.page .content .material .week1 .head:hover .info .week,
-.page .content .material .week2 .head:hover .info .week {
+.page .page-content .weeks .week1 .week-head:hover .week-title p:last-child,
+.page .page-content .weeks .week2 .week-head:hover .week-title p:last-child{
     color: var(--light-grey);
 }
 
 /* *HOVER */
 
-.page .content .material .week1 .head i,
-.page .content .material .week2 .head i,
-.page .content .material .week2 .data .mat i {
+.page .page-content .weeks .week1 .week-head i,
+.page .page-content .weeks .week2 .week-head i,
+.page .page-content .weeks .week2 .week-content .material i {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -90,26 +90,26 @@
 }
 
 /* *HOVER */
-.page .content .material .week1 .head:hover i,
-.page .content .material .week2 .head:hover i,
-.page .content .material .week2 .data .mat:hover i {
+.page .page-content .weeks .week1 .week-head:hover i,
+.page .page-content .weeks .week2 .week-head:hover i,
+.page .page-content .weeks .week2 .week-content .material:hover i {
     color: var(--light-grey);
 }
 
 /* *HOVER */
 
-.page .content .material .wek:not(:first-child) {
+.page .page-content .weeks .week:not(:first-child) {
     margin-top: 35px;
 }
 
 /* *week 2 */
 
-.page .content .material .week2 {
+.page .page-content .weeks .week2 {
     height: auto;
     padding-bottom: 20px;
 }
 
-.page .content .material .week2 .data .mat {
+.page .page-content .weeks .week2 .week-content .material {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -121,21 +121,21 @@
 }
 
 /* *HOVER */
-.page .content .material .week2 .data .mat:hover {
+.page .page-content .weeks .week2 .week-content .material:hover {
     background-color: var(--main-color);
 }
 
 /* *HOVER */
 
 
-.page .content .material .week2 .data .mat p {
+.page .page-content .weeks .week2 .week-content .material p {
     font-size: 18px;
     color: var(--main-color);
     transition: var(--transition);
 }
 
 /* *HOVER */
-.page .content .material .week2 .data .mat:hover p {
+.page .page-content .weeks .week2 .week-content .material:hover p {
     color: var(--light-grey);
 }
 
@@ -146,26 +146,26 @@
 
 /* *week3 */
 
-.page .content .material .week2 .data .main .mat-details {
+.page .page-content .weeks .week2 .week-content .main .material-files {
     background-color: var(--white);
     margin: 0 50px;
     border-bottom-left-radius: 14px;
     border-bottom-right-radius: 14px;
 }
 
-.page .content .material .week2 .data .main .mat-details .mat-det {
+.page .page-content .weeks .week2 .week-content .main .material-files .material-file {
     display: flex;
     align-items: center;
     padding: 15px;
 }
 
-.page .content .material .week2 .data .main .mat-details .mat-det i {
+.page .page-content .weeks .week2 .week-content .main .material-files .material-file i {
     font-size: 14px;
     color: var(--main-color);
     margin-right: 15px;
 }
 
-.page .content .material .week2 .data .main .mat-details .mat-det p {
+.page .page-content .weeks .week2 .week-content .main .material-files .material-file p {
     color: var(--main-color);
 }
 
@@ -175,16 +175,16 @@
 /* !RESPONSIVE */
 
 @media(max-width:615px){
-    .page .content .material .week1 .head .info .week,
-    .page .content .material .week2 .head .info .week {
+    .page .page-content .weeks .week1 .week-head .info .week,
+    .page .page-content .weeks .week2 .week-head .info .week {
         font-size: 15px;
     }
 
-    .page .content .material .week2 .data .mat p {
+    .page .page-content .weeks .week2 .week-content .material p {
         font-size: 13px;
     }
 
-    .page .content .material .week2 .data .main .mat-details .mat-det p{
+    .page .page-content .weeks .week2 .week-content .main .material-files .material-file p{
         font-size: 12px;
     }
 }

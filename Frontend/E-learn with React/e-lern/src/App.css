@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --main-color: #084C61;
+    --secondry-color: #0E7290;
+    --light-grey: #f1f2f7;
+    --white: white;
+    --transition: 0.4s;
+    --main-shadow: 5px 5px 0 0 var(--main-color);
+    --grey-shadow: 0px 25px 25px -12px #e0e0ec;
+    --title-font-size: 24px;
+    --subtitle-font-size: 20px;
+    --normal-font-size: 18px;
+    --xs-font-size: 16px;
+    --title-font-weight: bold;
+    --inset-shadow:inset 3.2px 3.2px 8px 0 #c8d0e7,
+    inset -3.2px -3.2px 8px 0 #c8d0e7;
+    --inset-input-shadow:-5px -5px 10px 0 #0a6d8be4 inset,
+                        5px 5px 10px 0 #161b1d1b inset;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+html::-webkit-scrollbar{
+    width: 8px;
+}
+
+html::-webkit-scrollbar-thumb{
+    background-color:var(--main-color);
+    border-radius: 8px;
+    scroll-behavior: smooth;
+    direction: rtl;
+}
+
+html::-webkit-scrollbar-track{
+    background-color:var(--light-grey);
+}

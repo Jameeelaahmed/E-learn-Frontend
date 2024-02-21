@@ -1,0 +1,81 @@
+.page .page-content .classes .class {
+    min-width: 230px;
+    height: 214px;
+    background-color: var(--light-grey);
+    margin: 40px 15px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    box-shadow: var(--main-shadow-arabic);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition);
+    position: relative;
+    padding:20px 20px;
+}
+
+.page .page-content .classes .class::before{
+    content: "";
+    position: absolute;
+    height: 25px;
+    width: 100px;
+    background-color: var(--light-grey);
+    right: 0;
+    top: -25px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 50px;
+    transition: var(--transition);
+}
+
+/* *HOVER */
+.page .page-content .classes .class:hover {
+    background-color: var(--main-color);
+}
+
+.page .page-content .classes .class:hover::before{
+    background-color: var(--main-color);
+}
+/* *HOVER */
+
+.page .page-content .classes .class p:first-child {
+    position: relative;
+    top: 20px;
+    font-weight: bold;
+    color: var(--main-color);
+    font-size: 18px;
+}
+
+.page .page-content .classes .class:not(:last-child) p:last-child {
+    position: relative;
+    bottom: 15px;
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 10px;
+    color: var(--main-color);
+    font-size: 14px;
+}
+
+.page .page-content .classes .class:last-child p {
+    position: relative;
+    top: 20px;
+    font-weight: bold;
+    color: var(--main-color);
+    font-size: 18px;
+}
+
+
+/* *HOVER */
+.page .page-content .classes .class:hover p {
+    color: var(--white) !important;
+}
+/* *HOVER */
+
+
+/* ! START CLASSES RESPONISIVE */
+@media(max-width:767px){
+    .page .page-content .classes .class{
+        height: 150px;
+    }
+}
+/* ! END CLASSES RESPONISIVE */
