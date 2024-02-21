@@ -1,0 +1,100 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: "Open Sans", "sans-serif";
+    margin: 0;
+    background-color: var(--white);
+}
+
+:root {
+    --main-color: #084C61;
+    --secondry-color: #0E7290;
+    --light-grey: #f1f2f7;
+    --white: white;
+    --transition: 0.4s;
+    --main-shadow: 5px 5px 0 0 var(--main-color);
+    --grey-shadow: 0px 25px 25px -12px #e0e0ec;
+    --title-font-size: 24px;
+    --subtitle-font-size: 20px;
+    --normal-font-size: 18px;
+    --xs-font-size: 16px;
+    --title-font-weight: bold;
+    --inset-shadow: inset 3.2px 3.2px 8px 0 #c8d0e7,
+        inset -3.2px -3.2px 8px 0 #c8d0e7;
+    --inset-input-shadow: -5px -5px 10px 0 #0a6d8be4 inset,
+        5px 5px 10px 0 #161b1d1b inset;
+}
+.main-section .container{
+    margin: 40px 20px 20px;
+}
+.main-section .container .section {
+    display: flex;
+    background-color: var(--white);
+    width: calc(100% - 10px);
+    border-radius: 20px;
+    flex-direction: column;
+    align-content: space-around;
+    flex-wrap: wrap;
+}
+
+.main-section .container .section .title-section {
+    margin-left: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+}
+
+.main-section .container .section .title-section:first-child {
+    margin-top: 20px;
+}
+
+.main-section .container .section .title-section:last-child {
+    margin-bottom: 50px;
+}
+
+.main-section .container .section .title-section p {
+    margin-left: 10px;
+}
+
+.main-section .container .section hr {
+    width: 83%;
+    margin-left: 25px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.main-section .container .section .contant-section {
+    margin-top: 10px;
+    margin-left: 20px;
+    width: calc(90% - 150px);
+    height: 30px;
+    border-radius: 20px;
+    border: thin solid rgb(8 76 97 / 69%);
+}
+
+.main-section .container .section .contant-section[title~="Description"] {
+    height: 90px;
+}
+
+.main-section .container .section .attachment-button {
+    display: flex;
+    width: 20%;
+    height: 40px;
+    background-color: var(--light-grey);
+    margin-bottom: 5px;
+    margin-top: 15px;
+    margin-left: 30px;
+    border: none;
+    color: var(--main-color);
+    justify-content: center;
+    align-items: center;
+}
+.main-section .container .section:nth-last-of-type(button){
+    margin-bottom:30px;
+}
