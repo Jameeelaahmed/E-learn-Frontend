@@ -1,0 +1,25 @@
+.button{
+    background-color: var(--white);
+    color: var(--white);
+    box-shadow:var(--inset-shadow);
+    padding: 15px 50px;
+    border-radius: 12px;
+    position: relative;
+    align-self: flex-end;
+    margin-right: 20px;
+}
+
+.button::before{
+    content: "ADD";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: calc(100% - 10%);
+    height: calc(100% - 30%);
+    border-radius: 6px;
+    background-color: var(--main-color);
+}
