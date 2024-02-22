@@ -72,7 +72,7 @@ body {
 .main-section .container .section .contant-section {
     margin-top: 10px;
     margin-left: 20px;
-    width: calc(90% - 150px);
+    width: calc(90% - 40px);
     height: 30px;
     border-radius: 20px;
     border: thin solid rgb(8 76 97 / 69%);
@@ -103,7 +103,8 @@ font-size:smaller;
     margin-bottom:30px;
 }
 .work-sidebar {
-    width: 275px;
+    display: flex;
+    width: 80%;
     background-color: var(--light-grey);
     padding: 15px 30px;
     margin-top: 60px;
@@ -111,12 +112,43 @@ font-size:smaller;
     box-shadow: var(--main-shadow);
     height: fit-content;
     margin-right: 50px;
+    flex-direction: column;
+    align-items: center;
 }
 .button p{
     color: var(--white);
 }
-.work{
+.main-section .right .work-sidebar .work{
     width: 90%;
+    display: flex;
     background-color: var(--white);
-    height: 190px;
+    height: fit-content;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+}
+.main-section .right .work-sidebar p{
+    color: #084C61;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.main-section .right .work-sidebar .work .task-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+}
+.main-section .right .work-sidebar .work .task-section p{
+    color: #084C61;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.main-section .right .work-sidebar .work .task-section .img-work{
+    width: 100%;
+    margin: 8px auto;
+}
+.main-section .right .work-sidebar .work .task-section .img-work img{
+    width: 100%;
 }
