@@ -1,4 +1,4 @@
-.main-section .container .question .option{
+.main-section .question-container .question .options {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
@@ -6,8 +6,8 @@
     justify-content: center;
 }
 
-.main-section .container .question .option p{
-    padding: 20px 20px 20px 80px;
+.main-section .question-container .question .options .option {
+    padding: 30px;
     background-color: var(--white);
     margin: 20px;
     width: 70%;
@@ -18,28 +18,30 @@
     overflow: hidden;
 }
 
-.main-section .container .question .option p:before,
-.main-section .container .question .option p:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 4px;
-  background: #fff;
-  transition: 0.5s;
-  z-index: -99;
+.main-section .question-container .question .options .option:before,
+.main-section .question-container .question .options .option:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background: #fff;
+    transition: 0.5s;
+    z-index: -99;
 }
-.main-section .container .question .option p::before{
+
+.main-section .question-container .question .options .option::before {
     transform: rotate(5deg);
 }
-.main-section .container .question .option p::after {
+
+.main-section .question-container .question .options .option::after {
     transform: rotate(2deg);
     box-shadow: 0 2px 20px rgba(0, 0, 0, .2);
 }
 
-.main-section .container .question .option p:hover{
+.main-section .question-container .question .options .option:hover {
     background-color: var(--main-color);
     color: var(--main-color);
 }
