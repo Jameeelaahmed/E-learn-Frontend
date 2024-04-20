@@ -1,0 +1,35 @@
+.track-assignment{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.track-assignment a{
+    padding: 30px;
+    background-color:var(--light-grey);
+    box-shadow: var(--main-shadow);
+    color: var(--main-color);
+    transition: var(--transition);
+    position: relative;
+}
+
+.track-assignment a:hover{
+    background-color: var(--main-color);
+    color: var(--white);
+}
+
+.track-assignment a:first-child{
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+.track-assignment a:last-child{
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.track-assignment a p{
+    position: absolute;
+    font-size: 15px;
+    text-align: end;
+}

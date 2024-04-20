@@ -1,0 +1,17 @@
+.form_container {
+    background-color: rgb(255, 255, 255);
+    height: auto;
+    padding: 20px;
+    width: 370px;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media(max-width:425px){
+    .form_container {
+        width: 300px;
+        height: 400px;
+    }
+}

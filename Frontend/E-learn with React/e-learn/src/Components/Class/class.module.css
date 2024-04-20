@@ -3,10 +3,8 @@
     height: 214px;
     background-color: var(--light-grey);
     margin: 40px 15px;
-    border-top-right-radius: 50px;
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
-    box-shadow: var(--main-shadow);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -15,18 +13,39 @@
     padding:20px 20px;
 }
 
+[dir='ltr'] .class {
+    border-top-right-radius: 50px;
+    box-shadow: var(--main-shadow);
+}
+[dir='rtl'] .class {
+    border-top-left-radius: 50px;
+    box-shadow: var(--main-arabic-shadow);
+}
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
 .class::before{
     content: "";
     position: absolute;
     height: 25px;
     width: 100px;
     background-color: var(--light-grey);
-    left: 0;
     top: -25px;
-    border-top-right-radius: 25px;
-    border-top-left-radius: 50px;
     transition: var(--transition);
 }
+
+[dir='ltr'] .class::before{
+    border-top-left-radius: 50px;
+    border-top-right-radius: 25px;
+    left: 0;
+}
+[dir='rtl'] .class::before{
+    border-top-right-radius: 50px;
+    border-top-left-radius: 25px;
+    right: 0;
+}
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
 /* *HOVER */
 .class:hover {
@@ -38,7 +57,7 @@
 }
 /* *HOVER */
 
- .class p:first-child {
+.class p:first-child {
     position: relative;
     top: 20px;
     font-weight: bold;
@@ -46,15 +65,25 @@
     font-size: 18px;
 }
 
+/* !!!!!!!!!!!!!!!!!!!!!! */
+
 .class:not(:last-child) p:last-child {
     position: relative;
     bottom: 15px;
     display: flex;
     justify-content: flex-end;
-    margin-right: 10px;
     color: var(--main-color);
     font-size: 14px;
 }
+
+[dir='ltr'] .class:not(:last-child) p:last-child {
+    margin-right: 10px;
+}
+[dir='rtl'] .class:not(:last-child) p:last-child {
+    margin-left: 10px;
+}
+
+/* !!!!!!!!!!!!!!!!! */
 
 .class:last-child p {
     position: relative;
@@ -63,7 +92,6 @@
     color: var(--main-color);
     font-size: 18px;
 }
-
 
 /* *HOVER */
 .class:hover p {

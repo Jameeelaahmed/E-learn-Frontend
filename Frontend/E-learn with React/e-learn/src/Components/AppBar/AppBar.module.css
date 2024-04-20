@@ -1,0 +1,36 @@
+.app_bar{
+    display: none;
+}
+@media(max-width:767px){
+    .app_bar{
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        background-color: var(--main-color);
+        width: 100vw;
+        box-shadow: var(--grey-shadow);
+    }
+
+    .app_bar li{
+        height: 5rem;
+        display:flex;
+        align-items: center;
+        width: calc(100% / 7);
+        transition: 0.4s;
+        color: var(--light-grey);
+    }
+
+    .app_bar li:hover{
+        color: var(--main-color);
+        background-color: var(--light-grey);
+        /* border-radius: 50%; */
+    }
+
+    /* .app_bar li .icon */
+    
+    .app_bar .icon{
+        margin: 15px;
+        /* flex: 1; */
+        font-size: 18px;
+    }
+}

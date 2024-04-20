@@ -1,0 +1,30 @@
+.flag {
+    width: 275px;
+    background-color: var(--light-grey) !important;
+    padding: 15px !important;
+    margin-top: 20px;
+    border-radius: 19px;
+    box-shadow: var(--main-shadow);
+    height: fit-content;
+    margin-right: 50px;
+}
+
+.page .page-content .main-section .right .flag .nums {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.page .page-content .main-section .right .flag .nums p {
+    padding: 10px;
+    background-color: var(--white);
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: var(--inset-input-shadow-grey);
+}
+
+
+@media (max-width:992px){
+    .flag{
+        width: 100%;
+    }
+}

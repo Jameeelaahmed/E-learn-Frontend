@@ -1,0 +1,158 @@
+/* ! START GLOBAL */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --main-color: #084C61;
+    --secondry-color: #0E7290;
+    --light-grey: #f1f2f7;
+    --white: white;
+    --transition: 0.4s;
+    --main-shadow: 5px 5px 0 0 var(--main-color);
+    --grey-shadow: 0px 25px 25px -12px #e0e0ec;
+    --title-font-size: 24px;
+    --subtitle-font-size: 20px;
+    --normal-font-size: 18px;
+    --xs-font-size: 16px;
+    --title-font-weight: bold;
+    --inset-shadow: inset 3.2px 3.2px 8px 0 #c8d0e7,
+        inset -3.2px -3.2px 8px 0 #c8d0e7;
+    --inset-input-shadow: -5px -5px 10px 0 #0a6d8be4 inset,
+        5px 5px 10px 0 #161b1d1b inset;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+html::-webkit-scrollbar {
+    width: 8px;
+}
+
+html::-webkit-scrollbar-thumb {
+    background-color: var(--main-color);
+    border-radius: 8px;
+    scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar-track {
+    background-color: var(--light-grey);
+}
+
+/* !END Global */
+
+
+/* !START LOGIN */
+
+/* img {
+    position: absolute;
+    width: 350px;
+    top: 55.5%;
+    right: 25%;
+} */
+
+
+
+.authentication h1 {
+    color: #084661;
+    text-align: center;
+    font-size: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #084661;
+}
+
+.authentication form {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.authentication .user_name,
+.authentication .password {
+    display: flex;
+    flex-direction: column;
+}
+
+.authentication label {
+    color: #084C61;
+}
+
+.authentication input {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 18px;
+    margin-top: 10px;
+}
+
+.authentication input:focus {
+    outline: none;
+}
+
+
+.authentication input[type="number"],
+.authentication input[type="password"],
+.authentication input[type="email"] {
+    box-shadow: 5px 5px 10px 0 rgba(22, 27, 29, 0.12)inset,
+        -5px -5px 10px 0 rgba(250, 251, 255, 0.8) inset;
+    width: 300px;
+    border: solid 1px #084661;
+    caret-color: #084661;
+}
+
+.authentication input[type="submit"] {
+    width: 220px;
+    background-color: #084C61;
+    border: none;
+    transition: 0.4s;
+    color: white;
+}
+
+.authentication input[type="submit"]:hover {
+    background-color: #0a546b;
+
+}
+
+.authentication input[type="number"]::-webkit-inner-spin-button,
+.authentication input[type="number"]::-webkit-outer-spin-button {
+    display: none;
+}
+
+.authentication.forget {
+    display: flex;
+    font-size: 11px;
+}
+
+.authentication .forget p {
+    margin-left: 5px;
+}
+
+.authentication .forget a {
+    color: #084661;
+}
+
+.control_error {
+    color: rgb(237 75 87);
+    width: 100%;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+
+
+@media(max-width:425px) {
+
+    input[type="number"],
+    input[type="password"] {
+        width: 250px;
+    }
+}

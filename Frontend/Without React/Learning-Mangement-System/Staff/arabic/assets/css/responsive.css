@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+:root {
+    --main-color: #084C61;
+    --secondry-color: #0E7290;
+    --light-grey: #f1f2f7;
+    --white: white;
+    --transition: 0.4s;
+    --main-shadow: 5px 5px 0 0 var(--main-color);
+    --grey-shadow: 0px 25px 25px -12px #e0e0ec;
+    --title-font-size: 24px;
+    --subtitle-font-size: 20px;
+    --normal-font-size: 18px;
+    --xs-font-size: 16px;
+    --title-font-weight: bold;
+}
+
+
+
+/* !START MATERIAL RESPONSIVE */
+
+@media(max-width:930px){
+    .main-section{
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .group-navigation-card{
+        display: none;
+    }
+
+    .page .page-content .material {
+        width: calc(100% - 10%);
+        margin: 20px 10px;
+    }
+}
+
+/* !END MATERIAL RESPONSIVE */
+
+
+/* ! START  ASSIGNment RESPONISIVE */
+@media(max-width:767px){
+    .page .page-content .assingments .assignment{
+        height: 150px;
+    }
+}
+/* ! END ASSIGNment RESPONISIVE */
+
+
+
+/* !START VOTING  RESPONSIVE*/
+
+.responsive-scroll-bar{
+    display: none;
+}
+
+@media(max-width:930px){
+    .main-section{
+        margin: 0 10px;
+    }
+    .main-section .container{
+        width: 87%;
+    }
+
+    .main-section .container .bar{
+        width: 87%;
+        padding: 15px;
+    } 
+
+    .main-section .container .bar .grey{
+        height: 15px;
+    }
+
+
+    /* *RADIOBUTTON */
+    .main-section .container label .radio-circle::before{
+        height: 1em;
+        width: 1em;
+    }
+    .main-section .container label input:checked+.radio-circle::before {
+        box-shadow: inset 0 0 0 0.3em var(--main-color);
+    }
+    /* *RADIOBUTTON */
+}
+
+/* !END VOTING  RESPONSIVE*/
+
+
+/* !START SURVEY RESPONSIVE */
+
+@media (max-width:767px){
+    .main-section .container{
+        padding: 20px;
+    }
+
+    .main-section .container .question .option p{
+        padding: 20px 20px 20px 50px;
+        width: 90%;
+    }
+
+    .button {
+        padding: 15px 30px;
+    }    
+}
+
+/* !END SURVEY RESPONSIVE */
