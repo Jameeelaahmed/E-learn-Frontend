@@ -21,6 +21,7 @@ body {
     --white: white;
     --transition: 0.4s;
     --main-shadow: 5px 5px 0 0 var(--main-color);
+    --main-arabic-shadow:-5px 5px 0 0 var(--main-color);
     --grey-shadow: 0px 25px 25px -12px #e0e0ec;
     --title-font-size: 24px;
     --subtitle-font-size: 20px;
@@ -29,8 +30,8 @@ body {
     --title-font-weight: bold;
     --inset-shadow:inset 3.2px 3.2px 8px 0 #c8d0e7,
     inset -3.2px -3.2px 8px 0 #c8d0e7;
-    --inset-input-shadow:-5px -5px 10px 0 #0a6d8be4 inset,
-                        5px 5px 10px 0 #161b1d1b inset;
+    --inset-input-shadow:5px 5px 10px 0 rgba(22, 27, 29, 0.06) inset,
+    -5px -5px 10px 0 rgba(250, 251, 255, 0.8) inset;
 }
 
 a {
@@ -41,17 +42,8 @@ ul {
     list-style: none;
 }
 
-html::-webkit-scrollbar{
-    width: 8px;
+::-webkit-scrollbar{
+    display: none;
 }
 
-html::-webkit-scrollbar-thumb{
-    background-color:var(--main-color);
-    border-radius: 8px;
-    scroll-behavior: smooth;
-}
-
-html::-webkit-scrollbar-track{
-    background-color:var(--light-grey);
-}
 

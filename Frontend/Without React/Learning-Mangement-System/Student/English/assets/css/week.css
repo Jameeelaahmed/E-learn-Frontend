@@ -78,6 +78,17 @@
 
 /* *HOVER */
 
+.page .page-content .weeks .week2 .week-content{
+    display: none;
+}
+
+.page .page-content .weeks .week2:hover .week-content{
+    display: block;
+    height: auto;
+    
+}
+/* !!!!!!!!!!!!!!!!!!!!!!!!! */
+
 .page .page-content .weeks .week1 .week-head i,
 .page .page-content .weeks .week2 .week-head i,
 .page .page-content .weeks .week2 .week-content .material i {
@@ -89,13 +100,14 @@
     transition: var(--transition);
 }
 
+
 /* *HOVER */
 .page .page-content .weeks .week1 .week-head:hover i,
 .page .page-content .weeks .week2 .week-head:hover i,
 .page .page-content .weeks .week2 .week-content .material:hover i {
     color: var(--light-grey);
+    transform: rotate(180deg);
 }
-
 /* *HOVER */
 
 .page .page-content .weeks .week:not(:first-child) {

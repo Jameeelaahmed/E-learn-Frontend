@@ -1,0 +1,67 @@
+.lec_sec {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--white);
+    margin: 0 20px;
+    padding: 15px;
+    border-radius: 14px;
+    margin-top: 15px;
+}
+
+/* *HOVER */
+.lec_sec:hover {
+    background-color: var(--main-color);
+}
+
+/* *HOVER */
+
+.lec_sec .icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lec_sec .icon{
+    font-size: 50px;
+    color: var(--main-color);
+    transition: var(--transition);
+}
+
+.lec_sec .leftIcon{
+    margin-top: 8px;
+    font-size: 18px;
+    color: var(--main-color);
+    transition: var(--transition);
+}
+.lec_sec:hover .leftIcon,
+.lec_sec.active .leftIcon{
+    color: var(--white);
+    margin-top: 0;
+}
+
+/* *HOVER */
+.lec_sec:hover .icon{
+    color: var(--light-grey);
+    transform: rotate(180deg);
+}
+/* *HOVER */
+
+.lec_sec p {
+    font-size: 18px;
+    color: var(--main-color);
+    transition: var(--transition);
+}
+
+/* *HOVER */
+.lec_sec:hover p {
+    color: var(--light-grey);
+}
+/* *HOVER */
+
+
+@media(max-width:615px){
+    .lec_sec p {
+        font-size: 13px;
+    }
+}

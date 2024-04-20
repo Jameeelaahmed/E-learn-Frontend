@@ -1,0 +1,30 @@
+.week{
+    background-color: var(--light-grey);
+    border-radius: 8px;
+    padding-bottom: 15px;
+    animation: slide-in-from-top 0.35s ease-out;
+    overflow:hidden;
+}
+
+[dir="ltr"] .week{
+    box-shadow: var(--main-shadow);
+}
+[dir="rtl"] .week{
+    box-shadow: var(--main-arabic-shadow);
+}
+
+.week:not(:first-child) {
+    margin-top: 35px;
+}
+
+@keyframes slide-in-from-top {
+    0% {
+        transform: translateY(-15%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

@@ -7,21 +7,22 @@ img.logo {
     left: 25px;
 }
 
+[dir='rtl'] img.logo {
+    right: 25px;
+}
+
 /* ! LOGO */
 
 /* ! START LOGO RESPONSIVE */
-/* img.logo-responsive{
-    display: none;
-} */
-
-/* img.logo{
-    display: none;
-} */
 img.logo-responsive{
     position: absolute;
     width: 120px;
     left: -27px;
     top: 20px;
+}
+
+[dir='rtl'] img.logo-responsive{
+    right: -27px;
 }
 
 @media(max-width:767px){
@@ -34,6 +35,10 @@ img.logo-responsive{
         width: 100px;
         left: -18px;
         top: 30px;
+    }
+
+    [dir='rtl'] img.logo-responsive{
+        right: -18px;
     }
 }
 /* !END LOGO RESPONSIVE */

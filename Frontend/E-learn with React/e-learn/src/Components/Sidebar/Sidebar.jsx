@@ -1,15 +1,54 @@
 import classes from './Sidebar.module.css'
-import { sidbarData } from '../../sidebarData'
 import pro from '../../assets/avatar.jpg'
 import { useState } from 'react'
 import * as FaIcons from "react-icons/fa6";
+// import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 
+// eslint-disable-next-line react/prop-types
 export default function Sidebar({opened,onClose}){
-      // * START ACTIVE
-        const [active,setActive]=useState("")
-        function handleActive(selectedButton){
-            setActive(selectedButton);
+    //* LANG 
+    const { t} = useTranslation();
+    //* LANG 
+
+    const sidebarData = [
+        {
+            title: t('Main'),
+            icon: <FaIcons.FaHouse className={classes.icon} />,
+            // link:'./home'
+        },
+        {
+            title: t('Groups'),
+            icon: <FaIcons.FaBook className={classes.icon} />,
+            // link:'./home'
+        },
+        {
+            title: t('Survey'),
+            icon: <FaIcons.FaSquarePollVertical className={classes.icon} />,
+            // link:'./home'
+        },
+        {
+            title: t('Voting'),
+            icon: <FaIcons.FaSquarePollVertical className={classes.icon} />,
+            // link:'./home'
+        },
+        {
+            title: t('Announcements'),
+            icon: <FaIcons.FaBullhorn className={classes.icon} />,
+            // link:'./home'
+        },
+        {
+            title: t('Community'),
+            icon: <FaIcons.FaUsers className={classes.icon} />,
+            // link:'./home'
         }
+    ];
+
+    // * START ACTIVE
+    const [active,setActive]=useState("")
+    function handleActive(selectedButton){
+        setActive(selectedButton);
+    }
       // * START ACTIVE
     return(
         <div 
@@ -25,7 +64,7 @@ export default function Sidebar({opened,onClose}){
                 <p>Jameela Ahmed</p>
             </a>
             <ul>
-                {sidbarData.map((item)=>(
+                {sidebarData.map((item)=>(
                 <li 
                 className={(active===item.title)? 
                 classes.active:undefined} 

@@ -1,0 +1,33 @@
+.weeks {
+    margin: 80px 40px;
+    width: calc(100% - 350px);
+    padding: 10px;
+}
+
+.weeks .add_week{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: var(--main-color);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+[dir="ltr"] .weeks .add_week .icon{
+    margin-right: 10px;
+}
+
+[dir="rtl"] .weeks .add_week .icon{
+    margin-left: 10px;
+}
+
+@media(max-width:930px){
+    .weeks{
+        width: calc(100% - 10%);
+        margin: 20px 10px;
+    }
+}
+
+
+
