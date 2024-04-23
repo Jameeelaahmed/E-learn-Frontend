@@ -38,12 +38,6 @@ const AddVsModal = forwardRef(function AddVsModal(_, ref) {
         }
     };
 
-    // function handleQuestionChange(questionId, answer) {
-    //     setFormData(prevFormData => ({
-    //         ...prevFormData,
-    //         [questionId]: answer
-    //     }));
-    // }
 
     function handleSubmit(e) {
         e.preventDefault();
