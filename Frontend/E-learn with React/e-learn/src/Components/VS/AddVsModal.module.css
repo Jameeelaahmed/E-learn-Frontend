@@ -335,10 +335,13 @@ textarea:focus {
 .x_icon{
     color: var(--main-color);
     position: absolute;
-    top: 13px;
+    top: 27px;
     cursor: pointer;
 }
 
+[dir="ltr"] .x_icon{
+    right: 20px;
+}
 [dir="rtl"] .x_icon{
     left: 20px;
 }
