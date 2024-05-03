@@ -1,6 +1,0 @@
-.assignments{
-    display: flex;
-    flex-wrap: wrap;
-    padding: 20px;
-    width: calc(100% -  300px);
-}

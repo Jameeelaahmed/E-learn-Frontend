@@ -1,0 +1,129 @@
+.profile{
+    padding: 25px;
+    background-color: var(--light-grey);
+    width: 100%;
+    height: fit-content;
+    border-radius: 10px;
+    box-shadow: var(--main-arabic-shadow);
+}
+
+.title{
+    color: var(--main-color);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.box{
+    border: 2px solid var(--main-color);
+    border-radius: 10px;
+    padding: 10px;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+}
+
+.box:not(:last-child){
+    margin-bottom: 15px;
+}
+
+.box .row{
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0;
+}
+
+.data{
+    width: 40%;
+}
+
+
+.label{
+    color: var(--main-color);
+    margin-bottom: 8px;
+}
+
+.profile img{
+    width: 100px;
+    height: 100px;
+    border-radius: 12px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 15px;
+}
+
+.password_container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.password{
+    display: flex;
+    flex-direction: column;
+}
+
+.edit{
+    padding: 10px 15px;
+    border: 2px dashed var(--main-color);
+    border-radius: 10px;
+    color: var(--main-color);
+    cursor: pointer;
+}
+
+.input{
+    padding: 9px 10PX;
+    background-color: var(--light-grey);
+    /* font-size: 15px; */
+    caret-color: var(--main-color);
+    margin-top: 5px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: var(--inset-input-shadow);
+    border:1px solid var(--main-color);
+    width:20%;
+}
+
+.input:focus{
+    outline: none;
+}
+
+.button{
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    transition: 0.4s;
+}
+
+.button:hover{
+    background-color: #104454;
+}
+
+.warning{
+    margin-top: 10px;
+    color: rgb(218, 0, 0);
+    font-size: 14px;
+}
+
+
+@media (max-width:768px){
+    .box .row{
+        flex-direction: column;
+        /* align-items: center; */
+    }
+
+    .data{
+        padding-bottom: 10px;
+        border: 1px solid var(--main-color);
+        border-radius:10px;
+        padding: 8px;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+    .input{
+        width: 50%;
+    }
+}

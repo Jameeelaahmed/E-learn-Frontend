@@ -1,0 +1,92 @@
+.group_navigation_card{
+    width: 275px;
+    background-color: var(--light-grey);
+    padding: 15px 30px;
+    border-radius: 19px;
+    box-shadow: var(--main-shadow);
+    height: fit-content;
+}
+
+[dir='ltr'] .group_navigation_card{
+    margin-right: 50px;
+}
+[dir='rtl'] .group_navigation_card{
+    margin-left: 50px;
+}
+
+.group_navigation_card p.group_title {
+    font-size: 28px;
+    color: var(--main-color);
+    font-weight: bolder;
+    margin-top: 30px;
+}
+
+.group_navigation_card .instructor_profile {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+
+.group_navigation_card .instructor_profile img {
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+[dir='ltr'] .group_navigation_card .instructor_profile img {
+    margin-right: 20px;
+}
+[dir='rtl'] .group_navigation_card .instructor_profile img {
+    margin-left: 20px;
+}
+
+.group_navigation_card .instructor_profile p {
+    color: var(--main-color);
+    font-weight: bolder;
+}
+
+.group_navigation_card .group_sections{
+    margin-top: 20px;
+    color: var(--main-color);
+}
+
+.group_navigation_card .group_sections a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: var(--main-color);
+}
+
+.group_navigation_card .group_sections a:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.group_navigation_card .group_sections a:first-child::before {
+    content: "";
+    position: absolute;
+    height: 30px;
+    width: 8px;
+    background-color: var(--main-color);
+} 
+
+[dir='ltr'] .group_navigation_card .group_sections a:first-child::before {
+    left: -15px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+} 
+
+[dir='rtl'] .group_navigation_card .group_sections a:first-child::before {
+    right: -15px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+
+/* ! RESPONSIVE*/
+
+@media(max-width:930px){
+    .group_navigation_card{
+        display: none;
+    }
+}

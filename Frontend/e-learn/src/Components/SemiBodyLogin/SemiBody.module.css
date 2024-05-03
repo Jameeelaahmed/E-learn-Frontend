@@ -1,0 +1,83 @@
+.semi_body{
+    font-family: "Open Sans", "sans-serif";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 100vh;
+    background-color: #084C61;
+    position: relative;
+    overflow: hidden;
+    /* background-image: url(../../assets/garden.jpg); */
+    background-repeat: no-repeat;
+    background-size:cover ;
+}
+
+.semi_body::before{
+    content: "";
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 25px;
+    top: -20px;
+    left: -80px;
+    transform: rotate(70deg);
+    background-color: #d9d9d935;
+    /* animation: square-rotate 5s linear 5s infinite ; */
+}
+
+
+.square_one,
+.square_two{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #d9d9d935;
+    border-radius: 10px;
+}
+
+.square_one{
+    top:100px;
+    left: 300px;
+    transform: rotate(70deg);
+    z-index: 100;
+}
+
+.square_two{
+    left: 200px;
+    top: 300px;
+    transform: rotate(-70deg);
+    z-index: 100;
+}
+
+@media(max-width:1200px){
+    .square_one,
+    .square_two{
+        display: none;
+    }
+    /* img{
+        display: none;
+    } */
+}
+
+@media(max-width:768px){
+    .semi_body::before{
+        display: none;
+    }
+}
+
+
+@keyframes square-rotate {
+    0%{
+        transform: rotate(70deg);
+    }
+    25%{
+        transform: rotate(100deg);
+    }
+    50%{
+        transform: rotate(125deg);
+    }
+    75%{
+        transform: rotate(150deg);
+    }
+}
