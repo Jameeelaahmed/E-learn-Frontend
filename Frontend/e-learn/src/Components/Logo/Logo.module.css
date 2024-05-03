@@ -1,0 +1,50 @@
+
+/* ! LOGO */
+img.logo {
+    position: absolute;
+    width: 150px;
+    top: 10px;
+}
+
+[dir='rtl'] img.logo {
+    right: 25px;
+}
+[dir='ltr'] img.logo {
+    left: 25px;
+}
+
+/* ! LOGO */
+
+/* ! START LOGO RESPONSIVE */
+img.logo_responsive{
+    position: absolute;
+    width: 120px;
+    top: 20px;
+}
+
+[dir='rtl'] img.logo_responsive{
+    right: -27px;
+}
+[dir='ltr'] img.logo_responsive{
+    left: -27px;
+}
+
+@media(max-width:767px){
+    img.logo{
+        display: none;
+    }
+    img.logo_responsive{
+        display:block;
+        position: absolute;
+        width: 100px;
+        top: 30px;
+    }
+
+    [dir='rtl'] img.logo_responsive{
+        right: -18px;
+    }
+    [dir='ltr'] img.logo_responsive{
+        left: -18px;
+    }
+}
+/* !END LOGO RESPONSIVE */

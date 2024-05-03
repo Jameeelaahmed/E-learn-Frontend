@@ -1,0 +1,28 @@
+.main_section {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 25px;
+}
+
+
+@media(max-width:930px){
+    .main_section{
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+/* 
+    .page .page-content .material {
+        width: calc(100% - 10%);
+        margin: 20px 10px;
+    } */
+}
+
+
+@media (max-width: 767px){
+    .main_section{
+        margin-bottom: 95px;
+    }
+}
