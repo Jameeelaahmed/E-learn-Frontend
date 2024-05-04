@@ -27,7 +27,6 @@ function App() {
   // * START CLOSESIDEBAR
   const [isOpen, setIsOpen] = useState(false);
   function handleClose() {
-    debugger
     setIsOpen((close) => !close);
   }
   // * END CLOSESIDEBAR

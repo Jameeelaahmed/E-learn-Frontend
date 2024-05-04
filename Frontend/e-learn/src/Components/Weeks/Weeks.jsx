@@ -47,7 +47,7 @@ export default function Weeks() {
                         {openWeeks[weekNum] && (
                             <div className={classes.week_content}>
                                 <div className={classes.main}>
-                                    <LecSec materialType={`${t("Lecture")} ${weekNum + 1}`} />
+                                    <LecSec materialType={`${t("Lecture")} ${weekNum + 1}`} weeknum={weekNum}/>
                                 </div>
                                 <div className={classes.main}>
                                     <LecSec materialType={`${t("Section")} ${weekNum + 1}`} />
