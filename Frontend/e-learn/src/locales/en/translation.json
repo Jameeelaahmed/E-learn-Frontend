@@ -55,9 +55,10 @@
     "add-quiz":"ADD QUIZ",
     "Faculty":"Faculty",
     "Student-ID":"Student ID",
-    "Save":"Save",
+    "save":"Save",
     "change-password":"Change Password",
     "old-password":"Old password",
     "new-password":"New password",
-    "confirm-password":"Confirm new password"
+    "confirm-password":"Confirm new password",
+    "add-email":"Add email"
 }
