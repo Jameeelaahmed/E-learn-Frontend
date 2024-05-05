@@ -128,7 +128,8 @@
 
 .input_container input[type="text"],
 .input_container input[type="time"],
-.input_container input[type="date"]{
+.input_container input[type="date"],
+.input_container input[type="number"]{
     padding: 9px 10PX;
     caret-color: var(--main-color);
     margin-top: 5px;
@@ -138,6 +139,11 @@
     box-shadow: var(--inset-input-shadow);
     color: var(--main-color);
     width: 100%;
+}
+
+.input_container input[type="number"]::-webkit-inner-spin-button,
+.input_container input[type="number"]::-webkit-outer-spin-button{
+    display: none;
 }
 
 .input_container  input[type="date"] {

@@ -1,16 +1,33 @@
-.lec_sec {
+.lec_sec_container{
+    background-color: var(--white);
+    margin: 0 20px;
+    border-radius: 14px;
+    margin-top: 15px;
+
+    transition: all 850ms ease;
+    max-height: 300px;
+}
+
+.lec_sec_container.active_slide{
+    transition: 350ms;
+
+}
+
+.lec_sec{
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: var(--white);
-    margin: 0 20px;
-    padding: 15px;
+    padding: 8px;
     border-radius: 14px;
-    margin-top: 15px;
+    width: 100%;
 }
 
+
+
 /* *HOVER */
-.lec_sec:hover {
+.lec_sec:hover,
+.lec_sec.active{
     background-color: var(--main-color);
 }
 
@@ -20,6 +37,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.lec_sec:hover .icon,
+.lec_sec.active .icon{
+    color: var(--light-grey);
+    transform: rotate(180deg);
 }
 
 .lec_sec .icon {
@@ -52,13 +75,6 @@
     margin-top: 0;
 }
 
-/* *HOVER */
-.lec_sec:hover .icon {
-    color: var(--light-grey);
-    transform: rotate(180deg);
-}
-
-/* *HOVER */
 
 .lec_sec p {
     font-size: 18px;
@@ -66,12 +82,53 @@
     transition: var(--transition);
 }
 
+[dir="ltr"] .lec_sec p{
+    margin-left: 10px;
+}
+[dir="rtl"] .lec_sec p{
+    margin-right: 10px;
+}
+
 /* *HOVER */
-.lec_sec:hover p {
+.lec_sec:hover p,
+.lec_sec.active p {
     color: var(--light-grey);
 }
 
 /* *HOVER */
+
+
+.file{
+    padding: 20px 5px;
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+}
+
+.file:not(:last-child){
+    border-bottom:1px solid var(--main-color) ;
+}
+
+.open_file{
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    color: var(--main-color);
+}
+
+.file_icon{
+    font-size: 20px;
+    color: var(--main-color);
+}
+
+[dir="ltr"] .file_icon{
+    margin-right: 10px;
+}
+
+[dir="rtl"] .file_icon{
+    margin-left: 10px;
+}
 
 
 @media(max-width:615px) {

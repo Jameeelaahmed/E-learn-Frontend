@@ -6,13 +6,13 @@
 
 
 @media(max-width:930px){
-    .main_section{
+    /* .main_section{
         flex-direction: column;
         align-items: center;
         position: relative;
         left: 50%;
         transform: translateX(-50%);
-    }
+    } */
 /* 
     .page .page-content .material {
         width: calc(100% - 10%);

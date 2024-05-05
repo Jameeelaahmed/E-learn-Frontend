@@ -1,31 +1,4 @@
-.AddAssignment{
-    width: 275px;
-    background-color: var(--light-grey);
-    padding: 15px 30px;
-    margin-top: 30px;
-    border-radius: 19px;
-    box-shadow: var(--main-shadow);
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.AddAssignment .create_assignment{
-    color: var(--main-color);
-    margin-bottom: 15px;
-}
-
-[dir='ltr'] .AddAssignment{
-    margin-right: 50px;
-}
-[dir='rtl'] .AddAssignment{
-    margin-left: 50px;
-}
-
-/* ! button */
-
-.actions button {
+.upButton{
     display: inline-block;
     transition: all 0.2s ease-in;
     position: relative;
@@ -37,14 +10,14 @@
     border-radius: 0.5em;
 }
 
-.actions button{
+.upButton{
     background-color: var(--light-grey);
     border: 2px solid  var(--main-color);
     color:var(--main-color);
 }
 
 
-.actions button:first-child::before {
+.upButton::before {
     content: "";
     position: absolute;
     left: 50%;
@@ -59,7 +32,7 @@
     z-index: -1;
 }
 
-.actions button::after {
+.upButton::after {
     content: "";
     position: absolute;
     left: 55%;
@@ -74,13 +47,13 @@
     z-index: -1;
 }
 
-.actions button:first-child:hover {
+.upButton:hover {
     color: #ffffff;
     border: 2px solid var(--main-color);
 }
 
 
-.actions button:hover::after {
+.upButton:hover::after {
     top: -45%;
     background-color:var(--main-color);
     transform: translateX(-50%) scaleY(1.3) scaleX(0.8);

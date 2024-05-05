@@ -1,0 +1,33 @@
+.files_list{
+    background-color:var(--light-grey);
+    border-radius:10px ;
+    border: 3px dashed #cbd5e0;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.file{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #084c6128;
+    border-radius: 10px;
+}
+
+.file:not(:last-child){
+    margin-bottom: 10px;
+}
+
+.button{
+    padding: 5px 8px;
+    /* background-color: var(--main-color); */
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    color: var(--main-color);
+    cursor: pointer;
+    border: 1px solid var(--main-color);
+}
+
