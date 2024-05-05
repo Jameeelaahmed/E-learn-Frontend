@@ -9,12 +9,12 @@ export default function StuMain(){
         <GroupsSlider/>
         <div className={classes.foot}>
             <div className={classes.upcoming_quizzes}>
-                <p>{t("up-comming-quiz")}</p>
+                <p className={classes.title}>{t("up-comming-quiz")}</p>
                 <UpCommingQuizzes/>
                 <UpCommingQuizzes/>
             </div>
             <div className={classes.timeline}>
-                <p>{t("Today's-time-line")}</p>
+                <p className={classes.title}>{t("Today's-time-line")}</p>
                 <ul className={classes.time_line}>
                 {/* MAP HERE */}
                     <li>
