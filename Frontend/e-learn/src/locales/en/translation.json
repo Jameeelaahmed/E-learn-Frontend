@@ -52,5 +52,12 @@
     "level":"Level",
     "number-of-members":"Number of members",
     "see-all":"SEE All",
-    "add-quiz":"ADD QUIZ"
+    "add-quiz":"ADD QUIZ",
+    "Faculty":"Faculty",
+    "Student-ID":"Student ID",
+    "Save":"Save",
+    "change-password":"Change Password",
+    "old-password":"Old password",
+    "new-password":"New password",
+    "confirm-password":"Confirm new password"
 }

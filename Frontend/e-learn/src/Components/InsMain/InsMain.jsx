@@ -27,7 +27,7 @@ export default function InsMain() {
                         <tbody>
                             {/* MAP HERE */}
                             <tr>
-                                <td>Coimputer theory</td>
+                                <td>Computer theory</td>
                                 <td>4</td>
                                 <td>100</td>
                             </tr>
