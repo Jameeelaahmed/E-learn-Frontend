@@ -5,7 +5,6 @@
 /* !RESPONSIVE */
 @media(max-width:930px){
     .group_navigation_card_responsive{
-        margin-top: 50px;
         display: flex;
         justify-content: center;
     }

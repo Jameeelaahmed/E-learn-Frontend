@@ -47,12 +47,8 @@ function App() {
           <Header></Header>
           <MainSection>
             {/* <FileBrowser></FileBrowser> */}
-            {/* <Assignments> */}
-            {/* </Assignments> */}
             {/* <VSQContainer></VSQContainer> */}
-            <GroupNavCardRespo/>
-            <Weeks></Weeks>
-            <GroupNavCard/>
+            <Assignments/>
           </MainSection>
         </PageContent>
         <AppBar></AppBar>

@@ -3,6 +3,14 @@
     margin: 0 20px;
     border-radius: 14px;
     margin-top: 15px;
+
+    transition: all 850ms ease;
+    max-height: 300px;
+}
+
+.lec_sec_container.active_slide{
+    transition: 350ms;
+
 }
 
 .lec_sec{
@@ -72,6 +80,13 @@
     font-size: 18px;
     color: var(--main-color);
     transition: var(--transition);
+}
+
+[dir="ltr"] .lec_sec p{
+    margin-left: 10px;
+}
+[dir="rtl"] .lec_sec p{
+    margin-right: 10px;
 }
 
 /* *HOVER */

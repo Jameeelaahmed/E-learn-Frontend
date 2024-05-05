@@ -3,7 +3,7 @@ export default function InputSelect({ wrapper = "select",name}) {
     let Wrapper;
     if(wrapper==='select'){
         Wrapper=(<div className={classes.select_dropdown}>
-        <select>
+        <select value="select">
             <option value="Option 1" name={name}>Ungradded</option>
         </select>
     </div>)

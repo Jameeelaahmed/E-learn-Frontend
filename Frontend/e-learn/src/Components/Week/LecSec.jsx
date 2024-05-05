@@ -20,7 +20,7 @@ export default function LecSec({ materialType }) {
     };
 
     return (
-        <div className={classes.lec_sec_container}>
+        <div className={`${classes.lec_sec_container} openFiles ? classes.active_slide : ''}`}>
             <div className={`${classes.lec_sec} ${openFiles ? classes.active : ''}`}>
                 <p>{materialType}</p>
                 <div className={classes.icons}>

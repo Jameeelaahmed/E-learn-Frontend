@@ -1,15 +1,13 @@
-import { useRef, forwardRef, useImperativeHandle, useState, useCallback ,useEffect} from "react"
+import { useRef, forwardRef, useImperativeHandle, useState, useCallback, useEffect } from "react"
 import classes from './AddAssignmentModal.module.css'
-import FileUpload from "../File/FileUpload";
-import FileList from "../File/FileList";
-import InputSelect from "./InputSelect";
+import FileUpload from "../Files/FileUpload";
 import { useTranslation } from "react-i18next";
 import { log } from "../../log";
+import SubmitButton from "../Button/SubmitButton";
 const AddAssignmentModal = forwardRef(function AddAssignmentModal(_, ref) {
     log("<AddAssignmentModal>")
     const { t } = useTranslation();
-    const [isEditing, setIsEditing] = useState(false);
-    const [formSubmitted,setFormSubmited]=useState(false)
+    const [formSubmitted, setFormSubmited] = useState(false)
     const [assignmentData, setassignmentData] = useState([{
         title: "",
         grade: "",
@@ -21,16 +19,6 @@ const AddAssignmentModal = forwardRef(function AddAssignmentModal(_, ref) {
         files: [],
     }])
 
-    function handlePoints(e) {
-        e.preventDefault();
-        setIsEditing((editing) => !editing);
-    }
-
-    let wrapperType = "select";
-    if (isEditing) {
-        wrapperType = "input";
-    }
-
     const addAssignmentDialog = useRef();
     useImperativeHandle(ref, () => ({
         open: () => {
@@ -41,11 +29,26 @@ const AddAssignmentModal = forwardRef(function AddAssignmentModal(_, ref) {
         }
     }));
 
-    const [files, setFiles] = useState([])
-
-    const removeFile = (filename) => {
-        setFiles(files.filter(file => file.name !== filename))
+    function handleCollectFiles(files) {
+        setassignmentData((prevData) => ({
+            ...prevData,
+            files: files,
+        }));
     }
+
+    const handleCancelClick = useCallback((e) => {
+        if (ref && ref.current) {
+            ref.current.close();
+            e.target.form.reset(); // Resetting the form
+
+            //! FILES NOT RESETED
+            // setassignmentData((prevData) => ({
+            //     ...prevData,
+            //     files: [], // Clearing files
+            // }));
+        }
+
+    }, [ref]);
 
     const handleSubmit = useCallback(e => {
         const fd = new FormData(e.target);
@@ -53,23 +56,22 @@ const AddAssignmentModal = forwardRef(function AddAssignmentModal(_, ref) {
         setassignmentData(prevData => ({
             ...prevData,
             title: assignmentData.title,
-            grade: assignmentData.grade,
+            grade: assignmentData.grade || "Ungraded",
             endTime: assignmentData.endTime,
             endDate: assignmentData.endDate,
             description: assignmentData.description,
-            files:files
         }));
         setFormSubmited(true)
         // Clear form inputs and files
         e.target.reset();
     }, []);
 
-    useEffect(()=>{
-        if(formSubmitted){
+    useEffect(() => {
+        if (formSubmitted) {
             console.log(assignmentData)
             setFormSubmited(false)
         }
-    },[formSubmitted])
+    }, [formSubmitted])
 
     return (
         <dialog ref={addAssignmentDialog} className={classes.modal} onSubmit={handleSubmit}>
@@ -78,13 +80,9 @@ const AddAssignmentModal = forwardRef(function AddAssignmentModal(_, ref) {
                     <label htmlFor="title">{t("title")}</label>
                     <input type="text" id="title" dir='auto' name="title" />
                 </div>
-                <div className={classes.grade}>
-                    <InputSelect
-                        name="grade"
-                        classs="player-name"
-                        wrapper={wrapperType}>
-                    </InputSelect>
-                    <button onClick={handlePoints} className={classes.button}>add points</button>
+                <div className={classes.input_container}>
+                    <label htmlFor="grade">{t("grade")}</label>
+                    <input type="number" id="grade" dir='auto' name="grade" />
                 </div>
                 <div className={classes.row}>
                     <div className={classes.input_container}>
@@ -100,10 +98,9 @@ const AddAssignmentModal = forwardRef(function AddAssignmentModal(_, ref) {
                     <label htmlFor="description">{t('description')}</label>
                     <textarea id="description" name="description"></textarea>
                 </div>
-                <FileUpload files={files} setFiles={setFiles}
-                    removeFile={removeFile} name="files" />
-                <FileList files={files} removeFile={removeFile} />
-                <button type="submit" className={classes.button}>{t("Create")}</button>
+                <FileUpload collectFiles={handleCollectFiles}></FileUpload>
+                <SubmitButton cancel={handleCancelClick}></SubmitButton>
+                {/* <button type="submit" className={classes.button}>{t("Create")}</button> */}
             </form>
         </dialog>
     )
