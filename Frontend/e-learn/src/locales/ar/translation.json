@@ -61,5 +61,7 @@
     "new-password":"كلمة المرور الجديدة",
     "confirm-password":"تأكيد كلمة المرور الجديده",
     "add-email":"اضافة بريد الكتروني",
-    "department":"القسم"
+    "department":"القسم",
+    "up-comming-quiz":"الاختبارات القادمه",
+    "Today's-time-line":"جدول اليوم"
 }

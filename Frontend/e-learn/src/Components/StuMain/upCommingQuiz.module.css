@@ -16,10 +16,16 @@
     width: 60px;
     height: 60px;
     background-color: #f1f2f746;
-    left: -20px;
     border-radius: 10px;
     top: -1%;
     transform: rotate(160deg);
+}
+
+[dir="rtl"] .UpCommingQuizzes::before{
+    left: -20px;
+}
+[dir="ltr"] .UpCommingQuizzes::before{
+    right: -20px;
 }
 
 .circle_one{
@@ -29,8 +35,15 @@
     background-color: #f1f2f746;
     position: absolute;
     top: 30px;
+}
+
+[dir="rtl"] .circle_one{
     left:80px;
 }
+[dir="ltr"] .circle_one{
+    right: 80px;
+}
+
 .circle_two{
     width: 40px;
     height: 40px;
@@ -38,8 +51,15 @@
     background-color: #f1f2f746;
     position: absolute;
     top: 70px;
+}
+
+[dir="rtl"] .circle_twp{
     left:20px;
 }
+[dir="ltr"] .circle_two{
+    right: 20px;
+}
+
 
 /* .square{
     background-color: ;
