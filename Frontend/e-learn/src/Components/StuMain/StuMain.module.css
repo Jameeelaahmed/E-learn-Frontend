@@ -63,6 +63,9 @@
 [dir="rtl"] .group_name{
     margin-right: 10px;
 }
+[dir="ltr"] .group_name{
+    margin-left: 10px;
+}
 
 @media (max-width:768px){
     .foot{

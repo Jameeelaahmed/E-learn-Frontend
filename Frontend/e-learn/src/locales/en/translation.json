@@ -61,5 +61,7 @@
     "new-password":"New password",
     "confirm-password":"Confirm new password",
     "add-email":"Add email",
-    "department":"Department"
+    "department":"Department",
+    "up-comming-quiz":"Up comming quiz",
+    "Today's-time-line":"Today's time line"
 }
