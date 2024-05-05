@@ -50,13 +50,14 @@ function App() {
         <PageContent>
           <Header></Header>
           <MainSection>
+            <Profile></Profile>
             {/* <FileBrowser></FileBrowser> */}
             {/* <VSQContainer></VSQContainer> */}
             {/* <Assignments/> */}
             {/* <GroupNavCardRespo></GroupNavCardRespo>
             <AssignmentDetails></AssignmentDetails>
             <GroupNavCard></GroupNavCard> */}
-            <InsMain/>
+            {/* <InsMain/> */}
           </MainSection>
         </PageContent>
         <AppBar></AppBar>

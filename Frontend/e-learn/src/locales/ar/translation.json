@@ -52,5 +52,12 @@
     "level":"المستوي",
     "number-of-members":"عدد الاعضاء",
     "see-all":"إظهار الكل",
-    "add-quiz":"إضافة إختبار"
+    "add-quiz":"إضافة إختبار",
+    "Faculty":"الكلية",
+    "Student-ID":"الكود الجامعي",
+    "Save":"حفظ",
+    "change-password":"تغيير كلمة المرور",
+    "old-password":"كلمة المرور القديمة",
+    "new-password":"كلمة المرور الجديدة",
+    "confirm-password":"تأكيد كلمة المرور الجديده"
 }

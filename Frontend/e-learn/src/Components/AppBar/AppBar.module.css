@@ -15,6 +15,7 @@
     .app_bar li{
         height: 5rem;
         display:flex;
+        justify-content: center;
         align-items: center;
         width: calc(100% / 7);
         transition: 0.4s;
