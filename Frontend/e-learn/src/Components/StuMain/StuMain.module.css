@@ -67,6 +67,13 @@
     margin-left: 10px;
 }
 
+.title{
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
 @media (max-width:768px){
     .foot{
         flex-direction: column;
@@ -77,5 +84,9 @@
     .timeline{
         width: 100%;
         margin-top: 20px;
+    }
+
+    .title{
+        font-size: 15px;
     }
 }
