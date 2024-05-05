@@ -17,7 +17,7 @@ export default function GroupNavCard(){
             <div className={classes.group_sections}>
                 <a href="">{t('Material')}</a>
                 <a href="">{t('Assignments')}</a>
-                <a href="">{t('Quiz')}</a>
+                <a href="">{t('Quizzes')}</a>
                 <a href="">{t('Participants')}</a>
             </div>
         </div>
