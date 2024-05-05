@@ -14,7 +14,7 @@
     "Computer-Theory":"نظرية الحاسوب",
     "Material":"ملحقات",
     "Assignments":"المهام",
-    "َQuiz":"الاختبارات",
+    "َQuizzes":"الاختبارات",
     "Participants":"الاعضاء",
     "add-week":"اضافة اسبوع",
     "week":"الاسبوع",
@@ -25,6 +25,7 @@
     "Group":"المجموعه" ,
     "survey-end-time":"موعد الانتهاء",
     "survey-end-date":"يوم الانتهاء",
+    "date":"التاريخ",
     "survey-description":"وصف استطلاع الرأي",
     "option":"الاختيار ",
     "Create":"اضافة",
@@ -44,5 +45,12 @@
     "Academic-Information":"معلومات اكاديمية",
     "Security-Information":"معلومات أمنيه",
     "edit":"تعديل",
-    "set-password":"تعيين كلمة المرور"
+    "set-password":"تعيين كلمة المرور",
+    "total-students-in-groups":"إجمالي الطلاب في المجموعات",
+    "total-quizzes":"إجمالي الإختبارات",
+    "total-assignments":"إجمالي المهام",
+    "level":"المستوي",
+    "number-of-members":"عدد الاعضاء",
+    "see-all":"إظهار الكل",
+    "add-quiz":"إضافة إختبار"
 }

@@ -1,0 +1,113 @@
+.input_container{
+    display: flex;
+    flex-direction: column;
+}
+
+.input_container input[type="text"],
+.input_container input[type="time"],
+.input_container input[type="date"],
+.input_container input[type="number"]{
+    padding: 9px 10PX;
+    caret-color: var(--main-color);
+    margin-top: 5px;
+    border-radius: 20px;
+    border: none;
+    font-size: 14px;
+    box-shadow: var(--inset-input-shadow);
+    color: var(--main-color);
+    width: 100%;
+}
+
+.input_container input[type="number"]::-webkit-inner-spin-button,
+.input_container input[type="number"]::-webkit-outer-spin-button{
+    display: none;
+}
+
+.input_container  input[type="date"] {
+    padding: 0px 0px 0px 20px;
+    color-scheme: dark;
+}
+
+.input_container input:focus {
+    outline: none;
+}
+
+[dir='rtl'] .input_container:first-child {
+    margin-left: 50px;
+}
+
+[dir='ltr'] .input_container:first-child {
+    margin-right: 50px;
+}
+
+
+/* *INPUT TYPE==>TIME */
+
+/* Wrapper around the hour, minute, second, and am/pm fields as well as 
+the up and down buttons and the 'X' button */
+.input_container  input[type="time"]::-webkit-datetime-edit-fields-wrapper {
+    display: flex;
+}
+
+/* The space between the fields - between hour and minute, the minute and 
+second, second and am/pm */
+.input_container  input[type="time"]::-webkit-datetime-edit-text {
+    padding: 8px 5px;
+}
+
+/* The naming convention for the hour, minute, second, and am/pm field is
+`-webkit-datetime-edit-{field}-field` */
+
+/* Hour */
+.input_container  input[type="time"]::-webkit-datetime-edit-hour-field {
+    /* background-color: var(--main-color);
+    color: white; */
+    border: var(--main-color) 1px solid;
+    color: var(--main-color);
+    border-radius: 8%;
+    padding: 8px 4px;
+}
+
+/* Minute */
+.input_container  input[type="time"]::-webkit-datetime-edit-minute-field {
+    border: var(--main-color) 1px solid;
+    color: var(--main-color);
+    border-radius: 8%;
+    padding: 8px 4px;
+}
+
+/* AM/PM */
+.input_container  input[type="time"]::-webkit-datetime-edit-ampm-field {
+    /* background-color: var(--main-color); */
+    color: var(--main-color);
+    border-radius: 8%;
+    padding: 8px 4px;
+
+}
+
+/* 'X' button for resetting/clearing time */
+.input_container  input[type="time"]::-webkit-clear-button {
+    display: none;
+}
+
+/* *INPUT TYPE==>TIME */
+
+/* ? INPUT TYPE==>DATE */
+
+.input_container  input[type="date"] {
+    padding: 0px 0px 0px 20px;
+    font-size: 14px;
+    color-scheme: dark;
+    background-color: var(--grey-color);
+    color: var(--main-color);
+}
+
+.input_container  input[type="date"]::-webkit-calendar-picker-indicator {
+    font-size: 15px;
+    background-color: var(--main-color);
+    border-radius: 20px;
+    padding: 18px;
+}
+/* ? INPUT TYPE==>DATE */
+
+/* ! INPUT CONTAINER */

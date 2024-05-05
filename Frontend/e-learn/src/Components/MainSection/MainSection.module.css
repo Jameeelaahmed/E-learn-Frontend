@@ -1,7 +1,8 @@
 .main_section {
-    display: flex;
-    justify-content: space-between;
+    /* display: flex; */
+    /* justify-content: space-between; */
     margin: 40px 25px;
+    z-index: 999;
 }
 
 

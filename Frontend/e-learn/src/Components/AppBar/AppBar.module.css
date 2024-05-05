@@ -9,6 +9,7 @@
         background-color: var(--main-color);
         width: 100vw;
         box-shadow: var(--grey-shadow);
+        z-index: 1000;
     }
 
     .app_bar li{
