@@ -12,6 +12,7 @@ export default function Profile() {
     const [changePassword, setChangePassword] = useState(false)
     const [matchPassword, setMatchPassword] = useState(false)
     const [addEmail, setAddEmail] = useState(false)
+    const [email, setEmail] = useState('');
     function handleChangePass() {
         setChangePassword(prev => !prev)
     }
@@ -42,7 +43,8 @@ export default function Profile() {
     }
 
     function handleSaveEmail() {
-        let email = emailRef.current.value;
+        const newEmail = emailRef.current.value;
+        setEmail(newEmail)
         setAddEmail(false)
         console.log(email)
     }
@@ -79,7 +81,7 @@ export default function Profile() {
                         {/* <label htmlFor="email">{t("email")}</label> */}
                             {addEmail ? <button onClick={handleSaveEmail} className={classes.add_email}>{t("save")}</button>: <button onClick={handleAddEmail}  className={classes.add_email}>{t("add-email")}</button>}
                         <div className={classes.email}>
-                            {addEmail ? <input className={`${classes.input} ${classes.email_input}`} type="email" ref={emailRef} /> : <Data name="gamilas320@gmail.com" />}
+                            {addEmail ? <input className={`${classes.input} ${classes.email_input}`} type="email" ref={emailRef} /> : <Data name={email} />}
                         </div>
                     </div>
                 </div>

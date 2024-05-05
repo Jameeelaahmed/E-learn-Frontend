@@ -55,9 +55,10 @@
     "add-quiz":"إضافة إختبار",
     "Faculty":"الكلية",
     "Student-ID":"الكود الجامعي",
-    "Save":"حفظ",
+    "save":"حفظ",
     "change-password":"تغيير كلمة المرور",
     "old-password":"كلمة المرور القديمة",
     "new-password":"كلمة المرور الجديدة",
-    "confirm-password":"تأكيد كلمة المرور الجديده"
+    "confirm-password":"تأكيد كلمة المرور الجديده",
+    "add-email":"اضافة بريد الكتروني"
 }
