@@ -1,0 +1,78 @@
+.foot{
+    display: flex;
+    justify-content: space-around;
+    color: var(--main-color);
+}
+
+.upcoming_quizzes{
+    width: 45%;
+}
+.timeline{
+    width: 30%;
+}
+
+.time_line{
+    background-color: var(--light-grey);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+.time_line li{
+    display: flex;
+}
+
+.time,
+.group_name{
+    padding: 12px 15px;
+    background-color: white;
+    border-radius: 8px;
+    color: var(--main-color);
+    position: relative;
+}
+
+.time::before{
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    background-color: var(--main-color);
+    top: 0;
+}
+
+[dir="rtl"] .time::before{
+    right: 0;
+    border-top-right-radius:8px;
+    border-bottom-right-radius:8px;
+}
+
+[dir="ltr"] .time::before{
+    left: 0;
+    border-top-left-radius:8px;
+    border-bottom-left-radius:8px;
+}
+
+.time:not(:last-child){
+    margin-bottom: 10px;
+}
+
+.group_name{
+    height: fit-content;
+}
+
+[dir="rtl"] .group_name{
+    margin-right: 10px;
+}
+
+@media (max-width:768px){
+    .foot{
+        flex-direction: column;
+    }
+    .upcoming_quizzes{
+        width: 100%;
+    }
+    .timeline{
+        width: 100%;
+        margin-top: 20px;
+    }
+}
