@@ -60,5 +60,6 @@
     "old-password":"Old password",
     "new-password":"New password",
     "confirm-password":"Confirm new password",
-    "add-email":"Add email"
+    "add-email":"Add email",
+    "department":"Department"
 }

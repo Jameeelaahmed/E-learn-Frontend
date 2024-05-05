@@ -1,0 +1,4 @@
+.group_slider{
+    display: flex;
+    overflow-x: scroll;
+}
