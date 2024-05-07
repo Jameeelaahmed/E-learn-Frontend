@@ -63,5 +63,13 @@
     "add-email":"Add email",
     "department":"Department",
     "up-comming-quiz":"Up comming quiz",
-    "Today's-time-line":"Today's time line"
+    "Today's-time-line":"Today's time line",
+    "assigned":"Assignned",
+    "turned-in":"Turned-In",
+    "all":"All",
+    "gradded":"Gradded",
+    "time":"Time",
+    "attachment":"Attachment",
+    "mark":"Mark",
+    "enter-mark":"enter mark"
 }

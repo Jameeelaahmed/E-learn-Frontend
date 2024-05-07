@@ -20,6 +20,7 @@ export default function Login() {
                     <div className={classes.user_name}>
                         <label htmlFor="">اسم المستخدم</label>
                         <input
+                            className={classes.input}
                             type="number"
                             ref={email}
                         />
@@ -27,6 +28,7 @@ export default function Login() {
                     <div className={classes.password}>
                         <label htmlFor="">كلمة المرور</label>
                         <input
+                            className={classes.input}
                             type="password"
                             ref={password}
                         />
