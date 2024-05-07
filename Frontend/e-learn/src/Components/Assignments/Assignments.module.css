@@ -1,24 +1,13 @@
 .assignments{
     display: flex;
-    flex-wrap: wrap;
-    padding: 20px;
-    width: calc(100% -  300px);
+    justify-content: sp;
+    width: 100%;
 }
 
-
-.col{
-    display: flex;
-    flex-direction: column;
-    position: absolute;
+@media (max-width:930px){
+    .assignments{
+        flex-direction: column;
+        align-items: center;
+    }
 }
-
-[dir="rtl"] .col{
-    left: 0;
-}
-
-[dir="ltr"] .col{
-    right: 0;
-}
-
-
 

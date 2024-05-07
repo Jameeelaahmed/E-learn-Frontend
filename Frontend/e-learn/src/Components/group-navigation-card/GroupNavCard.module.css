@@ -9,9 +9,12 @@
 
 [dir='ltr'] .group_navigation_card{
     /* margin-right: 30px; */
+    box-shadow: var(--main-shadow);
+
 }
 [dir='rtl'] .group_navigation_card{
     /* margin-left: 10px; */
+    box-shadow: var(--main-arabic-shadow);
 }
 
 .group_navigation_card p.group_title {

@@ -1,7 +1,7 @@
 export default [
     {
         id:"123456",
-        name:"jam",
+        name:"jameela ahmed abdlruhman",
         Time:"09:30 PM",
         Date:"10/10/24",
     },

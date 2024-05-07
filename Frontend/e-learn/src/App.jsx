@@ -23,13 +23,12 @@ import VSQContainer from "./Components/VS/VSQContainer";
 import Profile from "./Components/Profile/Profile";
 import ResponsesList from "./Components/VS/ResponsesList";
 import FileBrowser from "./Components/test";
-import AssignmentDetails from "./Components/Assignments/AssignmnetDetails";
+// import AssignmentDetails from "./Components/Assignments/AssignmnetDetails";
 import Card from "./Components/InsMain/Card";
 import * as FaIcons from "react-icons/fa6"
 import InsMain from "./Components/InsMain/InsMain";
 import GroupsSlider from "./Components/StuMain/GroupsSlider";
 import StuMain from "./Components/StuMain/StuMain";
-
 function App() {
   // * START CLOSESIDEBAR
   const [isOpen, setIsOpen] = useState(false);
@@ -61,7 +60,8 @@ function App() {
             <AssignmentDetails></AssignmentDetails>
             <GroupNavCard></GroupNavCard> */}
             {/* <InsMain/> */}
-            <StuMain/>
+            {/* <StuMain/> */}
+            <Assignments/>
           </MainSection>
         </PageContent>
         <AppBar></AppBar>

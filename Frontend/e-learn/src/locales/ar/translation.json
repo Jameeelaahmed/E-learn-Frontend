@@ -63,5 +63,13 @@
     "add-email":"اضافة بريد الكتروني",
     "department":"القسم",
     "up-comming-quiz":"الاختبارات القادمه",
-    "Today's-time-line":"جدول اليوم"
+    "Today's-time-line":"جدول اليوم",
+    "assigned":"تم تكليف الطالب بها",
+    "turned-in":"تم تسليمها ",
+    "all":"الكل",
+    "gradded":"تمت اضافة علامه اليها",
+    "time":"وقت التسليم",
+    "attachment":"المرفقات",
+    "mark":"الدرجه",
+    "enter-mark":"ادخل الدرجه"
 }
