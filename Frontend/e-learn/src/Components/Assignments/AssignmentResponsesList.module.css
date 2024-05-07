@@ -11,6 +11,15 @@
     width: 90%;
 }
 
+.head{
+    display: flex;
+    flex-direction: column;
+}
+
+.head p{
+    font-size: 15px;
+}
+
 .tracking a{
     padding: 20px;
     background-color:var(--light-grey);
