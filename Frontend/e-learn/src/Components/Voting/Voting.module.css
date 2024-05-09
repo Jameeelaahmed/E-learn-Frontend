@@ -1,0 +1,9 @@
+.voting{
+    display: flex;
+}
+
+@media (max-width:930px){
+    .voting{
+        flex-direction: column;
+    }
+}

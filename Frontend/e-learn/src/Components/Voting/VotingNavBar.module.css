@@ -1,0 +1,200 @@
+.vs_navigation_bar {
+    background-color: var(--white);
+    width: 280px;
+    padding: 20px 0;
+    margin-top: 30px;
+    border-radius: 21px;
+    height: 560px; 
+    overflow-y: auto; /* or overflow-x: scroll; */
+    container-type: inline-size;
+    border: 4px solid var(--secondry-color);
+}
+
+[dir='ltr'] .vs_navigation_bar{
+    box-shadow: var(--main-shadow);
+    margin-left: 10px;
+    padding-right: 10px;
+}
+[dir='rtl'] .vs_navigation_bar{
+    box-shadow: var(--main-arabic-shadow);
+    margin-right: 10px;
+    padding-left: 10px;
+}
+
+.vs_navigation_bar::-webkit-scrollbar{
+    width: 0px;
+}
+
+.vs_navigation_bar .add_survey{
+    display: flex;
+    align-items: center;
+    color: var(--main-color);
+}
+
+.vs_navigation_bar .icon_square{
+    flex-shrink: 0;
+}
+
+
+[dir='rtl'] .vs_navigation_bar .add_survey .icon{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+[dir='ltr'] .vs_navigation_bar .add_survey .icon{
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+
+.box_wrapper{
+    display: flex;
+    align-items: center;
+}
+
+.vs_navigation_bar li {
+    padding: 20px;
+    background-color: var(--light-grey);
+    margin: 15px 10px;
+    border-radius: 21px;
+    transition: var(--transition);
+    position: relative;
+    word-wrap: normal;
+    width: 80%;
+}
+
+.vs_navigation_bar li .title_wrapper {
+    color: var(--main-color);
+    display: flex;
+    align-items: center;
+}
+
+.vs_navigation_bar li .info {
+    display: block;
+    font-size: var();
+}
+
+[dir='ltr'] .vs_navigation_bar li .info{
+    margin-left: 10px;
+}
+[dir='rtl'] .vs_navigation_bar li .info{
+    margin-right: 10px;
+}
+
+.vs_navigation_bar li .info span.name{
+    overflow-wrap: break-word;
+}
+
+.vs_navigation_bar li .info span.name {
+    position: absolute;
+    bottom: 10px;
+    font-size: 12px;
+}
+
+span.title{
+    display: block; 
+    word-break: break-all;
+}
+
+[dir='ltr'] .vs_navigation_bar li .info span.name{
+    right: 15px;
+}
+[dir='rtl'] .vs_navigation_bar li .info span.name{
+    left : 15px;
+}
+
+/* *HOVER */
+.vs_navigation_bar li:hover {
+    background-color: var(--main-color);
+}
+
+
+.vs_navigation_bar li:hover span {
+    color: var(--white);
+}
+.vs_navigation_bar li:hover .icon{
+    color: var(--white);
+}
+
+
+/* *HOVER */
+
+
+@media(max-width:930px){
+    .vs_navigation_bar{
+        display: none;
+    }
+}
+
+
+.vs_navigation_bar_responsive{
+    display: none;
+}
+
+@media(max-width:930px){
+    .main-section .vs_navigation_bar{
+        display: none;
+    }
+
+    .vs_navigation_bar_responsive{
+        display: flex;
+        box-shadow: var(--main-shadow);
+        overflow-x: auto;
+        height: 110px;
+        margin-top: 60px;
+        width: 88%;
+        border-radius: 20px;
+        padding-top: 15px;
+        flex-direction: column;
+    }
+
+    .titles_wrapper{
+        display: flex;
+        overflow-x: auto;
+        height: 110px;
+        margin-top: 60px;
+        width: 88%;
+        border-radius: 20px;
+        padding-top: 15px;
+        flex-direction: column;
+    }
+
+    .vs_navigation_bar_responsive::-webkit-scrollbar{
+        width: 0px;
+    }
+
+    .vs_navigation_bar_responsive .box{
+        min-width: 130px;
+        height: 80px;
+        background-color: var(--light-grey);
+        margin-right: 10px;
+        padding: 15px;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: var(--main-color);
+    }
+
+    .vs_navigation_bar_responsive .box p:last-child{
+        align-self: flex-end;
+    }
+
+    .vs_navigation_bar_responsive .add_survey{
+        display: flex;
+        align-items: center;
+        color: var(--main-color);
+        margin-top: 10px;
+    }
+
+    [dir="ltr"] .vs_navigation_bar_responsive .add_survey{
+        margin-left: 10px;
+    }
+    [dir="rtl"] .vs_navigation_bar_responsive .add_survey{
+        margin-right: 10px;
+    }
+    
+    [dir='rtl'] .vs_navigation_bar_responsive .add_survey .icon{
+        margin-left: 10px;
+    }
+
+}

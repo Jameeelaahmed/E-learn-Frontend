@@ -14,3 +14,10 @@
 .add_work input{
     display: none;
 }
+
+.customFileInput{
+    display: inline-block;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}

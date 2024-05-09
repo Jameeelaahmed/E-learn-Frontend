@@ -1,27 +1,36 @@
-import classes from './Logo.module.css'
+import classes from './Logo.module.css';
+import { useState, useEffect } from 'react';
 
-export default function Logo({opened}){
-    let img;
-    let opacityNone;
-    if(opened){
-    img=(<img 
-        className={classes.logo} 
-        src="./src/assets/Untitled-65.png" 
-        alt=""
-        ></img>)
-    opacityNone=(<img 
-        className={classes.logo_responsive} 
-        src="./src/assets/Untitled-4.png" 
-        alt=""
-        style={{opacity:0}}></img>)
-    }
-    else if(!opened){
-        img=(<img className={classes.logo_responsive} src="./src/assets/Untitled-4.png" alt=""></img>)
-    }
-    return(
+export default function Logo({ open }) {
+    const [isMobile, setIsMobile] = useState(false); // State to track screen size
+
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        checkScreenSize();
+        window.addEventListener('resize', checkScreenSize);
+        return () => {
+            window.removeEventListener('resize', checkScreenSize);
+        };
+    }, []);
+
+    return (
         <>
-        {img}
-        {opacityNone}
+            {(isMobile || !open) &&(
+                <img
+                    className={classes.logo_responsive}
+                    src="./src/assets/Untitled-4.png"
+                    alt=""
+                />
+            )}
+            {open && !isMobile && (
+                <img
+                    className={classes.logo}
+                    src="./src/assets/Untitled-65.png"
+                    alt=""
+                />
+            )}
         </>
-        )
+    );
 }
