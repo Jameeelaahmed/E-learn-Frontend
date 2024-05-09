@@ -17,23 +17,23 @@ img.logo {
 
 /* ! START LOGO RESPONSIVE */
 img.logo_responsive{
-    position: absolute;
+    /* position: absolute; */
     width: 120px;
     top: 20px;
 }
 
-[dir='rtl'] img.logo_responsive{
+/* [dir='rtl'] img.logo_responsive{
     right: -27px;
 }
 [dir='ltr'] img.logo_responsive{
     left: -27px;
-}
+} */
 
-@media(max-width:767px){
+@media(max-width:930px){
     img.logo{
-        display: none;
+        /* display: none; */
     }
-    img.logo_responsive{
+    /* img.logo_responsive{
         display:block;
         position: absolute;
         width: 100px;
@@ -45,6 +45,6 @@ img.logo_responsive{
     }
     [dir='ltr'] img.logo_responsive{
         left: -18px;
-    }
+    } */
 }
 /* !END LOGO RESPONSIVE */

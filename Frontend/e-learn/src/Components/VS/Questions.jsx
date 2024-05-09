@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import * as FaIcons from "react-icons/fa6";
 import { log } from '../../log';
 
-const Questions = memo(function Questions({onStateChange,onQuestionChange}) {
+const Questions = memo(function Questions({onQuestionChange}) {
     log('<Questions /> rendered');
     const { t } = useTranslation();
     const [questions, setQuestions] = useState([{ description: "", options: ["", ""] }]);

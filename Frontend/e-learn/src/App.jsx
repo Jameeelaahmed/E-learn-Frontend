@@ -29,6 +29,7 @@ import * as FaIcons from "react-icons/fa6"
 import InsMain from "./Components/InsMain/InsMain";
 import GroupsSlider from "./Components/StuMain/GroupsSlider";
 import StuMain from "./Components/StuMain/StuMain";
+import Voting from "./Components/Voting/Voting";
 function App() {
   // * START CLOSESIDEBAR
   const [isOpen, setIsOpen] = useState(false);
@@ -45,12 +46,10 @@ function App() {
       {/* <ForgetPassword></ForgetPassword> */}
       {/* <SetNewPassword></SetNewPassword> */}
       {/* </SemiBody> */}
-
-      <Logo opened={isOpen}></Logo>
       <Page>
         <Sidebar opened={isOpen} onClose={handleClose}></Sidebar>
         <PageContent>
-          <Header></Header>
+          <Header opened={isOpen}></Header>
           <MainSection>
             {/* <Profile></Profile> */}
             {/* <FileBrowser></FileBrowser> */}
@@ -61,7 +60,8 @@ function App() {
             <GroupNavCard></GroupNavCard> */}
             {/* <InsMain/> */}
             {/* <StuMain/> */}
-            <Assignments/>
+            {/* <Assignments/> */}
+            <Voting/>
           </MainSection>
         </PageContent>
         <AppBar></AppBar>
