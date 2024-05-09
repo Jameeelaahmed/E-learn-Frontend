@@ -1,15 +1,44 @@
 import { useRef } from 'react';
 import classes from './authentication.module.css';
 import FormContainer from './FormContainer';
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next';
+import { httpRequest } from '../../HTTP';
 
 export default function Login() {
-    const {t}=useTranslation();
-    const email=useRef();
-    const password=useRef();
+    const { t } = useTranslation();
+    const email = useRef();
+    const password = useRef();
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
+        
+        const username = email.current.value;
+        const userPassword = password.current.value;
+        
+        if (!username || !userPassword) {
+            console.error('Username and password are required');
+            return;
+        }
+
+        const requestBody = {
+            UserName: username, // Use the username from the form
+            Password: userPassword // Use the password from the form
+        };
+    
+        try {
+            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/LogIn', null, null, requestBody);
+            if (response.status === 200) {
+                // Handle successful login here
+                console.log('Login successful');
+            } else {
+                // Handle unsuccessful login here
+                console.log(response);
+                console.log(requestBody);
+            }
+        } catch (error) {
+            // Handle any errors here
+            console.log('An error occurred:', error);
+        }
     }
 
     return (

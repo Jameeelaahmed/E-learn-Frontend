@@ -40,32 +40,32 @@ function App() {
   
   return (
     <>
-      {/* <SemiBody> */}
-      {/* <Login></Login> */}
+       <SemiBody>
+      <Login></Login>
       {/* <ForgetPassword></ForgetPassword> */}
       {/* <SetNewPassword></SetNewPassword> */}
-      {/* </SemiBody> */}
+      </SemiBody>
 
-      <Logo opened={isOpen}></Logo>
-      <Page>
-        <Sidebar opened={isOpen} onClose={handleClose}></Sidebar>
-        <PageContent>
-          <Header></Header>
-          <MainSection>
+      {/* <Logo opened={isOpen}></Logo> */}
+      {/* <Page> */}
+        {/* <Sidebar opened={isOpen} onClose={handleClose}></Sidebar> */}
+        {/* <PageContent> */}
+          {/* <Header></Header> */}
+          {/* <MainSection> */}
             {/* <Profile></Profile> */}
             {/* <FileBrowser></FileBrowser> */}
             {/* <VSQContainer></VSQContainer> */}
             {/* <Assignments/> */}
-            {/* <GroupNavCardRespo></GroupNavCardRespo>
-            <AssignmentDetails></AssignmentDetails>
-            <GroupNavCard></GroupNavCard> */}
+            {/* <GroupNavCardRespo></GroupNavCardRespo> */}
+            {/* <AssignmentDetails></AssignmentDetails> */}
+            {/* <GroupNavCard></GroupNavCard> */}
             {/* <InsMain/> */}
             {/* <StuMain/> */}
-            <Assignments/>
-          </MainSection>
-        </PageContent>
-        <AppBar></AppBar>
-      </Page>
+            {/* <Assignments/> */}
+          {/* </MainSection> */}
+        {/* </PageContent> */}
+        {/* <AppBar></AppBar> */}
+      {/* </Page> */}
     </>
   );
 }
