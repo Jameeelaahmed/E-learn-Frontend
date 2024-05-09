@@ -12,6 +12,7 @@
     user-select: none;
     -webkit-tap-highlight-color: transparent;
     padding:0 10px;
+    width: 85%;
 }
 
 /* Create a custom checkbox */

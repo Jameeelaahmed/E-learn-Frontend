@@ -16,7 +16,7 @@ export default function Assignments(){
     return (
         <div className={classes.assignments}>
             <GroupNavCardRespo/>
-                {/* <Class></Class> */}
+               {/* <Classes/> */}
             {/* <AssignmentDetails/> */}
             <AssignmentsResponsesList />
             <div className={classes.col}>

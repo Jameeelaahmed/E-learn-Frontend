@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import classes from './AddWork.module.css';
 import Button from '../Button/Button';
 import { useTranslation } from 'react-i18next';
+
 export default function AddWork() {
-    const {t}=useTranslation()
+    const { t } = useTranslation();
     const [selectedFiles, setSelectedFiles] = useState([]);
+    const fileInputRef = useRef(null);
 
     const handleFileChange = (event) => {
         setSelectedFiles([...selectedFiles, ...event.target.files]);
@@ -15,8 +17,19 @@ export default function AddWork() {
         window.open(fileUrl, '_blank');
     };
 
+    const handleAddButtonClick = () => {
+        fileInputRef.current.click();
+    };
+
     return (
         <div className={classes.add_work}>
+            <input
+                type="file"
+                ref={fileInputRef}
+                style={{ display: 'none' }}
+                onChange={handleFileChange}
+                multiple
+            />
             {selectedFiles.length > 0 && (
                 <div>
                     <ul>
@@ -28,11 +41,7 @@ export default function AddWork() {
                     </ul>
                 </div>
             )}
-            {/* Wrap the button around the file input */}
-            <label htmlFor="add_file">
-                <input type="file" multiple onChange={handleFileChange} id="add_file" />
-            </label>
-            <Button text={t("add")}></Button>
+            <Button text={t("add")} onClick={handleAddButtonClick} />
         </div>
     );
 }

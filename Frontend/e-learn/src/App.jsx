@@ -29,6 +29,8 @@ import * as FaIcons from "react-icons/fa6"
 import InsMain from "./Components/InsMain/InsMain";
 import GroupsSlider from "./Components/StuMain/GroupsSlider";
 import StuMain from "./Components/StuMain/StuMain";
+import Voting from "./Components/Voting/Voting";
+import Container from "./Components/Announcement-Chat/Container";
 function App() {
   // * START CLOSESIDEBAR
   const [isOpen, setIsOpen] = useState(false);
@@ -44,14 +46,12 @@ function App() {
       <Login></Login>
       {/* <ForgetPassword></ForgetPassword> */}
       {/* <SetNewPassword></SetNewPassword> */}
-      </SemiBody>
-
-      {/* <Logo opened={isOpen}></Logo> */}
-      {/* <Page> */}
-        {/* <Sidebar opened={isOpen} onClose={handleClose}></Sidebar> */}
-        {/* <PageContent> */}
-          {/* <Header></Header> */}
-          {/* <MainSection> */}
+      {/* </SemiBody> */}
+      <Page>
+        <Sidebar opened={isOpen} onClose={handleClose}></Sidebar>
+        <PageContent>
+          <Header opened={isOpen}></Header>
+          <MainSection>
             {/* <Profile></Profile> */}
             {/* <FileBrowser></FileBrowser> */}
             {/* <VSQContainer></VSQContainer> */}
@@ -62,10 +62,12 @@ function App() {
             {/* <InsMain/> */}
             {/* <StuMain/> */}
             {/* <Assignments/> */}
-          {/* </MainSection> */}
-        {/* </PageContent> */}
-        {/* <AppBar></AppBar> */}
-      {/* </Page> */}
+            {/* <Voting/> */}
+            <Container/>
+          </MainSection>
+        </PageContent>
+        <AppBar></AppBar>
+      </Page>
     </>
   );
 }

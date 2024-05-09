@@ -62,7 +62,8 @@
     margin-top: 15px;
     background-color: var(--light-grey);
     border-radius: 32px;
-    width: 100%;
+    width: 98%;
+    /* height: %; */
     z-index: 100;
     border-collapse: collapse;
 }
@@ -77,6 +78,8 @@
     color: var(--main-color);
     font-weight: bold;
     text-transform: uppercase;
+
+    border-top-left-radius: 20px;
 }
 
 .table th{
@@ -90,11 +93,15 @@
 }
 
 .table tbody tr{
-    height: 90px;
+    height: 85px;
 }
 
 .table tbody tr:nth-child(odd){
     background-color: white;
+}
+
+.table tbody tr:last-child{
+    background-color: none;
 }
 
 [dir="rtl"] .table{
@@ -122,6 +129,15 @@
     color: var(--main-color);
     cursor: pointer;
     transition: 0.4S;
+}
+
+[dir="ltr"] .mark .button,
+.input{
+    box-shadow: var(--main-shadow);
+}
+[dir="rtl"] .mark .button,
+.input{
+    box-shadow: var(--main-arabic-shadow);
 }
 
 .button{
@@ -162,8 +178,6 @@
     box-shadow: none;
 }
 /* ! TABLE */
-
-
 
 @media (max-width:930px){
     .track_responses{

@@ -148,9 +148,7 @@ html::-webkit-scrollbar-track {
 }
 
 
-
 @media(max-width:425px) {
-
     .input[type="number"],
     .input[type="password"] {
         width: 250px;

@@ -1,3 +1,8 @@
+.header_wrapper{
+    display: flex;
+    /* justify-content: space-around; */
+    align-items: center;
+}
 header {
     background-color: white;
     box-shadow: var(--grey-shadow);
@@ -7,6 +12,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
 [dir='ltr'] header {
@@ -64,6 +70,7 @@ header .icons a .icon {
 @media(max-width:767px){
     header{
         width:80%;
+
     }
 
     header .icon{

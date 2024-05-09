@@ -47,16 +47,18 @@ export default function Login() {
             <FormContainer h1Value="تسجيل دخول">
                 <form onSubmit={handleSubmit}>
                     <div className={classes.user_name}>
-                        <label htmlFor="">اسم المستخدم</label>
+                        <label htmlFor="user-name">اسم المستخدم</label>
                         <input
+                            id="user-name"
                             className={classes.input}
                             type="number"
                             ref={email}
                         />
                     </div>
                     <div className={classes.password}>
-                        <label htmlFor="">كلمة المرور</label>
+                        <label htmlFor="password">كلمة المرور</label>
                         <input
+                            id="password"
                             className={classes.input}
                             type="password"
                             ref={password}
