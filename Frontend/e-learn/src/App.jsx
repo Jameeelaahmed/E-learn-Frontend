@@ -30,6 +30,7 @@ import InsMain from "./Components/InsMain/InsMain";
 import GroupsSlider from "./Components/StuMain/GroupsSlider";
 import StuMain from "./Components/StuMain/StuMain";
 import Voting from "./Components/Voting/Voting";
+import Container from "./Components/Announcement-Chat/Container";
 function App() {
   // * START CLOSESIDEBAR
   const [isOpen, setIsOpen] = useState(false);
@@ -61,7 +62,8 @@ function App() {
             {/* <InsMain/> */}
             {/* <StuMain/> */}
             {/* <Assignments/> */}
-            <Voting/>
+            {/* <Voting/> */}
+            <Container/>
           </MainSection>
         </PageContent>
         <AppBar></AppBar>

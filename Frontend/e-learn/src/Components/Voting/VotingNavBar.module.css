@@ -111,7 +111,7 @@ span.title{
 .vs_navigation_bar li:hover span {
     color: var(--white);
 }
-.vs_navigation_bar li:hover .icon{
+.vs_navigation_bar li:hover .icon_square{
     color: var(--white);
 }
 

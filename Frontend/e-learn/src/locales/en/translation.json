@@ -71,5 +71,7 @@
     "time":"Time",
     "attachment":"Attachment",
     "mark":"Mark",
-    "enter-mark":"enter mark"
+    "enter-mark":"enter mark",
+    "add-voting":"add-voting",
+    "chats":"Chats"
 }
