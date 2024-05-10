@@ -30,7 +30,8 @@ import InsMain from "./Components/InsMain/InsMain";
 import GroupsSlider from "./Components/StuMain/GroupsSlider";
 import StuMain from "./Components/StuMain/StuMain";
 import Voting from "./Components/Voting/Voting";
-import Container from "./Components/Announcement-Chat/Container";
+import Container from "./Components/Announcement-Chat/Container"
+import Otp from "./Components/Authentication/Otp";
 function App() {
   // * START CLOSESIDEBAR
   const [isOpen, setIsOpen] = useState(false);
@@ -39,19 +40,28 @@ function App() {
   }
   // * END CLOSESIDEBAR
 
+
   
   return (
     <>
+<<<<<<< Updated upstream
        <SemiBody>
       <Login></Login>
+=======
+      
+      <SemiBody>
+      {/* <Login></Login> */}
+>>>>>>> Stashed changes
       {/* <ForgetPassword></ForgetPassword> */}
       {/* <SetNewPassword></SetNewPassword> */}
-      {/* </SemiBody> */}
-      <Page>
+      <Otp/>
+      </SemiBody>
+
+      {/* <Page>
         <Sidebar opened={isOpen} onClose={handleClose}></Sidebar>
         <PageContent>
           <Header opened={isOpen}></Header>
-          <MainSection>
+          <MainSection> */}
             {/* <Profile></Profile> */}
             {/* <FileBrowser></FileBrowser> */}
             {/* <VSQContainer></VSQContainer> */}
@@ -63,11 +73,11 @@ function App() {
             {/* <StuMain/> */}
             {/* <Assignments/> */}
             {/* <Voting/> */}
-            <Container/>
+            {/* <Container/>
           </MainSection>
         </PageContent>
         <AppBar></AppBar>
-      </Page>
+      </Page> */}
     </>
   );
 }
