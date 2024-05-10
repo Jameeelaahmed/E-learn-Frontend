@@ -42,8 +42,8 @@ function App() {
   
   return (
     <>
-      {/* <SemiBody> */}
-      {/* <Login></Login> */}
+       <SemiBody>
+      <Login></Login>
       {/* <ForgetPassword></ForgetPassword> */}
       {/* <SetNewPassword></SetNewPassword> */}
       {/* </SemiBody> */}
@@ -56,9 +56,9 @@ function App() {
             {/* <FileBrowser></FileBrowser> */}
             {/* <VSQContainer></VSQContainer> */}
             {/* <Assignments/> */}
-            {/* <GroupNavCardRespo></GroupNavCardRespo>
-            <AssignmentDetails></AssignmentDetails>
-            <GroupNavCard></GroupNavCard> */}
+            {/* <GroupNavCardRespo></GroupNavCardRespo> */}
+            {/* <AssignmentDetails></AssignmentDetails> */}
+            {/* <GroupNavCard></GroupNavCard> */}
             {/* <InsMain/> */}
             {/* <StuMain/> */}
             {/* <Assignments/> */}
