@@ -1,15 +1,10 @@
 import { useRef } from 'react';
 import classes from './authentication.module.css';
 import FormContainer from './FormContainer';
-<<<<<<< Updated upstream
 import { useTranslation } from 'react-i18next';
 import { httpRequest } from '../../HTTP';
-
-=======
-import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom';
 import ForgetPassword from './ForgetPassword';
->>>>>>> Stashed changes
 export default function Login() {
     const { t } = useTranslation();
     const email = useRef();

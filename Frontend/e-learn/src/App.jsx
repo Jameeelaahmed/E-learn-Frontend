@@ -43,15 +43,9 @@ function App() {
 
   
   return (
-    <>
-<<<<<<< Updated upstream
-       <SemiBody>
-      <Login></Login>
-=======
-      
+    <> 
       <SemiBody>
       {/* <Login></Login> */}
->>>>>>> Stashed changes
       {/* <ForgetPassword></ForgetPassword> */}
       {/* <SetNewPassword></SetNewPassword> */}
       <Otp/>
