@@ -6,10 +6,17 @@ import * as FaIcons from "react-icons/fa6";
 import { useTranslation } from 'react-i18next'
 
 // eslint-disable-next-line react/prop-types
-export default function Sidebar({opened,onClose}){
+export default function Sidebar() {
     //* LANG 
-    const { t} = useTranslation();
+    const { t } = useTranslation();
     //* LANG 
+
+    // * START CLOSESIDEBAR
+    const [isOpen, setIsOpen] = useState(false);
+    function handleClose() {
+        setIsOpen((close) => !close);
+    }
+    // * END CLOSESIDEBAR
 
     const sidebarData = [
         {
@@ -45,38 +52,38 @@ export default function Sidebar({opened,onClose}){
     ];
 
     // * START ACTIVE
-    const [active,setActive]=useState("")
-    function handleActive(selectedButton){
+    const [active, setActive] = useState("")
+    function handleActive(selectedButton) {
         setActive(selectedButton);
     }
-      // * START ACTIVE
-    return(
-        <div 
-        className={ `${opened ?classes.sidebar:classes.sidebar_active  }` }
+    // * START ACTIVE
+    return (
+        <div
+            className={`${isOpen ? classes.sidebar : classes.sidebar_active}`}
         >
-            <FaIcons.FaArrowLeftLong 
-            className={classes.icon}
-            onClick={onClose}/>
-            <a 
-            href="#profile" 
-            className={classes.profile}>
+            <FaIcons.FaArrowLeftLong
+                className={classes.icon}
+                onClick={handleClose} />
+            <a
+                href="#profile"
+                className={classes.profile}>
                 <img src={pro} alt=""></img>
                 <p>Jameela Ahmed</p>
             </a>
             <ul>
-                {sidebarData.map((item)=>(
-                <li 
-                className={(active===item.title)? 
-                classes.active:undefined} 
-                onClick={()=>handleActive(item.title)} 
-                key={item.title}
-                >
-                    <a 
-                    href="">
-                        {item.icon}
-                        <span>{item.title}</span>
-                    </a>
-                </li>))
+                {sidebarData.map((item) => (
+                    <li
+                        className={(active === item.title) ?
+                            classes.active : undefined}
+                        onClick={() => handleActive(item.title)}
+                        key={item.title}
+                    >
+                        <a
+                            href="">
+                            {item.icon}
+                            <span>{item.title}</span>
+                        </a>
+                    </li>))
                 }
             </ul>
         </div>

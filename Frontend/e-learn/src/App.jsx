@@ -34,12 +34,6 @@ import Container from "./Components/Announcement-Chat/Container"
 import Otp from "./Components/Authentication/Otp";
 import RoutesPage from "./RoutesPage";
 function App() {
-  // * START CLOSESIDEBAR
-  const [isOpen, setIsOpen] = useState(false);
-  function handleClose() {
-    setIsOpen((close) => !close);
-  }
-  // * END CLOSESIDEBAR
   return (
     <> 
     <RoutesPage></RoutesPage>
