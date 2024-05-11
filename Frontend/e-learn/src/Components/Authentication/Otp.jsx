@@ -2,16 +2,16 @@ import React, { useState, useRef } from 'react';
 import classes from './otp.module.css';
 import Button from '../Button/Button';
 import { useTranslation } from 'react-i18next';
-
+import { Link } from 'react-router-dom';
 const Otp = () => {
     const { t } = useTranslation();
     const [finalInput, setFinalInput] = useState('');
     const inputRefs = Array.from({ length: 6 }, () => useRef(null));
 
-    function handleInputChange(index, e){
+    function handleInputChange(index, e) {
         const { value, key } = e.target;
         const sanitizedValue = value.replace(/[^0-9]/g, '');
-    
+
         if (key === 'Backspace') {
             if (value === '') {
                 if (index > 0) {
@@ -31,8 +31,8 @@ const Otp = () => {
             }
         }
     };
-    
-    function handlePaste(e){
+
+    function handlePaste(e) {
         e.preventDefault();
         const pastedData = e.clipboardData.getData('text/plain').slice(0, 6);
         const formattedData = pastedData.replace(/[^0-9]/g, '').split('').slice(0, 6);
@@ -45,8 +45,8 @@ const Otp = () => {
         });
     };
 
-    function handleSubmit(){
-        const OtpValue=finalInput;
+    function handleSubmit() {
+        const OtpValue = finalInput;
     };
 
 
@@ -66,9 +66,11 @@ const Otp = () => {
                     />
                 ))}
             </div>
-            <div className={classes.action}>
-                <Button text={t("continue")} id="submit" onSelect={handleSubmit}/>
-            </div>
+            <Link to="/set-new-password">
+                <div className={classes.action}>
+                    <Button text={t("continue")} id="submit" onSelect={handleSubmit} />
+                </div>
+            </Link>
             <p className={classes.not}>{t('didnt-get-the-code')}</p>
         </div>
     );

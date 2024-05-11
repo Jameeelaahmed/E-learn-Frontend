@@ -32,6 +32,7 @@ import StuMain from "./Components/StuMain/StuMain";
 import Voting from "./Components/Voting/Voting";
 import Container from "./Components/Announcement-Chat/Container"
 import Otp from "./Components/Authentication/Otp";
+import RoutesPage from "./RoutesPage";
 function App() {
   // * START CLOSESIDEBAR
   const [isOpen, setIsOpen] = useState(false);
@@ -39,17 +40,15 @@ function App() {
     setIsOpen((close) => !close);
   }
   // * END CLOSESIDEBAR
-
-
-  
   return (
     <> 
-      <SemiBody>
+    <RoutesPage></RoutesPage>
+      {/* <SemiBody> */}
       {/* <Login></Login> */}
       {/* <ForgetPassword></ForgetPassword> */}
       {/* <SetNewPassword></SetNewPassword> */}
-      <Otp/>
-      </SemiBody>
+      {/* <Otp/> */}
+      {/* </SemiBody> */}
 
       {/* <Page>
         <Sidebar opened={isOpen} onClose={handleClose}></Sidebar>

@@ -147,6 +147,10 @@ html::-webkit-scrollbar-track {
     margin-bottom: 10px;
 }
 
+.action{
+    margin: 25px 0 20px;
+}
+
 
 @media(max-width:425px) {
     .input[type="number"],

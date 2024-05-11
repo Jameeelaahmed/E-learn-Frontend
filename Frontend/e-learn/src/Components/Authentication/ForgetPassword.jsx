@@ -1,26 +1,29 @@
 import classes from './authentication.module.css'
 import FormContainer from './FormContainer'
-import { useRef,useState } from 'react' 
-export default function ForgetPassword(){
-
-    const email=useRef();
-    const [isEdit,setIsEdit]=useState(false)
+import { useRef, useState } from 'react'
+import { Link } from 'react-router-dom';
+import Button from '../Button/Button';
+import { useTranslation } from 'react-i18next';
+export default function ForgetPassword() {
+    const {t}=useTranslation();
+    const email = useRef();
+    const [isEdit, setIsEdit] = useState(false)
 
     const emailIsInValid = isEdit && !email.current.value.includes('@');
 
-    function handleSubmit(event){
+    function handleSubmit(event) {
         event.preventDefault();
         email.current.value;
     }
 
-    function handleEmailBlur(){
+    function handleEmailBlur() {
         setIsEdit(true)
     }
 
-    function handleChange(){
+    function handleChange() {
         setIsEdit(false)
     }
-    return(
+    return (
         <div className={classes.authentication}>
             <FormContainer h1Value="هل تواجه مشكلة في تسجيل الدخول؟">
                 <form onSubmit={handleSubmit}>
@@ -34,9 +37,11 @@ export default function ForgetPassword(){
                         />
                     </div>
                     {emailIsInValid && <p className={classes.control_error}>enter valid email</p>}
-                    <input 
-                    type="submit"
-                    />
+                    <Link to="/otp">
+                        <div className={classes.action}>
+                            <Button text={t("ارسل الرمز السري")} id="submit" />
+                        </div>
+                    </Link>
                 </form>
             </FormContainer>
         </div>
