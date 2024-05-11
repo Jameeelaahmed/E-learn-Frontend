@@ -4,7 +4,6 @@ import FormContainer from './FormContainer';
 import { useTranslation } from 'react-i18next';
 import { httpRequest } from '../../HTTP';
 import { Link } from 'react-router-dom';
-import ForgetPassword from './ForgetPassword';
 export default function Login() {
     const { t } = useTranslation();
     const email = useRef();
@@ -68,7 +67,7 @@ export default function Login() {
                     <input type="submit" value="تسجيل دخول" />
                     <div className={classes.forget}>
                         <p>هل نسيت كلمة المرور؟</p>
-                        {/* <Link to="/forgetpassword">نسيت كلمة المرور</Link> */}
+                        <Link to="/forgetpassword">نسيت كلمة المرور</Link>
                     </div>
                 </form>
             </FormContainer>
