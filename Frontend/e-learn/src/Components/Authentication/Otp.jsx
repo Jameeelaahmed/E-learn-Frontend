@@ -5,10 +5,13 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { httpRequest } from '../../HTTP';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 const Otp = () => {
     const { t } = useTranslation();
     const [finalInput, setFinalInput] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
     const inputRefs = Array.from({ length: 6 }, () => useRef(null));
 
     function handleInputChange(index, e) {
@@ -50,7 +53,7 @@ const Otp = () => {
 
     async function handleSubmit() {
         const OtpValue = finalInput;
-        const UserEmail = 'moh65200152@gmail.com'
+        const UserEmail = location.state.Email;
         const RequestBody = {
             Email: UserEmail,
             OTP: OtpValue
@@ -60,7 +63,7 @@ const Otp = () => {
             if(response.statusCode === 200){
                 console.log(response);
                 console.log('OTP Verified');
-                navigate('/set-new-password');
+                navigate('/set-new-password', {state: {Email: UserEmail, token: response.data}});
             } else{
                 console.log(response);
             }

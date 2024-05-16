@@ -27,7 +27,7 @@ export default function ForgetPassword() {
             const response = await httpRequest('POST','https://elearnapi.runasp.net/api/Account/Forgot-Password',null,null,Email);
             if(response.statusCode===200){
                 console.log(response);
-                navigate('/otp');
+                navigate('/otp', {state: {Email}});
             }else{
                 console.log('an error occurred', response);
             }
