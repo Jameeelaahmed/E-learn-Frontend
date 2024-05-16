@@ -3,9 +3,15 @@ import classes from './otp.module.css';
 import Button from '../Button/Button';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { httpRequest } from '../../HTTP';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 const Otp = () => {
     const { t } = useTranslation();
     const [finalInput, setFinalInput] = useState('');
+    const navigate = useNavigate();
+    const location = useLocation();
     const inputRefs = Array.from({ length: 6 }, () => useRef(null));
 
     function handleInputChange(index, e) {
@@ -45,8 +51,26 @@ const Otp = () => {
         });
     };
 
-    function handleSubmit() {
+    async function handleSubmit() {
         const OtpValue = finalInput;
+        const UserEmail = location.state.Email;
+        const RequestBody = {
+            Email: UserEmail,
+            OTP: OtpValue
+        }
+        try{
+            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/Verify-OTP', null, null, RequestBody);
+            if(response.statusCode === 200){
+                console.log(response);
+                console.log('OTP Verified');
+                navigate('/set-new-password', {state: {Email: UserEmail, token: response.data}});
+            } else{
+                console.log(response);
+            }
+        }
+        catch(error){
+            console.log('An Error Occurred: ', error);
+        }
     };
 
 
@@ -66,11 +90,9 @@ const Otp = () => {
                     />
                 ))}
             </div>
-            <Link to="/set-new-password">
-                <div className={classes.action}>
-                    <Button text={t("continue")} id="submit" onSelect={handleSubmit} />
-                </div>
-            </Link>
+            <div className={classes.action}>
+                <Button text={t("continue")} id="submit" onSelect={handleSubmit} />
+            </div>
             <p className={classes.not}>{t('didnt-get-the-code')}</p>
         </div>
     );

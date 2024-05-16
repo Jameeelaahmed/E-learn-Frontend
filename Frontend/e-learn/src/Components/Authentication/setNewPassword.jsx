@@ -1,6 +1,10 @@
 import classes from './authentication.module.css';
 import FormContainer from './FormContainer';
 import { useRef,useState } from 'react';
+import { httpRequest } from '../../HTTP';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 
 import { hasMinLength } from './validation';
 export default function SetNewPassword(){
@@ -9,9 +13,36 @@ export default function SetNewPassword(){
     const confirmPass=useRef();
     const [isNotMatch,setIsNotMatch]=useState(false);
     const [passIsInvalid,setPassIsInvalid]=useState('');
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    function handleSubmit(event){
+    async function handleSubmit(event){
         event.preventDefault();
+        const RequestBody = {
+            token: location.state.token,//Reset Password Token
+            email: location.state.Email,//User Email
+            newPassword: pass.current.value,
+            confirmPassword: confirmPass.current.value
+        }
+        handleMatchPassword();
+       //if(setIsNotMatch(true)){
+            // error message 
+        //}
+        try{
+            console.log(RequestBody);
+            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/Reset-Password', null, null, RequestBody);
+            if(response.statusCode === 200){
+                console.log(response);
+                navigate('/'); //Navigating To Login
+            }
+            else{
+                console.log(response);
+            }
+        }
+        catch(error)
+        {
+            console.log(error);
+        }
     }
 
     function handlePassValidation(){
