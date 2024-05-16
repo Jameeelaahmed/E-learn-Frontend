@@ -28,10 +28,10 @@ export default function Login() {
         try {
             const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/LogIn', null, null, requestBody);
             if (response.status === 200) {
-                // Handle successful login here
+                //successful login
                 console.log('Login successful');
             } else {
-                // Handle unsuccessful login here
+                //unsuccessful login
                 console.log(response);
                 console.log(requestBody);
             }

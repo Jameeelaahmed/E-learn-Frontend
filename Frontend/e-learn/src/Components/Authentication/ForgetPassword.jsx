@@ -4,16 +4,37 @@ import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import { useTranslation } from 'react-i18next';
+import { httpRequest } from '../../HTTP';
+import { useNavigate } from 'react-router-dom';
 export default function ForgetPassword() {
     const {t}=useTranslation();
     const email = useRef();
     const [isEdit, setIsEdit] = useState(false)
-
+    const [isResponseOk, setIsResponseOk] = useState(false);
+    const navigate = useNavigate();
     const emailIsInValid = isEdit && !email.current.value.includes('@');
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
-        email.current.value;
+        const Email = email.current.value;
+    
+        if (!Email) {
+            console.error('Email is required');
+            return;
+        }
+        
+        try{
+            const response = await httpRequest('POST','https://elearnapi.runasp.net/api/Account/Forgot-Password',null,null,Email);
+            if(response.statusCode===200){
+                console.log(response);
+                navigate('/otp');
+            }else{
+                console.log('an error occurred', response);
+            }
+        }
+        catch(error){
+            console.log('An error occurred:',error);
+        }
     }
 
     function handleEmailBlur() {
@@ -37,11 +58,9 @@ export default function ForgetPassword() {
                         />
                     </div>
                     {emailIsInValid && <p className={classes.control_error}>enter valid email</p>}
-                    <Link to="/otp">
                         <div className={classes.action}>
                             <Button text={t("ارسل الرمز السري")} id="submit" />
                         </div>
-                    </Link>
                 </form>
             </FormContainer>
         </div>
