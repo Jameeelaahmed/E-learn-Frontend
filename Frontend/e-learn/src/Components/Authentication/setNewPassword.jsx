@@ -30,7 +30,7 @@ export default function SetNewPassword(){
         //}
         try{
             console.log(RequestBody);
-            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/Reset-Password', null, null, RequestBody);
+            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/Reset-Password', null, RequestBody);
             if(response.statusCode === 200){
                 console.log(response);
                 navigate('/'); //Navigating To Login

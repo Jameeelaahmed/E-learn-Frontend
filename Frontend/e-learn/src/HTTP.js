@@ -1,4 +1,4 @@
-export async function httpRequest(method, endpoint, accessToken, refreshToken, requestBody, headers) {
+export async function httpRequest(method, endpoint, accessToken, requestBody, headers) {
     const url = endpoint;
 
     const options = {
@@ -26,15 +26,15 @@ export async function httpRequest(method, endpoint, accessToken, refreshToken, r
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ refreshToken }),
             };
 
             try {
                 const refreshResponse = await fetch(refreshUrl, refreshOptions);
-                const refreshedAccessToken = await refreshResponse.json();
-
+                const response = await refreshResponse.json();
+                localStorage.setItem('token', response.data.token);
+                
                 // Retry the request with the new access token
-                options.headers.Authorization = `Bearer ${refreshedAccessToken}`;
+                options.headers.Authorization = `Bearer ${response.data,token}`;
                 const retryResponse = await fetch(url, options);
 
                 if (retryResponse.status === 401) {

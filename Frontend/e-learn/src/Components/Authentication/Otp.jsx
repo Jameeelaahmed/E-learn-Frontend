@@ -59,7 +59,7 @@ const Otp = () => {
             OTP: OtpValue
         }
         try{
-            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/Verify-OTP', null, null, RequestBody);
+            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/Verify-OTP', null, RequestBody);
             if(response.statusCode === 200){
                 console.log(response);
                 console.log('OTP Verified');
