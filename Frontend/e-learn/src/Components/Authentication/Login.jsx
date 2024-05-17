@@ -26,10 +26,19 @@ export default function Login() {
         };
     
         try {
-            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/LogIn', null, null, requestBody);
-            if (response.status === 200) {
+            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/LogIn', null, requestBody);
+            if (response.statusCode === 200) {
                 //successful login
                 console.log('Login successful');
+                const token = response.data.token;
+                const role = response.data.roles;
+                const userName = response.data.userName;
+                const email = response.data.email;
+                localStorage.setItem('token', token);
+                localStorage.setItem('role', role);
+                localStorage.setItem('userName', userName);
+                localStorage.setItem('email', email);
+                // Redirect to the home page
             } else {
                 //unsuccessful login
                 console.log(response);
