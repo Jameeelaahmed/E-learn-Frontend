@@ -35,8 +35,8 @@ import Otp from "./Components/Authentication/Otp";
 import RoutesPage from "./RoutesPage";
 function App() {
   return (
-    <> 
-    <RoutesPage></RoutesPage>
+    <>
+      <RoutesPage></RoutesPage>
       {/* <SemiBody> */}
       {/* <Login></Login> */}
       {/* <ForgetPassword></ForgetPassword> */}
@@ -45,23 +45,23 @@ function App() {
       {/* </SemiBody> */}
 
       {/* <Page>
-        <Sidebar opened={isOpen} onClose={handleClose}></Sidebar>
+        <Sidebar></Sidebar>
         <PageContent>
-          <Header opened={isOpen}></Header>
+          <Header></Header>
           <MainSection> */}
-            {/* <Profile></Profile> */}
-            {/* <FileBrowser></FileBrowser> */}
-            {/* <VSQContainer></VSQContainer> */}
-            {/* <Assignments/> */}
-            {/* <GroupNavCardRespo></GroupNavCardRespo> */}
-            {/* <AssignmentDetails></AssignmentDetails> */}
-            {/* <GroupNavCard></GroupNavCard> */}
-            {/* <InsMain/> */}
-            {/* <StuMain/> */}
-            {/* <Assignments/> */}
-            {/* <Voting/> */}
-            {/* <Container/>
-          </MainSection>
+      {/* <Profile></Profile> */}
+      {/* <FileBrowser></FileBrowser> */}
+      {/* <VSQContainer></VSQContainer> */}
+      {/* <Assignments/> */}
+      {/* <GroupNavCardRespo></GroupNavCardRespo> */}
+      {/* <AssignmentDetails></AssignmentDetails> */}
+      {/* <GroupNavCard></GroupNavCard> */}
+      {/* <InsMain/> */}
+      {/* <StuMain/> */}
+      {/* <Assignments/> */}
+      {/* <Voting/> */}
+      {/* <Container/> */}
+      {/* </MainSection>
         </PageContent>
         <AppBar></AppBar>
       </Page> */}

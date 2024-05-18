@@ -1,8 +1,8 @@
 import * as FaIcons from 'react-icons/fa6'
 import classes from './InsMain.module.css'
-import Card from "./Card"
+import Card from "../../Components/CardMain/Card"
 import { useTranslation } from 'react-i18next'
-import Button from '../Button/Button';
+import Button from '../../Components/Button/Button';
 export default function InsMain() {
     const { t } = useTranslation();
     return (
@@ -16,13 +16,15 @@ export default function InsMain() {
                 <div className={classes.box}>
                     <div className={classes.head}>
                         <p>{t("Groups")}</p>
-                        <Button text={t("see-all")}/>
+                        <Button text={t("see-all")} />
                     </div>
                     <table className={classes.table}>
                         <thead>
-                            <td>{t("Group")}</td>
-                            <td>{t("level")}</td>
-                            <td>{t("number-of-members")}</td>
+                            <tr>
+                                <th>{t("Group")}</th>
+                                <th>{t("level")}</th>
+                                <th>{t("number-of-members")}</th>
+                            </tr>
                         </thead>
                         <tbody>
                             {/* MAP HERE */}
@@ -37,12 +39,14 @@ export default function InsMain() {
                 <div className={classes.box}>
                     <div className={classes.head}>
                         <p>{t("Quizzes")}</p>
-                        <Button text={t("add-quiz")}/>
+                        <Button text={t("add-quiz")} />
                     </div>
                     <table className={classes.table}>
                         <thead>
-                            <td>{t("Group")}</td>
-                            <td>{t("date")}</td>
+                            <tr>
+                                <th>{t("Group")}</th>
+                                <th>{t("date")}</th>
+                            </tr>
                         </thead>
                         <tbody>
                             {/* MAP HERE */}

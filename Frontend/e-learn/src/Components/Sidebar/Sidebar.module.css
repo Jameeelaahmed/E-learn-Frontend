@@ -36,18 +36,18 @@
 
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
-.sidebar>a {
+.sidebar>li {
     display: flex;
     align-items: center;
     margin-top: 15px;
     color: white;
 }
 
-[dir='ltr'] .sidebar>a {
+[dir='ltr'] .sidebar>li {
     margin-left: 10px;
 }
 
-[dir='rtl'] .sidebar>a {
+[dir='rtl'] .sidebar>li {
     margin-right: 10px;
 }
 
@@ -67,13 +67,13 @@
 
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
-.sidebar a p {
+.sidebar li p {
     display: flex;
 }
 
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
-.sidebar li {
+.sidebar .link{
     display: flex;
     align-items: center;
     padding: 20px;
@@ -82,13 +82,13 @@
 }
 
 
-[dir='ltr'] .sidebar li {
+[dir='ltr'] .sidebar .link {
     margin: 0px 0 0px 10px;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
 }
 
-[dir='rtl'] .sidebar li {
+[dir='rtl'] .sidebar .link {
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
     margin: 0px 10px 0px 0;
@@ -96,29 +96,29 @@
 
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
-.sidebar li a {
+.sidebar .link li {
     display: flex;
     align-items: center;
 }
 
-.sidebar li:nth-child(1) {
+.sidebar .link:nth-child(1) {
     margin-top: 20px;
 }
 
-.sidebar li.active {
+.sidebar .link.active {
     background-color: var(--white);
 }
 
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
-.sidebar li .icon {
+.sidebar .link .icon {
     color: var(--white);
 }
 
-[dir='ltr'] .sidebar li .icon {
+[dir='ltr'] .sidebar .link .icon {
     margin-right: 20px;
 }
-[dir='rtl'] .sidebar li .icon {
+[dir='rtl'] .sidebar .link .icon {
     margin-left: 20px;
 }
 

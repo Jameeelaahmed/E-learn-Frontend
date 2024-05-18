@@ -4,11 +4,12 @@ import FormContainer from './FormContainer';
 import { useTranslation } from 'react-i18next';
 import { httpRequest } from '../../HTTP';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 export default function Login() {
     const { t } = useTranslation();
     const email = useRef();
     const password = useRef();
-
+    const navigate = useNavigate();
     async function handleSubmit(event) {
         event.preventDefault();
         
@@ -38,7 +39,9 @@ export default function Login() {
                 localStorage.setItem('role', role);
                 localStorage.setItem('userName', userName);
                 localStorage.setItem('email', email);
+                
                 // Redirect to the home page
+                navigate('/');
             } else {
                 //unsuccessful login
                 console.log(response);
