@@ -1,4 +1,5 @@
 export async function httpRequest(method, endpoint, accessToken, requestBody, headers) {
+    console.log('httpRequest function called');
     const url = endpoint;
 
     const options = {
