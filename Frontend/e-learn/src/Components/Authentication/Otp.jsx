@@ -63,7 +63,7 @@ const Otp = () => {
             if(response.statusCode === 200){
                 console.log(response);
                 console.log('OTP Verified');
-                navigate('/set-new-password', {state: {Email: UserEmail, token: response.data}});
+                navigate('set-new-password', {state: {Email: UserEmail, token: response.data}});
             } else{
                 console.log(response);
             }

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import * as FaIcons from "react-icons/fa6";
 // import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-
+import { Link } from 'react-router-dom';
 // eslint-disable-next-line react/prop-types
 export default function Sidebar() {
     //* LANG 
@@ -22,32 +22,32 @@ export default function Sidebar() {
         {
             title: t('Main'),
             icon: <FaIcons.FaHouse className={classes.icon} />,
-            // link:'./home'
+            link: '/'
         },
         {
             title: t('Groups'),
             icon: <FaIcons.FaBook className={classes.icon} />,
-            // link:'./home'
+            link: '/groups'
         },
         {
             title: t('Survey'),
             icon: <FaIcons.FaSquarePollVertical className={classes.icon} />,
-            // link:'./home'
+            link: '/voting'
         },
         {
             title: t('Voting'),
             icon: <FaIcons.FaSquarePollVertical className={classes.icon} />,
-            // link:'./home'
+            link: '/survey'
         },
         {
             title: t('Announcements'),
             icon: <FaIcons.FaBullhorn className={classes.icon} />,
-            // link:'./home'
+            link: '/announcements'
         },
         {
             title: t('Community'),
             icon: <FaIcons.FaUsers className={classes.icon} />,
-            // link:'./home'
+            link: '/community'
         }
     ];
 
@@ -64,26 +64,21 @@ export default function Sidebar() {
             <FaIcons.FaArrowLeftLong
                 className={classes.icon}
                 onClick={handleClose} />
-            <a
-                href="#profile"
+            <Link
+                to='/profile'
                 className={classes.profile}>
                 <img src={pro} alt=""></img>
                 <p>Jameela Ahmed</p>
-            </a>
+            </Link>
             <ul>
                 {sidebarData.map((item) => (
-                    <li
-                        className={(active === item.title) ?
-                            classes.active : undefined}
-                        onClick={() => handleActive(item.title)}
-                        key={item.title}
-                    >
-                        <a
-                            href="">
+                    <Link key={item.title} className={`${classes.link} ${className = {(active === item.title) ?
+                        classes.active : undefined}}`} onClick={() => handleActive(item.title)}>
+                        <li>
                             {item.icon}
                             <span>{item.title}</span>
-                        </a>
-                    </li>))
+                        </li>
+                    </Link>))
                 }
             </ul>
         </div>
