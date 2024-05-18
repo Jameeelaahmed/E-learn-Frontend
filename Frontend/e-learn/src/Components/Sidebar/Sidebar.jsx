@@ -72,8 +72,7 @@ export default function Sidebar() {
             </Link>
             <ul>
                 {sidebarData.map((item) => (
-                    <Link to={item.link} key={item.title} className={`${classes.link} {(active === item.title) ?
-                        classes.active : undefined}}`} onClick={() => handleActive(item.title)}>
+                    <Link to={item.link} key={item.title} className={`${classes.link} ${(active === item.title) ? classes.active : undefined}`} onClick={() => handleActive(item.title)}>
                         <li>
                             {item.icon}
                             <span>{item.title}</span>

@@ -52,6 +52,21 @@
 }
 
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+.profile{
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+[dir='ltr'] .profile {
+    margin-left: 10px;
+}
+
+[dir='rtl'] .profile {
+    margin-right: 10px;
+}
+
 .sidebar .profile img {
     width: 40px;
     border-radius: 50%;
@@ -80,7 +95,6 @@
     position: relative;
     flex-wrap: nowrap;
 }
-
 
 [dir='ltr'] .sidebar .link {
     margin: 0px 0 0px 10px;
@@ -127,6 +141,7 @@
 .sidebar .link.active .icon {
     color: var(--main-color);
     margin-right: 10px;
+    z-index: 1000;
 }
 
 [dir='ltr'] .sidebar .link.active .icon {
@@ -211,24 +226,8 @@
 }
 
 
-/* !!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
-.sidebar_active>.icon {
-    display: flex;
-    align-items: center;
-    margin-top: 15px;
-    margin-bottom: 30px;
-    color: white;
-}
 
-[dir='ltr'] .sidebar_active>.icon {
-    margin-left: 25px;
-}
-[dir='rtl'] .sidebar_active>.icon {
-    margin-right: 25px;
-}
-
-/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
 .sidebar_active>li {
     display: flex;
@@ -247,6 +246,23 @@
 
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
+.sidebar_active>.icon {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    color: white;
+    z-index: 1100;
+    color: var(--main-color);
+    background-color: var(--main-color);
+}
+
+[dir='ltr'] .sidebar_active>.icon {
+    margin-left: 25px;
+}
+[dir='rtl'] .sidebar_active>.icon {
+    margin-right: 25px;
+}
 .sidebar_active .profile img {
     width: 40px;
     border-radius: 50%;
@@ -293,6 +309,7 @@
 
 .sidebar_active .link.active {
     background-color: var(--white);
+    color: white;
 }
 
 .sidebar_active .link .icon {
@@ -304,7 +321,7 @@
     margin-right: -6px;
 }
 
-.sidebar_active li.active .icon {
+.sidebar_active .link.active .icon {
     color: var(--main-color);
     margin-right: 10px;
 }
