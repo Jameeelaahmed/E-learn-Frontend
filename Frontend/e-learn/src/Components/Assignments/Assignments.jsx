@@ -1,10 +1,10 @@
 import classes from './Assignments.module.css'
 import GroupNavCard from '../group-navigation-card/GroupNavCard'
-import Class from '../Class/class'
+import Group from '../Group/group';
 import AddAssignment from './Add-Assignment'
 import { log } from "../../log";
 import AssignmentDetails from './AssignmentDetails'
-import Classes from '../Classes/Classes'
+import Groups from '../../Pages/Groups/Groups';
 import AddWork from './AddWork'
 import AssignmentsResponsesList from './AssignmentResponsesList'
 import GroupNavCardRespo from '../group-nav-card-responsive/GroupNavCardRespo'
