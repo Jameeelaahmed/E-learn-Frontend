@@ -35,11 +35,12 @@ export default function Login() {
                 const role = response.data.roles;
                 const userName = response.data.userName;
                 const email = response.data.email;
+                const refreshTokenExpiration = response.data.refreshTokenExpiration;
                 localStorage.setItem('token', token);
                 localStorage.setItem('role', role);
                 localStorage.setItem('userName', userName);
                 localStorage.setItem('email', email);
-                
+                localStorage.setItem('refreshTokenExpiration', refreshTokenExpiration);
                 // Redirect to the home page
                 navigate('/');
             } else {
