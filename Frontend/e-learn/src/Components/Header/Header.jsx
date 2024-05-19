@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Header({ opened }) {
     const { i18n } = useTranslation();
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     // const handleLanguageChange = (lang) => {
     //     i18n.changeLanguage(lang);
     //     document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
@@ -27,7 +27,7 @@ export default function Header({ opened }) {
                 localStorage.removeItem('role');
                 localStorage.removeItem('userName');
                 localStorage.removeItem('email');
-                navigate('/');
+                //navigate('/');
             } else {
                 console.log(response);
             }
