@@ -1,21 +1,23 @@
-import Week from "../Week/Week";
+import Week from "../Week/Week"
 import WeekHead from "../Week/WeekHead";
 import classes from "./Weeks.module.css";
 import LecSec from "../Week/LecSec";
 import * as FaIcons from "react-icons/fa6";
 import { useState } from "react";
 import { useTranslation } from 'react-i18next'
-
+import { useParams } from "react-router-dom";
 export default function Weeks() {
     const [add, setAdd] = useState([]);
     const [openWeeks, setOpenWeeks] = useState([]);
+    const params = useParams();
+    params.groupId
 
     function handleAdd() {
         setAdd((prevAdd) => [...prevAdd, []]);
         setOpenWeeks((prevOpenWeeks) => [...prevOpenWeeks, false]); // Initialize all weeks as closed
     }
 
-    function handleDelete(i){
+    function handleDelete(i) {
         setAdd((prevAdd) => prevAdd.filter((_, index) => index !== i));
     }
 
@@ -26,9 +28,9 @@ export default function Weeks() {
             return updatedOpenWeeks;
         });
     }
-     //* LANG 
-    const {t} = useTranslation();
-     //* LANG 
+    //* LANG 
+    const { t } = useTranslation();
+    //* LANG 
     return (
         <div className={classes.weeks}>
             <div className={classes.add_week} onClick={handleAdd}>
@@ -39,7 +41,7 @@ export default function Weeks() {
                 return (
                     <Week key={weekNum}>
                         <WeekHead
-                            onDelete={()=>handleDelete(weekNum)}
+                            onDelete={() => handleDelete(weekNum)}
                             onSelect={() => handleOpen(weekNum)}
                             weekNum={weekNum + 1}
                             active={openWeeks[weekNum]} // Pass the active state to WeekHead
@@ -47,7 +49,7 @@ export default function Weeks() {
                         {openWeeks[weekNum] && (
                             <div className={classes.week_content}>
                                 <div className={classes.main}>
-                                    <LecSec materialType={`${t("Lecture")} ${weekNum + 1}`} weeknum={weekNum}/>
+                                    <LecSec materialType={`${t("Lecture")} ${weekNum + 1}`} weeknum={weekNum} />
                                 </div>
                                 <div className={classes.main}>
                                     <LecSec materialType={`${t("Section")} ${weekNum + 1}`} />
