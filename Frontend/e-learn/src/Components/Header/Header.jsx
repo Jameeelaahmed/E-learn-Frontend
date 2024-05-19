@@ -18,16 +18,19 @@ export default function Header({ opened }) {
         i18n.changeLanguage(lang);
     };
 
-    async function HandleLogOut() {
+    async function HandleLogOut(event) {
+        event.preventDefault();
         try{
-            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/LogOut', null, null);
+            const token = localStorage.getItem('token');
+            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/LogOut', token, null);
             if (response.statusCode === 200) {
                 console.log('Logout successful');
                 localStorage.removeItem('token');
                 localStorage.removeItem('role');
                 localStorage.removeItem('userName');
                 localStorage.removeItem('email');
-                //navigate('/');
+                localStorage.removeItem('refreshTokenExpiration');
+                navigate('/auth');
             } else {
                 console.log(response);
             }

@@ -1,19 +1,22 @@
-import { forwardRef, useImperativeHandle, useRef, useState,useEffect ,useCallback} from "react";
+import { forwardRef, useImperativeHandle, useRef, useState, useCallback } from "react";
 import { createPortal } from "react-dom";
 import classes from './VotingModal.module.css';
 import CheckboxDropdown from "../MultipleChoiceCheckMark/CheckboxDropdown";
 import { useTranslation } from 'react-i18next';
 import { log } from "../../log";
 import VotingQuestion from "./VotingQuestion";
-import SubmitButton from '../Button/SubmitButton'
+import SubmitButton from '../Button/SubmitButton';
 import { httpRequest } from "../../HTTP";
 import { getAuthToken } from "../../Helpers/AuthHelper";
-const VotingModal = forwardRef(function VotingModal({collectFormData}, ref) {
+
+const VotingModal = forwardRef(function VotingModal({ collectFormData }, ref) {
     log('<ADDVSModal /> rendered');
     const { t } = useTranslation();
     const checkboxDropdownRef = useRef();
     const votingModal = useRef();
     
+    const [options, setOptions] = useState(["", ""]);
+
     useImperativeHandle(ref, () => ({
         open: () => {
             votingModal.current.showModal();
@@ -28,20 +31,21 @@ const VotingModal = forwardRef(function VotingModal({collectFormData}, ref) {
             ref.current.close();
         }
     }, [ref]);
+
     async function handleSubmit(event) {
         event.preventDefault();
         const fd = new FormData(event.target);
         const formValues = Object.fromEntries(fd.entries());
-        const selectedGroups = checkboxDropdownRef.current.selectedGroups.map(group => group.value);
+        const selectedGroups = checkboxDropdownRef.current.selectedGroups.map(group => group.id);
+        const endDate = new Date(`${formValues.endDate}T${formValues.endTime}:00Z`);
         const requestBody = {
             Text: formValues.title,
             groups: [1],
-            Start: '2024-05-18T02:22:01.388Z',
-            End: '2024-05-19T02:22:01.388Z',
-            //Description: formValues.description,
-            Options: ["option1", "option2"]
+            Start: new Date().toISOString(),
+            End: endDate.toISOString(),
+            Options: options
         };
-        //collectFormData(requestBody);
+
         try {
             const accessToken = getAuthToken();
             const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Voting/CreateVoting', accessToken, requestBody);
@@ -55,10 +59,32 @@ const VotingModal = forwardRef(function VotingModal({collectFormData}, ref) {
             console.log('An error occurred:', error);
         }
     }
+
+    const handleAddOption = () => {
+        setOptions(prevOptions => {
+            if (prevOptions.length < 5) {
+                return [...prevOptions, ""];
+            }
+            return prevOptions;
+        });
+    };
+
+    const handleDeleteOption = (optionIndex) => {
+        setOptions(prevOptions => prevOptions.filter((_, index) => index !== optionIndex));
+    };
+
+    const handleOptionChange = (optionIndex, newOptionValue) => {
+        setOptions(prevOptions => {
+            const updatedOptions = [...prevOptions];
+            updatedOptions[optionIndex] = newOptionValue;
+            return updatedOptions;
+        });
+    };
+
     return createPortal(
         <dialog ref={votingModal} className={classes.modal}>
             <form method='dialog' onSubmit={handleSubmit}>
-            <div className={classes.input_container}>
+                <div className={classes.input_container}>
                     <label htmlFor="title">{t("title")}</label>
                     <input type="text" id="title" dir='auto' name="title" />
                 </div>
@@ -80,8 +106,13 @@ const VotingModal = forwardRef(function VotingModal({collectFormData}, ref) {
                     <label htmlFor="description">{t('description')}</label>
                     <textarea id="description" name="description"></textarea>
                 </div>
-                <VotingQuestion/>
-                <SubmitButton cancel={handleCancelClick}/>
+                <VotingQuestion
+                    options={options}
+                    onAddOption={handleAddOption}
+                    onDeleteOption={handleDeleteOption}
+                    onOptionChange={handleOptionChange}
+                />
+                <SubmitButton cancel={handleCancelClick} />
             </form>
         </dialog>,
         document.getElementById('vs-Modal')
