@@ -1,10 +1,11 @@
 import classes from './VotingNavBar.module.css'
 import * as FaIcons from "react-icons/fa6";
 import { useTranslation } from 'react-i18next'
-import { useRef, useState,useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import VotingModal from './VotingModal';
 import { log } from '../../log';
 import Delete from '../Button/Delete';
+import Edit from '../Button/Edit';
 export default function VSNavBar() {
     log('<vsNavbar /> rendered');
     const { t } = useTranslation();
@@ -12,7 +13,7 @@ export default function VSNavBar() {
     function handleOpenAddVSModal() {
         addVSDialog.current.open();
     }
-    const [isMobile, setIsMobile] = useState(false); // State to track screen size
+    const [isMobile, setIsMobile] = useState(false); 
 
     useEffect(() => {
         const checkScreenSize = () => {
@@ -25,7 +26,7 @@ export default function VSNavBar() {
         };
     }, []);
 
- 
+
     return (
         <div className={isMobile ? classes.vs_navigation_bar_responsive : classes.vs_navigation_bar}>
             <VotingModal
@@ -38,26 +39,29 @@ export default function VSNavBar() {
                     className={classes.icon} />
                 <p>{t("add-voting")}</p>
             </div>
-            <ul className={isMobile?classes.titles_wrapper:""}>
+            <ul className={isMobile ? classes.titles_wrapper : ""}>
                 {/* {returnFormData.map((data) => ( */}
                 <div className={classes.box_wrapper}>
                     <li >
                         {isMobile ? (
                             <div className={classes.box}>
-                                <p>kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk</p>
+                                <p>kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk</p>
                                 <p>name</p>
                             </div>
                         ) : (
                             <div className={classes.title_wrapper}>
                                 <FaIcons.FaSquare className={classes.icon_square} />
                                 <div className={classes.info}>
-                                    <span className={classes.title}>kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk</span>
+                                    <span className={classes.title}>kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk</span>
                                     <span className={classes.name}>by name</span>
                                 </div>
                             </div>
                         )}
                     </li>
-                    <Delete/>
+                    <div className={classes.edit_delete}>
+                        <Edit icon={FaIcons.FaPenClip} />
+                        <Delete />
+                    </div>
                 </div>
                 {/* ))} */}
             </ul>

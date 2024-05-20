@@ -1,7 +1,8 @@
 import classes from './Delete.module.css'
+import * as FaIcons from "react-icons/fa6";
 export default function Delete() {
     return (
-        <button className={classes.button}>
+        <button className={`${classes.button} ${classes.delete_button}`}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -20,7 +21,7 @@ export default function Delete() {
                     </clipPath>
                 </defs>
             </svg>
-
+                        
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
