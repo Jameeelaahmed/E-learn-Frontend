@@ -226,9 +226,6 @@
 }
 
 
-
-
-
 .sidebar_active>li {
     display: flex;
     justify-content: center;
@@ -320,10 +317,19 @@
 [dir='rtl'] .sidebar_active .link .icon {
     margin-right: -6px;
 }
+[dir='ltr'] .sidebar_active .link .icon {
+    margin-left: -6px;
+}
 
 .sidebar_active .link.active .icon {
     color: var(--main-color);
+}
+
+[dir="ltr"] .sidebar_active .link.active .icon {
     margin-right: 10px;
+}
+[dir="rtl"] .sidebar_active .link.active .icon {
+    margin-left: 10px;
 }
 
 

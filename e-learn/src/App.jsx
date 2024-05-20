@@ -10,7 +10,6 @@ import Page from "./Components/Pagee/Page";
 import MainSection from "./Components/MainSection/MainSection";
 import { useState } from "react";
 import Logo from "./Components/Logo/Logo";
-import Assignments from "./Components/Assignments/Assignments";
 import AppBar from "./Components/AppBar/AppBar";
 import { QuestionContext } from "./Context/Question-view-context";
 import AddAssignment from "./Components/Assignments/Add-Assignment";
@@ -25,7 +24,7 @@ import StuMain from "./Components/StuMain/StuMain";
 import Voting from "./Components/Voting/Voting";
 import Container from "./Components/Announcement-Chat/Container"
 import Otp from "./Components/Authentication/Otp";
-import RoutesPage from "./RoutesPage";
+import RoutesPage from "./Routes/RoutesPage";
 function App() {
   return (
     <>
@@ -42,19 +41,19 @@ function App() {
         <PageContent>
           <Header></Header>
           <MainSection> */}
-      {/* <Profile></Profile> */}
-      {/* <FileBrowser></FileBrowser> */}
-      {/* <VSQContainer></VSQContainer> */}
-      {/* <Assignments/> */}
-      {/* <GroupNavCardRespo></GroupNavCardRespo> */}
-      {/* <AssignmentDetails></AssignmentDetails> */}
-      {/* <GroupNavCard></GroupNavCard> */}
-      {/* <InsMain/> */}
-      {/* <StuMain/> */}
-      {/* <Assignments/> */}
-      {/* <Voting/> */}
-      {/* <Container/> */}
-      {/* </MainSection>
+            {/* <Profile></Profile> */}
+            {/* <FileBrowser></FileBrowser> */}
+            {/* <VSQContainer></VSQContainer> */}
+            {/* <Assignments/> */}
+            {/* <GroupNavCardRespo></GroupNavCardRespo> */}
+            {/* <AssignmentDetails></AssignmentDetails> */}
+            {/* <GroupNavCard></GroupNavCard> */}
+            {/* <InsMain/> */}
+            {/* <StuMain/> */}
+            {/* <Assignments/> */}
+            {/* <Voting /> */}
+            {/* <Container/> */}
+          {/* </MainSection>
         </PageContent>
         <AppBar></AppBar>
       </Page> */}

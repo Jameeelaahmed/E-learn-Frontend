@@ -7,7 +7,7 @@ export default function Groups() {
     const navigate = useNavigate();
 
     function handleGroupClick(id){
-        navigate(`/groups/${id}`);
+        navigate(`group${id}`);
     };
 
     const group = [
