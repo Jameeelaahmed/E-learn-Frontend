@@ -3,3 +3,9 @@
     flex-wrap: wrap;
     padding: 20px;
 }
+
+@media (max-width: 930px) {
+    .classes {
+        justify-content: center;
+    }
+}
