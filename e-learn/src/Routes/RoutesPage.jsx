@@ -12,7 +12,9 @@ import Voting from '../Components/Voting/Voting';
 import Groups from '../Pages/Groups/Groups';
 import CourseDetails from '../Pages/CourseDetails/CourseDetails'
 import Weeks from '../Components/Weeks/Weeks';
-
+import Assignments from '../Pages/Assignments/Assignments'
+import AssignmentDetails from '../Components/Assignments/AssignmentDetails'
+import AssignmentsResponsesList from '../Components/Assignments/AssignmentResponsesList'
 const router = createBrowserRouter([
     {
         path: '/auth',
@@ -34,17 +36,15 @@ const router = createBrowserRouter([
                 element: <PrivateRoutes />,
                 children: [
                     { path: '', element: <InsMain /> },
+                    { path: 'groups', element: <Groups /> },
                     {
-                        path: 'groups',
-                        element: <Groups />,
+                        path: ':groupId',
+                        element: <CourseDetails />,
                         children: [
-                            {
-                                path: ':groupId',
-                                element: <CourseDetails />,
-                                children: [
-                                    { path: 'weeks', element: <Weeks /> },
-                                ]
-                            }
+                            { path: ':groupId', element: <Weeks /> },
+                            { path: 'assignments', element: <Assignments /> },
+                            { path: 'assignments/:assignmentId', element: <AssignmentDetails /> },
+                            { path: ':assignmentId/responses-list', element: <AssignmentsResponsesList /> },
                         ]
                     },
                     { path: 'voting', element: <Voting /> },

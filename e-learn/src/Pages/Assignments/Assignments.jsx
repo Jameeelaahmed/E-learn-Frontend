@@ -1,29 +1,20 @@
-import classes from './Assignments.module.css'
-import GroupNavCard from '../../Components/group-navigation-card/GroupNavCard'
-import Group from '../../Components/Group/group';
-import AddAssignment from '../../Components/Assignments/Add-Assignment'
+import classes from './Assignments.module.css';
 import { log } from "../../log";
-import AssignmentDetails from '../../Components/Assignments/AssignmentDetails'
 import Groups from '../Groups/Groups';
-import AddWork from '../../Components/Assignments/AddWork'
-import AssignmentsResponsesList from '../../Components/Assignments/AssignmentResponsesList'
-import GroupNavCardRespo from '../../Components/group-nav-card-responsive/GroupNavCardRespo'
-import { useTranslation } from 'react-i18next'
+// import AssignmentDetails from '../../Components/Assignments/AssignmentDetails';
+import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 
 export default function Assignments() {
-    const { t } = useTranslation()
+    const { t } = useTranslation();
     log('<Assignments /> rendered', 1);
+    const location = useLocation();
+    const path = location.pathname;
+    console.log(path);
+
     return (
         <div className={classes.assignments}>
-            <GroupNavCardRespo />
-            {/* <Classes/> */}
-            {/* <AssignmentDetails/> */}
-            <AssignmentsResponsesList />
-            <div className={classes.col}>
-                <GroupNavCard></GroupNavCard>
-                {/* <AddAssignment></AddAssignment> */}
-                {/* <AddWork/> */}
-            </div>
+            {path === '/groups/assignments' && <Groups />}
         </div>
-    )
+    );
 }
