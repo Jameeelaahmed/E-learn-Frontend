@@ -1,4 +1,3 @@
-// RoutesPage.js
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SemiBody from '../Components/SemiBodyLogin/SemiBody';
 import Login from '../Components/Authentication/Login';
@@ -20,7 +19,7 @@ const router = createBrowserRouter([
         element: <SemiBody />,
         errorElement: <Error />,
         children: [
-            { path: '/auth', element: <Login /> },
+            { path: '', element: <Login /> },
             { path: 'forgetpassword', element: <ForgetPassword /> },
             { path: 'otp', element: <Otp /> },
             { path: 'set-new-password', element: <SetNewPassword /> },
@@ -29,30 +28,26 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <RootLayout />,
+        errorElement: <Error />,
         children: [
             {
-                path: '/',
-                errorElement: <Error />,
                 element: <PrivateRoutes />,
                 children: [
-                    { path: '/', element: <InsMain /> },
-                    // {
-                        {path: '/groups',
-                        errorElement: <Error />,
-                        element: <Groups />},
-                        // children: 
+                    { path: '', element: <InsMain /> },
+                    {
+                        path: 'groups',
+                        element: <Groups />,
+                        children: [
                             {
                                 path: ':groupId',
                                 element: <CourseDetails />,
-                                errorElement: <Error />,
                                 children: [
-                                    { path: ':groupId', element: <Weeks/>, errorElement: <Error /> },
-                                    { path: ':groupId', element: <Weeks/>, errorElement: <Error /> },
+                                    { path: 'weeks', element: <Weeks /> },
                                 ]
-                            },
-                        // 
-                    // },
-                    { path: '/voting', errorElement: <Error />, element: <Voting /> },
+                            }
+                        ]
+                    },
+                    { path: 'voting', element: <Voting /> },
                 ]
             },
         ]

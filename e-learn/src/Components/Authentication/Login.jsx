@@ -79,7 +79,7 @@ export default function Login() {
                     <input type="submit" value="تسجيل دخول" />
                     <div className={classes.forget}>
                         <p>هل نسيت كلمة المرور؟</p>
-                        <Link to="/forgetpassword">نسيت كلمة المرور</Link>
+                        <Link to="forgetpassword">نسيت كلمة المرور</Link>
                     </div>
                 </form>
             </FormContainer>
