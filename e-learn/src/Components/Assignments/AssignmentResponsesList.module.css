@@ -1,64 +1,67 @@
-.track_responses{
+.track_responses {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-left: 15px;
+    z-index: 10000;
 }
-.tracking{
+
+.tracking {
     display: flex;
     justify-content: center;
     width: 90%;
 }
 
-.head{
+.head {
     display: flex;
     flex-direction: column;
 }
 
-.head p{
+.head p {
     font-size: 15px;
 }
 
-.tracking a{
+.tracking a {
     padding: 20px;
-    background-color:var(--light-grey);
+    background-color: var(--light-grey);
     color: var(--main-color);
     transition: var(--transition);
 }
 
-[dir='ltr'] .tracking a{
+[dir='ltr'] .tracking a {
     box-shadow: var(--main-shadow);
 }
-[dir='rtl'] .tracking a{
+
+[dir='rtl'] .tracking a {
     box-shadow: var(--main-arabic-shadow);
 }
 
-.tracking a:hover{
+.tracking a:hover {
     background-color: var(--main-color);
     color: var(--white);
 }
 
 [dir='ltr'] .tracking a:first-child,
-[dir='rtl'] .tracking a:last-child{
+[dir='rtl'] .tracking a:last-child {
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
 }
 
 [dir='rtl'] .tracking a:first-child,
-[dir='ltr']  .tracking a:last-child{
+[dir='ltr'] .tracking a:last-child {
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
 }
 
 /* ! TABLE */
 
-.table_wrapper{
+.table_wrapper {
     width: 100%;
     overflow-x: scroll;
 }
 
-.table{
+.table {
     margin-top: 15px;
     background-color: var(--light-grey);
     border-radius: 32px;
@@ -68,13 +71,13 @@
     border-collapse: collapse;
 }
 
-.table td{
+.table td {
     padding: 10px;
     text-align: center;
 }
 
-.table thead{
-    padding: 10px 0 ;
+.table thead {
+    padding: 10px 0;
     color: var(--main-color);
     font-weight: bold;
     text-transform: uppercase;
@@ -82,42 +85,43 @@
     border-top-left-radius: 20px;
 }
 
-.table th{
-    width: 15%; 
+.table th {
+    width: 15%;
     color: var(--main-color);
 }
 
 
-.table tr:nth-of-type(2){
+.table tr:nth-of-type(2) {
     margin-top: 20px;
 }
 
-.table tbody tr{
+.table tbody tr {
     height: 85px;
 }
 
-.table tbody tr:nth-child(odd){
+.table tbody tr:nth-child(odd) {
     background-color: white;
 }
 
-.table tbody tr:last-child{
+.table tbody tr:last-child {
     background-color: none;
 }
 
-[dir="rtl"] .table{
+[dir="rtl"] .table {
     box-shadow: var(--main-arabic-shadow)
 }
-[dir="ltr"] .table{
+
+[dir="ltr"] .table {
     box-shadow: var(--main-shadow);
 }
 
 
-.mark .icon{
+.mark .icon {
     height: fit-content;
 }
 
 .mark .button,
-.input{
+.input {
     margin-right: 10px;
     padding: 10px;
     /* display: flex;
@@ -132,22 +136,23 @@
 }
 
 [dir="ltr"] .mark .button,
-.input{
+.input {
     box-shadow: var(--main-shadow);
 }
+
 [dir="rtl"] .mark .button,
-.input{
+.input {
     box-shadow: var(--main-arabic-shadow);
 }
 
-.button{
+.button {
     width: 41px;
     height: 41px;
     border-radius: 30%;
     align-self: center;
 }
 
-.input{
+.input {
     width: 100px;
     transition: opacity 0.4s;
     border-radius: 8px;
@@ -155,56 +160,61 @@
 }
 
 .input::-webkit-inner-spin-button,
-.input::-webkit-outer-spin-button{
+.input::-webkit-outer-spin-button {
     display: none;
 }
 
-.input:focus{
+.input:focus {
     outline: none;
 }
 
-.input::placeholder{
+.input::placeholder {
     transition: opacity 0.4s;
 }
 
-.input:focus::placeholder{
+.input:focus::placeholder {
     opacity: 0;
     color: var(--main-color);
 }
 
-.button:hover{
+.button:hover {
     background-color: var(--main-color);
     color: white;
     box-shadow: none;
 }
+
 /* ! TABLE */
 
-@media (max-width:930px){
-    .track_responses{
+@media (max-width:930px) {
+    .track_responses {
         margin-top: 15px;
     }
 }
 
-@media(max-width:615px){
-    .tracking{
+@media(max-width:615px) {
+    .tracking {
         font-size: 18px;
         font-weight: bolder;
     }
-    .table tr{
+
+    .table tr {
         font-size: 12px;
     }
 }
-@media(max-width:580px){
-    .tracking{
+
+@media(max-width:580px) {
+    .tracking {
         font-size: 18px;
         font-weight: bolder;
     }
-    .tracking a{
+
+    .tracking a {
         padding: 12px;
         font-size: 10px;
         width: 200px;
     }
-    .button{
+
+    .button {
         margin-top: 10px;
     }
 }
