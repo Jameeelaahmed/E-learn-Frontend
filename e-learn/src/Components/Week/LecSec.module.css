@@ -1,19 +1,17 @@
-.lec_sec_container{
+.lec_sec_container {
     background-color: var(--white);
     margin: 0 20px;
     border-radius: 14px;
     margin-top: 15px;
-
     transition: all 850ms ease;
-    max-height: 300px;
 }
 
-.lec_sec_container.active_slide{
+.lec_sec_container.active_slide {
     transition: 350ms;
 
 }
 
-.lec_sec{
+.lec_sec {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -27,7 +25,7 @@
 
 /* *HOVER */
 .lec_sec:hover,
-.lec_sec.active{
+.lec_sec.active {
     background-color: var(--main-color);
 }
 
@@ -40,7 +38,7 @@
 }
 
 .lec_sec:hover .icon,
-.lec_sec.active .icon{
+.lec_sec.active .icon {
     color: var(--light-grey);
     transform: rotate(180deg);
 }
@@ -58,14 +56,14 @@
     transition: var(--transition);
 }
 
-.customFileInput{
+.customFileInput {
     display: inline-block;
     cursor: pointer;
     background-color: transparent;
     border: none;
 }
 
-.fileInput{
+.fileInput {
     display: none;
 }
 
@@ -82,10 +80,11 @@
     transition: var(--transition);
 }
 
-[dir="ltr"] .lec_sec p{
+[dir="ltr"] .lec_sec p {
     margin-left: 10px;
 }
-[dir="rtl"] .lec_sec p{
+
+[dir="rtl"] .lec_sec p {
     margin-right: 10px;
 }
 
@@ -98,18 +97,15 @@
 /* *HOVER */
 
 
-.file{
+.file {
     padding: 20px 5px;
     display: flex;
     align-items: center;
     margin: 0 15px;
 }
 
-.file:not(:last-child){
-    border-bottom:1px solid var(--main-color) ;
-}
 
-.open_file{
+.open_file {
     background-color: white;
     border: none;
     cursor: pointer;
@@ -117,17 +113,45 @@
     color: var(--main-color);
 }
 
-.file_icon{
+.file_icon {
     font-size: 20px;
     color: var(--main-color);
 }
 
-[dir="ltr"] .file_icon{
+[dir="ltr"] .file_icon {
     margin-right: 10px;
 }
 
-[dir="rtl"] .file_icon{
+[dir="rtl"] .file_icon {
     margin-left: 10px;
+}
+
+.file_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.file_head:not(:last-child) {
+    border-bottom: 1px solid var(--main-color);
+}
+
+.file_head .leftIcon {
+    color: var(--main-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file_head .leftIcon:hover {
+    transform: scale(1.1);
+}
+
+[dir="ltr"] .file_head .leftIcon {
+    margin-right: 20px;
+}
+
+[dir="rtl"] .file_head .leftIcon {
+    margin-left: 20px;
 }
 
 

@@ -2,7 +2,7 @@ import classes from './LecSec.module.css';
 import * as FaIcons from "react-icons/fa6";
 import { useState } from 'react';
 
-export default function LecSec({ materialType }) {
+export default function LecSec({ materialType, onDelete }) {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [openFiles, setOpenFiles] = useState(false);
 
@@ -35,10 +35,15 @@ export default function LecSec({ materialType }) {
                 <div className={classes.filesContainer}>
                     <ul>
                         {selectedFiles.map((file, index) => (
-                            <li key={index} className={classes.file}>
-                                <FaIcons.FaSquare className={classes.file_icon}></FaIcons.FaSquare>
-                                <button onClick={() => openFileInBrowser(file)} className={classes.open_file}>{file.name}</button>
-                            </li>
+                            <div className={classes.file_head}>
+                                <li key={index} className={classes.file}>
+                                    <FaIcons.FaSquare className={classes.file_icon}></FaIcons.FaSquare>
+                                    <button onClick={() => openFileInBrowser(file)} className={classes.open_file}>{file.name}</button>
+                                </li>
+                                <FaIcons.FaTrash
+                                    onClick={onDelete}
+                                    className={classes.leftIcon} />
+                            </div>
                         ))}
                     </ul>
                 </div>
