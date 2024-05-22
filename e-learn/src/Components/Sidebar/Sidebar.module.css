@@ -1,4 +1,4 @@
-.sidebar{
+.sidebar {
     background-color: var(--main-color);
     color: var(--white);
     padding: 20px 0;
@@ -27,10 +27,11 @@
 }
 
 
-[dir='ltr'] .sidebar>.icon{
+[dir='ltr'] .sidebar>.icon {
     margin-left: 25px;
 }
-[dir='rtl'] .sidebar>.icon{
+
+[dir='rtl'] .sidebar>.icon {
     margin-right: 25px;
 }
 
@@ -53,7 +54,7 @@
 
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
-.profile{
+.profile {
     display: flex;
     align-items: center;
     color: white;
@@ -88,7 +89,7 @@
 
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
-.sidebar .link{
+.sidebar .link {
     display: flex;
     align-items: center;
     padding: 20px;
@@ -132,6 +133,7 @@
 [dir='ltr'] .sidebar .link .icon {
     margin-right: 20px;
 }
+
 [dir='rtl'] .sidebar .link .icon {
     margin-left: 20px;
 }
@@ -147,6 +149,7 @@
 [dir='ltr'] .sidebar .link.active .icon {
     margin-right: 10px;
 }
+
 [dir='rtl'] .sidebar .link.active .icon {
     margin-left: 10px;
 }
@@ -237,6 +240,7 @@
 [dir='ltr'] .sidebar_active>li {
     margin-left: 10px;
 }
+
 [dir='rtl'] .sidebar_active>li {
     margin-right: 10px;
 }
@@ -250,16 +254,17 @@
     margin-bottom: 30px;
     color: white;
     z-index: 1100;
-    color: var(--main-color);
-    background-color: var(--main-color);
+
 }
 
 [dir='ltr'] .sidebar_active>.icon {
     margin-left: 25px;
 }
+
 [dir='rtl'] .sidebar_active>.icon {
     margin-right: 25px;
 }
+
 .sidebar_active .profile img {
     width: 40px;
     border-radius: 50%;
@@ -268,6 +273,7 @@
 [dir='ltr'] .sidebar_active .profile img {
     margin-right: 15px;
 }
+
 [dir='rtl'] .sidebar_active .profile img {
     margin-left: 15px;
 }
@@ -317,6 +323,7 @@
 [dir='rtl'] .sidebar_active .link .icon {
     margin-right: -6px;
 }
+
 [dir='ltr'] .sidebar_active .link .icon {
     margin-left: -6px;
 }
@@ -328,6 +335,7 @@
 [dir="ltr"] .sidebar_active .link.active .icon {
     margin-right: 10px;
 }
+
 [dir="rtl"] .sidebar_active .link.active .icon {
     margin-left: 10px;
 }
@@ -391,8 +399,9 @@
 @media(max-width:768px) {
     .sidebar {
         display: none;
-    } 
-    .sidebar_active{
+    }
+
+    .sidebar_active {
         display: none;
     }
 }
