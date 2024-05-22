@@ -41,6 +41,19 @@
     margin-right: 15px;
 }
 
+.button_container {
+    display: flex;
+    margin-top: 20px;
+}
+
+[dir="rtl"] .delete_button {
+    margin-right: 30px;
+}
+
+[dir="ltr"] .delete_button {
+    margin-left: 30px;
+}
+
 @media (max-width:930px) {
     .assignment_details {
         margin-top: 15px;

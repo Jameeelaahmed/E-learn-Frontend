@@ -1,19 +1,20 @@
 import classes from './AssignmentDetails.module.css'
 import * as FaIcons from "react-icons/fa6";
 import { useTranslation } from 'react-i18next';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import InputText from '../InputText/InputText';
 import Button from '../Button/Button';
+import DeleteButton from '../Button/DeleteButton';
 export default function AssignmentDetails() {
     const { t } = useTranslation();
     const [isEdit, setisEdit] = useState(false);
-    const [formData,setFormData]=useState({
-        title:"",
-        description:"",
-        startDate:"",
-        endDate:"",
-        points:"",
-        attachements:[]
+    const [formData, setFormData] = useState({
+        title: "",
+        description: "",
+        startDate: "",
+        endDate: "",
+        points: "",
+        attachements: []
     })
     function handleEdit() {
         setisEdit(prev => (!prev))
@@ -21,19 +22,19 @@ export default function AssignmentDetails() {
 
 
     function handleSave() {
-        const fd=new FormData();
+        const fd = new FormData();
         const formValues = Object.fromEntries(fd.entries());
-        setFormData(formData=>({
+        setFormData(formData => ({
             ...formData,
-            title:formValues.title,
-            description:formValues.Description,
-            endDate:formValues.Due_Date,
-            points:formValues.Points
+            title: formValues.title,
+            description: formValues.Description,
+            endDate: formValues.Due_Date,
+            points: formValues.Points
         }))
 
         setisEdit(false)
     }
-    
+
     return (
         <div className={classes.assignment_details}>
             <div className={classes.assignment_container}>
@@ -67,7 +68,7 @@ export default function AssignmentDetails() {
             </div>
             <div className={classes.button_container}>
                 {isEdit ? <Button onSelect={handleSave} text={t("save")} /> : <Button onSelect={handleEdit} text={t("edit")} />}
-                <button>{t("delete")}</button>
+                <DeleteButton text={t("delete")} delete_button={classes.delete_button}></DeleteButton>
             </div>
         </div>
     )
