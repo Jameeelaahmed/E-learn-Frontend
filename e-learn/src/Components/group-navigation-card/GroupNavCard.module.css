@@ -1,4 +1,4 @@
-.group_navigation_card{
+.group_navigation_card {
     width: 275px;
     background-color: var(--light-grey);
     padding: 15px 30px;
@@ -7,12 +7,13 @@
     height: fit-content;
 }
 
-[dir='ltr'] .group_navigation_card{
+[dir='ltr'] .group_navigation_card {
     /* margin-right: 30px; */
     box-shadow: var(--main-shadow);
 
 }
-[dir='rtl'] .group_navigation_card{
+
+[dir='rtl'] .group_navigation_card {
     /* margin-left: 10px; */
     box-shadow: var(--main-arabic-shadow);
 }
@@ -40,6 +41,7 @@
 [dir='ltr'] .group_navigation_card .instructor_profile img {
     margin-right: 20px;
 }
+
 [dir='rtl'] .group_navigation_card .instructor_profile img {
     margin-left: 20px;
 }
@@ -49,7 +51,7 @@
     font-weight: bolder;
 }
 
-.group_navigation_card .group_sections{
+.group_navigation_card .group_sections {
     margin-top: 20px;
     color: var(--main-color);
 }
@@ -59,27 +61,39 @@
     display: flex;
     align-items: center;
     color: var(--main-color);
+    transition: 0.4s;
 }
 
 .group_navigation_card .group_sections a:not(:last-child) {
     margin-bottom: 10px;
 }
 
-.group_navigation_card .group_sections a:first-child::before {
+.group_navigation_card .group_sections a::before {
     content: "";
     position: absolute;
     height: 30px;
     width: 8px;
     background-color: var(--main-color);
-} 
+    transition: 0.4s;
+}
 
-[dir='ltr'] .group_navigation_card .group_sections a:first-child::before {
+.group_navigation_card .group_sections a.active::before {
+    width: 80px;
+    z-index: -1;
+}
+
+.group_navigation_card .group_sections a.active {
+    color: white;
+    z-index: 1000;
+}
+
+[dir='ltr'] .group_navigation_card .group_sections a::before {
     left: -15px;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
-} 
+}
 
-[dir='rtl'] .group_navigation_card .group_sections a:first-child::before {
+[dir='rtl'] .group_navigation_card .group_sections a::before {
     right: -15px;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
@@ -88,8 +102,8 @@
 
 /* ! RESPONSIVE*/
 
-@media(max-width:930px){
-    .group_navigation_card{
+@media(max-width:930px) {
+    .group_navigation_card {
         display: none;
     }
 }

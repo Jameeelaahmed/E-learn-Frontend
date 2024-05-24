@@ -41,7 +41,6 @@ export default function Weeks() {
                 return (
                     <Week key={weekNum}>
                         <WeekHead
-                            onDelete={() => handleDelete(weekNum)}
                             onSelect={() => handleOpen(weekNum)}
                             weekNum={weekNum + 1}
                             active={openWeeks[weekNum]} // Pass the active state to WeekHead
@@ -49,10 +48,10 @@ export default function Weeks() {
                         {openWeeks[weekNum] && (
                             <div className={classes.week_content}>
                                 <div className={classes.main}>
-                                    <LecSec materialType={`${t("Lecture")} ${weekNum + 1}`} weeknum={weekNum} />
+                                    <LecSec onDelete={() => handleDelete(weekNum)} materialType={`${t("Lecture")} ${weekNum + 1}`} weeknum={weekNum} />
                                 </div>
                                 <div className={classes.main}>
-                                    <LecSec materialType={`${t("Section")} ${weekNum + 1}`} />
+                                    <LecSec onDelete={() => handleDelete(weekNum)} materialType={`${t("Section")} ${weekNum + 1}`} />
                                 </div>
                             </div>
                         )}
