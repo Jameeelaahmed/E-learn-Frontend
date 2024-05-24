@@ -59,6 +59,8 @@
 .table_wrapper {
     width: 100%;
     overflow-x: scroll;
+    overflow-y: scroll;
+    height: 550px;
 }
 
 .table {
