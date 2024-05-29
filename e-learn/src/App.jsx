@@ -20,7 +20,6 @@ import FileBrowser from "./Components/test";
 // import AssignmentDetails from "./Components/Assignments/AssignmnetDetails";
 import * as FaIcons from "react-icons/fa6"
 import GroupsSlider from "./Components/StuMain/GroupsSlider";
-import StuMain from "./Components/StuMain/StuMain";
 import Voting from "./Components/Voting/Voting";
 import Container from "./Components/Announcement-Chat/Container"
 import Otp from "./Components/Authentication/Otp";
@@ -41,19 +40,19 @@ function App() {
         <PageContent>
           <Header></Header>
           <MainSection> */}
-            {/* <Profile></Profile> */}
-            {/* <FileBrowser></FileBrowser> */}
-            {/* <VSQContainer></VSQContainer> */}
-            {/* <Assignments/> */}
-            {/* <GroupNavCardRespo></GroupNavCardRespo> */}
-            {/* <AssignmentDetails></AssignmentDetails> */}
-            {/* <GroupNavCard></GroupNavCard> */}
-            {/* <InsMain/> */}
-            {/* <StuMain/> */}
-            {/* <Assignments/> */}
-            {/* <Voting /> */}
-            {/* <Container/> */}
-          {/* </MainSection>
+      {/* <Profile></Profile> */}
+      {/* <FileBrowser></FileBrowser> */}
+      {/* <VSQContainer></VSQContainer> */}
+      {/* <Assignments/> */}
+      {/* <GroupNavCardRespo></GroupNavCardRespo> */}
+      {/* <AssignmentDetails></AssignmentDetails> */}
+      {/* <GroupNavCard></GroupNavCard> */}
+      {/* <InsMain/> */}
+      {/* <StuMain/> */}
+      {/* <Assignments/> */}
+      {/* <Voting /> */}
+      {/* <Container/> */}
+      {/* </MainSection>
         </PageContent>
         <AppBar></AppBar>
       </Page> */}
