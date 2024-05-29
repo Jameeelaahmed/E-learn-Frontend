@@ -6,11 +6,13 @@ import * as FaIcons from "react-icons/fa6";
 import { useState } from "react";
 import { useTranslation } from 'react-i18next'
 import { useParams } from "react-router-dom";
-export default function Weeks() {
+export default function Weeks({ role }) {
     const [add, setAdd] = useState([]);
     const [openWeeks, setOpenWeeks] = useState([]);
-    const params = useParams();
-    params.groupId
+    // const params = useParams();
+    // params.groupId = parseInt(params.groupId);
+
+    const isInstructor = role === 'Staff';
 
     function handleAdd() {
         setAdd((prevAdd) => [...prevAdd, []]);
@@ -33,10 +35,13 @@ export default function Weeks() {
     //* LANG 
     return (
         <div className={classes.weeks}>
-            <div className={classes.add_week} onClick={handleAdd}>
-                <FaIcons.FaPlus className={classes.icon} />
-                <p>{t("add-week")}</p>
-            </div>
+            {isInstructor &&
+                <div className={classes.add_week} onClick={handleAdd}>
+                    <FaIcons.FaPlus className={classes.icon} />
+                    <p>{t("add-week")}</p>
+                </div>
+            }
+
             {add.map((week, weekNum) => {
                 return (
                     <Week key={weekNum}>

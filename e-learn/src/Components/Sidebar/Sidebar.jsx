@@ -18,16 +18,22 @@ export default function Sidebar() {
     }
     // * END CLOSESIDEBAR
 
+    function getRole() {
+        return localStorage.getItem('role');
+    }
+
+    const role = getRole();
+
     const sidebarData = [
         {
             title: t('Main'),
             icon: <FaIcons.FaHouse className={classes.icon} />,
-            link: '/'
+            link: role === 'Staff' ? 'InsMain' : 'stuMain'
         },
         {
             title: t('Groups'),
             icon: <FaIcons.FaBook className={classes.icon} />,
-            link: '/groups'
+            link: 'groups'
         },
         {
             title: t('Survey'),
