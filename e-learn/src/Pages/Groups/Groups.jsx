@@ -1,6 +1,7 @@
-// Groups.js
-import classes from './groups.module.css';
+ import classes from './groups.module.css';
+
 import Group from '../../Components/Group/group';
+
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 export default function Groups() {
