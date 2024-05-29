@@ -5,45 +5,53 @@ import { useTranslation } from 'react-i18next';
 import { httpRequest } from '../../HTTP';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+
 export default function Login() {
     const { t } = useTranslation();
     const email = useRef();
     const password = useRef();
     const navigate = useNavigate();
+
     async function handleSubmit(event) {
         event.preventDefault();
-        
+
         const username = email.current.value;
         const userPassword = password.current.value;
-        
+
         if (!username || !userPassword) {
             console.error('Username and password are required');
             return;
         }
 
         const requestBody = {
-            UserName: username, // Use the username from the form
-            Password: userPassword // Use the password from the form
+            UserName: username,
+            Password: userPassword
         };
-    
+
         try {
             const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/LogIn', null, requestBody);
             if (response.statusCode === 200) {
-                //successful login
+                // Successful login
                 console.log('Login successful');
                 const token = response.data.token;
-                const role = response.data.roles;
+                const role = response.data.roles[0]
                 const userName = response.data.userName;
                 const email = response.data.email;
                 localStorage.setItem('token', token);
                 localStorage.setItem('role', role);
                 localStorage.setItem('userName', userName);
                 localStorage.setItem('email', email);
-                
-                // Redirect to the home page
-                navigate('/');
+
+                // console.log(role);
+                console.log(localStorage.getItem(role));
+                if (localStorage.getItem(role) === 'Staff') {
+                    navigate('InsMain');
+                } else if (localStorage.getItem(role) === 'Student') {
+                    navigate('stuMain');
+                }
+
             } else {
-                //unsuccessful login
+                // Unsuccessful login
                 console.log(response);
                 console.log(requestBody);
             }
