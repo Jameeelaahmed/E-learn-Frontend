@@ -5,6 +5,7 @@ import * as FaIcons from "react-icons/fa6";
 // import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom';
+import { getFullName } from '../../Helpers/AuthHelper';
 // eslint-disable-next-line react/prop-types
 export default function Sidebar() {
     //* LANG 
@@ -23,7 +24,7 @@ export default function Sidebar() {
     }
 
     const role = getRole();
-
+    const name = getFullName();
     const sidebarData = [
         {
             title: t('Main'),
@@ -74,7 +75,7 @@ export default function Sidebar() {
                 to='/profile'
                 className={classes.profile}>
                 <img src={pro} alt=""></img>
-                <p>Jameela Ahmed</p>
+                <p>{name}</p>
             </Link>
             <ul>
                 {sidebarData.map((item) => (

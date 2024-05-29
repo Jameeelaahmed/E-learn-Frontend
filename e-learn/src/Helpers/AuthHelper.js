@@ -13,3 +13,7 @@ export function getUserName() {
 export function getEmail() {
     return localStorage.getItem('email');
 }
+
+export function getFullName() {
+    return localStorage.getItem('fullName');
+}

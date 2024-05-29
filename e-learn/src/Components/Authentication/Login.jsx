@@ -34,19 +34,20 @@ export default function Login() {
                 // Successful login
                 console.log('Login successful');
                 const token = response.data.token;
-                const role = response.data.roles[0]
+                const role = response.data.role;
                 const userName = response.data.userName;
                 const email = response.data.email;
+                const fullName = response.data.fullName;
                 localStorage.setItem('token', token);
                 localStorage.setItem('role', role);
                 localStorage.setItem('userName', userName);
                 localStorage.setItem('email', email);
-
+                localStorage.setItem('fullName', fullName);
                 // console.log(role);
                 console.log(localStorage.getItem(role));
-                if (localStorage.getItem('role') === 'Staff') {
+                if (role === 'Staff' || role === 'Admin') {
                     navigate('/InsMain');
-                } else if (localStorage.getItem('role') === 'Student') {
+                } else if (role === 'Student') {
                     navigate('/stuMain');
                 }
 

@@ -4,6 +4,7 @@ import i18n from '../../i18n';
 import Logo from '../Logo/Logo';
 import { httpRequest } from '../../HTTP';
 import { useNavigate } from 'react-router-dom';
+import {getAuthToken} from '../../Helpers/AuthHelper';
 
 export default function Header({ opened }) {
     const { i18n } = useTranslation();
@@ -20,14 +21,15 @@ export default function Header({ opened }) {
 
     async function HandleLogOut() {
         try{
-            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/LogOut', null, null);
+            const token = getAuthToken();
+            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/LogOut', token, null);
             if (response.statusCode === 200) {
-                console.log('Logout successful');
                 localStorage.removeItem('token');
                 localStorage.removeItem('role');
                 localStorage.removeItem('userName');
                 localStorage.removeItem('email');
-                navigate('/');
+                console.log('Logout successful');
+                navigate('/auth');
             } else {
                 console.log(response);
             }
@@ -57,9 +59,9 @@ export default function Header({ opened }) {
                     <a href="">
                         <i className={`${"fa-solid fa-bell"} ${classes.icon}`}></i>
                     </a>
-                    <a href="" onClick={HandleLogOut}>
-                        <i className={`${"fa-solid fa-right-from-bracket"} ${classes.icon}`}></i>
-                    </a>
+                    <button onClick={HandleLogOut} className={classes.icon}>
+                        <i className="fa-solid fa-right-from-bracket"></i>
+                    </button>
                 </div>
             </header>
         </div>
