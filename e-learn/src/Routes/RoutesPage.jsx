@@ -17,7 +17,7 @@ import AssignmentDetails from '../Components/Assignments/AssignmentDetails';
 import AssignmentsResponsesList from '../Components/Assignments/AssignmentResponsesList';
 import Participants from '../Components/Participants/Paricipants';
 // import StudentMain from '../Pages/MainPageStudent/StudentMain';
-import StuMain from '../Components/StuMain/StuMain';
+import StuMain from '../Pages/MainPageSTU/StuMain';
 
 // Role-based route component
 function RoleBasedRoutes() {
