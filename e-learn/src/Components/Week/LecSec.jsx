@@ -2,9 +2,11 @@ import classes from './LecSec.module.css';
 import * as FaIcons from "react-icons/fa6";
 import { useState } from 'react';
 
-export default function LecSec({ materialType, onDelete }) {
+export default function LecSec({ role, materialType, onDelete }) {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [openFiles, setOpenFiles] = useState(false);
+
+    const isInstructor = role === 'Staff';
 
     const handleFileChange = (event) => {
         setSelectedFiles([...selectedFiles, ...event.target.files]);
@@ -24,9 +26,11 @@ export default function LecSec({ materialType, onDelete }) {
             <div className={`${classes.lec_sec} ${openFiles ? classes.active : ''}`}>
                 <p>{materialType}</p>
                 <div className={classes.icons}>
-                    <label htmlFor="fileInput" className={classes.customFileInput}>
-                        <FaIcons.FaCirclePlus className={classes.leftIcon} />
-                    </label>
+                    {isInstructor &&
+                        <label htmlFor="fileInput" className={classes.customFileInput}>
+                            <FaIcons.FaCirclePlus className={classes.leftIcon} />
+                        </label>
+                    }
                     <FaIcons.FaCaretDown className={classes.icon} onClick={toggleOpenFiles} />
                 </div>
             </div>

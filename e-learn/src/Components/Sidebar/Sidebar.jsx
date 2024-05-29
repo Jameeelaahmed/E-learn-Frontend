@@ -28,7 +28,7 @@ export default function Sidebar() {
         {
             title: t('Main'),
             icon: <FaIcons.FaHouse className={classes.icon} />,
-            link: role === 'Staff' ? 'InsMain' : 'stuMain'
+            link: role === 'Staff' ? '/InsMain' : '/stuMain'
         },
         {
             title: t('Groups'),
