@@ -53,10 +53,10 @@ export default function Weeks({ role }) {
                         {openWeeks[weekNum] && (
                             <div className={classes.week_content}>
                                 <div className={classes.main}>
-                                    <LecSec onDelete={() => handleDelete(weekNum)} materialType={`${t("Lecture")} ${weekNum + 1}`} weeknum={weekNum} />
+                                    <LecSec role={role} onDelete={() => handleDelete(weekNum)} materialType={`${t("Lecture")} ${weekNum + 1}`} weeknum={weekNum} />
                                 </div>
                                 <div className={classes.main}>
-                                    <LecSec onDelete={() => handleDelete(weekNum)} materialType={`${t("Section")} ${weekNum + 1}`} />
+                                    <LecSec role={role} onDelete={() => handleDelete(weekNum)} materialType={`${t("Section")} ${weekNum + 1}`} />
                                 </div>
                             </div>
                         )}

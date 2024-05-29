@@ -44,10 +44,10 @@ export default function Login() {
 
                 // console.log(role);
                 console.log(localStorage.getItem(role));
-                if (localStorage.getItem(role) === 'Staff') {
-                    navigate('InsMain');
-                } else if (localStorage.getItem(role) === 'Student') {
-                    navigate('stuMain');
+                if (localStorage.getItem('role') === 'Staff') {
+                    navigate('/InsMain');
+                } else if (localStorage.getItem('role') === 'Student') {
+                    navigate('/stuMain');
                 }
 
             } else {
