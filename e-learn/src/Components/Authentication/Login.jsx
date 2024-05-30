@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import classes from './authentication.module.css';
 import FormContainer from './FormContainer';
 import { useTranslation } from 'react-i18next';
@@ -11,15 +11,18 @@ export default function Login() {
     const email = useRef();
     const password = useRef();
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
 
     async function handleSubmit(event) {
         event.preventDefault();
+        setIsLoading(true); // Set loading state to true
 
         const username = email.current.value;
         const userPassword = password.current.value;
 
         if (!username || !userPassword) {
             console.error('Username and password are required');
+            setIsLoading(false); // Reset loading state
             return;
         }
 
@@ -46,6 +49,7 @@ export default function Login() {
                 // console.log(role);
                 console.log(localStorage.getItem(role));
                 if (role === 'Staff' || role === 'Admin') {
+                    console.log('Staff or Admin');
                     navigate('/InsMain');
                 } else if (role === 'Student') {
                     navigate('/stuMain');
@@ -59,6 +63,8 @@ export default function Login() {
         } catch (error) {
             // Handle any errors here
             console.log('An error occurred:', error);
+        } finally {
+            setIsLoading(false); // Reset loading state
         }
     }
 
@@ -85,7 +91,12 @@ export default function Login() {
                             ref={password}
                         />
                     </div>
-                    <input type="submit" value="تسجيل دخول" />
+                    <input
+                        type="submit"
+                        value={isLoading ? 'جاري التحميل...' : 'تسجيل دخول'}
+                        className={classes.input}
+                        disabled={isLoading}
+                    />
                     <div className={classes.forget}>
                         <p>هل نسيت كلمة المرور؟</p>
                         <Link to="forgetpassword">نسيت كلمة المرور</Link>
