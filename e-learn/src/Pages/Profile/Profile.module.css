@@ -1,4 +1,4 @@
-.profile{
+.profile {
     padding: 25px;
     background-color: var(--light-grey);
     width: 100%;
@@ -7,13 +7,13 @@
     box-shadow: var(--main-arabic-shadow);
 }
 
-.title{
+.title {
     color: var(--main-color);
     font-weight: bold;
     font-size: 18px;
 }
 
-.box{
+.box {
     border: 2px solid var(--main-color);
     border-radius: 10px;
     padding: 10px;
@@ -22,47 +22,51 @@
     align-items: center; */
 }
 
-.box:not(:last-child){
+.box:not(:last-child) {
     margin-bottom: 15px;
 }
 
-.box .row{
+.box .row {
     display: flex;
     justify-content: space-around;
     margin: 15px 0;
 }
 
-.data{
+.data {
     width: 40%;
 }
 
 
-.label{
+.label {
     color: var(--main-color);
     margin-bottom: 8px;
 }
 
-.profile img{
+.image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile img {
     width: 100px;
     height: 100px;
     border-radius: 12px;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
     margin-bottom: 15px;
 }
 
-.password_container{
+.password_container {
     display: flex;
     justify-content: space-between;
 }
 
-.password{
+.password {
     display: flex;
     flex-direction: column;
 }
 
-.edit{
+.edit {
     padding: 10px 15px;
     border: 2px dashed var(--main-color);
     border-radius: 10px;
@@ -70,7 +74,7 @@
     cursor: pointer;
 }
 
-.input{
+.input {
     padding: 9px 10PX;
     background-color: var(--light-grey);
     /* font-size: 15px; */
@@ -79,19 +83,19 @@
     border-radius: 20px;
     border: none;
     box-shadow: var(--inset-input-shadow);
-    border:1px solid var(--main-color);
-    width:20%;
+    border: 1px solid var(--main-color);
+    width: 20%;
 }
 
-.input:not(:last-child){
+.input:not(:last-child) {
     margin-bottom: 10px;
 }
 
-.input:focus{
+.input:focus {
     outline: none;
 }
 
-.button{
+.button {
     margin-top: 10px;
     padding: 10px 15px;
     background-color: var(--main-color);
@@ -102,79 +106,80 @@
     cursor: pointer;
 }
 
-.button:hover{
+.button:hover {
     background-color: #104454;
 }
 
-.warning{
+.warning {
     margin-top: 10px;
     color: rgb(218, 0, 0);
     font-size: 14px;
 }
 
-[dir="ltr"] .password_button{
+[dir="ltr"] .password_button {
     margin-right: 10px;
 }
-[dir="rtl"] .password_button{
+
+[dir="rtl"] .password_button {
     margin-left: 10px;
 }
 
 .email_container {
-    width:40% ;
+    width: 40%;
 }
 
-.email_container label{
+.email_container label {
     color: var(--main-color);
 }
 
-.email{
+.email {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.add_email{
+.add_email {
     padding: 2px 10px;
     background-color: var(--light-grey);
     box-shadow: var(--main-shadow);
     border-radius: 8px;
-    border:2px solid var(--secondry-color);
-    cursor:pointer;
+    border: 2px solid var(--secondry-color);
+    cursor: pointer;
     color: var(--main-color);
     transition: 0.4s;
     margin-bottom: 15px;
 }
 
-.add_email:hover{
+.add_email:hover {
     background-color: var(--main-color);
     color: white;
 }
 
 
-@media (max-width:768px){
-    .box .row{
+@media (max-width:768px) {
+    .box .row {
         flex-direction: column;
         /* align-items: center; */
     }
 
-    .data{
+    .data {
         padding-bottom: 10px;
         border: 1px solid var(--main-color);
-        border-radius:10px;
+        border-radius: 10px;
         padding: 8px;
         margin-bottom: 10px;
         width: 100%;
     }
 
     .email_container {
-        width:100% ;
+        width: 100%;
     }
 
-    .input{
+    .input {
         width: 50%;
     }
 }
 
-.email_input{
+.email_input {
     width: 100%;
 }

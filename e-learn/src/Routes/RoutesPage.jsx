@@ -8,7 +8,7 @@ import Error from '../Pages/error404/Error';
 import RootLayout from './RootLayout';
 import InsMain from '../Pages/MainPageINS/InsMain';
 import PrivateRoutes from '../utils/privateRoute';
-import Voting from '../Components/Voting/Voting';
+import Voting from '../Pages/Voting/Voting';
 import Groups from '../Pages/Groups/Groups';
 import CourseDetails from '../Pages/CourseDetails/CourseDetails';
 import Weeks from '../Components/Weeks/Weeks';
@@ -16,6 +16,7 @@ import Assignments from '../Pages/Assignments/Assignments';
 import AssignmentDetails from '../Components/Assignments/AssignmentDetails';
 import AssignmentsResponsesList from '../Components/Assignments/AssignmentResponsesList';
 import Participants from '../Components/Participants/Paricipants';
+import Profile from '../Pages/Profile/Profile';
 // import StudentMain from '../Pages/MainPageStudent/StudentMain';
 import StuMain from '../Pages/MainPageSTU/StuMain';
 
@@ -41,6 +42,7 @@ function getRole() {
 
 const instructorRoutes = [
     { path: 'InsMain', element: <InsMain /> },
+    { path: 'profile', element: <Profile /> },
     { path: 'groups', element: <Groups /> },
     {
         path: ':groupId',
@@ -66,7 +68,6 @@ const studentRoutes = [
             { path: ':groupId', element: <Weeks role={getRole()} /> },
             { path: 'assignments', element: <Assignments /> },
             { path: 'assignments/:assignmentId', element: <AssignmentDetails /> },
-            { path: ':assignmentId/responses-list', element: <AssignmentsResponsesList /> },
             { path: 'participants', element: <Participants /> }
         ]
     },

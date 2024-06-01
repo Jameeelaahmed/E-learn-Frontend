@@ -5,6 +5,7 @@
     box-shadow: var(--grey-shadow);
     padding: 20px;
     z-index: 100;
+    height: fit-content;
 }
 
 [dir="rtl"] .assignment_details {

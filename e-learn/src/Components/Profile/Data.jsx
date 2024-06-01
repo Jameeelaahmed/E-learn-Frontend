@@ -1,10 +1,10 @@
-import classes from './Profile.module.css'
+import classes from '../../Pages/Profile/Profile.module.css'
 
-export default function Data({label,name}){
-    return(
+export default function Data({ label, name }) {
+    return (
         <div className={classes.data}>
             <p className={classes.label}>{label}</p>
             <p className={classes.text}>{name}</p>
-        </div> 
+        </div>
     )
 }

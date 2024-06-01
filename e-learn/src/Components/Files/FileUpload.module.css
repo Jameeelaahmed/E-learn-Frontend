@@ -1,24 +1,57 @@
-.upload_card{
+.wid {
+    width: 100%;
+}
+
+.upload_card {
     width: 100%;
     height: 150px;
     border: 3px dashed #cbd5e0;
     background-color: #edf2f7;
-    border-radius:10px;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.customFileInput{
+
+.customFileInput {
     display: inline-block;
     cursor: pointer;
     background-color: transparent;
     border: none;
 }
 
-.fileInput{
+.fileInput {
     display: none;
 }
+
+.space {
+    margin-top: 10px;
+}
+
+.upload_click {
+    /* width: 100%; */
+}
+
+.submit {
+    width: 100%;
+    padding: 0.7em 1.7em;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 0.5em;
+    margin-top: 10px;
+    border: 2px solid var(--main-color);
+    background-color: #ccd8df;
+    color: var(--main-color);
+    transition: 0.4s;
+}
+
+.submit:hover {
+    background-color: var(--main-color);
+    color: #ccd8df;
+}
+
+
 /* 
 .browse{
     

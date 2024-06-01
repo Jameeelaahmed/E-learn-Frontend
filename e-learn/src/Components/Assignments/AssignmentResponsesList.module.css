@@ -61,6 +61,11 @@
     overflow-x: scroll;
     overflow-y: scroll;
     height: 550px;
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+    max-height: 400px;
+    /* Set a max height for the table container */
+    position: relative;
 }
 
 .table {
@@ -84,6 +89,13 @@
     font-weight: bold;
     text-transform: uppercase;
     border-top-left-radius: 20px;
+    position: sticky;
+    top: 0;
+    /* Keep the header at the top */
+    background-color: white;
+    /* Ensure the background is opaque */
+    z-index: 1;
+    /* Ensure the header is above the table rows */
 }
 
 .table th {

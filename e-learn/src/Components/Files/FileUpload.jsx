@@ -1,13 +1,17 @@
 // FileUpload.js
-
-import React, { useState, useRef ,useEffect} from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import FilesList from "./FilesList";
 import classes from "./FileUpload.module.css";
 import UpButton from "../Button/UpButton";
-
+import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 export default function FileUpload({ collectFiles }) {
     const { t } = useTranslation();
+    const { assignmentId } = useParams();
+    const location = useLocation();
+    const path = location.pathname;
+    console.log(path);
     const [selectedFiles, setSelectedFiles] = useState([]);
     const fileInputRef = useRef(null);
 
@@ -33,7 +37,7 @@ export default function FileUpload({ collectFiles }) {
 
     return (
         <>
-            <div className={classes.upload_card}>
+            {/* <div className={classes.upload_card}>
                 <UpButton onClick={handleButtonClick}>{t("upload")}</UpButton>
                 <input
                     ref={fileInputRef}
@@ -43,8 +47,28 @@ export default function FileUpload({ collectFiles }) {
                     onChange={handleFileChange}
                     className={classes.fileInput}
                 />
-            </div>
-            <FilesList files={selectedFiles} onDelete={handleDelete} />
+            </div> */}
+            {/* <FilesList files={selectedFiles} onDelete={handleDelete} /> */}
+
+            {(path === `/groups/assignments/${assignmentId}`) &&
+                <div className={classes.wid}>
+                    <FilesList files={selectedFiles} onDelete={handleDelete} />
+                    <div className={classes.upload_click}>
+                        <div className={`${classes.space}`}>
+                            <UpButton classwid="wid" onClick={handleButtonClick}>{t("upload")}</UpButton>
+                            <input
+                                ref={fileInputRef}
+                                id="fileInput"
+                                type="file"
+                                multiple
+                                onChange={handleFileChange}
+                                className={classes.fileInput}
+                            />
+                        </div>
+                        <button className={classes.submit}>{t("submit")}</button>
+                    </div>
+                </div>
+            }
         </>
     );
 };

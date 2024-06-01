@@ -1,12 +1,15 @@
-.files_list{
-    background-color:var(--light-grey);
-    border-radius:10px ;
+.files_list {
+    background-color: var(--light-grey);
+    border-radius: 10px;
     border: 3px dashed #cbd5e0;
     padding: 10px;
     margin-top: 10px;
+    height: 140px;
+    overflow-y: scroll;
+    width: 100%;
 }
 
-.file{
+.file {
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -16,11 +19,11 @@
     border-radius: 10px;
 }
 
-.file:not(:last-child){
+.file:not(:last-child) {
     margin-bottom: 10px;
 }
 
-.button{
+.button {
     padding: 5px 8px;
     /* background-color: var(--main-color); */
     background-color: transparent;
@@ -29,5 +32,20 @@
     color: var(--main-color);
     cursor: pointer;
     border: 1px solid var(--main-color);
+    word-break: break-all;
 }
 
+.delete {
+    color: var(--main-color);
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+[dir="rtl"] .delete {
+    margin-right: 10px;
+}
+
+[dir="ltr"] .delete {
+    margin-left: 10px;
+}

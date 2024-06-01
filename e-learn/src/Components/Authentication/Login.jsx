@@ -46,15 +46,12 @@ export default function Login() {
                 localStorage.setItem('userName', userName);
                 localStorage.setItem('email', email);
                 localStorage.setItem('fullName', fullName);
-                // console.log(role);
-                console.log(localStorage.getItem(role));
-                if (role === 'Staff' || role === 'Admin') {
-                    console.log('Staff or Admin');
-                    navigate('/InsMain');
-                } else if (role === 'Student') {
-                    navigate('/stuMain');
-                }
 
+                if (role === 'Student') {
+                    navigate('/stuMain');
+                } else if (role === 'Staff' || role === 'Admin') {
+                    navigate('/InsMain');
+                }
             } else {
                 // Unsuccessful login
                 console.log(response);

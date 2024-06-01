@@ -13,15 +13,21 @@ export default function CourseDetails() {
     const path = location.pathname;
     const { assignmentId } = useParams();
     // console.log(path);
-
+    const role = getRole();
+    function getRole() {
+        return localStorage.getItem('role');
+    }
     return (
         <div className={classes.course_details}>
             <GroupNavCardRespo />
             <Outlet />
             <div className={classes.col}>
                 <GroupNavCard />
-                {path === '/groups/assignments' && <AddAssignment />}
-                {path === `/groups/assignments/${assignmentId}` && <ShowRespones />}
+                {role === 'Staff' && (
+                    (path === '/groups/assignments' && <AddAssignment />) ||
+                    (path === `/groups/assignments/${assignmentId}` && <ShowRespones />))
+                }
+                {role === 'Student' && (path === `/groups/assignments/${assignmentId}` && <AddWork />)}
             </div>
         </div>
     );

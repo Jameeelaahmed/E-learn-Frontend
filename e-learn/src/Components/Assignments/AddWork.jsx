@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import classes from './AddWork.module.css';
 import Button from '../Button/Button';
 import { useTranslation } from 'react-i18next';
+import FileUpload from '../Files/FileUpload';
 
 export default function AddWork() {
     const { t } = useTranslation();
@@ -23,25 +24,7 @@ export default function AddWork() {
 
     return (
         <div className={classes.add_work}>
-            <input
-                type="file"
-                ref={fileInputRef}
-                style={{ display: 'none' }}
-                onChange={handleFileChange}
-                multiple
-            />
-            {selectedFiles.length > 0 && (
-                <div>
-                    <ul>
-                        {selectedFiles.map((file, index) => (
-                            <li key={index}>
-                                <button onClick={() => openFileInBrowser(file)}>{file.name}</button>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-            <Button text={t("add")} onClick={handleAddButtonClick} />
+            <FileUpload collectFiles={setSelectedFiles} ref={fileInputRef} onChange={handleFileChange} />
         </div>
     );
 }

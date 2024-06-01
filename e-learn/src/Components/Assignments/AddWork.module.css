@@ -1,5 +1,6 @@
-.add_work{
-    width: 275px;
+.add_work {
+    width: 100%;
+    /* width: 275px; */
     background-color: var(--light-grey);
     padding: 15px 30px;
     margin-top: 30px;
@@ -11,11 +12,11 @@
     align-items: center;
 }
 
-.add_work input{
+.add_work input {
     display: none;
 }
 
-.customFileInput{
+.customFileInput {
     display: inline-block;
     cursor: pointer;
     background-color: transparent;

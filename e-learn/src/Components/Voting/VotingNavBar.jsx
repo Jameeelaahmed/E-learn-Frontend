@@ -6,14 +6,19 @@ import VotingModal from './VotingModal';
 import { log } from '../../log';
 import Delete from '../Button/Delete';
 import Edit from '../Button/Edit';
+import { useLocation } from 'react-router-dom';
 export default function VSNavBar() {
+    const role = getRole();
+    function getRole() {
+        return localStorage.getItem('role');
+    }
     log('<vsNavbar /> rendered');
     const { t } = useTranslation();
     const addVSDialog = useRef();
     function handleOpenAddVSModal() {
         addVSDialog.current.open();
     }
-    const [isMobile, setIsMobile] = useState(false); 
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const checkScreenSize = () => {
@@ -26,23 +31,30 @@ export default function VSNavBar() {
         };
     }, []);
 
+    let wid = ""
+    if (role === "Staff") {
+        wid = "changeWidth";
+    }
+
 
     return (
         <div className={isMobile ? classes.vs_navigation_bar_responsive : classes.vs_navigation_bar}>
             <VotingModal
                 ref={addVSDialog}
             />
-            <div
-                className={classes.add_survey}
-                onClick={handleOpenAddVSModal}>
-                <FaIcons.FaPlus
-                    className={classes.icon} />
-                <p>{t("add-voting")}</p>
-            </div>
+            {role === 'Staff' &&
+                <div
+                    className={classes.add_survey}
+                    onClick={handleOpenAddVSModal}>
+                    <FaIcons.FaPlus
+                        className={classes.icon} />
+                    <p>{t("add-voting")}</p>
+                </div>
+            }
             <ul className={isMobile ? classes.titles_wrapper : ""}>
                 {/* {returnFormData.map((data) => ( */}
                 <div className={classes.box_wrapper}>
-                    <li >
+                    <li className={wid} >
                         {isMobile ? (
                             <div className={classes.box}>
                                 <p>kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk</p>
@@ -58,10 +70,13 @@ export default function VSNavBar() {
                             </div>
                         )}
                     </li>
-                    <div className={classes.edit_delete}>
-                        <Edit icon={FaIcons.FaPenClip} />
-                        <Delete />
-                    </div>
+                    {role === 'Staff' && (
+                        <div className={classes.edit_delete}>
+                            <Edit icon={FaIcons.FaPenClip} />
+                            <Delete />
+                        </div>)
+                    }
+
                 </div>
                 {/* ))} */}
             </ul>

@@ -72,7 +72,7 @@ export default function Sidebar() {
                 className={classes.icon}
                 onClick={handleClose} />
             <Link
-                to='/profile'
+                to='profile'
                 className={classes.profile}>
                 <img src={pro} alt=""></img>
                 <p>{name}</p>
