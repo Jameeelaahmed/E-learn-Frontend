@@ -16,6 +16,12 @@ export default function AssignmentDetails() {
         points: "",
         attachements: []
     })
+
+    const role = getRole();
+    function getRole() {
+        return localStorage.getItem('role');
+    }
+
     function handleEdit() {
         setisEdit(prev => (!prev))
     }
@@ -66,10 +72,12 @@ export default function AssignmentDetails() {
                     </div>
                 </form>
             </div>
-            <div className={classes.button_container}>
-                {isEdit ? <Button onSelect={handleSave} text={t("save")} /> : <Button onSelect={handleEdit} text={t("edit")} />}
-                <DeleteButton text={t("delete")} delete_button={classes.delete_button}></DeleteButton>
-            </div>
+            {role === 'Staff' &&
+                <div className={classes.button_container}>
+                    {isEdit ? <Button onSelect={handleSave} text={t("save")} /> : <Button onSelect={handleEdit} text={t("edit")} />}
+                    <DeleteButton text={t("delete")} delete_button={classes.delete_button}></DeleteButton>
+                </div>
+            }
         </div>
     )
 }

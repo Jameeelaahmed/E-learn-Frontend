@@ -1,20 +1,24 @@
-.course_details{
+.course_details {
     display: flex;
     width: 100%;
     /* justify-content: flex-end; */
 }
 
-.col{
+.col {
+    width: 275px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     /* align-items: center; */
-    width: fit-content;
 }
 
-@media (max-width:930px){
-    .course_details{
+@media (max-width:930px) {
+    .course_details {
         flex-direction: column;
         align-items: center;
+    }
+
+    .col {
+        width: 100%;
     }
 }

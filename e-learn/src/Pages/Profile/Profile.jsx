@@ -1,8 +1,9 @@
-import Data from './Data'
+import Data from '../../Components/Profile/Data'
 import classes from './Profile.module.css'
 import { useState, useRef } from 'react';
+import img from '../../assets/avatar.jpg'
 import { useTranslation } from 'react-i18next'
-import Button from '../Button/Button';
+import Button from '../../Components/Button/Button';
 export default function Profile() {
     const { t } = useTranslation();
     const get_old_Password = useRef()
@@ -64,7 +65,9 @@ export default function Profile() {
     }
     return (
         <div className={classes.profile}>
-            <img src="../../assets/avatar.jpg" alt="" />
+            <div className={classes.image}>
+                <img src={img} alt="" />
+            </div>
             <div className={classes.box}>
                 <p className={classes.title}>{t("Personel-Information")}</p>
                 <div className={classes.row}>
@@ -79,7 +82,7 @@ export default function Profile() {
                     <Data label={t("Nationality")} name="Egyptian" />
                     <div className={classes.email_container}>
                         {/* <label htmlFor="email">{t("email")}</label> */}
-                            {addEmail ? <button onClick={handleSaveEmail} className={classes.add_email}>{t("save")}</button>: <button onClick={handleAddEmail}  className={classes.add_email}>{t("add-email")}</button>}
+                        {addEmail ? <button onClick={handleSaveEmail} className={classes.add_email}>{t("save")}</button> : <button onClick={handleAddEmail} className={classes.add_email}>{t("add-email")}</button>}
                         <div className={classes.email}>
                             {addEmail ? <input className={`${classes.input} ${classes.email_input}`} type="email" ref={emailRef} /> : <Data name={email} />}
                         </div>
@@ -94,7 +97,7 @@ export default function Profile() {
                 </div>
                 <div className={classes.row}>
                     <Data label={t("level")} name="Senior" />
-                    <Data label={t("department")} name="Computer Science"/>
+                    <Data label={t("department")} name="Computer Science" />
                 </div>
             </div>
             <div className={classes.box}>
