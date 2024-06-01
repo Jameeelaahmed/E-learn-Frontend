@@ -5,17 +5,19 @@ import { useTranslation } from 'react-i18next';
 import { httpRequest } from '../../HTTP';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import '../../App.css';
 export default function Login() {
     const { t } = useTranslation();
     const email = useRef();
     const password = useRef();
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     async function handleSubmit(event) {
         event.preventDefault();
         setIsLoading(true); // Set loading state to true
+        setError(null); // Reset error state
 
         const username = email.current.value;
         const userPassword = password.current.value;
@@ -56,10 +58,12 @@ export default function Login() {
                 // Unsuccessful login
                 console.log(response);
                 console.log(requestBody);
+                setError('حدث خطأ اثناء عملية تسجيل الدخول, برجاء المحاولة مرة أخرى');
             }
         } catch (error) {
             // Handle any errors here
             console.log('An error occurred:', error);
+            setError('حدث خطأ اثناء عملية تسجيل الدخول, برجاء المحاولة مرة أخرى');
         } finally {
             setIsLoading(false); // Reset loading state
         }
@@ -86,14 +90,15 @@ export default function Login() {
                             className={classes.input}
                             type="password"
                             ref={password}
-                        />
+                            />
                     </div>
+                    {error && <p className='error'>{error}</p>}
                     <input
                         type="submit"
                         value={isLoading ? 'جاري التحميل...' : 'تسجيل دخول'}
                         className={classes.input}
                         disabled={isLoading}
-                    />
+                        />
                     <div className={classes.forget}>
                         <p>هل نسيت كلمة المرور؟</p>
                         <Link to="forgetpassword">نسيت كلمة المرور</Link>
