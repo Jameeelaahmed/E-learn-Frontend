@@ -61,6 +61,7 @@ const instructorRoutes = [
 const studentRoutes = [
     { path: 'stuMain', element: <StuMain /> },
     { path: 'groups', element: <Groups /> },
+    { path: 'profile', element: <Profile /> },
     {
         path: ':groupId',
         element: <CourseDetails />,

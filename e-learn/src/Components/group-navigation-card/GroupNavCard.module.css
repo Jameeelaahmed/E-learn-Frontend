@@ -78,9 +78,17 @@
 }
 
 .group_navigation_card .group_sections a.active::before {
-    width: 80px;
     z-index: -1;
 }
+
+[dir='ltr'] .group_navigation_card .group_sections a.active::before {
+    width: 120px;
+}
+
+[dir='rtl'] .group_navigation_card .group_sections a.active::before {
+    width: 80px;
+}
+
 
 .group_navigation_card .group_sections a.active {
     color: white;

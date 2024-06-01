@@ -5,6 +5,8 @@
     height: fit-content;
     border-radius: 10px;
     box-shadow: var(--main-arabic-shadow);
+    z-index: 1000;
+    position: relative;
 }
 
 .title {

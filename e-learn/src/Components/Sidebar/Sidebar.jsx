@@ -37,13 +37,13 @@ export default function Sidebar() {
             link: 'groups'
         },
         {
-            title: t('Survey'),
+            title: t('Voting'),
             icon: <FaIcons.FaSquarePollVertical className={classes.icon} />,
             link: '/voting'
         },
         {
-            title: t('Voting'),
-            icon: <FaIcons.FaSquarePollVertical className={classes.icon} />,
+            title: t('Survey'),
+            icon: <FaIcons.FaClipboard className={classes.icon} />,
             link: '/survey'
         },
         {

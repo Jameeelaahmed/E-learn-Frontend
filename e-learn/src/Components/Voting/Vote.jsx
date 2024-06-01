@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import classes from './Vote.module.css';
-
+import VotingListModal from './VotingResponsesModal'
+import { useRef } from 'react';
 export default function Vote() {
     const [options, setOptions] = useState([
         { id: 1, percentage: 0 },
@@ -21,6 +22,11 @@ export default function Vote() {
         setOptions(newOptions);
     };
 
+    const ViewResponses = useRef();
+    function handleOpenResponses() {
+        ViewResponses.current.open();
+    }
+
     return (
         <div className={classes.question_container}>
             <p className={classes.description}>Description</p>
@@ -36,6 +42,10 @@ export default function Vote() {
                     </div>
                 </label>
             ))}
+            <div className={classes.voting_list}>
+                <VotingListModal ref={ViewResponses} />
+                <p onClick={handleOpenResponses}>Open Responses</p>
+            </div>
             <div className="date_question_container">
                 <p>Start Date: Date</p>
                 <p>End Date: Date</p>

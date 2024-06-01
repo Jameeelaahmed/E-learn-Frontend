@@ -6,7 +6,7 @@ import * as FaIcons from 'react-icons/fa6';
 import { useState, useRef } from 'react';
 
 export default function AssignmentsResponsesList() {
-    const initialMarks = responses.map(() => false); // Initialize marks state for each response
+    const initialMarks = responses.map(() => false);
     const [mark, setMark] = useState(initialMarks);
     const [searchTerm, setSearchTerm] = useState('');
     const { t } = useTranslation();
@@ -18,11 +18,10 @@ export default function AssignmentsResponsesList() {
         setMark(newMarks);
     }
 
-    var markValue = t("mark");
+    let markValue = t("mark");
 
     function handleSave(index) {
-        var markValue = getMark.current.value;
-        console.log(markValue);
+        let markValue = getMark.current.value;
         const newMarks = [...mark];
         newMarks[index] = false;
         setMark(newMarks);
@@ -32,6 +31,12 @@ export default function AssignmentsResponsesList() {
         response.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+    // const [activeSearch, setActiveSearch] = useState(false);
+
+    // function handleSearchActive() {
+    //     setActiveSearch(true);
+    // }
+
     return (
         <div className={classes.track_responses}>
             <div className={classes.tracking}>
@@ -40,13 +45,16 @@ export default function AssignmentsResponsesList() {
                 <a href="">{t("gradded")}</a>
                 <a href="">{t('all')}</a>
             </div>
-            <input
-                type="text"
-                placeholder={t("search")}
-                value={searchTerm}
-                onChange={e => setSearchTerm(e.target.value)}
-                className={classes.search_input}
-            />
+            <div className={classes.search}>
+                <input
+                    type="text"
+                    placeholder={t("search")}
+                    value={searchTerm}
+                    onChange={e => setSearchTerm(e.target.value)}
+                    className={`${classes.search_input}`}
+                // onFocus={handleSearchActive}
+                />
+            </div>
             <div className={classes.table_wrapper}>
                 <table className={classes.table}>
                     <thead>
@@ -71,7 +79,7 @@ export default function AssignmentsResponsesList() {
                                     {mark[index] ? (
                                         <input type='number' ref={getMark} placeholder={t('enter-mark')} className={classes.input} />
                                     ) : (
-                                        <Button onSelect={() => handleMark(index)} text={markValue} />
+                                        <Button onSelect={() => handleMark(index)} text={`${markValue}`} />
                                     )}
                                     {mark[index] && (
                                         <button onClick={() => handleSave(index)} className={classes.button}>
