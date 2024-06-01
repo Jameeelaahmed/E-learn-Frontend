@@ -23,6 +23,7 @@
 }
 
 .tracking a {
+    text-align: center;
     padding: 20px;
     background-color: var(--light-grey);
     color: var(--main-color);
@@ -62,9 +63,6 @@
     overflow-y: scroll;
     height: 550px;
     overflow-y: auto;
-    /* Enable vertical scrolling */
-    max-height: 400px;
-    /* Set a max height for the table container */
     position: relative;
 }
 
@@ -195,6 +193,38 @@
     color: white;
     box-shadow: none;
 }
+
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.search input {
+    width: 100px;
+    padding: 10px;
+    border-radius: 8px;
+    border-radius: 20px;
+    box-shadow: var(--inset-input-shadow);
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+    transition: 0.4s;
+    width: 250px;
+}
+
+/* .search input.active {} */
+
+.search input:focus {
+    outline: none;
+    transition: opacity 0.4s;
+}
+
+.search input:focus:placeholder {
+    opacity: 0;
+}
+
+
 
 /* ! TABLE */
 

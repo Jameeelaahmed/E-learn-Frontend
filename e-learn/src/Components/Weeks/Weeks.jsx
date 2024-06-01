@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useTranslation } from 'react-i18next'
 import { useParams } from "react-router-dom";
 export default function Weeks({ role }) {
-    const [add, setAdd] = useState([]);
+    const [addWeek, setAddWeek] = useState([]);
     const [openWeeks, setOpenWeeks] = useState([]);
     // const params = useParams();
     // params.groupId = parseInt(params.groupId);
@@ -15,12 +15,12 @@ export default function Weeks({ role }) {
     const isInstructor = role === 'Staff';
 
     function handleAdd() {
-        setAdd((prevAdd) => [...prevAdd, []]);
+        setAddWeek((prevAdd) => [...prevAdd, []]);
         setOpenWeeks((prevOpenWeeks) => [...prevOpenWeeks, false]); // Initialize all weeks as closed
     }
 
     function handleDelete(i) {
-        setAdd((prevAdd) => prevAdd.filter((_, index) => index !== i));
+        setAddWeek((prevAdd) => prevAdd.filter((_, index) => index !== i));
     }
 
     function handleOpen(weekIndex) {
@@ -42,7 +42,7 @@ export default function Weeks({ role }) {
                 </div>
             }
 
-            {add.map((week, weekNum) => {
+            {addWeek.map((week, weekNum) => {
                 return (
                     <Week key={weekNum}>
                         <WeekHead

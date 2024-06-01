@@ -11,8 +11,8 @@ import { useLocation } from "react-router-dom";
 export default function CourseDetails() {
     const location = useLocation();
     const path = location.pathname;
-    const { assignmentId } = useParams();
-    // console.log(path);
+    const { assignmentId, groupId } = useParams();
+    console.log(assignmentId, groupId);
     const role = getRole();
     function getRole() {
         return localStorage.getItem('role');
@@ -24,10 +24,10 @@ export default function CourseDetails() {
             <div className={classes.col}>
                 <GroupNavCard />
                 {role === 'Staff' && (
-                    (path === '/groups/assignments' && <AddAssignment />) ||
-                    (path === `/groups/assignments/${assignmentId}` && <ShowRespones />))
+                    (path === `assignments` && <AddAssignment />) ||
+                    (path === `assignments/${assignmentId}` && <ShowRespones />))
                 }
-                {role === 'Student' && (path === `/groups/assignments/${assignmentId}` && <AddWork />)}
+                {role === 'Student' && (path === `/assignments/${assignmentId}` && <AddWork />)}
             </div>
         </div>
     );

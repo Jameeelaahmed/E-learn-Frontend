@@ -8,10 +8,9 @@ import { useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 export default function FileUpload({ collectFiles }) {
     const { t } = useTranslation();
-    const { assignmentId } = useParams();
+    const { assignmentId, groupId } = useParams();
     const location = useLocation();
     const path = location.pathname;
-    console.log(path);
     const [selectedFiles, setSelectedFiles] = useState([]);
     const fileInputRef = useRef(null);
 
@@ -50,7 +49,7 @@ export default function FileUpload({ collectFiles }) {
             </div> */}
             {/* <FilesList files={selectedFiles} onDelete={handleDelete} /> */}
 
-            {(path === `/groups/assignments/${assignmentId}`) &&
+            {(path === `/${groupId}/assignments/${assignmentId}`) &&
                 <div className={classes.wid}>
                     <FilesList files={selectedFiles} onDelete={handleDelete} />
                     <div className={classes.upload_click}>

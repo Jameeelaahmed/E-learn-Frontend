@@ -3,7 +3,7 @@
     border: none;
     border-radius: 5px;
     font-weight: bold;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     cursor: pointer;
     color: var(--main-color);
     box-shadow: var(--main-shadow);
@@ -15,13 +15,13 @@
     outline: 2px solid var(--main-color);
 }
 
-[dir="ltr"] .button{
+[dir="ltr"] .button {
     box-shadow: var(--main-shadow);
-    letter-spacing: 5px;
+    letter-spacing: 1px;
 
 }
 
-[dir="rtl"] .button{
+[dir="rtl"] .button {
     box-shadow: var(--main-arabic-shadow);
 }
 
@@ -40,7 +40,7 @@
     top: 0;
     width: 0;
     height: 100%;
-    background-color:var(--main-color);
+    background-color: var(--main-color);
     transform: skewX(45deg);
     z-index: -1;
     transition: width 1000ms;

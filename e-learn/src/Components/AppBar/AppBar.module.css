@@ -1,20 +1,21 @@
-.app_bar{
+.app_bar {
     display: none;
 }
-@media(max-width:767px){
-    .app_bar{
+
+@media(max-width:767px) {
+    .app_bar {
         display: flex;
         position: fixed;
         bottom: 0;
         background-color: var(--main-color);
         width: 100vw;
         box-shadow: var(--grey-shadow);
-        z-index: 1000;
+        z-index: 100000000;
     }
 
-    .app_bar li{
+    .app_bar li {
         height: 5rem;
-        display:flex;
+        display: flex;
         justify-content: center;
         align-items: center;
         width: calc(100% / 7);
@@ -22,15 +23,15 @@
         color: var(--light-grey);
     }
 
-    .app_bar li:hover{
+    .app_bar li:hover {
         color: var(--main-color);
         background-color: var(--light-grey);
         /* border-radius: 50%; */
     }
 
     /* .app_bar li .icon */
-    
-    .app_bar .icon{
+
+    .app_bar .icon {
         margin: 15px;
         /* flex: 1; */
         font-size: 18px;
