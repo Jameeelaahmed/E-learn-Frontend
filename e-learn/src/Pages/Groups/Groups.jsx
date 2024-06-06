@@ -1,25 +1,17 @@
 import classes from './groups.module.css';
 import Group from '../../Components/Group/group';
-import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { httpRequest } from '../../HTTP';
 import { getAuthToken } from '../../Helpers/AuthHelper';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+
 export default function Groups() {
     const navigate = useNavigate();
-    const Loction = useLocation();
-    const path = Loction.pathname;
+    const location = useLocation();
     const { groupId } = useParams();
     const [group, setGroup] = useState([]); // Initialize group state
-    // console.log(path);
-    function handleGroupClick(id) {
-        navigate(`group${id}`);
-    };
-    function handleAssignmentClick(id) {
-        navigate(`assignment${id}`);
-    };
 
+    // Fetch groups from the API
     async function fetchGroups() {
         try {
             const token = getAuthToken();
@@ -34,11 +26,21 @@ export default function Groups() {
             console.log('An error occurred:', error);
         }
     }
+
     useEffect(() => {
-
         fetchGroups(); // Call fetchGroups when the component mounts
-
     }, []);
+
+    // Handle group click event
+    function handleGroupClick(id) {
+        navigate(`/groups/${id}`);
+    }
+
+    // Handle assignment click event
+    function handleAssignmentClick(id) {
+        navigate(`/groups/${groupId}/assignments/${id}`);
+    }
+
     const assignments = [
         {
             id: 1,
@@ -59,23 +61,23 @@ export default function Groups() {
 
     return (
         <ul className={classes.classes}>
-            {path === "/groups" &&
+            {location.pathname === "/groups" &&
                 group.map((item, index) => (
                     <Group
                         key={index}
                         subTitle={item.name}
                         insName={item.instructorName}
-                        onClick={() => handleGroupClick(item.id)}  // Ensure onClick is properly handled
+                        onClick={() => handleGroupClick(item.Id)} // Ensure onClick is properly handled
                     />
                 ))
             }
-            {path === `/${groupId}/assignments` &&
+            {location.pathname === `/groups/${groupId}/assignments` &&
                 assignments.map((item, index) => (
                     <Group
                         key={index}
                         subTitle={item.subTitle}
                         insName={item.insName}
-                        onClick={() => handleAssignmentClick(item.id)}  // Ensure onClick is properly handled
+                        onClick={() => handleAssignmentClick(item.id)} // Ensure onClick is properly handled
                     />
                 ))
             }

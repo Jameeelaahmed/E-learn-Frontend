@@ -38,15 +38,15 @@ export default function Login() {
             if (response.statusCode === 200) {
                 // Successful login
                 console.log('Login successful');
+                console.log(response);
                 const token = response.data.token;
                 const role = response.data.role;
                 const userName = response.data.userName;
-                const email = response.data.email;
                 const fullName = response.data.fullName;
+                
                 localStorage.setItem('token', token);
                 localStorage.setItem('role', role);
                 localStorage.setItem('userName', userName);
-                localStorage.setItem('email', email);
                 localStorage.setItem('fullName', fullName);
 
                 if (role === 'Student') {
