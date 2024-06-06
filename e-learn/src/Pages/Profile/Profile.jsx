@@ -19,6 +19,7 @@ export default function Profile() {
     const [emailSent, setEmailSent] = useState(false); // State for email confirmation message
     const [error, setError] = useState(''); // State for error message
     const [profile, setProfile] = useState({});
+    const [profilePictureUrl, setProfilePictureUrl] = useState(img);
 
     function handleChangePass() {
         setChangePassword(prev => !prev);
@@ -122,6 +123,10 @@ export default function Profile() {
             console.log('Profile fetched successfully');
             console.log(response);
             setProfile(response.data);
+            const profilePictureName = response.data.profilePictureName;
+            if(profilePictureName){
+                setProfilePictureUrl(`https://elearnapi.runasp.net/api/files/ViewFile/ProfilePictures/${profilePictureName}`);
+            }
         } else {
             console.log(response);
         }
@@ -139,7 +144,7 @@ export default function Profile() {
     return (
         <div className={classes.profile}>
             <div className={classes.image}>
-                <img src={img} alt="" />
+                <img src={profilePictureUrl} alt="Profile Picture" />
             </div>
             <div className={classes.box}>
                 <p className={classes.title}>{t("Personel-Information")}</p>

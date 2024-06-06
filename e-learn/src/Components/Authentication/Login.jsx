@@ -43,11 +43,13 @@ export default function Login() {
                 const role = response.data.role;
                 const userName = response.data.userName;
                 const fullName = response.data.fullName;
-                
+                const profilePicture = response.data.profilePictureName;
+
                 localStorage.setItem('token', token);
                 localStorage.setItem('role', role);
                 localStorage.setItem('userName', userName);
                 localStorage.setItem('fullName', fullName);
+                localStorage.setItem('profilePicture', profilePicture);
 
                 if (role === 'Student') {
                     navigate('/stuMain');
