@@ -3,16 +3,38 @@ import WeekHead from "../Week/WeekHead";
 import classes from "./Weeks.module.css";
 import LecSec from "../Week/LecSec";
 import * as FaIcons from "react-icons/fa6";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from 'react-i18next'
 import { useParams } from "react-router-dom";
+import { httpRequest } from "../../HTTP";
+
 export default function Weeks({ role }) {
     const [addWeek, setAddWeek] = useState([]);
     const [openWeeks, setOpenWeeks] = useState([]);
-    // const params = useParams();
-    // params.groupId = parseInt(params.groupId);
+    const [materials, setMaterials] = useState([]);
+    const params = useParams();
+    // const groupId = parseInt(params.groupId);
+    const groupId = 1; // Hardcoded for now
 
     const isInstructor = role === 'Staff';
+
+    // Fetch materials when component mounts
+    useEffect(() => {
+        async function fetchMaterials() {
+            try {
+                const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Material/GetAllFromGroup?id=${groupId}`, localStorage.getItem("token"));
+                console.log("Materials fetched:", response.data);
+                setMaterials(response.data);
+                // Initialize the state based on the fetched materials
+                setAddWeek(response.data.weeks);
+                setOpenWeeks(response.data.weeks.map(() => false)); // Initialize all weeks as closed
+            } catch (error) {
+                console.error("Error fetching materials:", error);
+            }
+        }
+
+        fetchMaterials();
+    }, [groupId]);
 
     function handleAdd() {
         setAddWeek((prevAdd) => [...prevAdd, []]);
@@ -30,9 +52,11 @@ export default function Weeks({ role }) {
             return updatedOpenWeeks;
         });
     }
+
     //* LANG 
     const { t } = useTranslation();
     //* LANG 
+
     return (
         <div className={classes.weeks}>
             {isInstructor &&
@@ -66,7 +90,6 @@ export default function Weeks({ role }) {
         </div>
     );
 }
-
 
 // import Week from "../Week/Week"
 // import WeekHead from "../Week/WeekHead"
