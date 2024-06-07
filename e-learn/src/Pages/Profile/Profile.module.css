@@ -2,7 +2,7 @@
     padding: 25px;
     background-color: var(--light-grey);
     width: 100%;
-    height: fit-content;
+    height: auto;
     border-radius: 10px;
     box-shadow: var(--main-arabic-shadow);
     z-index: 1000;
@@ -184,4 +184,84 @@
 
 .email_input {
     width: 100%;
+}
+
+/* Profile.module.css */
+.success {
+    color: green;
+    margin-top: 10px;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
+.email_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.email_input {
+    margin-top: 5px;
+}
+
+.add_email {
+    margin-top: 5px;
+    padding: 5px 10px;  /* Adjust padding for smaller button */
+    font-size: 0.9em;  /* Adjust font size for smaller text */
+    width: auto;  /* Allow button to adjust width based on content */
+    max-width: 200px;  /* Optionally, set a max width */
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.profile {
+    padding: 20px;
+}
+
+.image img {
+    border-radius: 50%;
+}
+
+.box {
+    margin-bottom: 20px;
+}
+
+.password_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.password_button {
+    display: flex;
+    align-items: center;
+}
+
+.password {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    margin-top: 5px;
+}
+
+.label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.warning {
+    color: red;
+    margin-top: 5px;
 }

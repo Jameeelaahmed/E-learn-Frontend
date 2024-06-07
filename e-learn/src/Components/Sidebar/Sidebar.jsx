@@ -63,6 +63,9 @@ export default function Sidebar() {
     function handleActive(selectedButton) {
         setActive(selectedButton);
     }
+
+    const profilePictureName = localStorage.getItem('profilePicture');
+    const profilePicture = profilePictureName ? `https://elearnapi.runasp.net/api/files/ViewFile/ProfilePictures/${profilePictureName}` : pro;
     // * START ACTIVE
     return (
         <div
@@ -74,7 +77,7 @@ export default function Sidebar() {
             <Link
                 to='profile'
                 className={classes.profile}>
-                <img src={pro} alt=""></img>
+                <img src={profilePicture} alt="Profile Picture"></img>
                 <p>{name}</p>
             </Link>
             <ul>
