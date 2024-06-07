@@ -5,16 +5,11 @@
 }
 
 .chat_contacts {
+    /* margin-left: 20px; */
     background-color: var(--white);
     width: 250px;
-    height: 572px;
+    height: 580px;
     overflow: auto;
-    /* padding:10px 0; */
-}
-
-[dir="ltr"] .chat_contacts {
-    border-top-left-radius: 32px;
-    border-bottom-left-radius: 32px;
 }
 
 [dir="rtl"] .chat_contacts {
@@ -22,16 +17,9 @@
     border-bottom-right-radius: 32px;
 }
 
-.chat_text {
-    margin: 20px 40px 0;
-    font-size: 20px;
-    color: var(--main-color);
-    font-weight: bolder;
-}
-
-[dir="ltr"] .chat_text {
-    text-transform: uppercase;
-    letter-spacing: 1px;
+[dir="ltr"] .chat_contacts {
+    border-top-left-radius: 32px;
+    border-bottom-left-radius: 32px;
 }
 
 .chat_contacts::-webkit-scrollbar {
@@ -43,24 +31,23 @@
     top: 0;
     z-index: 1;
     background-color: white;
-    padding: 0 15px 15px 15px;
-    box-shadow: var(--grey-shadow);
-}
-
-[dir="ltr"] .search_container {
+    padding: 15px;
     border-bottom-right-radius: 32px;
+    box-shadow: var(--grey-shadow);
 }
 
 [dir="rtl"] .search_container {
     border-bottom-left-radius: 32px;
 }
 
+[dir="ltr"] .search_container {
+    border-bottom-right-radius: 32px;
+}
+
 .search_container input {
-    width: 95%;
     margin-top: 15px;
     background-color: var(--light-grey);
     border-radius: 39px;
-    margin-right: 5px;
     box-shadow: 3.2px 3.2px 8px #c8d0e7 inset,
         -3.2px -3.2px 8px #ffff inset;
     border: none;
@@ -71,25 +58,26 @@
 
 [dir="ltr"] .search_container input {
     padding: 10px 0px 10px 40px;
+    margin-right: 5px;
 }
 
 [dir="rtl"] .search_container input {
-    padding: 10px 40px 10px 0;
+    padding: 10px 40px 10px 0px;
+    margin-left: 5px;
 }
 
 .search_container .search_icon {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
     color: var(--main-color);
-}
-
-[dir="ltr"] .search_container .search_icon {
-    left: 30px;
 }
 
 [dir="rtl"] .search_container .search_icon {
     right: 30px;
+}
+
+[dir="ltr"] .search_container .search_icon {
+    left: 30px;
 }
 
 .search:focus {
@@ -101,25 +89,26 @@
     align-items: center;
     height: 70px;
     position: relative;
-}
-
-[dir="ltr"] .chat_contacts ul li {
-    padding-left: 10px;
+    /* margin-left: 20px; */
 }
 
 [dir="rtl"] .chat_contacts ul li {
     padding-right: 10px;
 }
 
+[dir="ltr"] .chat_contacts ul li {
+    padding-left: 10px;
+}
+
 .chat_contacts ul li:not(:last-child) {
     margin-bottom: 15px;
 }
 
-[dir="ltr"] .single_chat {
+[dir="ltr"].chat_contacts .single_chat {
     margin-left: 15px;
 }
 
-[dir="rtl"] .single_chat {
+[dir="rtl"] .chat_contacts .single_chat {
     margin-right: 15px;
 }
 
@@ -142,7 +131,7 @@
     position: absolute;
 }
 
-.chat_contacts li:hover:before {
+.chat_contacts li:hover::before {
     content: '';
     position: absolute;
     width: 80px;
@@ -151,14 +140,14 @@
     border-radius: 50%;
 }
 
-[dir="ltr"] .chat_contacts li:hover::before {
-    right: 0px;
-    box-shadow: 40px 40px 0 var(--light-grey);
+[dir="rtl"] .chat_contacts li:hover::before {
+    left: 0;
+    box-shadow: -40px 40px 0 var(--light-grey);
 }
 
-[dir="rtl"] .chat_contacts li:hover::before {
-    left: 0px;
-    box-shadow: -40px 40px 0 var(--light-grey);
+[dir="ltr"] .chat_contacts li:hover:before {
+    box-shadow: 40px 40px 0 var(--light-grey);
+    right: 0;
 }
 
 
@@ -172,6 +161,7 @@
     border-bottom-right-radius: 32px;
 }
 
+
 .chat_contacts li:hover::after {
     content: '';
     position: absolute;
@@ -182,11 +172,12 @@
 }
 
 [dir="ltr"] .chat_contacts li:hover::after {
-    right: 0;
     box-shadow: 40px -40px 0 var(--light-grey);
+    right: 0;
+
 }
 
 [dir="rtl"] .chat_contacts li:hover::after {
-    left: 0;
     box-shadow: -40px -40px 0 var(--light-grey);
+    left: 0;
 }

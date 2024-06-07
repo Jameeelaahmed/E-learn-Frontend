@@ -4,8 +4,8 @@ import i18n from '../../i18n';
 import Logo from '../Logo/Logo';
 import { httpRequest } from '../../HTTP';
 import { useNavigate } from 'react-router-dom';
-import {getAuthToken} from '../../Helpers/AuthHelper';
-
+import { getAuthToken } from '../../Helpers/AuthHelper';
+import { Link } from 'react-router-dom';
 export default function Header({ opened }) {
     const { i18n } = useTranslation();
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function Header({ opened }) {
     };
 
     async function HandleLogOut() {
-        try{
+        try {
             const token = getAuthToken();
             const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/LogOut', token, null);
             if (response.statusCode === 200) {
@@ -34,7 +34,7 @@ export default function Header({ opened }) {
                 console.log(response);
             }
         }
-        catch(error){
+        catch (error) {
             console.log('An error occurred:', error);
         }
     }
@@ -53,9 +53,9 @@ export default function Header({ opened }) {
                         (<button onClick={() => handleLanguageChange('ar')}>
                             ar
                         </button>)}
-                    <a href="">
+                    <Link to="chat">
                         <i className={`${"fa-solid fa-message"} ${classes.icon}`}></i>
-                    </a>
+                    </Link>
                     <a href="">
                         <i className={`${"fa-solid fa-bell"} ${classes.icon}`}></i>
                     </a>

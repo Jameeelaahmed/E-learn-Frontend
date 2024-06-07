@@ -19,7 +19,7 @@ import Participants from '../Components/Participants/Paricipants';
 import Profile from '../Pages/Profile/Profile';
 // import StudentMain from '../Pages/MainPageStudent/StudentMain';
 import StuMain from '../Pages/MainPageSTU/StuMain';
-
+import Container from '../Pages/Chat/Container';
 // Role-based route component
 function RoleBasedRoutes() {
     const role = getRole();
@@ -27,8 +27,6 @@ function RoleBasedRoutes() {
         return <Outlet />;
     } else if (role === 'Student') {
         return <Outlet />;
-    } else {
-        return <Navigate to="/auth" />;
     }
 }
 
@@ -56,6 +54,7 @@ const instructorRoutes = [
         ]
     },
     { path: 'voting', element: <Voting /> },
+    { path: 'chat', element: <Container /> },
 ];
 
 const studentRoutes = [
@@ -73,6 +72,7 @@ const studentRoutes = [
         ]
     },
     { path: 'voting', element: <Voting /> },
+    { path: 'chat', element: <Container /> },
 ];
 
 const router = createBrowserRouter([

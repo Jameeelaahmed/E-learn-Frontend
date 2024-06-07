@@ -21,17 +21,17 @@ body {
     --white: white;
     --transition: 0.4s;
     --main-shadow: 5px 5px 0 0 var(--main-color);
-    --main-arabic-shadow:-5px 5px 0 0 var(--main-color);
+    --main-arabic-shadow: -5px 5px 0 0 var(--main-color);
     --grey-shadow: 0px 25px 25px -12px #e0e0ec;
     --title-font-size: 24px;
     --subtitle-font-size: 20px;
     --normal-font-size: 18px;
     --xs-font-size: 16px;
     --title-font-weight: bold;
-    --inset-shadow:inset 3.2px 3.2px 8px 0 #c8d0e7,
-    inset -3.2px -3.2px 8px 0 #c8d0e7;
-    --inset-input-shadow:5px 5px 10px 0 rgba(22, 27, 29, 0.06) inset,
-    -5px -5px 10px 0 rgba(250, 251, 255, 0.8) inset;
+    --inset-shadow: inset 3.2px 3.2px 8px 0 #c8d0e7,
+        inset -3.2px -3.2px 8px 0 #c8d0e7;
+    --inset-input-shadow: 5px 5px 10px 0 rgba(22, 27, 29, 0.06) inset,
+        -5px -5px 10px 0 rgba(250, 251, 255, 0.8) inset;
 }
 
 a {
@@ -42,8 +42,10 @@ ul {
     list-style: none;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     display: none;
 }
 
-
+.error {
+    color: rgb(222, 1, 1);
+}
