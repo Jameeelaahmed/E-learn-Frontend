@@ -31,10 +31,11 @@ export async function httpRequest(method, endpoint, accessToken, requestBody, he
             try {
                 const refreshResponse = await fetch(refreshUrl, refreshOptions);
                 const response = await refreshResponse.json();
+                console.log(response);
                 localStorage.setItem('token', response.data.token);
                 
                 // Retry the request with the new access token
-                options.headers.Authorization = `Bearer ${response.data,token}`;
+                options.headers.Authorization = `Bearer ${response.data.token}`;
                 const retryResponse = await fetch(url, options);
 
                 if (retryResponse.status === 401) {
