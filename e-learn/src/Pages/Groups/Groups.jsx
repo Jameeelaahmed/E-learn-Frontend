@@ -67,7 +67,7 @@ export default function Groups() {
                         key={index}
                         subTitle={item.name}
                         insName={item.instructorName}
-                        onClick={() => handleGroupClick(item.Id)} // Ensure onClick is properly handled
+                        onClick={() => handleGroupClick(item.id)} // Ensure onClick is properly handled
                     />
                 ))
             }
