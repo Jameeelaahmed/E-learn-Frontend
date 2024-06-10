@@ -2,8 +2,33 @@ import { participants } from '../../response'
 import classes from '../Assignments/AssignmentResponsesList.module.css'
 import { useTranslation } from 'react-i18next'
 import Button from '../Button/Button';
+import { useState, useEffect } from 'react';
+import { httpRequest } from '../../HTTP';
+import { getAuthToken } from '../../Helpers/AuthHelper';
+
 export default function Participants() {
     const { t } = useTranslation();
+    const [users, setUsers] = useState([]);
+
+    async function getGroupParticipants() {
+        try{
+            const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Group/GetGroupParticipants/${5}`, getAuthToken());
+            if (response.statusCode === 200) {
+                console.log(response);
+                setUsers(response.data);
+            }
+            else {
+                console.log(response.message);
+            }
+        }
+        catch(err) {
+            console.log(err);
+        }
+    }
+    useEffect(() => {
+        getGroupParticipants();
+    }, []);
+
     return (
         <div className={classes.track_responses}>
             <div className={classes.table_wrapper}>
@@ -18,11 +43,11 @@ export default function Participants() {
                         </tr>
                     </thead>
                     <tbody>
-                        {participants.map((index) => (
+                        {users.map((index) => (
                             <tr key={index}>
-                                <td>{participants.id}</td>
-                                <td>{participants.name}</td>
-                                <td>{participants.grade}</td>
+                                <td>{users.id}</td>
+                                <td>{users.name}</td>
+                                <td>{users.grade}</td>
                                 <td>
                                     {/* ADD FILE AS A PARMETERT IN THE OPEN FILE IN BROWSER FUNCTION AND THE FILE NAME THE TEXT */}
                                     <Button text={t("attachment")} />

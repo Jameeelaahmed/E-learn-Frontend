@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import classes from './Vote.module.css';
 import VotingListModal from './VotingResponsesModal'
 import { useRef } from 'react';
-import { httpRequest } from '../../HTTP';
-import { getAuthToken } from '../../Helpers/AuthHelper';
-
 export default function Vote() {
-    const [options, setOptions] = useState();
+    const [options, setOptions] = useState([
+        { id: 1, percentage: 0 },
+        { id: 2, percentage: 0 },
+        { id: 3, percentage: 0 }
+    ]);
 
-    const voteId = 11; //change it to be fetched from the url 
     const handleVote = (id) => {
         const totalPercentage = options.reduce((total, option) => total + option.percentage, 0);
         const newOptions = options.map(option => {
@@ -27,26 +27,6 @@ export default function Vote() {
         ViewResponses.current.open();
     }
 
-    async function fetchVote(){
-        try{
-            var token = getAuthToken();
-            const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Voting/GetVoting/${voteId}`, token);
-            if(response.statusCode === 200){
-                const options = [
-                    { id: 1, percentage: response.data.option1 },
-                    { id: 2, percentage: response.data.option2 },
-                    { id: 3, percentage: response.data.option3 },
-                    { id: 4, percentage: response.data.option4 },
-                    { id: 5, percentage: response.data.option5}
-                ]
-                setOptions(options);
-            }
-
-        }
-        catch(error){
-            console.log('an error occurred, ', error);
-        }
-    }
     return (
         <div className={classes.question_container}>
             <p className={classes.description}>Description</p>
