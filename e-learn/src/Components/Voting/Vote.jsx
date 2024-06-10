@@ -3,15 +3,14 @@ import classes from './Vote.module.css';
 import VotingListModal from './VotingResponsesModal'
 import { useRef } from 'react';
 export default function Vote() {
-<<<<<<< Updated upstream
+
     const [options, setOptions] = useState([
         { id: 1, percentage: 0 },
         { id: 2, percentage: 0 },
         { id: 3, percentage: 0 }
     ]);
-=======
-    const [options, setOptions] = useState([]);
->>>>>>> Stashed changes
+
+    // const [options, setOptions] = useState([]);
 
     const handleVote = (id) => {
         const totalPercentage = options.reduce((total, option) => total + option.percentage, 0);
@@ -31,8 +30,7 @@ export default function Vote() {
         ViewResponses.current.open();
     }
 
-<<<<<<< Updated upstream
-=======
+
     async function fetchVote() {
         try {
             var token = getAuthToken();
@@ -53,7 +51,6 @@ export default function Vote() {
             console.log('an error occurred, ', error);
         }
     }
->>>>>>> Stashed changes
     return (
         <div className={classes.question_container}>
             <p className={classes.description}>Description</p>
