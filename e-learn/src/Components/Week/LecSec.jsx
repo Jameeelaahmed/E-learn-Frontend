@@ -2,27 +2,17 @@ import classes from './LecSec.module.css';
 import * as FaIcons from "react-icons/fa6";
 import { useState } from 'react';
 
-export default function LecSec({ role, materialType, onDelete }) {
-    const [selectedFiles, setSelectedFiles] = useState([]);
+export default function LecSec({ role, materialType, onDelete, material }) {
     const [openFiles, setOpenFiles] = useState(false);
 
     const isInstructor = role === 'Staff';
-
-    const handleFileChange = (event) => {
-        setSelectedFiles([...selectedFiles, ...event.target.files]);
-    };
-
-    const openFileInBrowser = (file) => {
-        const fileUrl = URL.createObjectURL(file);
-        window.open(fileUrl, '_blank');
-    };
 
     const toggleOpenFiles = () => {
         setOpenFiles(!openFiles);
     };
 
     return (
-        <div className={`${classes.lec_sec_container} openFiles ? classes.active_slide : ''}`}>
+        <div className={`${classes.lec_sec_container} ${openFiles ? classes.active_slide : ''}`}>
             <div className={`${classes.lec_sec} ${openFiles ? classes.active : ''}`}>
                 <p>{materialType}</p>
                 <div className={classes.icons}>
@@ -34,21 +24,21 @@ export default function LecSec({ role, materialType, onDelete }) {
                     <FaIcons.FaCaretDown className={classes.icon} onClick={toggleOpenFiles} />
                 </div>
             </div>
-            <input type="file" id="fileInput" className={classes.fileInput} multiple onChange={handleFileChange} />
-            {openFiles && selectedFiles.length > 0 && (
+            <input type="file" id="fileInput" className={classes.fileInput} multiple onChange={() => {}} />
+            {openFiles && material && (
                 <div className={classes.filesContainer}>
                     <ul>
-                        {selectedFiles.map((file, index) => (
-                            <div className={classes.file_head}>
-                                <li key={index} className={classes.file}>
-                                    <FaIcons.FaSquare className={classes.file_icon}></FaIcons.FaSquare>
-                                    <button onClick={() => openFileInBrowser(file)} className={classes.open_file}>{file.name}</button>
-                                </li>
+                        <div className={classes.file_head}>
+                            <li className={classes.file}>
+                                <FaIcons.FaSquare className={classes.file_icon}></FaIcons.FaSquare>
+                                <a href={material.viewUrl} target="_blank" rel="noopener noreferrer" className={classes.open_file}>{material.title}</a>
+                            </li>
+                            {isInstructor &&
                                 <FaIcons.FaTrash
                                     onClick={onDelete}
                                     className={classes.leftIcon} />
-                            </div>
-                        ))}
+                            }
+                        </div>
                     </ul>
                 </div>
             )}

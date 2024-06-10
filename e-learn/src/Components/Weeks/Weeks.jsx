@@ -1,20 +1,19 @@
-import Week from "../Week/Week"
+import Week from "../Week/Week";
 import WeekHead from "../Week/WeekHead";
 import classes from "./Weeks.module.css";
 import LecSec from "../Week/LecSec";
 import * as FaIcons from "react-icons/fa6";
 import { useState, useEffect } from "react";
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next';
 import { useParams } from "react-router-dom";
 import { httpRequest } from "../../HTTP";
+import { getAuthToken } from "../../Helpers/AuthHelper";
 
 export default function Weeks({ role }) {
-    const [addWeek, setAddWeek] = useState([]);
+    const [weeks, setWeeks] = useState([]);
     const [openWeeks, setOpenWeeks] = useState([]);
-    const [materials, setMaterials] = useState([]);
     const params = useParams();
-    // const groupId = parseInt(params.groupId);
-    const groupId = 1; // Hardcoded for now
+    const groupId = params.groupId;
 
     const isInstructor = role === 'Staff';
 
@@ -22,12 +21,24 @@ export default function Weeks({ role }) {
     useEffect(() => {
         async function fetchMaterials() {
             try {
-                const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Material/GetAllFromGroup?id=${groupId}`, localStorage.getItem("token"));
-                console.log("Materials fetched:", response.data);
-                setMaterials(response.data);
-                // Initialize the state based on the fetched materials
-                setAddWeek(response.data.weeks);
-                setOpenWeeks(response.data.weeks.map(() => false)); // Initialize all weeks as closed
+                const token = getAuthToken();
+                console.log("Fetching materials for group", groupId);
+                const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Material/GetAllFromGroup/${groupId}`, token);
+                console.log(response);
+                if (response.statusCode === 200) {
+                    const materialsByWeek = response.data.reduce((acc, material) => {
+                        if (!acc[material.week]) {
+                            acc[material.week] = [];
+                        }
+                        acc[material.week].push(material);
+                        return acc;
+                    }, {});
+
+                    setWeeks(Object.entries(materialsByWeek));
+                    setOpenWeeks(Object.keys(materialsByWeek).map(() => false)); // Initialize all weeks as closed
+                } else {
+                    console.log(response.message);
+                }
             } catch (error) {
                 console.error("Error fetching materials:", error);
             }
@@ -37,12 +48,16 @@ export default function Weeks({ role }) {
     }, [groupId]);
 
     function handleAdd() {
-        setAddWeek((prevAdd) => [...prevAdd, []]);
-        setOpenWeeks((prevOpenWeeks) => [...prevOpenWeeks, false]); // Initialize all weeks as closed
+        setWeeks((prevWeeks) => [...prevWeeks, [prevWeeks.length + 1, []]]);
+        setOpenWeeks((prevOpenWeeks) => [...prevOpenWeeks, false]); // Initialize the new week as closed
     }
 
-    function handleDelete(i) {
-        setAddWeek((prevAdd) => prevAdd.filter((_, index) => index !== i));
+    function handleDelete(weekIndex, materialId) {
+        setWeeks((prevWeeks) => {
+            const updatedWeeks = [...prevWeeks];
+            updatedWeeks[weekIndex][1] = updatedWeeks[weekIndex][1].filter((material) => material.id !== materialId);
+            return updatedWeeks;
+        });
     }
 
     function handleOpen(weekIndex) {
@@ -53,9 +68,7 @@ export default function Weeks({ role }) {
         });
     }
 
-    //* LANG 
     const { t } = useTranslation();
-    //* LANG 
 
     return (
         <div className={classes.weeks}>
@@ -66,77 +79,43 @@ export default function Weeks({ role }) {
                 </div>
             }
 
-            {addWeek.map((week, weekNum) => {
-                return (
-                    <Week key={weekNum}>
-                        <WeekHead
-                            onSelect={() => handleOpen(weekNum)}
-                            weekNum={weekNum + 1}
-                            active={openWeeks[weekNum]} // Pass the active state to WeekHead
-                        />
-                        {openWeeks[weekNum] && (
-                            <div className={classes.week_content}>
-                                <div className={classes.main}>
-                                    <LecSec role={role} onDelete={() => handleDelete(weekNum)} materialType={`${t("Lecture")} ${weekNum + 1}`} weeknum={weekNum} />
+            {weeks.map(([weekNum, materials], weekIndex) => (
+                <Week key={weekNum}>
+                    <WeekHead
+                        onSelect={() => handleOpen(weekIndex)}
+                        weekNum={weekNum}
+                        active={openWeeks[weekIndex]} // Pass the active state to WeekHead
+                    />
+                    {openWeeks[weekIndex] && (
+                        <div className={classes.week_content}>
+                            {materials.map((material) => (
+                                <div className={classes.main} key={material.id}>
+                                    <LecSec
+                                        role={role}
+                                        materialType={material.type === 0 ? `${t("Lecture")} ${weekNum}` : `${t("Section")} ${weekNum}`}
+                                        onDelete={() => handleDelete(weekIndex, material.id)}
+                                        material={material}
+                                    />
                                 </div>
+                            ))}
+                            {materials.length === 0 && (
                                 <div className={classes.main}>
-                                    <LecSec role={role} onDelete={() => handleDelete(weekNum)} materialType={`${t("Section")} ${weekNum + 1}`} />
+                                    <LecSec
+                                        role={role}
+                                        materialType={t("Lecture")}
+                                        onDelete={() => handleDelete(weekIndex, null)}
+                                    />
+                                    <LecSec
+                                        role={role}
+                                        materialType={t("Section")}
+                                        onDelete={() => handleDelete(weekIndex, null)}
+                                    />
                                 </div>
-                            </div>
-                        )}
-                    </Week>
-                );
-            })}
+                            )}
+                        </div>
+                    )}
+                </Week>
+            ))}
         </div>
     );
 }
-
-// import Week from "../Week/Week"
-// import WeekHead from "../Week/WeekHead"
-// import classes from './Weeks.module.css'
-// import LecSec from "../Week/LecSec";
-// import * as FaIcons from "react-icons/fa6";
-// import { useState } from "react";
-
-// export default function Weeks(){
-//     const [add, setAdd] = useState([]);
-//     const [open, setOpen] = useState(false);
-
-//     function handleAdd(){
-//         setAdd(prevAdd => [...prevAdd, []]);
-//     }
-
-//     function handleOpen(){
-//         setOpen(opened => !opened);
-//     }
-
-//     return(
-//         <div className={classes.weeks}>
-//                 <div className={classes.add_week} onClick={handleAdd}>
-//                     <FaIcons.FaPlus className={classes.icon}></FaIcons.FaPlus>
-//                     <p>add week</p>
-//                 </div>
-//                 {add.map((week, weekNum) => {
-//                 return (
-//                     <Week key={weekNum}>
-//                         <WeekHead onSelect={handleOpen} weekNum={weekNum+1}></WeekHead>
-//                         {week.map((weekContent, i) => {
-//                             return (
-//                                 open && (
-//                                     <div key={i} className={classes.week_content}>
-//                                         <div className={classes.main}>
-//                                             <LecSec materialType={`${"Lecture"} ${weekNum + 1}`} />
-//                                         </div>
-//                                         <div className={classes.main}>
-//                                             <LecSec materialType={`${"Section"} ${weekNum + 1}`} />
-//                                         </div>
-//                                     </div>
-//                                 )
-//                             );
-//                         })}
-//                     </Week>
-//                 );
-//             })}
-//         </div>
-//     );
-// }
