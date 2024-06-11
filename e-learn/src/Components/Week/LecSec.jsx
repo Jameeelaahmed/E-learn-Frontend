@@ -6,9 +6,9 @@ import { getAuthToken } from '../../Helpers/AuthHelper';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-export default function LecSec({ role, materialType, onDelete, material, weekNum, onAddMaterial }) {
+export default function LecSec({ role, materialType, materials, weekNum, onDelete, onAddMaterial }) {
     const [openFiles, setOpenFiles] = useState(false);
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFiles, setSelectedFiles] = useState([]);
     const params = useParams();
     const groupId = params.groupId;
     const { t } = useTranslation();
@@ -19,13 +19,13 @@ export default function LecSec({ role, materialType, onDelete, material, weekNum
         setOpenFiles(!openFiles);
     };
 
-    const handleDelete = async () => {
-        if (material && material.id) {
+    const handleDelete = async (materialId) => {
+        if (materialId) {
             try {
                 const token = getAuthToken();
-                const response = await httpRequest('DELETE', `https://elearnapi.runasp.net/api/Material/Delete/${material.id}`, token);
+                const response = await httpRequest('DELETE', `https://elearnapi.runasp.net/api/Material/Delete/${materialId}`, token);
                 if (response.statusCode === 200) {
-                    onDelete(material.id); // Notify parent component to update state
+                    onDelete(materialId); // Notify parent component to update state
                 } else {
                     console.error("Failed to delete material:", response.message);
                 }
@@ -36,38 +36,35 @@ export default function LecSec({ role, materialType, onDelete, material, weekNum
     };
 
     const handleFileChange = async (event) => {
-        const file = event.target.files[0];
-        setSelectedFile(file);
-    
-        if (file) {
-            const formData = new FormData();
-            formData.append('Week', weekNum);
-            formData.append('File', file);
-            formData.append('Type', materialType.includes(t("Lecture")) ? 0 : 1);
-            console.log(`Week ${formData.weekNum}`);
-            console.log(materialType);
-            console.log(t("Lecture"));
-            const token = getAuthToken();
-            try {
-                const response = await httpRequest('POST', `https://elearnapi.runasp.net/api/Material/${groupId}/AddMaterial`, token, formData, 'multipart/form-data');
-                console.log(response);
-    
-                if (response.statusCode === 200) {
-                    console.log("Material added successfully:", response.data);
-                    if (typeof onAddMaterial === 'function') {
-                        onAddMaterial(response.data); // Notify parent component to refresh materials list
+        const files = Array.from(event.target.files);
+        setSelectedFiles(files);
+
+        const token = getAuthToken();
+        files.forEach(async (file) => {
+            if (file) {
+                const formData = new FormData();
+                formData.append('Week', weekNum);
+                formData.append('File', file);
+                formData.append('Type', materialType.includes(t("Lecture")) ? 0 : 1); // Correctly set the type
+                console.log(`Week: ${weekNum}, Type: ${materialType.includes(t("Lecture")) ? 0 : 1}`);
+
+                try {
+                    const response = await httpRequest('POST', `https://elearnapi.runasp.net/api/Material/${groupId}/AddMaterial`, token, formData, 'multipart/form-data');
+                    if (response.statusCode === 200) {
+                        if (typeof onAddMaterial === 'function') {
+                            onAddMaterial(response.data); // Notify parent component to refresh materials list
+                        } else {
+                            console.error("onAddMaterial is not a function");
+                        }
                     } else {
-                        console.error("onAddMaterial is not a function");
+                        console.error("Failed to add material:", response.message);
                     }
-                } else {
-                    console.error("Failed to add material:", response.message);
+                } catch (error) {
+                    console.error("Error adding material:", error);
                 }
-            } catch (error) {
-                console.error("Error adding material:", error);
             }
-        }
+        });
     };
-    
 
     return (
         <div className={`${classes.lec_sec_container} ${openFiles ? classes.active_slide : ''}`}>
@@ -77,26 +74,28 @@ export default function LecSec({ role, materialType, onDelete, material, weekNum
                     {isInstructor &&
                         <label htmlFor="fileInput" className={classes.customFileInput}>
                             <FaIcons.FaCirclePlus className={classes.leftIcon} />
-                            <input type="file" id="fileInput" className={classes.fileInput} onChange={handleFileChange} />
+                            <input type="file" id="fileInput" className={classes.fileInput} multiple onChange={handleFileChange} />
                         </label>
                     }
                     <FaIcons.FaCaretDown className={classes.icon} onClick={toggleOpenFiles} />
                 </div>
             </div>
-            {openFiles && material && (
+            {openFiles && materials && (
                 <div className={classes.filesContainer}>
                     <ul>
-                        <div className={classes.file_head}>
-                            <li className={classes.file}>
-                                <FaIcons.FaSquare className={classes.file_icon}></FaIcons.FaSquare>
-                                <a href={material.viewUrl} target="_blank" rel="noopener noreferrer" className={classes.open_file}>{material.title}</a>
-                            </li>
-                            {isInstructor &&
-                                <FaIcons.FaTrash
-                                    onClick={handleDelete}
-                                    className={classes.leftIcon} />
-                            }
-                        </div>
+                        {materials.map((material) => (
+                            <div className={classes.file_head} key={material.id}>
+                                <li className={classes.file}>
+                                    <FaIcons.FaSquare className={classes.file_icon}></FaIcons.FaSquare>
+                                    <a href={material.viewUrl} target="_blank" rel="noopener noreferrer" className={classes.open_file}>{material.title}</a>
+                                </li>
+                                {isInstructor &&
+                                    <FaIcons.FaTrash
+                                        onClick={() => handleDelete(material.id)}
+                                        className={classes.leftIcon} />
+                                }
+                            </div>
+                        ))}
                     </ul>
                 </div>
             )}
