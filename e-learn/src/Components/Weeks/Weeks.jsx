@@ -17,7 +17,6 @@ export default function Weeks({ role }) {
 
     const isInstructor = role === 'Staff';
 
-    // Fetch materials when component mounts
     useEffect(() => {
         async function fetchMaterials() {
             try {
@@ -54,8 +53,16 @@ export default function Weeks({ role }) {
 
     function handleDelete(weekIndex, materialId) {
         setWeeks((prevWeeks) => {
-            const updatedWeeks = [...prevWeeks];
-            updatedWeeks[weekIndex][1] = updatedWeeks[weekIndex][1].filter((material) => material.id !== materialId);
+            const updatedWeeks = prevWeeks.map(([weekNum, materials], index) => {
+                if (index === weekIndex) {
+                    const updatedMaterials = materials.filter((material) => material.id !== materialId);
+                    if (updatedMaterials.length === 0) {
+                        return null; // Mark the week for removal if no materials are left
+                    }
+                    return [weekNum, updatedMaterials];
+                }
+                return [weekNum, materials];
+            }).filter(week => week !== null); // Remove empty weeks
             return updatedWeeks;
         });
     }
@@ -65,6 +72,19 @@ export default function Weeks({ role }) {
             const updatedOpenWeeks = [...prevOpenWeeks];
             updatedOpenWeeks[weekIndex] = !updatedOpenWeeks[weekIndex]; // Toggle the visibility state of the clicked week
             return updatedOpenWeeks;
+        });
+    }
+
+    function handleAddMaterial(newMaterial) {
+        setWeeks((prevWeeks) => {
+            const updatedWeeks = [...prevWeeks];
+            const weekIndex = updatedWeeks.findIndex(([weekNum]) => weekNum === newMaterial.week);
+            if (weekIndex !== -1) {
+                updatedWeeks[weekIndex][1].push(newMaterial);
+            } else {
+                updatedWeeks.push([newMaterial.week, [newMaterial]]);
+            }
+            return updatedWeeks;
         });
     }
 
@@ -95,6 +115,8 @@ export default function Weeks({ role }) {
                                         materialType={material.type === 0 ? `${t("Lecture")} ${weekNum}` : `${t("Section")} ${weekNum}`}
                                         onDelete={() => handleDelete(weekIndex, material.id)}
                                         material={material}
+                                        weekNum={weekNum}
+                                        onAddMaterial={handleAddMaterial} 
                                     />
                                 </div>
                             ))}
@@ -104,11 +126,15 @@ export default function Weeks({ role }) {
                                         role={role}
                                         materialType={t("Lecture")}
                                         onDelete={() => handleDelete(weekIndex, null)}
+                                        weekNum={weekNum}
+                                        onAddMaterial={handleAddMaterial}
                                     />
                                     <LecSec
                                         role={role}
                                         materialType={t("Section")}
                                         onDelete={() => handleDelete(weekIndex, null)}
+                                        weekNum={weekNum}
+                                        onAddMaterial={handleAddMaterial}
                                     />
                                 </div>
                             )}

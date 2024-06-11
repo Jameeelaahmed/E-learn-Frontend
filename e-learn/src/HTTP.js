@@ -1,15 +1,19 @@
-export async function httpRequest(method, endpoint, accessToken, requestBody, headers) {
+export async function httpRequest(method, endpoint, accessToken, requestBody, contentType, headers) {
     const url = endpoint;
 
     const options = {
         method,
         headers: {
             ...headers,
-            'Content-Type': 'application/json',
+            'Content-Type': contentType ? contentType : 'application/json',
             Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify(requestBody),
+        body: contentType === 'multipart/form-data' ? requestBody : JSON.stringify(requestBody),
     };
+
+    if (contentType === 'multipart/form-data') {
+        delete options.headers['Content-Type']; // Let the browser set the correct boundary for multipart/form-data
+    }
 
     try {
         const response = await fetch(url, options);
@@ -33,16 +37,15 @@ export async function httpRequest(method, endpoint, accessToken, requestBody, he
                 const response = await refreshResponse.json();
                 console.log(response);
                 localStorage.setItem('token', response.data.token);
-                
-                // Retry the request with the new access token
-                options.headers.Authorization = `Bearer ${response.data.token}`;
-                const retryResponse = await fetch(url, options);
+            // Retry the request with the new access token
+            options.headers.Authorization = `Bearer ${newAccessToken}`;
+            const retryResponse = await fetch(url, options);
 
-                if (retryResponse.status === 401) {
-                    throw new Error('Unauthorized');
-                }
+            if (retryResponse.status === 401) {
+                throw new Error('Unauthorized');
+            }
 
-                const responseData = await retryResponse.json();
+            const responseData = await retryResponse.json();
                 return responseData;
             } catch (error) {
                 // Handle error
@@ -54,7 +57,6 @@ export async function httpRequest(method, endpoint, accessToken, requestBody, he
         const responseData = await response.json();
         return responseData;
     } catch (error) {
-        // Handle error
         console.error('An error occurred:', error);
         throw error;
     }
