@@ -7,6 +7,7 @@
     height: 560px;
     overflow-y: auto;
     border: 4px solid var(--secondry-color);
+    z-index: 1000000000000000
 }
 
 [dir='ltr'] .vs_navigation_bar {
@@ -55,7 +56,8 @@
     position: relative;
     word-wrap: normal;
     min-height: 80px;
-    width: 300px; /* Fixed width for boxes */
+    width: 300px;
+    /* Fixed width for boxes */
 }
 
 .changeWidth {
@@ -159,11 +161,13 @@ span.title {
     }
 
     .vs_navigation_bar_responsive::-webkit-scrollbar {
-        width: 10px; /* Make the scrollbar visible */
+        width: 10px;
+        /* Make the scrollbar visible */
     }
 
     .vs_navigation_bar_responsive .box {
-        width: 200px; /* Fixed width for boxes */
+        width: 200px;
+        /* Fixed width for boxes */
         height: 80px;
         background-color: var(--light-grey);
         margin-right: 10px;
