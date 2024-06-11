@@ -8,14 +8,16 @@ const ChatItem = ({ user, msg, image }) => {
             style={{ animationDelay: `0.8s` }}
             className={`${classes.chat__item} `}
         >
-            <div className={`${classes.chat__item__content} ${user === "sender" ? classes.sender : ""} ${user === "receiver" ? classes.receiver : ""} `}>
-                <div className={classes.chat__msg}>{msg}</div>
-                <div className={classes.chat__meta}>
-                    <span>16 mins ago</span>
-                    {/* <span>Seen 1.03PM</span> */}
+            <div className={classes.reverse}>
+                <div className={`${classes.chat__item__content} ${user === "sender" ? classes.sender : ""} ${user === "receiver" ? classes.receiver : ""} `}>
+                    <div className={classes.chat__msg}>{msg}</div>
+                    <div className={classes.chat__meta}>
+                        <span>16 mins ago</span>
+                        {/* <span>Seen 1.03PM</span> */}
+                    </div>
                 </div>
+                <img className={classes.img} src={img}></img>
             </div>
-            <img className={classes.img} src={img}></img>
         </div>
     );
 };
