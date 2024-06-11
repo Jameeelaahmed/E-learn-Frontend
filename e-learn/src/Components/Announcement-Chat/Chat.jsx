@@ -1,11 +1,10 @@
-import classes from './chat.module.css';
 import { useState, useRef, useEffect } from 'react';
-import * as FaIcons from 'react-icons/fa6';
-import img from '../../assets/avatar.jpg'
-import ChatItem from './ChatItem';
-export default function Chat() {
+import classes from './chat.module.css';
+import img from '../../assets/avatar.jpg';
 
+export default function Chat() {
     const messagesEndRef = useRef(null);
+    const inputRef = useRef(null);
 
     const initialChatItems = [
         {
@@ -14,46 +13,10 @@ export default function Chat() {
             type: "sender",
             msg: "Hi Tim, How are you?",
         },
-        {
-            key: 2,
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTA78Na63ws7B7EAWYgTr9BxhX_Z8oLa1nvOA&usqp=CAU",
-            type: "receiver",
-            msg: "I am fine.",
-        },
-        {
-            key: 3,
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTA78Na63ws7B7EAWYgTr9BxhX_Z8oLa1nvOA&usqp=CAU",
-            type: "sender",
-            msg: "What about you?",
-        },
-        {
-            key: 4,
-            image: "https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg",
-            type: "receiver",
-            msg: "Awesome these days.",
-        },
-        {
-            key: 5,
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTA78Na63ws7B7EAWYgTr9BxhX_Z8oLa1nvOA&usqp=CAU",
-            type: "sender",
-            msg: "Finally. What's the plan?",
-        },
-        {
-            key: 6,
-            image: "https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg",
-            type: "receiver",
-            msg: "what plan mate?",
-        },
-        {
-            key: 7,
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTA78Na63ws7B7EAWYgTr9BxhX_Z8oLa1nvOA&usqp=CAU",
-            type: "sender",
-            msg: "I'm talking about the tutorial",
-        },
     ];
 
     const [chat, setChat] = useState(initialChatItems);
-    const [msg, setMsg] = useState("");
+    const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0 });
 
     const scrollToBottom = () => {
         messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
@@ -61,68 +24,89 @@ export default function Chat() {
 
     useEffect(() => {
         const handleKeyDown = (e) => {
-            if (e.keyCode === 13 && msg !== "") {
+            if (e.keyCode === 13 && inputRef.current.value !== "") {
                 addMessage();
             }
         };
 
+        const handleClick = () => {
+            setContextMenu({ visible: false, x: 0, y: 0 });
+        };
+
         window.addEventListener("keydown", handleKeyDown);
+        window.addEventListener("click", handleClick);
         scrollToBottom();
 
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
+            window.removeEventListener("click", handleClick);
         };
-    }, [msg]);
-
-    const handleChange = (e) => {
-        setMsg(e.target.value);
-    };
+    }, []);
 
     const addMessage = () => {
-        if (msg !== "") {
+        if (inputRef.current.value !== "") {
             const newChatItem = {
                 key: chat.length + 1,
-                type: "",
-                msg: msg,
+                type: "sender",
+                msg: inputRef.current.value,
                 image: "https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg",
             };
             setChat((prevChat) => [...prevChat, newChatItem]);
-            setMsg("");
-            scrollToBottom();
+            inputRef.current.value = "";
+            scrollToBottom(); // Ensure scrolling to bottom after message is added
         }
     };
 
+    const handleContextMenu = (e) => {
+        e.preventDefault();
+        const clickY = e.clientY;
+        const menuHeight = 100; // Approximate height of the context menu
+        const windowHeight = window.innerHeight;
+
+        const adjustedY = (clickY + menuHeight > windowHeight) ? clickY - menuHeight : clickY;
+
+        setContextMenu({ visible: true, x: e.clientX, y: adjustedY });
+    };
+
     return (
-        <div className={classes.main__chatcontent}>
+        <div className={classes.main__chatcontent} onContextMenu={handleContextMenu}>
             <div className={classes.content__header}>
                 <div className={classes.blocks}>
                     <div className={classes.current_chatting_user}>
-                        <img className={classes.img} src={img}></img>
+                        <img className={classes.img} src={img} alt="current chatting user" />
                         <p>Tim Hover</p>
                     </div>
                 </div>
 
                 <div className={classes.blocks}>
                     <div className={classes.settings}>
-                        <button className={classes.btn_nobg}>
-                            <i className="fa fa-cog"></i>
-                        </button>
+                        <i className="fa fa-cog"></i>
                     </div>
                 </div>
             </div>
             <div className={classes.content__body}>
                 <div className={classes.chat__items}>
-                    {chat.map((itm, index) => (
-                        <ChatItem
-                            animationDelay={index + 2}
-                            key={itm.key}
-                            user={itm.type}
-                            msg={itm.msg}
-                            image={itm.image}
-                        />
+                    {chat.map((itm) => (
+                        <div key={itm.key} className={`${classes.chat__item} ${itm.type === "sender" ? classes.sender : ""} ${itm.type === "receiver" ? classes.receiver : ""}`}>
+                            <div className={`${classes.chat__item__content}`}>
+                                <div className={classes.chat__msg} dir='auto'>{itm.msg}</div>
+                                <div className={classes.chat__meta}>
+                                    <span>16 mins ago</span>
+                                    {/* <span>Seen 1.03PM</span> */}
+                                </div>
+                            </div>
+                            <img className={classes.img} src={img} alt="avatar" />
+                        </div>
                     ))}
                     <div ref={messagesEndRef} />
                 </div>
+                {contextMenu.visible && (
+                    <ul className={`${classes.contextMenu} ${classes.show}`} style={{ top: `${contextMenu.y}px`, left: `${contextMenu.x}px` }}>
+                        <li onClick={() => alert('Action 1')}>Action 1</li>
+                        <li onClick={() => alert('Action 2')}>Action 2</li>
+                        <li onClick={() => alert('Action 3')}>Action 3</li>
+                    </ul>
+                )}
             </div>
             <div className={classes.content__footer}>
                 <div className={classes.sendNewMessage}>
@@ -132,8 +116,7 @@ export default function Chat() {
                     <input
                         type="text"
                         placeholder="Type a message here"
-                        onChange={handleChange}
-                        value={msg}
+                        ref={inputRef}
                     />
                     <button className={classes.btnSendMsg} id="sendMsgBtn" onClick={addMessage}>
                         <i className="fa fa-paper-plane"></i>
