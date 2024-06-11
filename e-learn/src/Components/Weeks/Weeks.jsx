@@ -21,15 +21,17 @@ export default function Weeks({ role }) {
         async function fetchMaterials() {
             try {
                 const token = getAuthToken();
-                console.log("Fetching materials for group", groupId);
                 const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Material/GetAllFromGroup/${groupId}`, token);
-                console.log(response);
                 if (response.statusCode === 200) {
                     const materialsByWeek = response.data.reduce((acc, material) => {
                         if (!acc[material.week]) {
-                            acc[material.week] = [];
+                            acc[material.week] = { lectures: [], sections: [] };
                         }
-                        acc[material.week].push(material);
+                        if (material.type === 0) {
+                            acc[material.week].lectures.push(material);
+                        } else {
+                            acc[material.week].sections.push(material);
+                        }
                         return acc;
                     }, {});
 
@@ -47,7 +49,7 @@ export default function Weeks({ role }) {
     }, [groupId]);
 
     function handleAdd() {
-        setWeeks((prevWeeks) => [...prevWeeks, [prevWeeks.length + 1, []]]);
+        setWeeks((prevWeeks) => [...prevWeeks, [prevWeeks.length + 1, { lectures: [], sections: [] }]]);
         setOpenWeeks((prevOpenWeeks) => [...prevOpenWeeks, false]); // Initialize the new week as closed
     }
 
@@ -55,11 +57,12 @@ export default function Weeks({ role }) {
         setWeeks((prevWeeks) => {
             const updatedWeeks = prevWeeks.map(([weekNum, materials], index) => {
                 if (index === weekIndex) {
-                    const updatedMaterials = materials.filter((material) => material.id !== materialId);
-                    if (updatedMaterials.length === 0) {
+                    const updatedLectures = materials.lectures.filter((material) => material.id !== materialId);
+                    const updatedSections = materials.sections.filter((material) => material.id !== materialId);
+                    if (updatedLectures.length === 0 && updatedSections.length === 0) {
                         return null; // Mark the week for removal if no materials are left
                     }
-                    return [weekNum, updatedMaterials];
+                    return [weekNum, { lectures: updatedLectures, sections: updatedSections }];
                 }
                 return [weekNum, materials];
             }).filter(week => week !== null); // Remove empty weeks
@@ -80,9 +83,13 @@ export default function Weeks({ role }) {
             const updatedWeeks = [...prevWeeks];
             const weekIndex = updatedWeeks.findIndex(([weekNum]) => weekNum === newMaterial.week);
             if (weekIndex !== -1) {
-                updatedWeeks[weekIndex][1].push(newMaterial);
+                if (newMaterial.type === 0) {
+                    updatedWeeks[weekIndex][1].lectures.push(newMaterial);
+                } else {
+                    updatedWeeks[weekIndex][1].sections.push(newMaterial);
+                }
             } else {
-                updatedWeeks.push([newMaterial.week, [newMaterial]]);
+                updatedWeeks.push([newMaterial.week, newMaterial.type === 0 ? { lectures: [newMaterial], sections: [] } : { lectures: [], sections: [newMaterial] }]);
             }
             return updatedWeeks;
         });
@@ -108,36 +115,26 @@ export default function Weeks({ role }) {
                     />
                     {openWeeks[weekIndex] && (
                         <div className={classes.week_content}>
-                            {materials.map((material) => (
-                                <div className={classes.main} key={material.id}>
-                                    <LecSec
-                                        role={role}
-                                        materialType={material.type === 0 ? `${t("Lecture")} ${weekNum}` : `${t("Section")} ${weekNum}`}
-                                        onDelete={() => handleDelete(weekIndex, material.id)}
-                                        material={material}
-                                        weekNum={weekNum}
-                                        onAddMaterial={handleAddMaterial} 
-                                    />
-                                </div>
-                            ))}
-                            {materials.length === 0 && (
-                                <div className={classes.main}>
-                                    <LecSec
-                                        role={role}
-                                        materialType={t("Lecture")}
-                                        onDelete={() => handleDelete(weekIndex, null)}
-                                        weekNum={weekNum}
-                                        onAddMaterial={handleAddMaterial}
-                                    />
-                                    <LecSec
-                                        role={role}
-                                        materialType={t("Section")}
-                                        onDelete={() => handleDelete(weekIndex, null)}
-                                        weekNum={weekNum}
-                                        onAddMaterial={handleAddMaterial}
-                                    />
-                                </div>
-                            )}
+                            <div className={classes.main}>
+                                <LecSec
+                                    role={role}
+                                    materialType={t("Lecture")}
+                                    materials={materials.lectures}
+                                    onDelete={(materialId) => handleDelete(weekIndex, materialId)}
+                                    weekNum={weekNum}
+                                    onAddMaterial={handleAddMaterial}
+                                />
+                            </div>
+                            <div className={classes.main}>
+                                <LecSec
+                                    role={role}
+                                    materialType={t("Section")}
+                                    materials={materials.sections}
+                                    onDelete={(materialId) => handleDelete(weekIndex, materialId)}
+                                    weekNum={weekNum}
+                                    onAddMaterial={handleAddMaterial}
+                                />
+                            </div>
                         </div>
                     )}
                 </Week>
