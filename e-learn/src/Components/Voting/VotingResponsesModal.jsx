@@ -2,10 +2,17 @@ import classes from './VotingResponsesModal.module.css';
 import { useTranslation } from 'react-i18next';
 import { forwardRef } from 'react';
 import img from '../../assets/avatar.jpg'
-import { useCallback, useImperativeHandle, useRef } from 'react';
+import { useCallback, useImperativeHandle, useRef, useState, useEffect } from 'react';
+import { httpRequest } from '../../HTTP';
+import { getAuthToken } from '../../Helpers/AuthHelper';
+import { useParams } from 'react-router-dom';
+
 const VotingListModal = forwardRef(function VotingListModal(_, ref) {
     const { t } = useTranslation();
     const votingResponsesModal = useRef();
+    const params = useParams();
+    const voteId = params.voteId();
+    const [response, setResponses] = useState[null];
 
     useImperativeHandle(ref, () => ({
         open: () => {
@@ -22,6 +29,14 @@ const VotingListModal = forwardRef(function VotingListModal(_, ref) {
         }
     }, [ref]);
 
+    async function fetchVoteResponses(){
+        try{
+            const response = await httpRequest('GET', ``)
+        }
+        catch(err){
+            console.log()
+        }
+    }
     const respones = [
         {
             id: 1,

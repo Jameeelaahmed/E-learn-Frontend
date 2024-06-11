@@ -65,7 +65,9 @@ export default function Sidebar() {
     }
 
     const profilePictureName = localStorage.getItem('profilePicture');
-    const profilePicture = profilePictureName ? `https://elearnapi.runasp.net/api/files/ViewFile/ProfilePictures/${profilePictureName}` : pro;
+    var profilePicture = `https://elearnapi.runasp.net/api/files/ViewFile/ProfilePictures/${profilePictureName}`;
+    if(profilePictureName == 'null')
+        profilePicture = pro;
     // * START ACTIVE
     return (
         <div
