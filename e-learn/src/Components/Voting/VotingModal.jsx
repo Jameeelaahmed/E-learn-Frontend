@@ -1,3 +1,4 @@
+// VotingModal Component:
 import React, { forwardRef, useImperativeHandle, useRef, useCallback, useState } from 'react';
 import { createPortal } from 'react-dom';
 import classes from './VotingModal.module.css';
@@ -9,7 +10,7 @@ import SubmitButton from '../Button/SubmitButton';
 import { httpRequest } from '../../HTTP';
 import { getAuthToken } from '../../Helpers/AuthHelper';
 
-const VotingModal = forwardRef(function VotingModal({ collectFormData }, ref) {
+const VotingModal = forwardRef(function VotingModal({ onVotingCreated }, ref) {
     log('<ADDVSModal /> rendered');
     const { t } = useTranslation();
     const checkboxDropdownRef = useRef();
@@ -58,9 +59,10 @@ const VotingModal = forwardRef(function VotingModal({ collectFormData }, ref) {
         try {
             const token = getAuthToken();
             const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Voting/CreateVoting', token, requestBody);
-            if (response.statusCode === 200) {
+            if (response.statusCode === 201) {
                 console.log('Voting created successfully');
                 ref.current.close();
+                onVotingCreated();
                 
             } else {
                 console.log(response);
@@ -88,7 +90,7 @@ const VotingModal = forwardRef(function VotingModal({ collectFormData }, ref) {
                     </div>
                     <div className={classes.input_container}>
                         <label htmlFor="date">{t("end-date")}</label>
-                        <input type="date" dir='auto' name="endDate" />
+                        <input type="date" dir='auto' name="endDate" /> 
                     </div>
                 </div>
                 <div className={classes.description}>

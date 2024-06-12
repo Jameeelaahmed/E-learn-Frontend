@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import classes from './Vote.module.css';
-import VotingListModal from './VotingResponsesModal'
-import { useRef } from 'react';
-export default function Vote() {
+import VotingListModal from './VotingResponsesModal';
 
-    const [options, setOptions] = useState([
-        { id: 1, percentage: 0 },
-        { id: 2, percentage: 0 },
-        { id: 3, percentage: 0 }
-    ]);
+export default function Vote({ vote }) {
+    const [options, setOptions] = useState([]);
 
-    // const [options, setOptions] = useState([]);
+    useEffect(() => {
+        if (vote) {
+            const voteOptions = [
+                { id: 1, description: vote.option1, percentage: 0 },
+                { id: 2, description: vote.option2, percentage: 0 },
+                { id: 3, description: vote.option3, percentage: 0 },
+                { id: 4, description: vote.option4, percentage: 0 },
+                { id: 5, description: vote.option5, percentage: 0 }
+            ].filter(option => option.description !== null);
+            setOptions(voteOptions);
+                console.log('Vote received:', vote);
+                console.log('Vote Options:', voteOptions);
+                console.log('Vote title:', vote.title);
+        } else {
+            console.log('No vote data available');
+        }
+    }, [vote]);
 
     const handleVote = (id) => {
         const totalPercentage = options.reduce((total, option) => total + option.percentage, 0);
@@ -30,50 +41,35 @@ export default function Vote() {
         ViewResponses.current.open();
     }
 
-
-    async function fetchVote() {
-        try {
-            var token = getAuthToken();
-            const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Voting/GetVoting/${voteId}`, token);
-            if (response.statusCode === 200) {
-                const options = [
-                    { id: 1, percentage: response.data.option1 },
-                    { id: 2, percentage: response.data.option2 },
-                    { id: 3, percentage: response.data.option3 },
-                    { id: 4, percentage: response.data.option4 },
-                    { id: 5, percentage: response.data.option5 }
-                ]
-                setOptions(options);
-            }
-
-        }
-        catch (error) {
-            console.log('an error occurred, ', error);
-        }
-    }
     return (
         <div className={classes.question_container}>
-            <p className={classes.description}>Description</p>
-            {options.map(option => (
-                <label key={option.id}>
-                    <p>Description</p>
-                    <div className={classes.bar}>
-                        <input type="radio" name="option" onClick={() => handleVote(option.id)} />
-                        <div className={classes.radio_circle}></div>
-                        <div className={classes.grey}>
-                            <span style={{ width: `${option.percentage}%` }} className={classes.main_color} data-progress={`${option.percentage}%`}></span>
-                        </div>
+            {vote ? (
+                <>
+                    <p className={classes.description}>{vote.description}</p>
+                    {options.map(option => (
+                        <label key={option.id}>
+                            <p>{option.description}</p>
+                            <div className={classes.bar}>
+                                <input type="radio" name="option" onClick={() => handleVote(option.id)} />
+                                <div className={classes.radio_circle}></div>
+                                <div className={classes.grey}>
+                                    <span style={{ width: `${option.percentage}%` }} className={classes.main_color} data-progress={`${option.percentage}%`}></span>
+                                </div>
+                            </div>
+                        </label>
+                    ))}
+                    <div className={classes.voting_list}>
+                        <VotingListModal ref={ViewResponses} />
+                        <p onClick={handleOpenResponses}>Open Responses</p>
                     </div>
-                </label>
-            ))}
-            <div className={classes.voting_list}>
-                <VotingListModal ref={ViewResponses} />
-                <p onClick={handleOpenResponses}>Open Responses</p>
-            </div>
-            <div className="date_question_container">
-                <p>Start Date: Date</p>
-                <p>End Date: Date</p>
-            </div>
+                    <div className="date_question_container">
+                        <p>Start Date: {new Date(vote.start).toLocaleString()}</p>
+                        <p>End Date: {new Date(vote.end).toLocaleString()}</p>
+                    </div>
+                </>
+            ) : (
+                <p>No vote selected</p>
+            )}
         </div>
     );
 }

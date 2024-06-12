@@ -8,10 +8,12 @@ import Delete from '../Button/Delete';
 import Edit from '../Button/Edit';
 import { httpRequest } from '../../HTTP';
 
-export default function VSNavBar() {
+export default function VSNavBar({ onVoteSelected }) { // Add onVoteSelected prop
     const [votes, setVotes] = useState([]);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
+    const [selectedVote, setSelectedVote] = useState(null);
+
     const role = getRole();
 
     function getRole() {
@@ -39,7 +41,7 @@ export default function VSNavBar() {
         };
     }, []);
 
-    let wid = ""
+    let wid = "";
     if (role === "Staff") {
         wid = "changeWidth";
     }
@@ -47,7 +49,7 @@ export default function VSNavBar() {
     async function GetUserGroupsVotes() {
         try {
             const response = await httpRequest('GET', 'https://elearnapi.runasp.net/api/Voting/GetUserGroupsVotes', localStorage.getItem('token'));
-            
+
             console.log(response);
             if (response.statusCode === 200) {
                 setVotes(response.data);
@@ -81,11 +83,26 @@ export default function VSNavBar() {
         }
     }
 
+    async function handleVoteClick(voteId) {
+        try {
+            const token = localStorage.getItem('token');
+            console.log('Getting vote with id:', voteId);
+            const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Voting/GetVoting/${voteId}`, token);
+            console.log(response);
+            if (response.statusCode === 200) {
+                setSelectedVote(response.data);
+                onVoteSelected(response.data); // Notify parent component about the selected vote
+            }
+        } catch (error) {
+            console.log('An error occurred:', error);
+        }
+    }
+
     return (
         <div className={isMobile ? classes.vs_navigation_bar_responsive : classes.vs_navigation_bar}>
             {loading && <p>Deleting vote...</p>}
             {message && <p>{message}</p>}
-            <VotingModal ref={addVSDialog} />
+            <VotingModal ref={addVSDialog} onVotingCreated={GetUserGroupsVotes} />
             {role === 'Staff' &&
                 <div className={classes.add_survey} onClick={handleOpenAddVSModal}>
                     <FaIcons.FaPlus className={classes.icon} />
@@ -95,7 +112,7 @@ export default function VSNavBar() {
             <ul className={isMobile ? classes.titles_wrapper : ""}>
                 {votes.map((vote) => (
                     <div key={vote.id} className={classes.box_wrapper}>
-                        <li className={wid}>
+                        <li className={wid} onClick={() => handleVoteClick(vote.id)}>
                             {isMobile ? (
                                 <div className={classes.box}>
                                     <p>{vote.title}</p>
