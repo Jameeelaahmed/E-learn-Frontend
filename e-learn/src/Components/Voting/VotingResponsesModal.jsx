@@ -10,9 +10,6 @@ import { useParams } from 'react-router-dom';
 const VotingListModal = forwardRef(function VotingListModal(_, ref) {
     const { t } = useTranslation();
     const votingResponsesModal = useRef();
-    const params = useParams();
-    const voteId = params.voteId();
-    const [response, setResponses] = useState[null];
 
     useImperativeHandle(ref, () => ({
         open: () => {
@@ -28,15 +25,6 @@ const VotingListModal = forwardRef(function VotingListModal(_, ref) {
             ref.current.close();
         }
     }, [ref]);
-
-    async function fetchVoteResponses(){
-        try{
-            const response = await httpRequest('GET', ``)
-        }
-        catch(err){
-            console.log()
-        }
-    }
     const respones = [
         {
             id: 1,
