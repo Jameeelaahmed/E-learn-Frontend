@@ -104,7 +104,7 @@
 }
 
 [dir="rtl"] .chat__item {
-    transform-origin: left;
+    transform-origin: right;
 }
 
 @keyframes showIn {
@@ -263,7 +263,6 @@
 .contextMenu {
     position: fixed;
     background-color: rgba(255, 255, 255, 0.8);
-    /* Semi-transparent background to see the blur effect */
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     list-style: none;
@@ -274,16 +273,13 @@
     transform: scale(0.9);
     transition: opacity 0.3s ease, transform 0.3s ease;
     pointer-events: none;
-    /* Prevents interaction when hidden */
     backdrop-filter: blur(10px);
-    /* Blur effect */
 }
 
 .contextMenu.show {
     opacity: 1;
     transform: scale(1);
     pointer-events: auto;
-    /* Allows interaction when shown */
 }
 
 .contextMenu li {
@@ -293,4 +289,8 @@
 
 .contextMenu li:hover {
     background-color: #f0f0f0;
+}
+
+.chat__item__content {
+    position: relative;
 }
