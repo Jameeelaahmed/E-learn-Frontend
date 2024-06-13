@@ -61,24 +61,7 @@ export default function Groups() {
         navigate(`assignments/${id}`);
     }
 
-    // const assignments = [
-    //     {
-    //         id: 1,
-    //         subTitle: "Assignment 1",
-    //         insName: "Dr. Ahmed"
-    //     },
-    //     {
-    //         id: 2,
-    //         subTitle: "Assignment 2",
-    //         insName: "Dr. Sara"
-    //     },
-    //     {
-    //         id: 3,
-    //         subTitle: "Assignment 3",
-    //         insName: "Dr. John"
-    //     },
-    // ];
-
+    
     return (
         <ul className={classes.classes}>
             {location.pathname === "/groups" &&
