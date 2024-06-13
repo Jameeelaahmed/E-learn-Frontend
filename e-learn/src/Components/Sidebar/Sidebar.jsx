@@ -6,7 +6,7 @@ import * as FaIcons from "react-icons/fa6";
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom';
 import { getFullName } from '../../Helpers/AuthHelper';
-// eslint-disable-next-line react/prop-types
+
 export default function Sidebar() {
     //* LANG 
     const { t } = useTranslation();
@@ -29,32 +29,44 @@ export default function Sidebar() {
         {
             title: t('Main'),
             icon: <FaIcons.FaHouse className={classes.icon} />,
-            link: role === 'Staff' ? '/InsMain' : '/stuMain'
+            link: role === 'Staff' ? '/InsMain' : '/stuMain',
+            roles: ['Staff', 'Student'] // This item is visible to all roles
+        },
+        {
+            title: t('Users'),
+            icon: <FaIcons.FaUser className={classes.icon} />,
+            link: 'users',
+            roles: ['Admin'] // This item is visible to all roles
         },
         {
             title: t('Groups'),
             icon: <FaIcons.FaBook className={classes.icon} />,
-            link: 'groups'
+            link: 'groups',
+            roles: ['Staff', 'Student'] // This item is visible to all roles
         },
         {
             title: t('Voting'),
             icon: <FaIcons.FaSquarePollVertical className={classes.icon} />,
-            link: '/voting'
+            link: '/voting',
+            roles: ['Staff', 'Student'] // This item is visible to all roles
         },
         {
             title: t('Survey'),
             icon: <FaIcons.FaClipboard className={classes.icon} />,
-            link: '/survey'
+            link: '/survey',
+            roles: ['Staff', 'Student'] // This item is visible to all roles
         },
         {
             title: t('Announcements'),
             icon: <FaIcons.FaBullhorn className={classes.icon} />,
-            link: '/announcements'
+            link: '/announcements',
+            roles: ['Staff', 'Student'] // This item is visible to all roles
         },
         {
             title: t('Community'),
             icon: <FaIcons.FaUsers className={classes.icon} />,
-            link: '/community'
+            link: '/community',
+            roles: ['Student', 'Admin'] // This item is visible only to Students and Admins
         }
     ];
 
@@ -66,13 +78,12 @@ export default function Sidebar() {
 
     const profilePictureName = localStorage.getItem('profilePicture');
     var profilePicture = `https://elearnapi.runasp.net/api/files/ViewFile/ProfilePictures/${profilePictureName}`;
-    if(profilePictureName == 'null')
+    if (profilePictureName == 'null')
         profilePicture = pro;
-    // * START ACTIVE
+    // * END ACTIVE
+
     return (
-        <div
-            className={`${isOpen ? classes.sidebar : classes.sidebar_active}`}
-        >
+        <div className={`${isOpen ? classes.sidebar : classes.sidebar_active}`}>
             <FaIcons.FaArrowLeftLong
                 className={classes.icon}
                 onClick={handleClose} />
@@ -83,13 +94,16 @@ export default function Sidebar() {
                 <p>{name}</p>
             </Link>
             <ul>
-                {sidebarData.map((item) => (
-                    <Link to={item.link} key={item.title} className={`${classes.link} ${(active === item.title) ? classes.active : undefined}`} onClick={() => handleActive(item.title)}>
-                        <li>
-                            {item.icon}
-                            <span>{item.title}</span>
-                        </li>
-                    </Link>))
+                {sidebarData
+                    .filter(item => item.roles.includes(role))
+                    .map(item => (
+                        <Link to={item.link} key={item.title} className={`${classes.link} ${(active === item.title) ? classes.active : undefined}`} onClick={() => handleActive(item.title)}>
+                            <li>
+                                {item.icon}
+                                <span>{item.title}</span>
+                            </li>
+                        </Link>
+                    ))
                 }
             </ul>
         </div>

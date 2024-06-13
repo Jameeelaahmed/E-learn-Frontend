@@ -53,8 +53,10 @@ export default function Login() {
 
                 if (role === 'Student') {
                     navigate('/stuMain');
-                } else if (role === 'Staff' || role === 'Admin') {
+                } else if (role === 'Staff') {
                     navigate('/InsMain');
+                } else if (role === "Admin") {
+                    navigate('users')
                 }
             } else {
                 // Unsuccessful login
@@ -92,7 +94,7 @@ export default function Login() {
                             className={classes.input}
                             type="password"
                             ref={password}
-                            />
+                        />
                     </div>
                     {error && <p className='error'>{error}</p>}
                     <input
@@ -100,7 +102,7 @@ export default function Login() {
                         value={isLoading ? 'جاري التحميل...' : 'تسجيل دخول'}
                         className={classes.input}
                         disabled={isLoading}
-                        />
+                    />
                     <div className={classes.forget}>
                         <p>هل نسيت كلمة المرور؟</p>
                         <Link to="forgetpassword">نسيت كلمة المرور</Link>

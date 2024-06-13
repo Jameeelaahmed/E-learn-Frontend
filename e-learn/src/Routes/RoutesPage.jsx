@@ -20,6 +20,7 @@ import Profile from '../Pages/Profile/Profile';
 // import StudentMain from '../Pages/MainPageStudent/StudentMain';
 import StuMain from '../Pages/MainPageSTU/StuMain';
 import Container from '../Pages/Chat/Container';
+import Users from '../Pages/Users/Users';
 // Role-based route component
 function RoleBasedRoutes() {
     const role = getRole();
@@ -27,6 +28,11 @@ function RoleBasedRoutes() {
         return <Outlet />;
     } else if (role === 'Student') {
         return <Outlet />;
+    } else if (role === 'Admin') {
+        return <Outlet />;
+    } else {
+        // Redirect to login if role is not recognized
+        return <Navigate to="/auth" />;
     }
 }
 
@@ -37,6 +43,10 @@ function getRole() {
 
 // console.log(getRole());
 
+const adminRoutes = [
+    { path: '/users', element: <Users /> }
+
+]
 
 const instructorRoutes = [
     { path: 'InsMain', element: <InsMain /> },
@@ -98,7 +108,10 @@ const router = createBrowserRouter([
                     {
                         path: '/',
                         element: <RoleBasedRoutes />,
-                        children: getRole() === 'Staff' ? instructorRoutes : studentRoutes,
+                        children:
+                            getRole() === 'Staff' ? instructorRoutes :
+                                getRole() === "Admin" ? adminRoutes :
+                                    getRole() === "Student" ? studentRoutes : [],
                     },
                 ],
             },

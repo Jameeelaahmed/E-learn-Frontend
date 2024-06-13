@@ -1,27 +1,27 @@
 import { useState, useRef, useEffect } from 'react';
 import classes from './chat.module.css';
-import img from '../../assets/avatar.jpg';
 import { useTranslation } from 'react-i18next';
-
-export default function Chat() {
+import Empty from '../Empty/Empty';
+import { format, isSameDay, isSameWeek } from 'date-fns';
+export default function Chat({ selectedChat }) {
     const messagesEndRef = useRef(null);
     const inputRef = useRef(null);
     const { t } = useTranslation();
 
-    const initialChatItems = [
-        {
-            key: 1,
-            image: "https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg",
-            type: "sender",
-            msg: "Hi Tim, How are you?",
-        },
-    ];
+    const [chat, setChat] = useState([]);
+    const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0 });
+    const [contextMessageMenu, setContextMessageMenu] = useState({ visible: false, x: 0, y: 0, messageKey: null });
 
-    const [chat, setChat] = useState(initialChatItems);
-    const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, type: null, messageKey: null });
+    useEffect(() => {
+        if (selectedChat) {
+            setChat(selectedChat.messages);
+        }
+    }, [selectedChat]);
 
     const scrollToBottom = () => {
-        messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+        }
     };
 
     useEffect(() => {
@@ -32,7 +32,8 @@ export default function Chat() {
         };
 
         const handleClick = () => {
-            setContextMenu({ visible: false, x: 0, y: 0, type: null, messageKey: null });
+            setContextMenu({ visible: false, x: 0, y: 0 });
+            setContextMessageMenu({ visible: false, x: 0, y: 0, messageKey: null });
         };
 
         window.addEventListener("keydown", handleKeyDown);
@@ -43,7 +44,7 @@ export default function Chat() {
             window.removeEventListener("keydown", handleKeyDown);
             window.removeEventListener("click", handleClick);
         };
-    }, []);
+    }, [chat]);
 
     const addMessage = () => {
         if (inputRef.current.value !== "") {
@@ -52,6 +53,7 @@ export default function Chat() {
                 type: "sender",
                 msg: inputRef.current.value,
                 image: "https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg",
+                timestamp: new Date().toISOString(),  // Ensure ISO format
             };
             setChat((prevChat) => [...prevChat, newChatItem]);
             inputRef.current.value = "";
@@ -59,19 +61,27 @@ export default function Chat() {
         }
     };
 
-    const handleContextMenu = (e, messageKey = null) => {
+    const handleContextMenu = (e) => {
         e.preventDefault();
         const clickY = e.clientY;
         const menuHeight = 100;
         const windowHeight = window.innerHeight;
-
         const adjustedY = (clickY + menuHeight > windowHeight) ? clickY - menuHeight : clickY;
 
-        setContextMenu({ visible: false, x: 0, y: 0, type: null, messageKey: null });
+        setContextMessageMenu({ visible: false, x: 0, y: 0, messageKey: null });
+        setContextMenu({ visible: true, x: e.clientX, y: adjustedY });
+    };
 
-        setTimeout(() => {
-            setContextMenu({ visible: true, x: e.clientX, y: adjustedY, type: messageKey ? 'message' : 'general', messageKey });
-        }, 0);
+    const handleContextMessageMenu = (e, messageKey) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const clickY = e.clientY;
+        const menuHeight = 100;
+        const windowHeight = window.innerHeight;
+        const adjustedY = (clickY + menuHeight > windowHeight) ? clickY - menuHeight : clickY;
+
+        setContextMenu({ visible: false, x: 0, y: 0 });
+        setContextMessageMenu({ visible: true, x: e.clientX, y: adjustedY, messageKey });
     };
 
     const editMessage = (key) => {
@@ -89,72 +99,114 @@ export default function Chat() {
         setChat((prevChat) => prevChat.filter((msg) => msg.key !== key));
     };
 
+    useEffect(() => {
+        scrollToBottom();
+    }, [chat]);
     return (
-        <div className={classes.main__chatcontent} onContextMenu={(e) => handleContextMenu(e)}>
-            <div className={classes.content__header}>
-                <div className={classes.blocks}>
-                    <div className={classes.current_chatting_user}>
-                        <img className={classes.img} src={img} alt="current chatting user" />
-                        <p>Tim Hover</p>
-                    </div>
-                </div>
-
-                <div className={classes.blocks}>
-                    <div className={classes.settings}>
-                        <i className="fa fa-cog"></i>
-                    </div>
-                </div>
-            </div>
-            <div className={classes.content__body}>
-                <div className={classes.chat__items}>
-                    {chat.map((itm) => (
-                        <div
-                            key={itm.key}
-                            className={`${classes.chat__item} ${itm.type === "sender" ? classes.sender : ""} ${itm.type === "receiver" ? classes.receiver : ""}`}
-                            onContextMenu={(e) => itm.type === 'sender' && handleContextMenu(e, itm.key)}
-                        >
-                            <div className={`${classes.chat__item__content}`}>
-                                <div className={classes.chat__msg} dir='auto'>{itm.msg}</div>
-                                <div className={classes.chat__meta}>
-                                    <span>16 mins ago</span>
-                                </div>
+        <div className={classes.main__chatcontent}>
+            {selectedChat ? (
+                <>
+                    <div className={classes.content__header}>
+                        <div className={classes.blocks}>
+                            <div className={classes.current_chatting_user}>
+                                <>
+                                    <img className={classes.img} src={selectedChat.image} alt={selectedChat.name} />
+                                    <p>{selectedChat.name}</p>
+                                </>
                             </div>
-                            <img className={classes.img} src={img} alt="avatar" />
                         </div>
-                    ))}
-                    <div ref={messagesEndRef} />
-                </div>
-                {contextMenu.visible && (
-                    <ul className={`${classes.contextMenu} ${classes.show}`} style={{ top: `${contextMenu.y}px`, left: `${contextMenu.x}px` }}>
-                        {contextMenu.type === 'message' ? (
-                            <>
-                                <li onClick={() => editMessage(contextMenu.messageKey)}>Edit</li>
-                                <li onClick={() => deleteMessage(contextMenu.messageKey)}>Delete</li>
-                            </>
-                        ) : (
-                            <>
-                                <li onClick={() => alert('Action 1')}>{t("Delete")}</li>
-                                <li onClick={() => alert('Action 2')}>{t("contact-info")}</li>
-                            </>
+
+                        <div className={classes.blocks}>
+                            <div className={classes.settings}>
+                                <i className="fa fa-cog"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={classes.content__body} onContextMenu={handleContextMenu}>
+                        <div className={classes.chat__items}>
+                            {chat.map((itm, index) => {
+                                const date = new Date(itm.timestamp);
+                                let formattedTime = 'Invalid time';
+                                try {
+                                    if (!isNaN(date)) {
+                                        formattedTime = format(date, 'HH:mm');
+                                    }
+                                } catch (e) {
+                                    console.error('Error parsing date:', e);
+                                }
+
+                                const showDate = index === 0 || !isSameDay(date, new Date(chat[index - 1].timestamp));
+                                let formattedDate = '';
+                                try {
+                                    if (!isNaN(date)) {
+                                        if (index === 0 || !isSameWeek(date, new Date(chat[index - 1].timestamp))) {
+                                            formattedDate = format(date, 'P'); // Format as date if new week
+                                        } else {
+                                            formattedDate = format(date, 'EEEE'); // Format as day name if same week
+                                        }
+                                    }
+                                } catch (e) {
+                                    console.error('Error parsing date:', e);
+                                }
+
+                                return (
+                                    <div key={itm.key}>
+                                        {showDate && (
+                                            <div className={classes.chat__date}>
+                                                <p>
+                                                    {formattedDate}
+                                                </p>
+                                            </div>
+                                        )}
+                                        <div
+                                            className={`${classes.chat__item} ${itm.type === "sender" ? classes.sender : ""} ${itm.type === "receiver" ? classes.receiver : ""}`}
+                                            onContextMenu={(e) => handleContextMessageMenu(e, itm.key)}
+                                        >
+                                            <div className={`${classes.chat__item__content}`}>
+                                                <div className={classes.chat__msg} dir='auto'>{itm.msg}</div>
+                                                <div className={classes.chat__meta}>
+                                                    <span>{formattedTime}</span>
+                                                </div>
+                                            </div>
+                                            <img className={classes.img} src={itm.image} alt="avatar" />
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                            <div ref={messagesEndRef} />
+                        </div>
+                        {contextMenu.visible && (
+                            <ul className={`${classes.contextMenu} ${classes.show}`} style={{ top: `${contextMenu.y}px`, left: `${contextMenu.x}px` }}>
+                                <li>Option 1</li>
+                                <li>Option 2</li>
+                            </ul>
                         )}
-                    </ul>
-                )}
-            </div>
-            <div className={classes.content__footer}>
-                <div className={classes.sendNewMessage}>
-                    <button className={classes.addFiles}>
-                        <i className="fa fa-plus"></i>
-                    </button>
-                    <input
-                        type="text"
-                        placeholder="Type a message here"
-                        ref={inputRef}
-                    />
-                    <button className={classes.btnSendMsg} id="sendMsgBtn" onClick={addMessage}>
-                        <i className="fa fa-paper-plane"></i>
-                    </button>
-                </div>
-            </div>
+                        {contextMessageMenu.visible && (
+                            <ul className={`${classes.contextMenu} ${classes.show}`} style={{ top: `${contextMessageMenu.y}px`, left: `${contextMessageMenu.x}px` }}>
+                                <li onClick={() => editMessage(contextMessageMenu.messageKey)}>Edit</li>
+                                <li onClick={() => deleteMessage(contextMessageMenu.messageKey)}>Delete</li>
+                            </ul>
+                        )}
+                    </div>
+                    <div className={classes.content__footer}>
+                        <div className={classes.sendNewMessage}>
+                            <button className={classes.addFiles}>
+                                <i className="fa fa-plus"></i>
+                            </button>
+                            <input
+                                type="text"
+                                placeholder="Type a message here"
+                                ref={inputRef}
+                            />
+                            <button className={classes.btnSendMsg} id="sendMsgBtn" onClick={addMessage}>
+                                <i className="fa fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </>
+            ) : (
+                <Empty message="Select a chat to start messaging" />
+            )}
         </div>
     );
 }

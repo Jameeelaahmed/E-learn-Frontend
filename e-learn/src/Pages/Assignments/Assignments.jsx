@@ -12,11 +12,12 @@ export default function Assignments() {
     log('<Assignments /> rendered', 1);
     const location = useLocation();
     const path = location.pathname;
-    console.log(path);
+    // console.log(path);
 
+    console.log("iam here")
     return (
         <div className={classes.assignments}>
-            {path === `/${groupId}/assignments` && <Groups />}
+            {path === `/groups/assignments` && <Groups />}
         </div>
     );
 }

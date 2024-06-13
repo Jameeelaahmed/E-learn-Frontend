@@ -6,7 +6,7 @@
 
 .chat_contacts {
     background-color: var(--white);
-    width: 250px;
+    width: 365px;
     height: 572px;
     overflow: auto;
 }
