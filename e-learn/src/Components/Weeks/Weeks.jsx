@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { useTranslation } from 'react-i18next';
 import { useParams } from "react-router-dom";
 import { httpRequest } from "../../HTTP";
-import { getAuthToken } from "../../Helpers/AuthHelper";
+import { getAuthToken, getRole } from "../../Helpers/AuthHelper";
 
 export default function Weeks({ role }) {
     const [weeks, setWeeks] = useState([]);
@@ -15,7 +15,7 @@ export default function Weeks({ role }) {
     const params = useParams();
     const groupId = params.groupId;
 
-    const isInstructor = role === 'Staff';
+    const isInstructor = getRole() === 'Staff';
 
     useEffect(() => {
         async function fetchMaterials() {
@@ -114,7 +114,7 @@ export default function Weeks({ role }) {
     }
 
     const { t } = useTranslation();
-
+    console.log(isInstructor);
     return (
         <div className={classes.weeks}>
             {isInstructor &&
