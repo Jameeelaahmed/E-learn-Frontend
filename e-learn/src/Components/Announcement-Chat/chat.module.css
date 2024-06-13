@@ -107,12 +107,20 @@
 }
 
 
-[dir="ltr"] .chat__item {
+[dir="rtl"] .chat__item.receiver {
+    transform-origin: left;
+}
+
+[dir="rtl"] .chat__item.receiver {
     transform-origin: right;
 }
 
-[dir="rtl"] .chat__item {
+[dir="ltr"] .chat__item.sender {
     transform-origin: right;
+}
+
+[dir="rtl"] .chat__item.sender {
+    transform-origin: left;
 }
 
 @keyframes showIn {
@@ -151,12 +159,10 @@
 
 [dir="ltr"] .receiver .chat__item__content {
     border-radius: 10px 10px 10px 0px;
-    flex-direction: row-reverse;
 }
 
 [dir="rtl"] .receiver .chat__item__content {
-    border-radius: 10px 10px 10px 0px;
-    flex-direction: row;
+    border-radius: 10px 10px 0px 10px;
 }
 
 [dir="ltr"] .receiver {
@@ -164,7 +170,7 @@
 }
 
 [dir="rtl"] .receiver {
-    flex-direction: row;
+    flex-direction: row-reverse;
 }
 
 .sender .chat__item__content {
@@ -183,7 +189,7 @@
 }
 
 [dir="rtl"] .sender .chat__item__content {
-    border-radius: 10px 10px 0px 10px;
+    border-radius: 10px 10px 10px 0px;
 }
 
 [dir="ltr"] .sender .chat__item__content {
@@ -191,7 +197,7 @@
 }
 
 [dir="rtl"] .sender {
-    flex-direction: row-reverse;
+    flex-direction: row;
 }
 
 [dir="ltr"] .sender {
@@ -228,7 +234,15 @@
     justify-content: space-between;
     padding: 10px;
     border-radius: 8px;
+}
+
+[dir="ltr"] .sendNewMessage {
+    border-radius: 0 0 32px 0;
+}
+
+[dir="rtl"] .sendNewMessage {
     border-radius: 0 0 0px 32px;
+
 }
 
 .sendNewMessage button {
