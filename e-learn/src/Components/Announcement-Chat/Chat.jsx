@@ -129,7 +129,7 @@ export default function Chat({ selectedChat }) {
                                 let formattedTime = 'Invalid time';
                                 try {
                                     if (!isNaN(date)) {
-                                        formattedTime = format(date, 'HH:mm');
+                                        formattedTime = format(date, 'h:mm a'); // Non-digital time format
                                     }
                                 } catch (e) {
                                     console.error('Error parsing date:', e);
@@ -148,7 +148,6 @@ export default function Chat({ selectedChat }) {
                                 } catch (e) {
                                     console.error('Error parsing date:', e);
                                 }
-
                                 return (
                                     <div key={itm.key}>
                                         {showDate && (
@@ -160,12 +159,11 @@ export default function Chat({ selectedChat }) {
                                         )}
                                         <div
                                             className={`${classes.chat__item} ${itm.type === "sender" ? classes.sender : ""} ${itm.type === "receiver" ? classes.receiver : ""}`}
-                                            onContextMenu={(e) => handleContextMessageMenu(e, itm.key)}
                                         >
-                                            <div className={`${classes.chat__item__content}`}>
+                                            <div className={`${classes.chat__item__content}`} onContextMenu={(e) => handleContextMessageMenu(e, itm.key)}>
                                                 <div className={classes.chat__msg} dir='auto'>{itm.msg}</div>
                                                 <div className={classes.chat__meta}>
-                                                    <span>{formattedTime}</span>
+                                                    <span dir='ltr'>{formattedTime}</span>
                                                 </div>
                                             </div>
                                             <img className={classes.img} src={itm.image} alt="avatar" />
