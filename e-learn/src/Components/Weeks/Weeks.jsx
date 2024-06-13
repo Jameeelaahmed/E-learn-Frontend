@@ -80,18 +80,36 @@ export default function Weeks({ role }) {
 
     function handleAddMaterial(newMaterial) {
         setWeeks((prevWeeks) => {
-            const updatedWeeks = [...prevWeeks];
-            const weekIndex = updatedWeeks.findIndex(([weekNum]) => weekNum === newMaterial.week);
-            if (weekIndex !== -1) {
-                if (newMaterial.type === 0) {
-                    updatedWeeks[weekIndex][1].lectures.push(newMaterial);
-                } else {
-                    updatedWeeks[weekIndex][1].sections.push(newMaterial);
+            const updatedWeeks = prevWeeks.map(([weekNum, materials]) => {
+                if (weekNum === newMaterial.week.toString()) {
+                    if (newMaterial.type === 0) {
+                        return [weekNum, { ...materials, lectures: [...materials.lectures, newMaterial] }];
+                    } else {
+                        return [weekNum, { ...materials, sections: [...materials.sections, newMaterial] }];
+                    }
                 }
-            } else {
-                updatedWeeks.push([newMaterial.week, newMaterial.type === 0 ? { lectures: [newMaterial], sections: [] } : { lectures: [], sections: [newMaterial] }]);
+                return [weekNum, materials];
+            });
+
+            const weekExists = updatedWeeks.some(([weekNum]) => weekNum === newMaterial.week.toString());
+            if (!weekExists) {
+                const newWeek = [newMaterial.week.toString(), newMaterial.type === 0 ? { lectures: [newMaterial], sections: [] } : { lectures: [], sections: [newMaterial] }];
+                updatedWeeks.push(newWeek);
             }
+
             return updatedWeeks;
+        });
+
+        // Ensure the newly added material's week is open
+        setOpenWeeks(prevOpenWeeks => {
+            const updatedOpenWeeks = [...prevOpenWeeks];
+            const weekIndex = weeks.findIndex(([weekNum]) => weekNum === newMaterial.week.toString());
+            if (weekIndex !== -1) {
+                updatedOpenWeeks[weekIndex] = true; // Open the week where the material is added
+            } else {
+                updatedOpenWeeks.push(true); // Open the new week
+            }
+            return updatedOpenWeeks;
         });
     }
 
@@ -107,7 +125,7 @@ export default function Weeks({ role }) {
             }
 
             {weeks.map(([weekNum, materials], weekIndex) => (
-                <Week key={weekNum}>
+                <Week key={`${weekNum}-${weekIndex}`}>
                     <WeekHead
                         onSelect={() => handleOpen(weekIndex)}
                         weekNum={weekNum}
