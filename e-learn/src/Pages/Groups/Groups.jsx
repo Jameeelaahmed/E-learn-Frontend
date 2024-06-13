@@ -38,7 +38,7 @@ export default function Groups() {
 
     // Handle assignment click event
     function handleAssignmentClick(id) {
-        navigate(`/groups/${groupId}/assignments/${id}`);
+        navigate(`assignments/${id}`);
     }
 
     const assignments = [
@@ -71,7 +71,7 @@ export default function Groups() {
                     />
                 ))
             }
-            {location.pathname === `/groups/${groupId}/assignments` &&
+            {location.pathname === `/groups/assignments` &&
                 assignments.map((item, index) => (
                     <Group
                         key={index}

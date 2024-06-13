@@ -12,8 +12,9 @@ export default function CourseDetails() {
     const location = useLocation();
     const path = location.pathname;
     const { assignmentId, groupId } = useParams();
-    console.log(assignmentId, groupId);
+    // console.log(assignmentId, groupId);
     const role = getRole();
+    // console.log(role)
     function getRole() {
         return localStorage.getItem('role');
     }
