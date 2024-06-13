@@ -50,7 +50,7 @@ export default function Chat({ selectedChat }) {
         if (inputRef.current.value !== "") {
             const newChatItem = {
                 key: chat.length + 1,
-                type: "sender",
+                type: "receiver",
                 msg: inputRef.current.value,
                 image: "https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg",
                 timestamp: new Date().toISOString(),  // Ensure ISO format
@@ -72,16 +72,23 @@ export default function Chat({ selectedChat }) {
         setContextMenu({ visible: true, x: e.clientX, y: adjustedY });
     };
 
-    const handleContextMessageMenu = (e, messageKey) => {
+    const handleContextMessageMenu = (e, messageKey, type) => {
         e.preventDefault();
         e.stopPropagation();
         const clickY = e.clientY;
         const menuHeight = 100;
         const windowHeight = window.innerHeight;
-        const adjustedY = (clickY + menuHeight > windowHeight) ? clickY - menuHeight : clickY;
+        const adjustedY = clickY + menuHeight > windowHeight ? clickY - menuHeight : clickY;
 
-        setContextMenu({ visible: false, x: 0, y: 0 });
-        setContextMessageMenu({ visible: true, x: e.clientX, y: adjustedY, messageKey });
+        if (type === 'sender') {
+            setContextMenu({ visible: false, x: 0, y: 0 });
+            setContextMessageMenu({ visible: true, x: e.clientX, y: adjustedY, messageKey });
+        }
+
+        if (type === 'receiver') {
+            setContextMenu({ visible: false, x: 0, y: 0 });
+            setContextMessageMenu({ visible: false, x: e.clientX, y: adjustedY, messageKey });
+        }
     };
 
     const editMessage = (key) => {
@@ -98,6 +105,28 @@ export default function Chat({ selectedChat }) {
     const deleteMessage = (key) => {
         setChat((prevChat) => prevChat.filter((msg) => msg.key !== key));
     };
+
+
+    const getFormattedDate = (timestamp) => {
+        // Parse ISO timestamp to Date object
+        const date = parseISO(timestamp);
+
+        if (!isValid(date)) {
+            return '';
+        }
+
+        const today = new Date();
+        if (isSameDay(date, today)) {
+            return t('Today');
+        } else if (isSameDay(subDays(today, 1), date)) {
+            return t('Yesterday');
+        } else if (isSameWeek(date, today)) {
+            return format(date, 'EEEE'); // Day name if same week
+        } else {
+            return format(date, 'P'); // Date format for new week
+        }
+    };
+
 
     useEffect(() => {
         scrollToBottom();
@@ -150,7 +179,7 @@ export default function Chat({ selectedChat }) {
                                 }
                                 return (
                                     <div key={itm.key}>
-                                        {showDate && (
+                                        {showDate && formattedDate && (
                                             <div className={classes.chat__date}>
                                                 <p>
                                                     {formattedDate}
@@ -160,7 +189,7 @@ export default function Chat({ selectedChat }) {
                                         <div
                                             className={`${classes.chat__item} ${itm.type === "sender" ? classes.sender : ""} ${itm.type === "receiver" ? classes.receiver : ""}`}
                                         >
-                                            <div className={`${classes.chat__item__content}`} onContextMenu={(e) => handleContextMessageMenu(e, itm.key)}>
+                                            <div className={`${classes.chat__item__content}`} onContextMenu={(e) => handleContextMessageMenu(e, itm.key, itm.type)}>
                                                 <div className={classes.chat__msg} dir='auto'>{itm.msg}</div>
                                                 <div className={classes.chat__meta}>
                                                     <span dir='ltr'>{formattedTime}</span>
