@@ -25,10 +25,10 @@ export default function CourseDetails() {
             <div className={classes.col}>
                 <GroupNavCard />
                 {role === 'Staff' && (
-                    (path === `assignments` && <AddAssignment />) ||
-                    (path === `assignments/${assignmentId}` && <ShowRespones />))
+                    (path.endsWith(`assignments`) && <AddAssignment />) ||
+                    (path.endsWith(`assignments/${assignmentId}`) && <ShowRespones />))
                 }
-                {role === 'Student' && (path === `/assignments/${assignmentId}` && <AddWork />)}
+                {role === 'Student' && (path.endsWith(`/assignments/${assignmentId}`) && <AddWork />)}
             </div>
         </div>
     );
