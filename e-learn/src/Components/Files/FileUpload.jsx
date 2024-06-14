@@ -34,22 +34,31 @@ export default function FileUpload({ collectFiles }) {
         collectFiles(selectedFiles);
     }, [selectedFiles]);
 
+    function getRole() {
+        return localStorage.getItem('role');
+    }
+
+    const role = getRole()
+
     return (
         <>
-            {/* <div className={classes.upload_card}>
-                <UpButton onClick={handleButtonClick}>{t("upload")}</UpButton>
-                <input
-                    ref={fileInputRef}
-                    id="fileInput"
-                    type="file"
-                    multiple
-                    onChange={handleFileChange}
-                    className={classes.fileInput}
-                />
-            </div> */}
-            {/* <FilesList files={selectedFiles} onDelete={handleDelete} /> */}
-
-            {(path.includes(`assignments/${assignmentId}`)) &&
+            {role === "Staff" && (
+                <>
+                    <div className={`${classes.upload_card} ${classes.wid}`}>
+                        <UpButton classwid="wid" onClick={handleButtonClick}>{t("upload")}</UpButton>
+                        <input
+                            ref={fileInputRef}
+                            id="fileInput"
+                            type="file"
+                            multiple
+                            onChange={handleFileChange}
+                            className={classes.fileInput}
+                        />
+                    </div>
+                    <FilesList files={selectedFiles} onDelete={handleDelete} />
+                </>
+            )}
+            {role === "Student" && path.includes(`assignments/${assignmentId}`) && (
                 <div className={classes.wid}>
                     <FilesList files={selectedFiles} onDelete={handleDelete} />
                     <div className={classes.upload_click}>
@@ -67,7 +76,8 @@ export default function FileUpload({ collectFiles }) {
                         <button className={classes.submit}>{t("submit")}</button>
                     </div>
                 </div>
-            }
+            )}
+
         </>
     );
 };
