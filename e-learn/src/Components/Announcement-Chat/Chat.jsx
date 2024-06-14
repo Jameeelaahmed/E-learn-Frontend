@@ -11,7 +11,7 @@ export default function Chat({ selectedChat }) {
     const [chat, setChat] = useState([]);
     const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0 });
     const [contextMessageMenu, setContextMessageMenu] = useState({ visible: false, x: 0, y: 0, messageKey: null });
-
+    const [edittMessage, setEditMessage] = useState(false);
     useEffect(() => {
         if (selectedChat) {
             setChat(selectedChat.messages);
@@ -50,7 +50,7 @@ export default function Chat({ selectedChat }) {
         if (inputRef.current.value !== "") {
             const newChatItem = {
                 key: chat.length + 1,
-                type: "receiver",
+                type: "sender",
                 msg: inputRef.current.value,
                 image: "https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg",
                 timestamp: new Date().toISOString(),  // Ensure ISO format
@@ -92,7 +92,7 @@ export default function Chat({ selectedChat }) {
     };
 
     const editMessage = (key) => {
-        const newMessage = prompt("Edit your message:");
+        setEditMessage()
         if (newMessage) {
             setChat((prevChat) =>
                 prevChat.map((msg) =>

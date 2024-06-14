@@ -21,6 +21,7 @@ import StuMain from '../Pages/MainPageSTU/StuMain';
 import Container from '../Pages/Chat/Container';
 import Users from '../Pages/Users/Users';
 
+
 function RoleBasedRoutes() {
     const role = getRole();
     if (role === 'Staff') {
@@ -39,11 +40,11 @@ function getRole() {
 }
 
 const adminRoutes = [
-    { path: '/users', element: <Users /> }
+    { path: 'users', element: <Users /> }
 ];
 
 const instructorRoutes = [
-    { path: 'InsMain', element: <InsMain /> },
+    { path: '/InsMain', element: <InsMain /> },
     { path: 'profile', element: <Profile /> },
     { path: 'groups', element: <Groups /> },
     {
@@ -62,7 +63,7 @@ const instructorRoutes = [
 ];
 
 const studentRoutes = [
-    { path: 'stuMain', element: <StuMain /> },
+    { path: '/stuMain', element: <StuMain /> },
     { path: 'groups', element: <Groups /> },
     { path: 'profile', element: <Profile /> },
     {
@@ -103,16 +104,19 @@ const router = createBrowserRouter([
                     {
                         path: '/',
                         element: <RoleBasedRoutes />,
-                        children:
-                            getRole() === 'Staff' ? instructorRoutes :
-                                getRole() === "Admin" ? adminRoutes :
-                                    getRole() === "Student" ? studentRoutes : [],
+                        children: [
+                            ...getRole() === 'Staff' ? instructorRoutes : [],
+                            ...getRole() === "Admin" ? adminRoutes : [],
+                            ...getRole() === "Student" ? studentRoutes : [],
+                        ],
                     },
                 ],
             },
         ],
     },
 ]);
+
+
 
 export default function RoutesPage() {
     return <RouterProvider router={router} />;
