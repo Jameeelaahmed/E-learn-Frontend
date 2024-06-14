@@ -1,10 +1,9 @@
-import classes from './Sidebar.module.css'
-import pro from '../../assets/avatar.jpg'
-import { useState } from 'react'
+import classes from './Sidebar.module.css';
+import pro from '../../assets/avatar.jpg';
+import { useState } from 'react';
 import * as FaIcons from "react-icons/fa6";
-// import { useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { NavLink, useLocation } from 'react-router-dom';
 import { getFullName } from '../../Helpers/AuthHelper';
 
 export default function Sidebar() {
@@ -35,32 +34,32 @@ export default function Sidebar() {
         {
             title: t('Users'),
             icon: <FaIcons.FaUser className={classes.icon} />,
-            link: 'users',
-            roles: ['Admin'] // This item is visible to all roles
+            link: '/users',
+            roles: ['Admin'] // This item is visible to Admin
         },
         {
             title: t('Groups'),
             icon: <FaIcons.FaBook className={classes.icon} />,
-            link: 'groups',
-            roles: ['Staff', 'Student'] // This item is visible to all roles
+            link: '/groups',
+            roles: ['Staff', 'Student'] // This item is visible to Staff and Student
         },
         {
             title: t('Voting'),
             icon: <FaIcons.FaSquarePollVertical className={classes.icon} />,
             link: '/voting',
-            roles: ['Staff', 'Student'] // This item is visible to all roles
+            roles: ['Staff', 'Student'] // This item is visible to Staff and Student
         },
         {
             title: t('Survey'),
             icon: <FaIcons.FaClipboard className={classes.icon} />,
             link: '/survey',
-            roles: ['Staff', 'Student'] // This item is visible to all roles
+            roles: ['Staff', 'Student'] // This item is visible to Staff and Student
         },
         {
             title: t('Announcements'),
             icon: <FaIcons.FaBullhorn className={classes.icon} />,
             link: '/announcements',
-            roles: ['Staff', 'Student'] // This item is visible to all roles
+            roles: ['Staff', 'Student'] // This item is visible to Staff and Student
         },
         {
             title: t('Community'),
@@ -71,14 +70,12 @@ export default function Sidebar() {
     ];
 
     // * START ACTIVE
-    const [active, setActive] = useState("")
-    function handleActive(selectedButton) {
-        setActive(selectedButton);
-    }
+    const location = useLocation();
+    const currentPath = location.pathname;
 
     const profilePictureName = localStorage.getItem('profilePicture');
     var profilePicture = `https://elearnapi.runasp.net/api/files/ViewFile/ProfilePictures/${profilePictureName}`;
-    if (profilePictureName == 'null')
+    if (profilePictureName === 'null')
         profilePicture = pro;
     // * END ACTIVE
 
@@ -87,25 +84,30 @@ export default function Sidebar() {
             <FaIcons.FaArrowLeftLong
                 className={classes.icon}
                 onClick={handleClose} />
-            <Link
+            <NavLink
                 to='profile'
                 className={classes.profile}>
                 <img src={profilePicture} alt="Profile Picture"></img>
                 <p>{name}</p>
-            </Link>
+            </NavLink>
             <ul>
                 {sidebarData
                     .filter(item => item.roles.includes(role))
                     .map(item => (
-                        <Link to={item.link} key={item.title} className={`${classes.link} ${(active === item.title) ? classes.active : undefined}`} onClick={() => handleActive(item.title)}>
+                        <NavLink
+                            to={item.link}
+                            key={item.title}
+                            className={({ isActive }) => `${classes.link} ${isActive ? classes.active : ''}`}
+                            exact
+                        >
                             <li>
                                 {item.icon}
                                 <span>{item.title}</span>
                             </li>
-                        </Link>
+                        </NavLink>
                     ))
                 }
             </ul>
         </div>
-    )
+    );
 }

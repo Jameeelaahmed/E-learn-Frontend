@@ -2,7 +2,7 @@ import classes from './GroupNavCard.module.css';
 import pro from '../../assets/avatar.jpg';
 import { useTranslation } from 'react-i18next';
 import { log } from "../../log";
-import { Link, useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { httpRequest } from '../../HTTP';
 import { getAuthToken } from '../../Helpers/AuthHelper';
@@ -11,12 +11,7 @@ export default function GroupNavCard() {
     log('<GroupNavCard /> rendered', 2);
     const { t } = useTranslation();
     const { groupId } = useParams();
-    const [active, setActive] = useState("");
     const [groupInfo, setGroupInfo] = useState({});
-
-    function handleActive(link) {
-        setActive(link);
-    }
 
     async function getGroupInfo() {
         try {
@@ -40,14 +35,38 @@ export default function GroupNavCard() {
         <div className={classes.group_navigation_card}>
             <p className={classes.group_title}>{groupInfo.name}</p>
             <div className={classes.instructor_profile}>
-                <img src={pro} alt=""></img>
+                <img src={pro} alt="Profile"></img>
                 <p>{groupInfo.instructorName}</p>
             </div>
             <div className={classes.group_sections}>
-                <Link onClick={() => handleActive("material")} className={`${active === "material" ? classes.active : ''}`} to="">{t('Material')}</Link>
-                <Link onClick={() => handleActive("assignment")} className={`${active === "assignment" ? classes.active : ''}`} to="assignments">{t('Assignments')}</Link>
-                <Link onClick={() => handleActive("quiz")} className={`${active === "quiz" ? classes.active : ''}`} to="">{t('Quizzes')}</Link>
-                <Link onClick={() => handleActive("participants")} className={`${active === "participants" ? classes.active : ''}`} to="participants">{t('Participants')}</Link>
+                <NavLink
+                    to=""
+                    end
+                    className={({ isActive }) => `${isActive ? classes.active : ''}`}
+                >
+                    {t('Material')}
+                </NavLink>
+                <NavLink
+                    to="assignments"
+                    end
+                    className={({ isActive }) => `${isActive ? classes.active : ''}`}
+                >
+                    {t('Assignments')}
+                </NavLink>
+                <NavLink
+                    to=""
+                    end
+                    className={({ isActive }) => `${isActive ? classes.active : ''}`}
+                >
+                    {t('Quizzes')}
+                </NavLink>
+                <NavLink
+                    to="participants"
+                    end
+                    className={({ isActive }) => `${isActive ? classes.active : ''}`}
+                >
+                    {t('Participants')}
+                </NavLink>
             </div>
         </div>
     );
