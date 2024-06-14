@@ -21,6 +21,7 @@ import StuMain from '../Pages/MainPageSTU/StuMain';
 import Container from '../Pages/Chat/Container';
 import Users from '../Pages/Users/Users';
 
+// Import necessary components and functions
 
 function RoleBasedRoutes() {
     const role = getRole();
@@ -58,7 +59,7 @@ const instructorRoutes = [
             { path: 'participants', element: <Participants /> }
         ]
     },
-    { path: 'voting', element: <Voting /> },
+    { path: 'voting/*', element: <Voting /> }, // Dynamic path for selected vote
     { path: 'chat', element: <Container /> },
 ];
 
@@ -77,7 +78,7 @@ const studentRoutes = [
             { path: 'participants', element: <Participants /> }
         ]
     },
-    { path: 'voting', element: <Voting /> },
+    { path: 'voting/*', element: <Voting /> }, // Dynamic path for selected vote
     { path: 'chat', element: <Container /> },
 ];
 
@@ -115,8 +116,6 @@ const router = createBrowserRouter([
         ],
     },
 ]);
-
-
 
 export default function RoutesPage() {
     return <RouterProvider router={router} />;
