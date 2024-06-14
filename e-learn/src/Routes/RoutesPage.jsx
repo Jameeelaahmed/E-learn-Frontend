@@ -72,6 +72,7 @@ const studentRoutes = [
             { path: '', element: <Weeks role={getRole()} /> },
             { path: 'assignments', element: <Assignments /> },
             { path: 'assignments/:assignmentId', element: <AssignmentDetails /> },
+            { path: 'assignments/:assignmentId/responses-list', element: <AssignmentsResponsesList /> },
             { path: 'participants', element: <Participants /> }
         ]
     },

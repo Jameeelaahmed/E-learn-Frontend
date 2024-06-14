@@ -1,14 +1,16 @@
-import classes from './Add-Assignment.module.css'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import classes from './Add-Assignment.module.css';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 export default function ShowRespones() {
     const navigate = useNavigate();
     const { t } = useTranslation();
-    const { assignmentId } = useParams();
+    const { assignmentId, groupId } = useParams();
+
     function handleOpenResponses() {
-        navigate(`:${assignmentId}/responses-list`);
+        navigate(`/groups/${groupId}/assignments/${assignmentId}/responses-list`);
     }
+
     return (
         <div>
             <div className={classes.AddAssignment}>
@@ -18,5 +20,5 @@ export default function ShowRespones() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
