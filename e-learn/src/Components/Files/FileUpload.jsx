@@ -49,7 +49,7 @@ export default function FileUpload({ collectFiles }) {
             </div> */}
             {/* <FilesList files={selectedFiles} onDelete={handleDelete} /> */}
 
-            {(path === `/${groupId}/assignments/${assignmentId}`) &&
+            {(path.includes(`assignments/${assignmentId}`)) &&
                 <div className={classes.wid}>
                     <FilesList files={selectedFiles} onDelete={handleDelete} />
                     <div className={classes.upload_click}>
