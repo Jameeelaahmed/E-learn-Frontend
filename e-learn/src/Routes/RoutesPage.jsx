@@ -17,11 +17,10 @@ import AssignmentDetails from '../Components/Assignments/AssignmentDetails';
 import AssignmentsResponsesList from '../Components/Assignments/AssignmentResponsesList';
 import Participants from '../Components/Participants/Paricipants';
 import Profile from '../Pages/Profile/Profile';
-// import StudentMain from '../Pages/MainPageStudent/StudentMain';
 import StuMain from '../Pages/MainPageSTU/StuMain';
 import Container from '../Pages/Chat/Container';
 import Users from '../Pages/Users/Users';
-// Role-based route component
+
 function RoleBasedRoutes() {
     const role = getRole();
     if (role === 'Staff') {
@@ -31,35 +30,30 @@ function RoleBasedRoutes() {
     } else if (role === 'Admin') {
         return <Outlet />;
     } else {
-        // Redirect to login if role is not recognized
         return <Navigate to="/auth" />;
     }
 }
 
-// Get role from local storage
 function getRole() {
     return localStorage.getItem('role');
 }
 
-// console.log(getRole());
-
 const adminRoutes = [
     { path: '/users', element: <Users /> }
-
-]
+];
 
 const instructorRoutes = [
     { path: 'InsMain', element: <InsMain /> },
     { path: 'profile', element: <Profile /> },
     { path: 'groups', element: <Groups /> },
     {
-        path: ':groupId',
+        path: 'groups/:groupId',
         element: <CourseDetails />,
         children: [
-            { path: ':groupId', element: <Weeks role={getRole()} /> },
+            { path: '', element: <Weeks role={getRole()} /> },
             { path: 'assignments', element: <Assignments /> },
             { path: 'assignments/:assignmentId', element: <AssignmentDetails /> },
-            { path: ':assignmentId/responses-list', element: <AssignmentsResponsesList /> },
+            { path: 'assignments/:assignmentId/responses-list', element: <AssignmentsResponsesList /> },
             { path: 'participants', element: <Participants /> }
         ]
     },
@@ -72,10 +66,10 @@ const studentRoutes = [
     { path: 'groups', element: <Groups /> },
     { path: 'profile', element: <Profile /> },
     {
-        path: ':groupId',
+        path: 'groups/:groupId',
         element: <CourseDetails />,
         children: [
-            { path: ':groupId', element: <Weeks role={getRole()} /> },
+            { path: '', element: <Weeks role={getRole()} /> },
             { path: 'assignments', element: <Assignments /> },
             { path: 'assignments/:assignmentId', element: <AssignmentDetails /> },
             { path: 'participants', element: <Participants /> }

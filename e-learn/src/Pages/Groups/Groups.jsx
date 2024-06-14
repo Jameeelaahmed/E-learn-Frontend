@@ -38,7 +38,7 @@ export default function Groups() {
 
     // Handle assignment click event
     function handleAssignmentClick(id) {
-        navigate(`assignments/${id}`);
+        navigate(`/groups/${groupId}/assignments/${id}`);
     }
 
     const assignments = [
@@ -61,7 +61,7 @@ export default function Groups() {
 
     return (
         <ul className={classes.classes}>
-            {location.pathname === "/groups" &&
+            {location.pathname.endsWith("/groups") &&
                 group.map((item, index) => (
                     <Group
                         key={index}
@@ -71,7 +71,7 @@ export default function Groups() {
                     />
                 ))
             }
-            {location.pathname === `/groups/assignments` &&
+            {location.pathname.endsWith("/assignments") &&
                 assignments.map((item, index) => (
                     <Group
                         key={index}
