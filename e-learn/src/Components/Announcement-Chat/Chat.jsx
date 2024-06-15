@@ -219,7 +219,6 @@ export default function Chat({ selectedChat, setViewMode }) {
                                                 {itm.type === "sender" && <div className={classes.caret_icon}>
                                                     <FaIcons.FaCaretDown onClick={(e) => handleContextMessageMenu(e, itm.key, itm.type)} />
                                                 </div>}
-
                                                 <div className={classes.chat__msg} dir='auto'>{itm.msg}</div>
                                                 <div className={classes.chat__meta}>
                                                     <span dir='ltr'>{formattedTime}</span>
