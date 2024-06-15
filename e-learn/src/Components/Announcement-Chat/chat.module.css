@@ -23,7 +23,12 @@
     border-top-left-radius: 27px;
 }
 
+
 /* ! BLOCKs */
+
+.blocks:last-child {
+    display: flex;
+}
 
 .current_chatting_user {
     display: flex;
@@ -44,7 +49,8 @@
     border-radius: 50%;
 }
 
-.settings {
+.settings,
+.back_arrow {
     width: 36px;
     height: 36px;
     background-color: #ecefff;
@@ -247,7 +253,6 @@
 
 [dir="rtl"] .sendNewMessage {
     border-radius: 0 0 0px 32px;
-
 }
 
 .sendNewMessage button {
@@ -289,8 +294,8 @@
 
 .contextMenu {
     position: fixed;
-    background-color: rgba(255, 255, 255, 0.8);
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    background-color: #ababab38;
+    color: var(--main-color);
     z-index: 1000;
     list-style: none;
     padding: 5px 0;
@@ -300,7 +305,7 @@
     transform: scale(0.9);
     transition: opacity 0.3s ease, transform 0.3s ease;
     pointer-events: none;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(3px);
 }
 
 .contextMenu.show {
@@ -385,13 +390,41 @@
 }
 
 
-/* chat.module.css */
-
-.chat__file {
-    margin-top: 10px;
+.back_arrow {
+    display: none;
 }
 
-.chat__file a {
-    color: blue;
-    text-decoration: underline;
+@media (max-width: 700px) {
+    .back_arrow {
+        display: flex;
+        cursor: pointer;
+    }
+
+    [dir="rtl"] .content__header .settings {
+        margin-right: 10px;
+    }
+
+
+    [dir="ltr"] .content__header .settings {
+        margin-left: 10px;
+    }
+
+
+
+    [dir="rtl"] .content__header {
+        border-top-right-radius: 32px;
+    }
+
+    [dir="ltr"] .content__header {
+        border-top-left-radius: 32px;
+    }
+
+
+    [dir="ltr"] .sendNewMessage {
+        border-radius: 0 0 32px 32px;
+    }
+
+    [dir="rtl"] .sendNewMessage {
+        border-radius: 0 0 32px 32px;
+    }
 }

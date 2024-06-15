@@ -6,7 +6,7 @@
 
 .chat_contacts {
     background-color: var(--white);
-    width: 365px;
+    width: 300px;
     height: 572px;
     overflow: auto;
 }
@@ -196,4 +196,20 @@
 [dir="rtl"] .chat_contacts li:hover::after {
     left: 0;
     box-shadow: -40px -40px 0 var(--light-grey);
+}
+
+
+@media (max-width:700px) {
+    .chat_contacts {
+        width: 100%;
+        border-radius: 32px;
+    }
+
+    [dir="ltr"] .chat_contacts {
+        border-right: none;
+    }
+
+    [dir="rtl"] .chat_contacts {
+        border-left: none;
+    }
 }

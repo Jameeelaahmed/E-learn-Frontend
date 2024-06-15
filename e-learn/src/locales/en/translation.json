@@ -80,5 +80,7 @@
     "chats": "Chats",
     "show-details": "Show Details",
     "show": "Show",
-    "Edit message": "Edit message"
+    "Edit-message": "Edit message",
+    "delete": "Delete",
+    "conact-info": "Contact-Info"
 }
