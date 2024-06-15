@@ -69,7 +69,8 @@
     align-items: center;
 }
 
-.settings:hover {
+.settings:hover,
+.back_arrow:hover {
     transform: scale(1.2);
 }
 
