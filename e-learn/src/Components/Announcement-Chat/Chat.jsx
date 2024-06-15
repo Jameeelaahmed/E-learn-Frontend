@@ -5,7 +5,7 @@ import Empty from '../Empty/Empty';
 import { format, isSameDay, isSameWeek, parseISO, isValid, subDays } from 'date-fns';
 import * as FaIcons from 'react-icons/fa6';
 
-export default function Chat({ selectedChat }) {
+export default function Chat({ selectedChat, setViewMode }) {
     const messagesEndRef = useRef(null);
     const inputRef = useRef(null);
     const { t } = useTranslation();
@@ -72,6 +72,7 @@ export default function Chat({ selectedChat }) {
 
     const handleContextMenu = (e) => {
         e.preventDefault();
+        e.stopPropagation();
         const clickY = e.clientY;
         const menuHeight = 100;
         const windowHeight = window.innerHeight;
@@ -163,16 +164,16 @@ export default function Chat({ selectedChat }) {
                     <div className={classes.content__header}>
                         <div className={classes.blocks}>
                             <div className={classes.current_chatting_user}>
-                                <>
-                                    <img className={classes.img} src={selectedChat.image} alt={selectedChat.name} />
-                                    <p>{selectedChat.name}</p>
-                                </>
+                                <img className={classes.img} src={selectedChat.image} alt={selectedChat.name} />
+                                <p>{selectedChat.name}</p>
                             </div>
                         </div>
-
                         <div className={classes.blocks}>
-                            <div className={classes.settings}>
-                                <i className="fa fa-cog"></i>
+                            <div className={classes.back_arrow}>
+                                <FaIcons.FaArrowLeft onClick={() => setViewMode('contacts')} /> {/* Set the view mode to 'contacts' */}
+                            </div>
+                            <div onClick={handleContextMenu} className={classes.settings}>
+                                <FaIcons.FaGear />
                             </div>
                         </div>
                     </div>
@@ -233,14 +234,14 @@ export default function Chat({ selectedChat }) {
                         </div>
                         {contextMenu.visible && (
                             <ul className={`${classes.contextMenu} ${classes.show}`} style={{ top: `${contextMenu.y}px`, left: `${contextMenu.x}px` }}>
-                                <li>Option 1</li>
-                                <li>Option 2</li>
+                                <li>{t("delete")}</li>
+                                <li>{t("Contact-info")}</li>
                             </ul>
                         )}
                         {contextMessageMenu.visible && (
                             <ul className={`${classes.contextMenu} ${classes.show}`} style={{ top: `${contextMessageMenu.y}px`, left: `${contextMessageMenu.x}px` }}>
-                                <li onClick={() => startEditingMessage(contextMessageMenu.messageKey)}>{t('Edit')}</li>
-                                <li onClick={() => deleteMessage(contextMessageMenu.messageKey)}>{t('Delete')}</li>
+                                <li onClick={() => startEditingMessage(contextMessageMenu.messageKey)}>{t('Edit-message')}</li>
+                                <li onClick={() => deleteMessage(contextMessageMenu.messageKey)}>{t('delete')}</li>
                             </ul>
                         )}
                     </div>
