@@ -252,7 +252,7 @@ export default function Chat({ selectedChat, setViewMode }) {
                                         <FaIcons.FaPen />
                                     </div>
                                     <div className={classes.edited_message}>
-                                        <p className={classes.edit}>{t('Edit message')}</p>
+                                        <p className={classes.edit}>{t('Edit-message')}</p>
                                         <p className={classes.original_message} dir='auto'>{originalMessage}</p>
                                     </div>
                                 </div>
