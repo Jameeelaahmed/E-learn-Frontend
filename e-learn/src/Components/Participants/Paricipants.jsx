@@ -5,13 +5,56 @@ import Button from '../Button/Button';
 import { useState, useEffect } from 'react';
 import { httpRequest } from '../../HTTP';
 import { getAuthToken } from '../../Helpers/AuthHelper';
-
+import * as FaIcons from 'react-icons/fa6'
+import { Link } from 'react-router-dom';
 export default function Participants() {
     const { t } = useTranslation();
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState([
+        {
+            id: 1,
+            name: "Ahmed",
+            grade: "A"
+        },
+        {
+            id: 1,
+            name: "Ahmed",
+            grade: "A"
+        },
+        {
+            id: 1,
+            name: "Ahmed",
+            grade: "A"
+        },
+        {
+            id: 1,
+            name: "Ahmed",
+            grade: "A"
+        },
+        {
+            id: 1,
+            name: "Ahmed",
+            grade: "A"
+        },
+        {
+            id: 1,
+            name: "Ahmed",
+            grade: "A"
+        },
+        {
+            id: 1,
+            name: "Ahmed",
+            grade: "A"
+        },
+    ]);
+
+    function getRole() {
+        return localStorage.getItem('role');
+    }
+
+    const role = getRole();
 
     async function getGroupParticipants() {
-        try{
+        try {
             const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Group/GetGroupParticipants/${5}`, getAuthToken());
             if (response.statusCode === 200) {
                 console.log(response);
@@ -21,7 +64,7 @@ export default function Participants() {
                 console.log(response.message);
             }
         }
-        catch(err) {
+        catch (err) {
             console.log(err);
         }
     }
@@ -40,6 +83,7 @@ export default function Participants() {
                             <td>{t("grade")}</td>
                             <td>{t("profile")}</td>
                             <td>{t("chat")}</td>
+                            {role === "Admin" && <td>{t("actions")}</td>}
                         </tr>
                     </thead>
                     <tbody>
@@ -50,17 +94,25 @@ export default function Participants() {
                                 <td>{users.grade}</td>
                                 <td>
                                     {/* ADD FILE AS A PARMETERT IN THE OPEN FILE IN BROWSER FUNCTION AND THE FILE NAME THE TEXT */}
-                                    <Button text={t("attachment")} />
+                                    <Button text={t("profile")} />
                                 </td>
-                                <td className={classes.mark}>
-                                    {/* {mark[index] ? <input type='number' ref={getMark} placeholder={t('enter-mark')} className={classes.input} /> :
-                                        <Button onSelect={() => handleMark(index)} text={markValue} />}
-                                    {mark[index] &&
-                                        <button onClick={() => handleSave(index)} className={classes.button}>
-                                            <FaIcons.FaCheck className={classes.icon}></FaIcons.FaCheck>
-                                        </button>
-                                    } */}
+                                <td>
+                                    {/* ADD FILE AS A PARMETERT IN THE OPEN FILE IN BROWSER FUNCTION AND THE FILE NAME THE TEXT */}
+                                    <Button text={t("chat")} />
                                 </td>
+                                {
+                                    role === "Admin" &&
+                                    <td className={classes.actions}>
+                                        <Link to="/users/edituser" className={classes.icon} >
+                                            <div>
+                                                <FaIcons.FaPen />
+                                            </div>
+                                        </Link>
+                                        <div className={classes.icon}>
+                                            <FaIcons.FaTrash />
+                                        </div>
+                                    </td>
+                                }
                             </tr>
                         ))}
                     </tbody>

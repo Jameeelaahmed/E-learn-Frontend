@@ -147,14 +147,16 @@ html::-webkit-scrollbar-track {
     margin-bottom: 10px;
 }
 
-.action{
+.action {
     margin: 25px 0 20px;
 }
 
 
-@media(max-width:425px) {
-    .input[type="number"],
-    .input[type="password"] {
-        width: 250px;
+@media (max-width:425px) {
+
+    .authentication input[type="number"],
+    .authentication input[type="password"],
+    .authentication input[type="email"] {
+        width: 230px;
     }
 }

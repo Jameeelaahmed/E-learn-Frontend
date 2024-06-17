@@ -20,6 +20,7 @@ import Profile from '../Pages/Profile/Profile';
 import StuMain from '../Pages/MainPageSTU/StuMain';
 import Container from '../Pages/Chat/Container';
 import Users from '../Pages/Users/Users';
+import AddEditUser from '../Pages/AddUser/addEditUser';
 
 // Import necessary components and functions
 
@@ -41,7 +42,9 @@ function getRole() {
 }
 
 const adminRoutes = [
-    { path: 'users', element: <Users /> }
+    { path: 'users', element: <Users /> },
+    { path: 'users/adduser', element: <AddEditUser /> },
+    { path: 'users/edituser', element: <AddEditUser /> },
 ];
 
 const instructorRoutes = [

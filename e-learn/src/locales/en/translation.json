@@ -82,5 +82,18 @@
     "show": "Show",
     "Edit-message": "Edit message",
     "delete": "Delete",
-    "conact-info": "Contact-Info"
+    "conact-info": "Contact-Info",
+    "chat": "Chat",
+    "profile": "Profile",
+    "first-name": "First Name",
+    "last-name": "Last Name",
+    "birthdate": "Birthdate",
+    "national-id": "National ID",
+    "nationality": "Nationality",
+    "email": "Email",
+    "grade": "Grade",
+    "ID": "ID",
+    "add": "Add",
+    "upload": "Upload",
+    "save-changes": "Save Changes"
 }
