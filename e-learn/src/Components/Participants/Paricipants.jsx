@@ -4,10 +4,17 @@ import Button from '../Button/Button';
 import { useState, useEffect } from 'react';
 import { httpRequest } from '../../HTTP';
 import { getAuthToken } from '../../Helpers/AuthHelper';
-
+import * as FaIcons from 'react-icons/fa6'
+import { Link } from 'react-router-dom';
 export default function Participants() {
     const { t } = useTranslation();
     const [users, setUsers] = useState([]);
+
+    function getRole() {
+        return localStorage.getItem('role');
+    }
+
+    const role = getRole();
 
     async function getGroupParticipants() {
         try {
@@ -38,6 +45,7 @@ export default function Participants() {
                             <td>{t("grade")}</td>
                             <td>{t("profile")}</td>
                             <td>{t("chat")}</td>
+                            {role === "Admin" && <td>{t("actions")}</td>}
                         </tr>
                     </thead>
                     <tbody>
