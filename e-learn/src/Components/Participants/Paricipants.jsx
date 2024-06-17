@@ -1,6 +1,5 @@
-import { participants } from '../../response'
-import classes from '../Assignments/AssignmentResponsesList.module.css'
-import { useTranslation } from 'react-i18next'
+import classes from '../Assignments/AssignmentResponsesList.module.css';
+import { useTranslation } from 'react-i18next';
 import Button from '../Button/Button';
 import { useState, useEffect } from 'react';
 import { httpRequest } from '../../HTTP';
@@ -9,43 +8,7 @@ import * as FaIcons from 'react-icons/fa6'
 import { Link } from 'react-router-dom';
 export default function Participants() {
     const { t } = useTranslation();
-    const [users, setUsers] = useState([
-        {
-            id: 1,
-            name: "Ahmed",
-            grade: "A"
-        },
-        {
-            id: 1,
-            name: "Ahmed",
-            grade: "A"
-        },
-        {
-            id: 1,
-            name: "Ahmed",
-            grade: "A"
-        },
-        {
-            id: 1,
-            name: "Ahmed",
-            grade: "A"
-        },
-        {
-            id: 1,
-            name: "Ahmed",
-            grade: "A"
-        },
-        {
-            id: 1,
-            name: "Ahmed",
-            grade: "A"
-        },
-        {
-            id: 1,
-            name: "Ahmed",
-            grade: "A"
-        },
-    ]);
+    const [users, setUsers] = useState([]);
 
     function getRole() {
         return localStorage.getItem('role');
@@ -55,19 +18,18 @@ export default function Participants() {
 
     async function getGroupParticipants() {
         try {
-            const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Group/GetGroupParticipants/${5}`, getAuthToken());
+            const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Group/GetGroupParticipants/5`, getAuthToken());
             if (response.statusCode === 200) {
                 console.log(response);
                 setUsers(response.data);
-            }
-            else {
+            } else {
                 console.log(response.message);
             }
-        }
-        catch (err) {
+        } catch (err) {
             console.log(err);
         }
     }
+
     useEffect(() => {
         getGroupParticipants();
     }, []);
@@ -87,37 +49,35 @@ export default function Participants() {
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map((index) => (
-                            <tr key={index}>
-                                <td>{users.id}</td>
-                                <td>{users.name}</td>
-                                <td>{users.grade}</td>
-                                <td>
-                                    {/* ADD FILE AS A PARMETERT IN THE OPEN FILE IN BROWSER FUNCTION AND THE FILE NAME THE TEXT */}
-                                    <Button text={t("profile")} />
-                                </td>
-                                <td>
-                                    {/* ADD FILE AS A PARMETERT IN THE OPEN FILE IN BROWSER FUNCTION AND THE FILE NAME THE TEXT */}
-                                    <Button text={t("chat")} />
-                                </td>
-                                {
-                                    role === "Admin" &&
-                                    <td className={classes.actions}>
-                                        <Link to="/users/edituser" className={classes.icon} >
-                                            <div>
-                                                <FaIcons.FaPen />
-                                            </div>
-                                        </Link>
-                                        <div className={classes.icon}>
-                                            <FaIcons.FaTrash />
-                                        </div>
+                        {users.length > 0 ? (
+                            users.map((user, index) => (
+                                <tr key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>{user.name}</td>
+                                    <td>{user.grade}</td>
+                                    <td>
+                                        {/* ADD FILE AS A PARAMETER IN THE OPEN FILE IN BROWSER FUNCTION AND THE FILE NAME THE TEXT */}
+                                        <Button text={t("attachment")} />
                                     </td>
-                                }
+                                    <td className={classes.mark}>
+                                        {/* {mark[index] ? <input type='number' ref={getMark} placeholder={t('enter-mark')} className={classes.input} /> :
+                                            <Button onSelect={() => handleMark(index)} text={markValue} />}
+                                        {mark[index] &&
+                                            <button onClick={() => handleSave(index)} className={classes.button}>
+                                                <FaIcons.FaCheck className={classes.icon}></FaIcons.FaCheck>
+                                            </button>
+                                        } */}
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="5">No participants found</td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
             </div>
-        </div >
-    )
+        </div>
+    );
 }
