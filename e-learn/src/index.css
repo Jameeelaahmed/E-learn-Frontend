@@ -20,6 +20,8 @@ body {
     --secondry-color: #0E7290;
     --light-grey: #f1f2f7;
     --white: white;
+    --red: #E84242;
+    --trans-red: #F3CBCB;
     --transition: 0.4s;
     --main-shadow: 5px 5px 0 0 var(--main-color);
     --main-arabic-shadow: -5px 5px 0 0 var(--main-color);

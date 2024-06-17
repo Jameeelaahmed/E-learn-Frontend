@@ -79,5 +79,21 @@
     "add-voting": "اضافة تصويت",
     "chats": "الدردشات",
     "show-details": "عرض التفاصيل",
-    "show": "عرض"
+    "show": "عرض",
+    "Edit-message": "تعديل الرسالة",
+    "delete": "مسح",
+    "conact-info": "",
+    "chat": "الدردشه",
+    "profile": "الصفحة الشخصية",
+    "first-name": "الأسم الاول",
+    "last-name": "الأسم الأخير",
+    "birthdate": "تاريخ الميلاد",
+    "national-id": "الرقم القومي",
+    "nationality": "الجنسية",
+    "email": "الايميل",
+    "grade": "الصف",
+    "ID": "الكود الجامعي",
+    "add": "اضافة",
+    "upload": "رفع",
+    "save-changes": "حفظ التعديلات"
 }

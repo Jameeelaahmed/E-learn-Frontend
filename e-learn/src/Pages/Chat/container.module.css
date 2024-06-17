@@ -1,6 +1,5 @@
 .chat_container {
     position: relative;
-    margin-top: 60px;
     background-color: var(--light-grey);
     width: 100%;
     height: 580px;
@@ -8,6 +7,10 @@
     border: 4px solid var(--secondry-color);
     display: flex;
     z-index: 1000000;
+    display: flex;
+    flex-direction: row;
+    /* height: 100vh; */
+    /* Ensure the container takes the full height */
 }
 
 [dir="ltr"] .chat_container {
@@ -16,4 +19,28 @@
 
 [dir="rtl"] .chat_container {
     box-shadow: var(--main-arabic-shadow);
+}
+
+.chat_visible {
+    width: 100%;
+}
+
+@media (max-width: 700px) {
+    .contacts_visible {
+        display: block;
+        width: 100%;
+    }
+
+    .contacts_hidden {
+        display: none;
+    }
+
+    .chat_visible {
+        display: block;
+        width: 100%;
+    }
+
+    .chat_hidden {
+        display: none;
+    }
 }
