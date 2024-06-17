@@ -23,6 +23,7 @@ import Users from '../Pages/Users/Users';
 import AddEditUser from '../Pages/AddEditUser/addEditUser';
 import AdminGroups from '../Pages/AdminGroups/AdminGroups';
 import AddEditGroup from '../Pages/AddEditGroup/AddEditGroup';
+import AdminSingleGroup from '../Pages/AdminSingleGroup/AdminSingleGroup';
 
 // Import necessary components and functions
 
@@ -49,8 +50,11 @@ const adminRoutes = [
     { path: 'users/edituser', element: <AddEditUser /> },
     { path: 'admingroups', element: <AdminGroups /> },
     { path: 'admingroups/addgroup', element: <AddEditGroup /> },
-    { path: 'admingroups/editgroup', element: <AddEditGroup /> }
-    // { path: 'admingroups/:admingroupID', element}
+    { path: 'admingroups/editgroup', element: <AddEditGroup /> },
+    { path: 'admingroups/:admingroupID', element: <AdminSingleGroup /> },
+    { path: 'admingroups/:admingroupID/assignments', element: <AdminSingleGroup /> },
+    { path: 'admingroups/:admingroupID/quiz', element: <AdminSingleGroup /> },
+    { path: 'admingroups/:admingroupID/participants', element: <AdminSingleGroup /> },
 ];
 
 const instructorRoutes = [
