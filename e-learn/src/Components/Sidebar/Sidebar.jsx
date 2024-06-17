@@ -44,6 +44,12 @@ export default function Sidebar() {
             roles: ['Staff', 'Student'] // This item is visible to Staff and Student
         },
         {
+            title: t('Groups'),
+            icon: <FaIcons.FaBook className={classes.icon} />,
+            link: 'admingroups',
+            roles: ['Admin']
+        },
+        {
             title: t('Voting'),
             icon: <FaIcons.FaSquarePollVertical className={classes.icon} />,
             link: '/voting',

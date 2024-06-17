@@ -20,7 +20,9 @@ import Profile from '../Pages/Profile/Profile';
 import StuMain from '../Pages/MainPageSTU/StuMain';
 import Container from '../Pages/Chat/Container';
 import Users from '../Pages/Users/Users';
-import AddEditUser from '../Pages/AddUser/addEditUser';
+import AddEditUser from '../Pages/AddEditUser/addEditUser';
+import AdminGroups from '../Pages/AdminGroups/AdminGroups';
+import AddEditGroup from '../Pages/AddEditGroup/AddEditGroup';
 
 // Import necessary components and functions
 
@@ -45,6 +47,10 @@ const adminRoutes = [
     { path: 'users', element: <Users /> },
     { path: 'users/adduser', element: <AddEditUser /> },
     { path: 'users/edituser', element: <AddEditUser /> },
+    { path: 'admingroups', element: <AdminGroups /> },
+    { path: 'admingroups/addgroup', element: <AddEditGroup /> },
+    { path: 'admingroups/editgroup', element: <AddEditGroup /> }
+    // { path: 'admingroups/:admingroupID', element}
 ];
 
 const instructorRoutes = [
