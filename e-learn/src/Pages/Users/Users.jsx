@@ -13,7 +13,7 @@ export default function () {
     return (
         <div className={classes.users}>
             <div className={classes.users_head}>
-                <p>Participants</p>
+                <p>{t("Participants")}</p>
                 <Link to="/users/adduser">
                     <div className={classes.add}>
                         <FaIcons.FaCirclePlus />

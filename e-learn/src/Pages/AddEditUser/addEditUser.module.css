@@ -1,7 +1,7 @@
 .addEditUser {
     background-color: var(--grey-color);
     padding: 10px;
-    z-index: 10000000000000000000000;
+    z-index: 10000000;
     border-radius: 32px;
     border: 5px solid var(--secondry-color);
     position: relative;

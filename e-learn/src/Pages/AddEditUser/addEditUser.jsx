@@ -16,7 +16,7 @@ const AddEditUser = () => {
     const [isHovered, setIsHovered] = useState(false); // State for hover
     const { t } = useTranslation();
 
-    const photoUpload = e => {
+    const handleProfileImageUpload = e => {
         e.preventDefault();
         const reader = new FileReader();
         const file = e.target.files[0];
@@ -49,7 +49,7 @@ const AddEditUser = () => {
                                 <img src={user} alt="Profile" className={classes.img} />
                             )
                         )}
-                        <input id="photo-upload" type="file" onChange={photoUpload} style={{ display: 'none' }} />
+                        <input id="photo-upload" type="file" onChange={handleProfileImageUpload} style={{ display: 'none' }} />
                     </div>
                 </label>
             </div>
