@@ -1,0 +1,113 @@
+.head {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--light-grey);
+    padding: 0px 8px;
+    box-shadow: var(--main-shadow);
+    border-top-right-radius: 32px;
+    border-top-left-radius: 32px;
+    border-bottom: 2px solid var(--main-color);
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+[dir="ltr"] .head {
+    letter-spacing: 1px;
+}
+
+.section {
+    padding-bottom: 10px;
+    padding: 15px 10px;
+    position: relative;
+}
+
+.section::before {
+    content: "";
+    position: absolute;
+    bottom: 3px;
+    height: 4px;
+    width: 0;
+    background-color: var(--main-color);
+    border-radius: 8px;
+    transition: left 0.5s ease, right 0.5s ease, width 0.5s ease;
+}
+
+.section.activeLeft::before {
+    left: 0;
+    right: auto;
+    width: 50%;
+    transform: translateX(50%);
+}
+
+.section.activeRight::before {
+    right: 0;
+    left: auto;
+    width: 50%;
+    transform: translateX(-50%);
+}
+
+.table {
+    position: relative;
+    background-color: var(--light-grey);
+    padding: 0 10px 10px 10px;
+    z-index: 100000;
+    box-shadow: var(--main-shadow);
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    max-height: 550px;
+    overflow-y: scroll;
+    width: 100%;
+    overflow-x: scroll;
+    /* Enables horizontal scrolling */
+}
+
+.table_content {
+    position: relative;
+}
+
+.table_head {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: var(--main-color);
+    color: white;
+    /* border-radius: 15px; */
+    position: sticky;
+    /* Changed from fixed to sticky */
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Ensure it stays on top of the other table content */
+    border-top-right-radius: 32px;
+    border-top-left-radius: 32px;
+}
+
+.table ul {
+    min-width: 600px;
+}
+
+.table ul li {
+    display: flex;
+    padding: 10px 0;
+    justify-content: space-around;
+}
+
+.table ul li:not(:last-child) {
+    border-bottom: 1px solid var(--main-color);
+}
+
+
+@media (max-width: 768px) {
+    .table ul {
+        display: block;
+        /* Stack the items vertically */
+    }
+
+    .table li {
+        display: block;
+    }
+
+    .head {
+        font-size: 11px;
+    }
+}
