@@ -103,5 +103,14 @@
     "cancel": "الغاء",
     "edit-quiz": "تعديل الاختبار",
     "edit-assignment": "تعديل المهمه",
-    "submit": "تسليم"
+    "submit": "تسليم",
+    "Material name": "اسم الملف",
+    "Instructor Name": "اسم المحاضر",
+    "Material Type": "تصنيف الملف",
+    "Date": "التاريخ",
+    "Assignment Title": "عنوان المهمة",
+    "Total Marks": "الدرجة الكلية",
+    "Quiz Title": "عنوان الاختبار",
+    "Name": "الاسم",
+    "Level": "Level"
 }

@@ -162,6 +162,10 @@
     margin: 5px;
     word-wrap: break-word;
     align-self: flex-start;
+    display: flex;
+    /* Use flexbox to align content */
+    align-items: flex-start;
+    /* Align items to the start of the container */
 }
 
 [dir="ltr"] .receiver .chat__item__content {
@@ -228,6 +232,13 @@
 .chat__msg {
     user-select: none;
     font-size: 14px;
+    flex: 1;
+    /* Allow the message to take up remaining space */
+    display: flex;
+    flex-direction: column;
+    /* Stack items vertically */
+    align-items: flex-start;
+    /* Align items to the start of the container */
 }
 
 
@@ -235,7 +246,7 @@
     padding-top: 15px;
 }
 
-.message_content {
+.write_message {
     display: flex;
     justify-content: space-between;
 }
@@ -428,4 +439,35 @@
     [dir="rtl"] .sendNewMessage {
         border-radius: 0 0 32px 32px;
     }
+}
+
+.img_message {
+    /* min-height: 150px;
+    max-height: 300px;
+    width: 250px; */
+    justify-content: space-between;
+    /* Space the messages evenly within the content */
+    align-content: space-between;
+    max-width: 250px;
+    /* Set the maximum width of the image */
+    max-height: 250px;
+    /* Set the maximum height of the image */
+    width: auto;
+    /* Maintain aspect ratio */
+    height: auto;
+}
+
+.uploaded__image {
+    max-width: 200px;
+    /* Set the maximum width of the image */
+    max-height: 200px;
+    /* Set the maximum height of the image */
+    width: auto;
+    /* Maintain aspect ratio */
+    height: auto;
+    /* Maintain aspect ratio */
+    display: block;
+    /* Ensure it behaves like a block element */
+    border-radius: 10px;
+    /* Optional: Add rounded corners */
 }

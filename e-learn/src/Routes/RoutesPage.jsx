@@ -26,7 +26,6 @@ import AddEditGroup from '../Pages/AddEditGroup/AddEditGroup';
 import AdminSingleGroup from '../Pages/AdminSingleGroup/AdminSingleGroup';
 
 // Import necessary components and functions
-
 function RoleBasedRoutes() {
     const role = getRole();
     if (role === 'Staff') {
@@ -55,6 +54,7 @@ const adminRoutes = [
     { path: 'admingroups/:admingroupID/assignments', element: <AdminSingleGroup /> },
     { path: 'admingroups/:admingroupID/quiz', element: <AdminSingleGroup /> },
     { path: 'admingroups/:admingroupID/participants', element: <AdminSingleGroup /> },
+    { path: 'chat', element: <Container /> },
 ];
 
 const instructorRoutes = [
@@ -119,9 +119,9 @@ const router = createBrowserRouter([
                         path: '/',
                         element: <RoleBasedRoutes />,
                         children: [
-                            ...getRole() === 'Staff' ? instructorRoutes : [],
-                            ...getRole() === "Admin" ? adminRoutes : [],
-                            ...getRole() === "Student" ? studentRoutes : [],
+                            ...(getRole() === 'Staff' ? instructorRoutes : []),
+                            ...(getRole() === 'Admin' ? adminRoutes : []),
+                            ...(getRole() === 'Student' ? studentRoutes : []),
                         ],
                     },
                 ],
