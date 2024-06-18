@@ -7,7 +7,7 @@ import Button from '../Button/Button';
 import DeleteButton from '../Button/DeleteButton';
 import { httpRequest } from '../../HTTP';
 import { getAuthToken } from '../../Helpers/AuthHelper';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 export default function AssignmentDetails() {
     const { t } = useTranslation();
@@ -15,6 +15,8 @@ export default function AssignmentDetails() {
     const [formData, setFormData] = useState({});
     const params = useParams();
     const assignmentId = params.assignmentId;
+    const groupId = params.groupId;
+    const navigate = useNavigate();
 
     const role = getRole();
     function getRole() {
@@ -58,6 +60,20 @@ export default function AssignmentDetails() {
         fetchAssignmentDetails();
     }, [assignmentId]);
 
+    async function handleDelete(){
+        try{
+            const token = getAuthToken();
+            const response = await httpRequest('DELETE', `https://elearnapi.runasp.net/api/Assignment/Delete/${assignmentId}`, token);
+            console.log(response);
+            if(response.statusCode === 200){
+                console.log('Assignment Deleted Successfully');
+                navigate(`/groups/${groupId}/assignments`);
+            }
+        }
+        catch(error){
+            console.log('an error occurred, ', error);
+        }
+    }
     const displayGrade = formData.grade == null || formData.grade === 0 ? t("ungraded") : formData.grade;
     const displayFilesURLs = formData.filesURLs && formData.filesURLs.length > 0 ? formData.filesURLs : [];
 
@@ -95,7 +111,7 @@ export default function AssignmentDetails() {
             {role === 'Staff' && (
                 <div className={classes.button_container}>
                     {isEdit ? <Button onSelect={handleSave} text={t("save")} /> : <Button onSelect={handleEdit} text={t("edit")} />}
-                    <DeleteButton text={t("delete")} delete_button={classes.delete_button}></DeleteButton>
+                    <DeleteButton text={t("delete")} delete_button={classes.delete_button} onDelete={handleDelete}></DeleteButton>
                 </div>
             )}
         </div>
