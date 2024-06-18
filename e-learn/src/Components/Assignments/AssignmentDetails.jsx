@@ -12,7 +12,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 export default function AssignmentDetails() {
     const { t } = useTranslation();
     const [isEdit, setIsEdit] = useState(false);
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState({
+        title: '',
+        description: '',
+        end: '',
+        grade: null
+    });
     const params = useParams();
     const assignmentId = params.assignmentId;
     const groupId = params.groupId;
@@ -24,21 +29,35 @@ export default function AssignmentDetails() {
     }
 
     function handleEdit() {
-        setIsEdit(prev => (!prev));
+        setIsEdit(prev => !prev);
     }
 
-    function handleSave() {
-        const fd = new FormData();
-        const formValues = Object.fromEntries(fd.entries());
-        setFormData(formData => ({
-            ...formData,
-            title: formValues.title,
-            description: formValues.Description,
-            endDate: formValues.Due_Date,
-            points: formValues.Points
-        }));
+    async function handleSave() {
+        const assignmentData = {
+            Title: formData.title,
+            Description: formData.description,
+            GroupId: parseInt(groupId, 10), // Ensure GroupId is an integer
+            End: formData.end,
+            Grade: formData.grade // Optional, can be null
+        };
 
-        setIsEdit(false);
+        console.log('Assignment Data Before Save:', assignmentData);
+
+        try {
+            const token = getAuthToken();
+            console.log('Assignment Data:', assignmentData);
+            const response = await httpRequest('PUT', `https://elearnapi.runasp.net/api/Assignment/UpdateAssignment/${assignmentId}`, token, assignmentData);
+            console.log('Response:', response);
+            if (response.statusCode === 200) {
+                console.log('Assignment updated successfully');
+                setFormData(response.data); // Update the formData state with the new data
+                setIsEdit(false);
+            } else {
+                console.log('Failed to update assignment', response);
+            }
+        } catch (error) {
+            console.log('An error occurred:', error);
+        }
     }
 
     async function fetchAssignmentDetails() {
@@ -60,20 +79,20 @@ export default function AssignmentDetails() {
         fetchAssignmentDetails();
     }, [assignmentId]);
 
-    async function handleDelete(){
-        try{
+    async function handleDelete() {
+        try {
             const token = getAuthToken();
             const response = await httpRequest('DELETE', `https://elearnapi.runasp.net/api/Assignment/Delete/${assignmentId}`, token);
             console.log(response);
-            if(response.statusCode === 200){
+            if (response.statusCode === 200) {
                 console.log('Assignment Deleted Successfully');
                 navigate(`/groups/${groupId}/assignments`);
             }
-        }
-        catch(error){
+        } catch (error) {
             console.log('an error occurred, ', error);
         }
     }
+
     const displayGrade = formData.grade == null || formData.grade === 0 ? t("ungraded") : formData.grade;
     const displayFilesURLs = formData.filesURLs && formData.filesURLs.length > 0 ? formData.filesURLs : [];
 
@@ -83,19 +102,55 @@ export default function AssignmentDetails() {
                 <form>
                     <div className={classes.container}>
                         <FaIcons.FaHeading className={classes.icon} />
-                        <InputText type="text" isInput={isEdit} htmlFor="Title" value={formData.title || ""} />
+                        <InputText
+                            type="text"
+                            isInput={isEdit}
+                            htmlFor="Title"
+                            value={formData.title || ""}
+                            onChange={(e) => {
+                                console.log('Title Changed:', e.target.value);
+                                setFormData({ ...formData, title: e.target.value });
+                            }}
+                        />
                     </div>
                     <div className={classes.container}>
                         <FaIcons.FaPenClip className={classes.icon} />
-                        <InputText type="text" isInput={isEdit} htmlFor="Description" value={formData.description || ""} />
+                        <InputText
+                            type="text"
+                            isInput={isEdit}
+                            htmlFor="Description"
+                            value={formData.description || ""}
+                            onChange={(e) => {
+                                console.log('Description Changed:', e.target.value);
+                                setFormData({ ...formData, description: e.target.value });
+                            }}
+                        />
                     </div>
                     <div className={classes.container}>
                         <FaIcons.FaRegCalendar className={classes.icon} />
-                        <InputText type="date" isInput={isEdit} htmlFor="Due_Date" value={formData.end || ""} />
+                        <InputText
+                            type="date"
+                            isInput={isEdit}
+                            htmlFor="Due_Date"
+                            value={formData.end || ""}
+                            onChange={(e) => {
+                                console.log('End Date Changed:', e.target.value);
+                                setFormData({ ...formData, end: e.target.value });
+                            }}
+                        />
                     </div>
                     <div className={classes.container}>
                         <FaIcons.FaClipboardList className={classes.icon} />
-                        <InputText type="number" isInput={isEdit} htmlFor="Points" value={displayGrade} />
+                        <InputText
+                            type="number"
+                            isInput={isEdit}
+                            htmlFor="Points"
+                            value={formData.grade}
+                            onChange={(e) => {
+                                console.log('Grade Changed:', e.target.value);
+                                setFormData({ ...formData, grade: e.target.value });
+                            }}
+                        />
                     </div>
                     {displayFilesURLs.length > 0 && (
                         <div className={classes.container}>

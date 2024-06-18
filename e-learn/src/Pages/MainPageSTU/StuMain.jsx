@@ -18,16 +18,16 @@ export default function StuMain() {
                     <ul className={classes.time_line}>
                         {/* MAP HERE */}
                         <li>
-                            <p className={classes.time}>10:00 Am</p>
-                            <p className={classes.group_name}>{t("sec")} algorithm</p>
+                            <p className={classes.time}>12:00 pm</p>
+                            <p className={classes.group_name}>{t("lecture")} Compiler</p>
                         </li>
                         <li>
-                            <p className={classes.time}>10:00 Am</p>
-                            <p className={classes.group_name}>{t("sec")} algorithm</p>
+                            <p className={classes.time}>03:00 pm</p>
+                            <p className={classes.group_name}>{t("section")} Compiler</p>
                         </li>
                         <li>
-                            <p className={classes.time}>10:00 Am</p>
-                            <p className={classes.group_name}>{t("sec")} algorithm</p>
+                            <p className={classes.time}>05:00 pm</p>
+                            <p className={classes.group_name}>{t("lecture")} Computer Vision</p>
                         </li>
                     </ul>
 

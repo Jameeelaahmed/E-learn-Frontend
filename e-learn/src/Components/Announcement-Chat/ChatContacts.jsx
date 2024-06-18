@@ -9,7 +9,7 @@ export default function ChatContacts({ setSelectedChat }) {
     const contacts = [
         {
             id: 1,
-            name: "Jameela Ahmed",
+            name: "جميلة أحمد",
             image: img,
             messages: [
                 {
@@ -28,19 +28,19 @@ export default function ChatContacts({ setSelectedChat }) {
         },
         {
             id: 2,
-            name: "Tim Hover",
+            name: "مروان سيد",
             image: img,
             messages: [
                 {
                     key: 1,
                     type: "receiver",
-                    msg: "Hello Tim!",
+                    msg: "Hello Marwan!",
                     image: img
                 },
                 {
                     key: 2,
                     type: "sender",
-                    msg: "Hi Tim, How are you?",
+                    msg: "Hi Mohamed, How are you?",
                     image: img
                 },
             ],
