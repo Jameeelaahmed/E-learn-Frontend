@@ -56,8 +56,9 @@ export default function Login() {
                 } else if (role === 'Staff') {
                     navigate('/InsMain');
                 } else if (role === "Admin") {
-                    navigate('users')
+                    navigate('/users');
                 }
+
             } else {
                 // Unsuccessful login
                 console.log(response);

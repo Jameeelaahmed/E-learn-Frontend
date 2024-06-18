@@ -24,6 +24,8 @@ export default function AdminSingleGroup() {
         Participants: `/admingroups/${admingroupID}/participants`
     };
 
+
+
     const handleClick = (section) => {
         const newSectionIndex = sections.indexOf(section);
         const oldSectionIndex = sections.indexOf(activeSection);
@@ -58,10 +60,10 @@ export default function AdminSingleGroup() {
                         <div className={classes.table_content}>
                             <div className={classes.table_head}>
                                 <p>Number</p>
-                                <p>Material name</p>
-                                <p>Instructor Name</p>
-                                <p>Material Type</p>
-                                <p>Date</p>
+                                <p>{t("Material name")}</p>
+                                <p>{t("Instructor Name")}</p>
+                                <p>{t("Material Type")}</p>
+                                <p>{t("Date")}</p>
                             </div>
                             {/* MAP  */}
                             <li>
@@ -140,10 +142,10 @@ export default function AdminSingleGroup() {
                         <>
                             <div className={classes.table_head}>
                                 <p>Number</p>
-                                <p>Assignment Title</p>
-                                <p>Instructor Name</p>
-                                <p>Mark</p>
-                                <p>Date</p>
+                                <p>{t("Assignment Title")}</p>
+                                <p>{t("Instructor Name")}</p>
+                                <p>{t("Total Marks")}</p>
+                                <p>{t("Date")}</p>
                             </div>
                             {/* MAP  */}
                             <li>
@@ -159,11 +161,12 @@ export default function AdminSingleGroup() {
                         <>
                             <div className={classes.table_head}>
                                 <p>Number</p>
-                                <p>Quiz Title</p>
-                                <p>Instructor Name</p>
-                                <p>Degree</p>
-                                <p>Date</p>
+                                <p>{t("Quiz Title")}</p>
+                                <p>{t("Instructor Name")}</p>
+                                <p>{t("Total Marks")}</p>
+                                <p>{t("Date")}</p>
                             </div>
+
                             {/* MAP  */}
                             <li>
                                 <p>num</p>
@@ -178,10 +181,10 @@ export default function AdminSingleGroup() {
                         <>
                             <div className={classes.table_head}>
                                 <p>Number</p>
-                                <p>ID</p>
-                                <p>Name</p>
-                                <p>Department</p>
-                                <p>Level</p>
+                                <p>{t("ID")}</p>
+                                <p>{t("Name")}</p>
+                                <p>{t("department")}</p>
+                                <p>{t("Level")}</p>
                             </div>
                             {/* MAP  */}
                             <li>
