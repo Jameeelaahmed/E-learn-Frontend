@@ -43,15 +43,16 @@
     transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
 }
 
-.img:hover,
-.img_upload:hover {
-    transform: scale(1.2);
-}
 
 .img_upload {
     width: 100px;
     animation: upDown 2s infinite ease-in-out;
     /* Add the animation here */
+}
+
+.img:hover,
+.img_upload:hover {
+    transform: scale(1.2);
 }
 
 .loaded {
