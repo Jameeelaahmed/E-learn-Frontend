@@ -32,18 +32,32 @@
     transition: left 0.5s ease, right 0.5s ease, width 0.5s ease;
 }
 
-.section.activeLeft::before {
+[dir="rtl"] .section.activeLeft::before {
     left: 0;
     right: auto;
     width: 50%;
     transform: translateX(50%);
 }
 
-.section.activeRight::before {
+[dir="ltr"] .section.activeLeft::before {
     right: 0;
     left: auto;
     width: 50%;
     transform: translateX(-50%);
+}
+
+[dir="rtl"] .section.activeRight::before {
+    right: 0;
+    left: auto;
+    width: 50%;
+    transform: translateX(-50%);
+}
+
+[dir="ltr"] .section.activeRight::before {
+    left: 0;
+    right: auto;
+    width: 50%;
+    transform: translateX(50%);
 }
 
 .table {
@@ -82,15 +96,28 @@
     border-top-left-radius: 32px;
 }
 
+.table_head p {
+    width: 20%;
+    text-align: center;
+    word-wrap: break-word;
+}
+
 .table ul {
     min-width: 600px;
 }
 
 .table ul li {
     display: flex;
-    padding: 10px 0;
-    justify-content: space-around;
+    padding: 10px;
 }
+
+
+.table ul li p {
+    width: 20%;
+    text-align: center;
+    word-wrap: break-word;
+}
+
 
 .table ul li:not(:last-child) {
     border-bottom: 1px solid var(--main-color);

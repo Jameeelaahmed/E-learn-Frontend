@@ -95,5 +95,14 @@
     "ID": "ID",
     "add": "Add",
     "upload": "Upload",
-    "save-changes": "Save Changes"
+    "save-changes": "Save Changes",
+    "Material name": "Material name",
+    "Instructor Name": "Instructor Name",
+    "Material Type": "Material Type",
+    "Date": "Date",
+    "Assignment Title": "Assignment Title",
+    "Total Marks": "Total Marks",
+    "Quiz Title": "Quiz Title",
+    "Name": "Name",
+    "Level": "Level"
 }

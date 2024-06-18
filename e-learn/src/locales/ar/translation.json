@@ -95,5 +95,14 @@
     "ID": "الكود الجامعي",
     "add": "اضافة",
     "upload": "رفع",
-    "save-changes": "حفظ التعديلات"
+    "save-changes": "حفظ التعديلات",
+    "Material name": "اسم الملف",
+    "Instructor Name": "اسم المحاضر",
+    "Material Type": "تصنيف الملف",
+    "Date": "التاريخ",
+    "Assignment Title": "عنوان المهمة",
+    "Total Marks": "الدرجة الكلية",
+    "Quiz Title": "عنوان الاختبار",
+    "Name": "الاسم",
+    "Level": "Level"
 }
