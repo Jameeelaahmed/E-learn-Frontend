@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Empty from '../Empty/Empty';
 import { format, isSameDay, isSameWeek, parseISO, isValid, subDays } from 'date-fns';
 import * as FaIcons from 'react-icons/fa6';
-
+import img from '../../assets/avatar.jpg'
 export default function Chat({ selectedChat, setViewMode }) {
     const messagesEndRef = useRef(null);
     const inputRef = useRef(null);
@@ -56,15 +56,24 @@ export default function Chat({ selectedChat, setViewMode }) {
     }, [chat, editMode]);
 
     const addMessage = () => {
-        if (inputRef.current.value !== "") {
+        if (inputRef.current.value !== "" || chat.some(item => item.uploadedFiles)) {
             const newChatItem = {
                 key: chat.length + 1,
                 type: "sender",
                 msg: inputRef.current.value,
-                image: "https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg",
+                uploadedFiles: [],
                 timestamp: new Date().toISOString(),  // Ensure ISO format
             };
-            setChat((prevChat) => [...prevChat, newChatItem]);
+
+            if (chat.some(item => item.uploadedFiles)) {
+                chat.forEach(item => {
+                    if (item.uploadedFiles) {
+                        newChatItem.uploadedFiles.push(item.uploadedFiles);
+                    }
+                });
+            }
+
+            setChat(prevChat => [...prevChat, newChatItem]);
             setInputValue('');
             scrollToBottom();
         }
@@ -153,6 +162,34 @@ export default function Chat({ selectedChat, setViewMode }) {
         setOriginalMessage(''); // Clear the original message state
     };
 
+    const handleFileInputChange = (event) => {
+        const files = event.target.files;
+        const newChatItems = [];
+
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const newChatItem = {
+                        key: chat.length + i + 1,
+                        type: "sender",
+                        msg: "",
+                        uploadedImage: reader.result,
+                        profileImage: img,
+                        timestamp: new Date().toISOString(),  // Ensure ISO format
+                    };
+                    newChatItems.push(newChatItem);
+                    if (newChatItems.length === files.length) {
+                        setChat(prevChat => [...prevChat, ...newChatItems]);
+                        scrollToBottom();
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    };
+
     useEffect(() => {
         scrollToBottom();
     }, [chat]);
@@ -215,16 +252,25 @@ export default function Chat({ selectedChat, setViewMode }) {
                                         <div
                                             className={`${classes.chat__item} ${itm.type === "sender" ? classes.sender : ""} ${itm.type === "receiver" ? classes.receiver : ""}`}
                                         >
-                                            <div className={`${classes.chat__item__content}`} onContextMenu={(e) => handleContextMessageMenu(e, itm.key, itm.type)}>
-                                                {itm.type === "sender" && <div className={classes.caret_icon}>
-                                                    <FaIcons.FaCaretDown onClick={(e) => handleContextMessageMenu(e, itm.key, itm.type)} />
-                                                </div>}
-                                                <div className={classes.chat__msg} dir='auto'>{itm.msg}</div>
+                                            <div className={`${classes.chat__item__content} ${itm.uploadedImage ? classes.img_message : ""}`}>
+                                                <div className={`${classes.chat__msg}`}>
+                                                    <p className={classes.chat__msg__text}>{itm.msg}</p>
+                                                    {itm.uploadedImage && (
+                                                        <img className={classes.uploaded__image} src={itm.uploadedImage} alt="Uploaded" />
+                                                    )}
+                                                    {itm.uploadedFiles && itm.uploadedFiles.map((file, index) => (
+                                                        <div key={index} className={classes.uploaded__file}>
+                                                            <p>{file.name}</p>
+                                                            {/* Add icons for different file types */}
+                                                        </div>
+                                                    ))}
+                                                </div>
                                                 <div className={classes.chat__meta}>
-                                                    <span dir='ltr'>{formattedTime}</span>
+                                                    <span>{formattedTime}</span>
                                                 </div>
                                             </div>
-                                            <img className={classes.img} src={itm.image} alt="avatar" />
+                                            <img className={classes.img} src={img} alt="Profile" />
+
                                         </div>
                                     </div>
                                 );
@@ -257,10 +303,17 @@ export default function Chat({ selectedChat, setViewMode }) {
                                     </div>
                                 </div>
                             )}
-                            <div className={classes.message_content}>
-                                <button className={classes.addFiles}>
+                            <div className={classes.write_message}>
+                                <button className={classes.addFiles} onClick={() => document.getElementById('fileInput').click()}>
                                     <i className="fa fa-plus"></i>
                                 </button>
+                                <input
+                                    id="fileInput"
+                                    type="file"
+                                    multiple
+                                    style={{ display: 'none' }}
+                                    onChange={handleFileInputChange}
+                                />
                                 <input
                                     dir='auto'
                                     type="text"
@@ -288,6 +341,7 @@ export default function Chat({ selectedChat, setViewMode }) {
                                     {editMode.isEditing ? <FaIcons.FaCheck /> : <FaIcons.FaPaperPlane />}
                                 </button>
                             </div>
+
                         </div>
                     </div>
                 </>
