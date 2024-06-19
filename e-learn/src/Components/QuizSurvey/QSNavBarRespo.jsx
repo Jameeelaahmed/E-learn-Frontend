@@ -1,11 +1,11 @@
-import classes from './VSNavBarRespo.module.css'
+import classes from './QSNavBarRespo.module.css'
 import * as FaIcons from "react-icons/fa6";
 import { useTranslation } from 'react-i18next'
 import { useRef, useState } from 'react';
 import './AddVSModal'
 import AddVsModal from './AddVSModal';
 import { log } from '../../log';
-export default function VSNavBarRespo() {
+export default function QSNavBarRespo() {
     const { t } = useTranslation();
     const addVSDialog = useRef();
     function handleOpenAddVSModal() {

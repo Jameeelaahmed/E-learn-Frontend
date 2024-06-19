@@ -17,18 +17,18 @@ export default function Logo({ open }) {
 
     return (
         <>
-            {(isMobile || !open) &&(
+            {(isMobile || !open) && (
                 <img
                     className={classes.logo_responsive}
                     src="./src/assets/Untitled-4.png"
-                    alt=""
+                    alt="Responsive Logo"
                 />
             )}
             {open && !isMobile && (
                 <img
                     className={classes.logo}
                     src="./src/assets/Untitled-65.png"
-                    alt=""
+                    alt="Regular Logo"
                 />
             )}
         </>

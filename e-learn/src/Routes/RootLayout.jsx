@@ -5,12 +5,18 @@ import Header from "../Components/Header/Header"
 import MainSection from "../Components/MainSection/MainSection"
 import AppBar from "../Components/AppBar/AppBar"
 import { Outlet } from "react-router-dom"
+import { useState } from "react"
 export default function RootLayout() {
+
+    const [isSidebarOpened, setIsSidebarOpened] = useState(false);
+    function handleOpenSidebar(opened) {
+        setIsSidebarOpened(opened)
+    }
     return (
         <Page>
-            <Sidebar></Sidebar>
+            <Sidebar isOpened={handleOpenSidebar}></Sidebar>
             <PageContent>
-                <Header></Header>
+                <Header opened={isSidebarOpened}></Header>
                 <MainSection>
                     <Outlet></Outlet>
                 </MainSection>

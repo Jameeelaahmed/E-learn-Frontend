@@ -1,8 +1,8 @@
-import classes from './AddVsModal.module.css'
+import classes from './AddQSModal.module.css'
 import { useTranslation } from 'react-i18next';
 import { log } from '../../log';
-import { memo,useCallback } from 'react';
-const Question =memo(function Question({ children, onLoseFocus }) {
+import { memo, useCallback } from 'react';
+const Question = memo(function Question({ children, onLoseFocus }) {
     log('<Questionnnn /> rendered');
     const { t } = useTranslation();
     const handleBlur = useCallback((e) => {

@@ -1,12 +1,9 @@
-import classes from './vsNabBar.module.css'
+import classes from './QSNavBar.module.css'
 import * as FaIcons from "react-icons/fa6";
 import { useTranslation } from 'react-i18next'
-import { useRef, useState,useEffect } from 'react';
-import './AddVSModal'
-import AddVsModal from './AddVSModal';
-import { log } from '../../log';
-export default function VSNavBar({VSQData}) {
-    log('<vsNavbar /> rendered');
+import { useRef, useState, useEffect } from 'react';
+import AddQSModal from './AddQSModal'
+export default function QSNavBar({ VSQData }) {
     const { t } = useTranslation();
     const addVSDialog = useRef();
     function handleOpenAddVSModal() {
@@ -34,9 +31,9 @@ export default function VSNavBar({VSQData}) {
 
     return (
         <div className={isMobile ? classes.vs_navigation_bar_responsive : classes.vs_navigation_bar}>
-            <AddVsModal
+            <AddQSModal
                 ref={addVSDialog}
-                collectFormData={collectData}/>
+                collectFormData={collectData} />
             <div
                 className={classes.add_survey}
                 onClick={handleOpenAddVSModal}>
@@ -44,7 +41,7 @@ export default function VSNavBar({VSQData}) {
                     className={classes.icon} />
                 <p>{t("add-survey")}</p>
             </div>
-            <ul className={isMobile?classes.titles_wrapper:""}>
+            <ul className={isMobile ? classes.titles_wrapper : ""}>
                 {returnFormData.map((data) => (
                     <li key={data.endTime}>
                         {isMobile ? (

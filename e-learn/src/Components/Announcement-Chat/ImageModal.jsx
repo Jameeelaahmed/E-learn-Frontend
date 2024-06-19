@@ -1,34 +1,33 @@
-// ImagePopup.js
-import React from 'react';
-import Slider from 'react-slick';
-import { FaTimes } from 'react-icons/fa';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import classes from './ImagePopup.module.css';
+import { forwardRef, useImperativeHandle } from "react";
+import { Slide } from "react-slideshow-image";
+import classes from "./ImageModal.module.css";
+import "react-slideshow-image/dist/styles.css";
+const ImageModal = forwardRef(function ImageModal(props, ref) {
+    const { slideImages } = props;
 
-const ImagePopup = ({ images, closePopup }) => {
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-    };
+    useImperativeHandle(ref, () => ({
+        open: (images) => {
+            ref.current.showModal(images); // Changed ImageModal to ref
+        },
+        close: () => {
+            ref.current.close(); // Changed ImageModal to ref
+        },
+    }));
 
     return (
-        <div className={classes.popup}>
-            <div className={classes.popupContent}>
-                <FaTimes className={classes.closeIcon} onClick={closePopup} />
-                <Slider {...settings}>
-                    {images.map((image, index) => (
-                        <div key={index} className={classes.imageContainer}>
-                            <img src={image} alt={`Slide ${index}`} className={classes.image} />
+        <dialog className={classes.modal}>
+            <Slide>
+                {slideImages &&
+                    slideImages.map((slideImage, index) => (
+                        <div key={index}>
+                            <div className="slide" style={{ backgroundImage: `url(${slideImage.url})` }}>
+                                <span className="caption">{slideImage.caption}</span>
+                            </div>
                         </div>
                     ))}
-                </Slider>
-            </div>
-        </div>
+            </Slide>
+        </dialog>
     );
-};
+});
 
-export default ImagePopup;
+export default ImageModal;

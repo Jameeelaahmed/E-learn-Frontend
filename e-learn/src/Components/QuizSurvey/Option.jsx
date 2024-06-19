@@ -1,9 +1,9 @@
-import classes from './AddVsModal.module.css';
+import classes from './AddQSModal.module.css';
 import { useTranslation } from 'react-i18next';
 import { log } from '../../log';
-import { memo,useCallback } from 'react';
+import { memo, useCallback } from 'react';
 // import {useSta}
-const Option= memo( function Option({ index,onBlur }) {
+const Option = memo(function Option({ index, onBlur }) {
     log('<Option /> rendered');
 
     // const [counter,setCounter]=use
