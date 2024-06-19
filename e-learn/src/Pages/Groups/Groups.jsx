@@ -1,5 +1,6 @@
 import classes from './groups.module.css';
 import Group from '../../Components/Group/group';
+import AddAssignment from '../../Components/Assignments/Add-Assignment';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { httpRequest } from '../../HTTP';
 import { getAuthToken } from '../../Helpers/AuthHelper';
@@ -11,6 +12,7 @@ export default function Groups() {
     const { groupId } = useParams();
     const [group, setGroup] = useState([]); // Initialize group state
     const [assignments, setAssignments] = useState([]); // Initialize assignments state
+
     // Fetch groups from the API
     async function fetchGroups() {
         try {
@@ -61,7 +63,6 @@ export default function Groups() {
         navigate(`/groups/${groupId}/assignments/${id}`);
     }
 
-    
     return (
         <ul className={classes.classes}>
             {location.pathname.endsWith("/groups") &&

@@ -4,11 +4,15 @@ import Button from '../Button/Button';
 import { useState, useEffect } from 'react';
 import { httpRequest } from '../../HTTP';
 import { getAuthToken } from '../../Helpers/AuthHelper';
+import { useParams } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa6'
 import { Link } from 'react-router-dom';
+
 export default function Participants() {
     const { t } = useTranslation();
     const [users, setUsers] = useState([]);
+    const params = useParams();
+    const groupId = params.groupId;
 
     function getRole() {
         return localStorage.getItem('role');
@@ -18,7 +22,7 @@ export default function Participants() {
 
     async function getGroupParticipants() {
         try {
-            const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Group/GetGroupParticipants/5`, getAuthToken());
+            const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Group/GetGroupParticipants/${groupId}`, getAuthToken());
             if (response.statusCode === 200) {
                 console.log(response);
                 setUsers(response.data);

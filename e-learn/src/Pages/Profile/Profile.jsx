@@ -137,7 +137,7 @@ export default function Profile() {
     }, []);
 
     const fullName = localStorage.getItem('fullName');
-    const userEmail = profile.Email;
+    const userEmail = profile.email;
     console.log(userEmail);
     const userName = localStorage.getItem('userName');
 

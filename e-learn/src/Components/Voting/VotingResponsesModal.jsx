@@ -9,7 +9,7 @@ const VotingListModal = forwardRef(function VotingListModal(_, ref) {
     const { t } = useTranslation();
     const votingResponsesModal = useRef();
     const params = useParams();
-    const voteId = params.voteId || 24; // Use params.voteId if available
+    const voteId = params.votingId || 1003; // Use params.voteId if available
     const [responses, setResponses] = useState([]);
 
     useImperativeHandle(ref, () => ({

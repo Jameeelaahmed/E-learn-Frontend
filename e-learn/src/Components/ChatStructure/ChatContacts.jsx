@@ -12,7 +12,7 @@ export default function ChatContacts() {
                 <li>
                     <img className={classes.contact_pic} src={img}></img>
                     <div className={classes.single_chat}>
-                        <div className={classes.name}>jameela ahmed</div>
+                        <div className={classes.name}>جميلة أحمد</div>
                         {/* <p className="single-chat-message">
                                         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat similique, harum tenetur ducimus quisquam numquam, quae itaque perferendis iste vitae accusantium tempore pariatur quibusdam porro dolore dignissimos qui ipsa quas.
                                     </p>  */}
@@ -21,7 +21,7 @@ export default function ChatContacts() {
                 <li>
                     <img className={classes.contact_pic} src={img}></img>
                     <div className={classes.single_chat}>
-                        <div className={classes.name}>jameela ahmed</div>
+                        <div className={classes.name}>مروان سيد</div>
                         {/* <p className="single-chat-message">
                                         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat similique, harum tenetur ducimus quisquam numquam, quae itaque perferendis iste vitae accusantium tempore pariatur quibusdam porro dolore dignissimos qui ipsa quas.
                                     </p> */}

@@ -34,19 +34,23 @@ export async function httpRequest(method, endpoint, accessToken, requestBody, co
 
             try {
                 const refreshResponse = await fetch(refreshUrl, refreshOptions);
-                const response = await refreshResponse.json();
-                console.log(response);
-                localStorage.setItem('token', response.data.token);
-            // Retry the request with the new access token
-            options.headers.Authorization = `Bearer ${newAccessToken}`;
-            const retryResponse = await fetch(url, options);
+                const refreshData = await refreshResponse.json();
+                localStorage.setItem('token', refreshData.data.token);
 
-            if (retryResponse.status === 401) {
-                throw new Error('Unauthorized');
-            }
+                // Retry the request with the new access token
+                options.headers.Authorization = `Bearer ${refreshData.data.token}`;
+                const retryResponse = await fetch(url, options);
 
-            const responseData = await retryResponse.json();
-                return responseData;
+                if (retryResponse.status === 401) {
+                    throw new Error('Unauthorized');
+                }
+
+                const retryResponseText = await retryResponse.text();
+                if (!retryResponseText) {
+                    throw new Error('Response body is empty');
+                }
+                const retryResponseData = JSON.parse(retryResponseText);
+                return retryResponseData;
             } catch (error) {
                 // Handle error
                 console.error('An error occurred:', error);
@@ -54,7 +58,11 @@ export async function httpRequest(method, endpoint, accessToken, requestBody, co
             }
         }
 
-        const responseData = await response.json();
+        const responseText = await response.text();
+        if (!responseText) {
+            throw new Error('Response body is empty');
+        }
+        const responseData = JSON.parse(responseText);
         return responseData;
     } catch (error) {
         console.error('An error occurred:', error);
