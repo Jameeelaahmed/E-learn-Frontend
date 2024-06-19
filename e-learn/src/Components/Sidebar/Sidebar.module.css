@@ -1,11 +1,26 @@
+img.logo {
+    width: 150px;
+}
+
+
+
+.logo_img {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+
 .sidebar {
     background-color: var(--main-color);
     color: var(--white);
     padding: 20px 0;
     position: relative;
     width: 280px;
-    margin-top: 110px;
+    /* margin-top: 110px; */
     transition: 850ms;
+    height: 100%;
 }
 
 [dir="ltr"] .sidebar {
@@ -217,7 +232,7 @@
     background-color: var(--main-color);
     color: var(--white);
     position: relative;
-    margin-top: 110px;
+    height: 100%;
 }
 
 [dir="ltr"] .sidebar_active {
@@ -398,6 +413,10 @@
 
 @media(max-width:768px) {
     .sidebar {
+        display: none;
+    }
+
+    img.logo {
         display: none;
     }
 

@@ -1,9 +1,10 @@
+import React, { useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useParams, useLocation, Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import classes from './AssignmentResponsesList.module.css';
-import { useTranslation } from 'react-i18next';
 import responses from '../../response';
 import * as FaIcons from 'react-icons/fa6';
-import { useState, useRef } from 'react';
 
 export default function AssignmentsResponsesList() {
     const initialMarks = responses.map(() => false);
@@ -11,6 +12,10 @@ export default function AssignmentsResponsesList() {
     const [searchTerm, setSearchTerm] = useState('');
     const { t } = useTranslation();
     const getMark = useRef();
+
+    const { groupId, assignmentId } = useParams();
+    const location = useLocation();
+    const path = location.pathname;
 
     function handleMark(index) {
         const newMarks = [...mark];
@@ -31,19 +36,13 @@ export default function AssignmentsResponsesList() {
         response.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // const [activeSearch, setActiveSearch] = useState(false);
-
-    // function handleSearchActive() {
-    //     setActiveSearch(true);
-    // }
-
     return (
         <div className={classes.track_responses}>
             <div className={classes.tracking}>
-                <a href="">{t('assigned')}</a>
-                <a href="">{t('turned-in')}</a>
-                <a href="">{t("gradded")}</a>
-                <a href="">{t('all')}</a>
+                <Link to={`/groups/${groupId}/assignments/${assignmentId}/responses-list`} className={path === `/groups/${groupId}/assignments/${assignmentId}/responses-list` ? classes.active : ''}>{t('assigned')}</Link>
+                <Link to={`/groups/${groupId}/assignments/${assignmentId}/responses-list/turnedIn`} className={path === `/groups/${groupId}/assignments/${assignmentId}/responses-list/turnedIn` ? classes.active : ''}>{t('turned-in')}</Link>
+                <Link to={`/groups/${groupId}/assignments/${assignmentId}/responses-list/gradded`} className={path === `/groups/${groupId}/assignments/${assignmentId}/responses-list/gradded` ? classes.active : ''}>{t("gradded")}</Link>
+                <Link to={`/groups/${groupId}/assignments/${assignmentId}/responses-list/all`} className={path === `/groups/${groupId}/assignments/${assignmentId}/responses-list/all` ? classes.active : ''}>{t('all')}</Link>
             </div>
             <div className={classes.search}>
                 <input
@@ -52,7 +51,6 @@ export default function AssignmentsResponsesList() {
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)}
                     className={`${classes.search_input}`}
-                // onFocus={handleSearchActive}
                 />
             </div>
             <div className={classes.table_wrapper}>
