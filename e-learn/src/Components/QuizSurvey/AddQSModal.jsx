@@ -1,25 +1,25 @@
-import { forwardRef, useImperativeHandle, useRef, useState,useEffect ,useCallback} from "react";
+import { forwardRef, useImperativeHandle, useRef, useState, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import CheckboxDropdown from '../MultipleChoiceCheckMark/CheckboxDropdown';
-import classes from './AddVsModal.module.css';
+import classes from './AddQSModal.module.css';
 import Questions from "./Questions";
 import { useTranslation } from 'react-i18next';
 import InputContainer from './InputContainer';
 import { log } from "../../log";
-const AddVsModal = forwardRef(function AddVsModal({collectFormData}, ref) {
+const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
     log('<ADDVSModal /> rendered');
     const { t } = useTranslation();
     const [formData, setFormData] = useState({
-        title:"",
-        groups:[],
-        startTime:"",
-        endTime:"",
-        startDate:"",
-        endDate:"",
-        questions:[
+        title: "",
+        groups: [],
+        startTime: "",
+        endTime: "",
+        startDate: "",
+        endDate: "",
+        questions: [
             {
-                questionTitle:"",
-                questionOptions:[]
+                questionTitle: "",
+                questionOptions: []
             }
         ]
     });
@@ -27,7 +27,7 @@ const AddVsModal = forwardRef(function AddVsModal({collectFormData}, ref) {
 
     const checkboxDropdownRef = useRef();
     const addVSDialog = useRef();
-    
+
     useImperativeHandle(ref, () => ({
         open: () => {
             addVSDialog.current.showModal();
@@ -69,7 +69,7 @@ const AddVsModal = forwardRef(function AddVsModal({collectFormData}, ref) {
     }, []);
 
     useEffect(() => {
-        if(formSubmitted){
+        if (formSubmitted) {
             collectFormData(formData)
             console.log(formData)
             setFormSubmitted(false)
@@ -88,7 +88,7 @@ const AddVsModal = forwardRef(function AddVsModal({collectFormData}, ref) {
                     <InputContainer label={t("end-time")} type="time" nameFor="time" />
                     <InputContainer label={t("end-date")} type="date" nameFor="date" />
                 </div>
-                <Questions onQuestionChange={handleQuestions} onStateChange={setFormData}/>
+                <Questions onQuestionChange={handleQuestions} onStateChange={setFormData} />
                 <div className={classes.actions}>
                     <button type="button" onClick={handleCancelClick}>{t("Cancel")}</button>
                     <button type="submit">{t("Create")}</button>
@@ -99,4 +99,4 @@ const AddVsModal = forwardRef(function AddVsModal({collectFormData}, ref) {
     );
 });
 
-export default AddVsModal;
+export default AddQSModal;

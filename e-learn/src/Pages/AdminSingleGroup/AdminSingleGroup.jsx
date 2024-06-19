@@ -1,20 +1,32 @@
-import React, { useState } from 'react';
+import { useRef, useState } from 'react';
 import classes from './AdminSingleGroup.module.css';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
+import * as FaIcons from 'react-icons/fa6'
+import AddModal from './AddModal';
 export default function AdminSingleGroup() {
     const { t } = useTranslation();
     const navigate = useNavigate(); // Initialize useHistory hook
     const location = useLocation();
     const path = location.pathname;
-    console.log(path)
     const [activeSection, setActiveSection] = useState('material');
     const [direction, setDirection] = useState('left');
-
     const sections = ['Material', 'Assignments', 'Quizzes', 'Participants'];
-
-
     const { admingroupID } = useParams();
+    const [searchTerm, setSearchTerm] = useState('');
+
+
+    // const filteredResponses = responses.filter(response =>
+    //     response.name.toLowerCase().includes(searchTerm.toLowerCase())
+    // );
+
+    const AddModalRef = useRef();
+
+
+    function handleAddModal() {
+        AddModalRef.current.open();
+    }
+
 
     // Define paths for each section with correct interpolation
     const sectionPaths = {
@@ -43,6 +55,22 @@ export default function AdminSingleGroup() {
 
     return (
         <>
+            <div className={classes.add_button}>
+                <div className={classes.search}>
+                    <input
+                        type="text"
+                        placeholder={t("search")}
+                        value={searchTerm}
+                        // onChange={e => setSearchTerm(e.target.value)}
+                        className={`${classes.search_input}`}
+                    // onFocus={handleSearchActive}
+                    />
+                </div>
+                <div onClick={handleAddModal} className={classes.add}>
+                    <FaIcons.FaCirclePlus />
+                </div>
+                <AddModal ref={AddModalRef}></AddModal>
+            </div>
             <div className={classes.head}>
                 {sections.map((section) => (
                     <div

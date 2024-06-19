@@ -1,8 +1,10 @@
-.header_wrapper{
+.header_wrapper {
     display: flex;
     /* justify-content: space-around; */
     align-items: center;
+    width: 100%;
 }
+
 header {
     background-color: white;
     box-shadow: var(--grey-shadow);
@@ -18,6 +20,7 @@ header {
 [dir='ltr'] header {
     margin-right: 15px;
 }
+
 [dir='rtl'] header {
     margin-left: 15px;
 }
@@ -31,6 +34,7 @@ header .current_page {
 [dir='ltr'] header .current_page {
     margin-left: 15px;
 }
+
 [dir='rtl'] header .current_page {
     margin-right: 15px;
 }
@@ -59,21 +63,21 @@ header .icons a .icon {
     border-radius: 8px;
 }
 
-[dir='ltr'] .icons button:first-child{
+[dir='ltr'] .icons button:first-child {
     margin-right: 10px;
 }
 
-[dir='rtl'] .icons button:first-child{
+[dir='rtl'] .icons button:first-child {
     margin-left: 10px;
 }
 
-@media(max-width:767px){
-    header{
-        width:80%;
+@media(max-width:767px) {
+    header {
+        width: 80%;
 
     }
 
-    header .icon{
+    header .icon {
         font-size: 12px;
     }
 }

@@ -1,12 +1,12 @@
-import classes from './AddVsModal.module.css'
+import classes from './AddQSModal.module.css'
 import Question from "./Question";
 import Option from "./Option";
-import { useState, useEffect, createContext, memo } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as FaIcons from "react-icons/fa6";
 import { log } from '../../log';
 
-const Questions = memo(function Questions({onQuestionChange}) {
+const Questions = memo(function Questions({ onQuestionChange }) {
     log('<Questions /> rendered');
     const { t } = useTranslation();
     const [questions, setQuestions] = useState([{ description: "", options: ["", ""] }]);
@@ -25,7 +25,7 @@ const Questions = memo(function Questions({onQuestionChange}) {
         updatedQuestions[questionIndex].options.splice(optionIndex, 1);
         setQuestions(updatedQuestions);
     }
-    
+
 
     function handleAddQuestion() {
         setQuestions([...questions, { description: "", options: ["", ""] }]);
@@ -46,12 +46,12 @@ const Questions = memo(function Questions({onQuestionChange}) {
 
 
     function handleQuestionChange(questionIndex, newQuestionValue) {
-        const updatedQuestions=[...questions];
-        updatedQuestions[questionIndex].description=newQuestionValue;
+        const updatedQuestions = [...questions];
+        updatedQuestions[questionIndex].description = newQuestionValue;
         setQuestions(updatedQuestions)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         onQuestionChange(questions)
         console.log(questions)
     })

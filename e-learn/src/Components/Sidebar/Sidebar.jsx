@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router-dom';
 import { getFullName } from '../../Helpers/AuthHelper';
 
-export default function Sidebar() {
+export default function Sidebar({ isOpened }) {
     //* LANG 
     const { t } = useTranslation();
     //* LANG 
@@ -14,7 +14,11 @@ export default function Sidebar() {
     // * START CLOSESIDEBAR
     const [isOpen, setIsOpen] = useState(false);
     function handleClose() {
-        setIsOpen((close) => !close);
+        setIsOpen((prev) => {
+            const newState = !prev;
+            isOpened(newState);
+            return newState;
+        });
     }
     // * END CLOSESIDEBAR
 

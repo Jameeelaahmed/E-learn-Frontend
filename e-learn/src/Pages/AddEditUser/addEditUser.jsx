@@ -4,8 +4,6 @@ import upload from '../../assets/upload.png'
 import classes from './addEditUser.module.css';
 import { useTranslation } from 'react-i18next';
 import FileUpload from '../../Components/Files/FileUpload';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faUpload } from '@fortawesome/free-solid-svg-icons';
 import Button from '../../Components/Button/Button';
 import { useLocation } from 'react-router-dom';
 const AddEditUser = () => {

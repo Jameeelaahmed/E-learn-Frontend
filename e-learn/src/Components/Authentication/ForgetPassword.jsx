@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { httpRequest } from '../../HTTP';
 import { useNavigate } from 'react-router-dom';
 export default function ForgetPassword() {
-    const {t}=useTranslation();
+    const { t } = useTranslation();
     const email = useRef();
     const [isEdit, setIsEdit] = useState(false)
     const [isResponseOk, setIsResponseOk] = useState(false);
@@ -17,23 +17,23 @@ export default function ForgetPassword() {
     async function handleSubmit(event) {
         event.preventDefault();
         const Email = email.current.value;
-    
+
         if (!Email) {
             console.error('Email is required');
             return;
         }
-        
-        try{
-            const response = await httpRequest('POST','https://elearnapi.runasp.net/api/Account/Forgot-Password',null,Email);
-            if(response.statusCode===200){
+
+        try {
+            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/Forgot-Password', null, Email);
+            if (response.statusCode === 200) {
                 console.log(response);
-                navigate('otp', {state: {Email}});
-            }else{
+                navigate('auth/otp', { state: { Email } });
+            } else {
                 console.log('an error occurred', response);
             }
         }
-        catch(error){
-            console.log('An error occurred:',error);
+        catch (error) {
+            console.log('An error occurred:', error);
         }
     }
 
@@ -58,9 +58,9 @@ export default function ForgetPassword() {
                         />
                     </div>
                     {emailIsInValid && <p className={classes.control_error}>enter valid email</p>}
-                        <div className={classes.action}>
-                            <Button text={t("ارسل الرمز السري")} id="submit" />
-                        </div>
+                    <div className={classes.action}>
+                        <Button text={t("ارسل الرمز السري")} id="submit" />
+                    </div>
                 </form>
             </FormContainer>
         </div>

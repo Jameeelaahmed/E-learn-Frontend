@@ -1,14 +1,14 @@
-
 /* ! LOGO */
 img.logo {
-    position: absolute;
+    /* position: absolute; */
     width: 150px;
-    top: 10px;
+    /* top: 10px; */
 }
 
 [dir='rtl'] img.logo {
     right: 25px;
 }
+
 [dir='ltr'] img.logo {
     left: 25px;
 }
@@ -16,7 +16,7 @@ img.logo {
 /* ! LOGO */
 
 /* ! START LOGO RESPONSIVE */
-img.logo_responsive{
+img.logo_responsive {
     /* position: absolute; */
     width: 120px;
     top: 20px;
@@ -29,10 +29,11 @@ img.logo_responsive{
     left: -27px;
 } */
 
-@media(max-width:930px){
-    img.logo{
+@media(max-width:930px) {
+    img.logo {
         /* display: none; */
     }
+
     /* img.logo_responsive{
         display:block;
         position: absolute;
@@ -47,4 +48,5 @@ img.logo_responsive{
         left: -18px;
     } */
 }
+
 /* !END LOGO RESPONSIVE */

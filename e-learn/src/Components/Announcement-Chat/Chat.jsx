@@ -5,9 +5,11 @@ import Empty from '../Empty/Empty';
 import { format, isSameDay, isSameWeek, parseISO, isValid, subDays } from 'date-fns';
 import * as FaIcons from 'react-icons/fa6';
 import img from '../../assets/avatar.jpg'
+import ImageModal from './ImageModal';
 export default function Chat({ selectedChat, setViewMode }) {
     const messagesEndRef = useRef(null);
     const inputRef = useRef(null);
+    const fileInputRef = useRef(null); // Added file input reference
     const { t } = useTranslation();
 
     const [chat, setChat] = useState([]);
@@ -16,6 +18,16 @@ export default function Chat({ selectedChat, setViewMode }) {
     const [editMode, setEditMode] = useState({ isEditing: false, messageKey: null });
     const [inputValue, setInputValue] = useState('');
     const [originalMessage, setOriginalMessage] = useState('');
+
+    const ImageModalRef = useRef();
+    const handleImageSliderModal = (uploadedFiles) => {
+        const slideImages = uploadedFiles.map((file) => ({
+            url: file.url,
+            caption: file.caption,
+        }));
+        ImageModalRef.current.open(slideImages);
+    };
+
 
     useEffect(() => {
         if (selectedChat) {
@@ -60,8 +72,10 @@ export default function Chat({ selectedChat, setViewMode }) {
             const newChatItem = {
                 key: chat.length + 1,
                 type: "sender",
-                msg: inputRef.current.value,
-                uploadedFiles: [],
+                msg: inputValue,
+                uploadedImage: null, // Reset uploadedImage to null
+                uploadedFiles: [], // New array to hold uploaded files
+                profileImage: "https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg",
                 timestamp: new Date().toISOString(),  // Ensure ISO format
             };
 
@@ -193,7 +207,6 @@ export default function Chat({ selectedChat, setViewMode }) {
     useEffect(() => {
         scrollToBottom();
     }, [chat]);
-
     return (
         <div className={classes.main__chatcontent}>
             {selectedChat ? (
@@ -256,21 +269,26 @@ export default function Chat({ selectedChat, setViewMode }) {
                                                 <div className={`${classes.chat__msg}`}>
                                                     <p className={classes.chat__msg__text}>{itm.msg}</p>
                                                     {itm.uploadedImage && (
-                                                        <img className={classes.uploaded__image} src={itm.uploadedImage} alt="Uploaded" />
+                                                        <img
+                                                            className={classes.uploaded__image}
+                                                            src={itm.uploadedImage}
+                                                            alt="Uploaded"
+
+                                                        />
                                                     )}
                                                     {itm.uploadedFiles && itm.uploadedFiles.map((file, index) => (
-                                                        <div key={index} className={classes.uploaded__file}>
+                                                        <div key={index} className={classes.uploaded__file} onClick={handleImageSliderModal(itm.uploadedFiles)}>
                                                             <p>{file.name}</p>
                                                             {/* Add icons for different file types */}
                                                         </div>
                                                     ))}
+                                                    <ImageModal ref={ImageModalRef} />
                                                 </div>
                                                 <div className={classes.chat__meta}>
                                                     <span>{formattedTime}</span>
                                                 </div>
                                             </div>
                                             <img className={classes.img} src={img} alt="Profile" />
-
                                         </div>
                                     </div>
                                 );
