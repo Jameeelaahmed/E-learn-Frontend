@@ -6,15 +6,10 @@
     padding: 20px;
     z-index: 100;
     height: fit-content;
+    margin: 0 15px;
 }
 
-[dir="rtl"] .assignment_details {
-    margin-left: 15px;
-}
 
-[dir="ltr"] .assignment_details {
-    margin-right: 15px;
-}
 
 .assignment_container {
     background-color: white;

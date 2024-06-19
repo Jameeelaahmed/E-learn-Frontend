@@ -2,6 +2,10 @@ img.logo {
     width: 150px;
 }
 
+img.logo_responsive {
+    width: 120px;
+    ;
+}
 
 
 .logo_img {
@@ -10,14 +14,16 @@ img.logo {
     justify-content: center;
 }
 
-
+.sidebar_container_active {
+    width: 70px;
+}
 
 .sidebar {
     background-color: var(--main-color);
     color: var(--white);
     padding: 20px 0;
     position: relative;
-    width: 280px;
+    width: 200px;
     /* margin-top: 110px; */
     transition: 850ms;
     height: 100%;
