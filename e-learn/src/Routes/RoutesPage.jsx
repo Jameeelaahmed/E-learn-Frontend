@@ -70,6 +70,10 @@ const instructorRoutes = [
             { path: 'assignments', element: <Assignments /> },
             { path: 'assignments/:assignmentId', element: <AssignmentDetails /> },
             { path: 'assignments/:assignmentId/responses-list', element: <AssignmentsResponsesList /> },
+            { path: 'assignments/:assignmentId/responses-list', element: <AssignmentsResponsesList /> },
+            { path: 'assignments/:assignmentId/responses-list/turnedIn', element: <AssignmentsResponsesList /> },
+            { path: 'assignments/:assignmentId/responses-list/gradded', element: <AssignmentsResponsesList /> },
+            { path: 'assignments/:assignmentId/responses-list/all', element: <AssignmentsResponsesList /> },
             { path: 'participants', element: <Participants /> }
         ]
     },
@@ -90,6 +94,10 @@ const studentRoutes = [
             { path: 'assignments', element: <Assignments /> },
             { path: 'assignments/:assignmentId', element: <AssignmentDetails /> },
             { path: 'assignments/:assignmentId/responses-list', element: <AssignmentsResponsesList /> },
+            { path: 'assignments/:assignmentId/responses-list' },
+            { path: 'assignments/:assignmentId/responses-list/turnedIn' },
+            { path: 'assignments/:assignmentId/responses-list/gradded' },
+            { path: 'assignments/:assignmentId/responses-list/all' },
             { path: 'participants', element: <Participants /> }
         ]
     },

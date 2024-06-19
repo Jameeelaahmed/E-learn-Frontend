@@ -5,7 +5,7 @@ import * as FaIcons from "react-icons/fa6";
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router-dom';
 import { getFullName } from '../../Helpers/AuthHelper';
-
+import logoimg from '../../assets/Untitled-65.png'
 export default function Sidebar({ isOpened }) {
     //* LANG 
     const { t } = useTranslation();
@@ -90,34 +90,43 @@ export default function Sidebar({ isOpened }) {
     // * END ACTIVE
 
     return (
-        <div className={`${isOpen ? classes.sidebar : classes.sidebar_active}`}>
-            <FaIcons.FaArrowLeftLong
-                className={classes.icon}
-                onClick={handleClose} />
-            <NavLink
-                to='profile'
-                className={classes.profile}>
-                <img src={profilePicture} alt="Profile Picture"></img>
-                <p>{name}</p>
-            </NavLink>
-            <ul>
-                {sidebarData
-                    .filter(item => item.roles.includes(role))
-                    .map(item => (
-                        <NavLink
-                            to={item.link}
-                            key={item.title}
-                            className={({ isActive }) => `${classes.link} ${isActive ? classes.active : ''}`}
-                            exact
-                        >
-                            <li>
-                                {item.icon}
-                                <span>{item.title}</span>
-                            </li>
-                        </NavLink>
-                    ))
-                }
-            </ul>
+        <div className={classes.sidebar_container}>
+            <div className={classes.logo_img}>
+                <img
+                    className={classes.logo}
+                    src={logoimg}
+                    alt="Regular Logo"
+                />
+            </div>
+            <div className={`${isOpen ? classes.sidebar : classes.sidebar_active}`}>
+                <FaIcons.FaArrowLeftLong
+                    className={classes.icon}
+                    onClick={handleClose} />
+                <NavLink
+                    to='profile'
+                    className={classes.profile}>
+                    <img src={profilePicture} alt="Profile Picture"></img>
+                    <p>{name}</p>
+                </NavLink>
+                <ul>
+                    {sidebarData
+                        .filter(item => item.roles.includes(role))
+                        .map(item => (
+                            <NavLink
+                                to={item.link}
+                                key={item.title}
+                                className={({ isActive }) => `${classes.link} ${isActive ? classes.active : ''}`}
+                                exact
+                            >
+                                <li>
+                                    {item.icon}
+                                    <span>{item.title}</span>
+                                </li>
+                            </NavLink>
+                        ))
+                    }
+                </ul>
+            </div>
         </div>
     );
 }
