@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router-dom';
 import { getFullName } from '../../Helpers/AuthHelper';
 import logoimg from '../../assets/Untitled-65.png'
+import logoimg2 from '../../assets/Untitled-4.png'
 export default function Sidebar({ isOpened }) {
     //* LANG 
     const { t } = useTranslation();
@@ -90,13 +91,19 @@ export default function Sidebar({ isOpened }) {
     // * END ACTIVE
 
     return (
-        <div className={classes.sidebar_container}>
+        <div className={`${classes.sidebar_container} ${isOpen ? "" : classes.sidebar_container_active}`}>
             <div className={classes.logo_img}>
-                <img
-                    className={classes.logo}
-                    src={logoimg}
-                    alt="Regular Logo"
-                />
+                {isOpen ?
+                    <img
+                        className={classes.logo}
+                        src={logoimg}
+                        alt="Regular Logo"
+                    /> : <img
+                        className={classes.logo_responsive}
+                        src={logoimg2}
+                        alt="Responsive Logo"
+                    />
+                }
             </div>
             <div className={`${isOpen ? classes.sidebar : classes.sidebar_active}`}>
                 <FaIcons.FaArrowLeftLong

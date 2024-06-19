@@ -18,7 +18,9 @@
         align-items: center;
     }
 
+
     .col {
+        display: block;
         width: 100%;
     }
 }

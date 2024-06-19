@@ -4,11 +4,18 @@
     padding: 15px 30px;
     margin-top: 30px;
     border-radius: 19px;
-    box-shadow: var(--main-shadow);
     height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+[dir="rtl"] .AddAssignment {
+    box-shadow: var(--main-arabic-shadow);
+}
+
+[dir="ltr"] .AddAssignment {
+    box-shadow: var(--main-shadow);
 }
 
 @media (max-width:930px) {

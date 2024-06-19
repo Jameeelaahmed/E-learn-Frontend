@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import classes from './Vote.module.css';
 import VotingListModal from './VotingResponsesModal';
-
+import { useParams } from 'react-router-dom';
 export default function Vote({ vote }) {
     const [options, setOptions] = useState([]);
 
+    const { voteId } = useParams()
     useEffect(() => {
         if (vote) {
             const voteOptions = [
@@ -15,9 +16,9 @@ export default function Vote({ vote }) {
                 { id: 5, description: vote.option5, percentage: 0 }
             ].filter(option => option.description !== null);
             setOptions(voteOptions);
-                console.log('Vote received:', vote);
-                console.log('Vote Options:', voteOptions);
-                console.log('Vote title:', vote.title);
+            console.log('Vote received:', vote);
+            console.log('Vote Options:', voteOptions);
+            console.log('Vote title:', vote.title);
         } else {
             console.log('No vote data available');
         }

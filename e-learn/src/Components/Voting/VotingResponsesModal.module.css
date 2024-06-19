@@ -1,6 +1,6 @@
 .modal {
     padding: 2%;
-    width: 30%;
+    width: 35%;
     height: fit-content;
     border: none;
     border-radius: 10px;
@@ -18,13 +18,13 @@
 
 @media (max-width:930px) {
     .modal {
-        width: 40%;
+        width: 45%;
     }
 }
 
 @media (max-width:768px) {
     .modal {
-        width: 60%;
+        width: 55%;
     }
 }
 
@@ -60,6 +60,8 @@
 .vote_data {
     display: flex;
     align-items: center;
+    font-size: 13px;
+    color: var(--main-color);
 }
 
 [dir="rtl"] .vote_data:first-child span {
