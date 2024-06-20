@@ -25,7 +25,7 @@ import AdminGroups from '../Pages/AdminGroups/AdminGroups';
 import AddEditGroup from '../Pages/AddEditGroup/AddEditGroup';
 import AdminSingleGroup from '../Pages/AdminSingleGroup/AdminSingleGroup';
 import QSContainer from '../Pages/QuizSurvey/QSContainer';
-
+import Vote from '../Components/Voting/Vote';
 // Import necessary components and functions
 function RoleBasedRoutes() {
     const role = getRole();
@@ -77,7 +77,8 @@ const instructorRoutes = [
             { path: 'participants', element: <Participants /> }
         ]
     },
-    { path: 'voting/*', element: <Voting /> }, // Dynamic path for selected vote
+    { path: 'voting', element: <Voting /> },
+    { path: 'voting/:voteId', element: <Vote /> },
     { path: 'survey', element: <QSContainer /> },
     { path: 'chat', element: <Container /> },
 ];
@@ -101,7 +102,7 @@ const studentRoutes = [
             { path: 'participants', element: <Participants /> }
         ]
     },
-    { path: 'voting', element: <Voting /> }, // Dynamic path for selected vote
+    { path: 'voting', element: <Voting /> },
     { path: 'chat', element: <Container /> },
 ];
 

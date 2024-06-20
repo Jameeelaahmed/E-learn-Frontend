@@ -6,6 +6,7 @@ import VotingModal from './VotingModal';
 import { log } from '../../log';
 import Delete from '../Button/Delete';
 import Edit from '../Button/Edit';
+import { useNavigate, useParams } from 'react-router-dom';
 import { httpRequest } from '../../HTTP';
 
 export default function VSNavBar({ onVoteSelected }) { // Add onVoteSelected prop
@@ -14,6 +15,8 @@ export default function VSNavBar({ onVoteSelected }) { // Add onVoteSelected pro
     const [message, setMessage] = useState('');
     const [selectedVote, setSelectedVote] = useState(null);
 
+    const { voteId } = useParams();
+    const navigate = useNavigate();
     const role = getRole();
 
     function getRole() {
@@ -92,6 +95,7 @@ export default function VSNavBar({ onVoteSelected }) { // Add onVoteSelected pro
             if (response.statusCode === 200) {
                 setSelectedVote(response.data);
                 onVoteSelected(response.data); // Notify parent component about the selected vote
+                navigate(`/voting/${voteId}`);
             }
         } catch (error) {
             console.log('An error occurred:', error);

@@ -1,9 +1,18 @@
 .main_section {
     /* display: flex; */
     /* justify-content: space-between; */
-    margin: 40px 0 40px 25px;
     z-index: 999;
 }
+
+[dir="rtl"] .main_section {
+    margin: 40px 10px 40px 25px;
+}
+
+[dir="ltr"] .main_section {
+    margin: 40px 25px 40px 10 px;
+}
+
+
 
 
 @media(max-width:930px) {
