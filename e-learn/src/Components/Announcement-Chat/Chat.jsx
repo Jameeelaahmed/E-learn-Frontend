@@ -69,33 +69,6 @@ export default function Chat({ selectedChat, setViewMode }) {
         };
     }, [chat, editMode]);
 
-    const addMessage = () => {
-        if (inputRef.current.value !== "" || chat.some(item => item.uploadedFiles)) {
-            const newChatItem = {
-                key: chat.length + 1,
-                type: "sender",
-                msg: inputValue,
-                uploadedImage: null, // Reset uploadedImage to null
-                uploadedFiles: [], // New array to hold uploaded files
-                profileImage: "https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg",
-                timestamp: new Date().toISOString(),  // Ensure ISO format
-            };
-
-            if (chat.some((item) => item.uploadedFiles)) {
-                chat.forEach((item) => {
-                    if (item.uploadedFiles) {
-                        newChatItem.uploadedFiles.push(item.uploadedFiles);
-                    }
-                });
-            }
-
-
-            setChat(prevChat => [...prevChat, newChatItem]);
-            setInputValue('');
-            scrollToBottom();
-        }
-    };
-
     const handleContextMenu = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -177,6 +150,34 @@ export default function Chat({ selectedChat, setViewMode }) {
         setEditMode({ isEditing: false, messageKey: null });
         setInputValue(''); // Clear the input field
         setOriginalMessage(''); // Clear the original message state
+    };
+
+
+    const addMessage = () => {
+        if (inputRef.current.value !== '' || chat.some((item) => item.uploadedFiles && item.uploadedFiles.length > 0)) {
+            const newChatItem = {
+                key: chat.length + 1,
+                type: 'sender',
+                msg: inputValue,
+                uploadedImage: null,
+                uploadedFiles: [], // Initialize uploadedFiles as an empty array
+                profileImage: { img },
+                timestamp: new Date().toISOString(),
+                receivers: ['receiver1', 'receiver2'],
+            };
+
+            // Flattening any arrays in chat uploadedFiles to ensure it's a flat array
+            chat.forEach((item) => {
+                if (item.uploadedFiles && item.uploadedFiles.length > 0) {
+                    newChatItem.uploadedFiles = newChatItem.uploadedFiles.concat(item.uploadedFiles);
+                }
+            });
+
+            setChat((prevChat) => [...prevChat, newChatItem]);
+
+            setInputValue('');
+            scrollToBottom();
+        }
     };
 
     const handleFileInputChange = (event) => {

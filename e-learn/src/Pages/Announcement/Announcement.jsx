@@ -135,6 +135,7 @@ export default function Announcement() {
         setOriginalMessage(''); // Clear the original message state
     };
 
+
     const handleFileInputChange = (event) => {
         const files = event.target.files;
         const newChatItems = [];
@@ -165,13 +166,8 @@ export default function Announcement() {
         }
     };
 
-
-    useEffect(() => {
-        scrollToBottom();
-    }, [chat]);
-
     const addMessage = () => {
-        if (inputRef.current.value !== '' || chat.some((item) => item.uploadedFiles)) {
+        if (inputRef.current.value !== '' || chat.some((item) => item.uploadedFiles.length > 0)) {
             const newChatItem = {
                 key: chat.length + 1,
                 type: 'sender',
@@ -183,19 +179,22 @@ export default function Announcement() {
                 receivers: ['receiver1', 'receiver2'],
             };
 
-            if (chat.some((item) => item.uploadedFiles)) {
-                chat.forEach((item) => {
-                    if (item.uploadedFiles) {
-                        newChatItem.uploadedFiles.push(item.uploadedFiles);
-                    }
-                });
-            }
+            // Flattening any arrays in chat uploadedFiles to ensure it's a flat array
+            chat.forEach((item) => {
+                if (item.uploadedFiles.length > 0) {
+                    newChatItem.uploadedFiles = newChatItem.uploadedFiles.concat(item.uploadedFiles);
+                }
+            });
 
             setChat((prevChat) => [...prevChat, newChatItem]);
             setInputValue('');
             scrollToBottom();
         }
     };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [chat]);
 
     const getFileIcon = (fileType) => {
         switch (fileType) {
@@ -230,8 +229,6 @@ export default function Announcement() {
                 return <FaFileAlt className={classes.fileIconDefault} />;
         }
     };
-
-
 
     return (
         <div className={accnounceclasses.announcement}>
@@ -296,6 +293,7 @@ export default function Announcement() {
                                                         ))}
                                                     </div>
                                                 )}
+
                                                 <ImageModal ref={ImageModalRef} />
                                             </div>
                                             <div className={classes.chat__meta}>
