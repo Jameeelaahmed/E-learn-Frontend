@@ -471,3 +471,72 @@
     border-radius: 10px;
     /* Optional: Add rounded corners */
 }
+
+
+.uploadedFile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+[dir="rtl"] .uploadedFile a {
+    color: var(--secondry-color);
+    margin-right: 10px;
+}
+
+[dir="ltr"] .uploadedFile a {
+    color: var(--secondry-color);
+    margin-left: 10px;
+}
+
+/* chat.module.css */
+
+.fileIconPdf {
+    color: red;
+    font-size: 20px;
+}
+
+.fileIconImage {
+    color: blue;
+    font-size: 20px;
+}
+
+.fileIconWord {
+    color: #2b579a;
+    font-size: 20px;
+}
+
+.fileIconExcel {
+    color: #217346;
+    font-size: 20px;
+}
+
+.fileIconPowerpoint {
+    color: #d24726;
+    font-size: 20px;
+}
+
+.fileIconArchive {
+    color: #f0ad4e;
+    font-size: 20px;
+}
+
+.fileIconAudio {
+    color: #f39c12;
+    font-size: 20px;
+}
+
+.fileIconVideo {
+    color: #e74c3c;
+    font-size: 20px;
+}
+
+.fileIconCode {
+    color: #8e44ad;
+    font-size: 20px;
+}
+
+.fileIconDefault {
+    color: gray;
+    font-size: 20px;
+}

@@ -6,6 +6,8 @@ import { format, isSameDay, isSameWeek, parseISO, isValid, subDays } from 'date-
 import * as FaIcons from 'react-icons/fa6';
 import img from '../../assets/avatar.jpg'
 import ImageModal from './ImageModal';
+import { FaFileAlt, FaFileImage, FaFilePdf, FaFileWord, FaFileExcel, FaFilePowerpoint, FaFileArchive, FaFileAudio, FaFileVideo, FaFileCode } from 'react-icons/fa';
+
 export default function Chat({ selectedChat, setViewMode }) {
     const messagesEndRef = useRef(null);
     const inputRef = useRef(null);
@@ -79,13 +81,14 @@ export default function Chat({ selectedChat, setViewMode }) {
                 timestamp: new Date().toISOString(),  // Ensure ISO format
             };
 
-            if (chat.some(item => item.uploadedFiles)) {
-                chat.forEach(item => {
+            if (chat.some((item) => item.uploadedFiles)) {
+                chat.forEach((item) => {
                     if (item.uploadedFiles) {
                         newChatItem.uploadedFiles.push(item.uploadedFiles);
                     }
                 });
             }
+
 
             setChat(prevChat => [...prevChat, newChatItem]);
             setInputValue('');
@@ -187,15 +190,16 @@ export default function Chat({ selectedChat, setViewMode }) {
                 reader.onload = () => {
                     const newChatItem = {
                         key: chat.length + i + 1,
-                        type: "sender",
-                        msg: "",
-                        uploadedImage: reader.result,
-                        profileImage: img,
-                        timestamp: new Date().toISOString(),  // Ensure ISO format
+                        type: 'sender',
+                        msg: inputValue,
+                        uploadedImage: file.type.startsWith('image/') ? reader.result : null,
+                        uploadedFiles: !file.type.startsWith('image/') ? [{ name: file.name, type: file.type, content: reader.result }] : [],
+                        profileImage: 'https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg',
+                        timestamp: new Date().toISOString(),
                     };
                     newChatItems.push(newChatItem);
                     if (newChatItems.length === files.length) {
-                        setChat(prevChat => [...prevChat, ...newChatItems]);
+                        setChat((prevChat) => [...prevChat, ...newChatItems]);
                         scrollToBottom();
                     }
                 };
@@ -203,6 +207,43 @@ export default function Chat({ selectedChat, setViewMode }) {
             }
         }
     };
+
+
+    const getFileIcon = (fileType) => {
+        switch (fileType) {
+            case 'application/pdf':
+                return <FaFilePdf className={classes.fileIconPdf} />;
+            case 'image/jpeg':
+            case 'image/png':
+                return <FaFileImage className={classes.fileIconImage} />;
+            case 'application/msword':
+            case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                return <FaFileWord className={classes.fileIconWord} />;
+            case 'application/vnd.ms-excel':
+            case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+                return <FaFileExcel className={classes.fileIconExcel} />;
+            case 'application/vnd.ms-powerpoint':
+            case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+                return <FaFilePowerpoint className={classes.fileIconPowerpoint} />;
+            case 'application/zip':
+            case 'application/x-rar-compressed':
+                return <FaFileArchive className={classes.fileIconArchive} />;
+            case 'audio/mpeg':
+            case 'audio/mp3':
+                return <FaFileAudio className={classes.fileIconAudio} />;
+            case 'video/mp4':
+            case 'video/mpeg':
+                return <FaFileVideo className={classes.fileIconVideo} />;
+            case 'text/html':
+            case 'application/javascript':
+            case 'application/json':
+                return <FaFileCode className={classes.fileIconCode} />;
+            default:
+                return <FaFileAlt className={classes.fileIconDefault} />;
+        }
+    };
+
+
 
     useEffect(() => {
         scrollToBottom();
@@ -273,15 +314,22 @@ export default function Chat({ selectedChat, setViewMode }) {
                                                             className={classes.uploaded__image}
                                                             src={itm.uploadedImage}
                                                             alt="Uploaded"
-
                                                         />
                                                     )}
-                                                    {itm.uploadedFiles && itm.uploadedFiles.map((file, index) => (
-                                                        <div key={index} className={classes.uploaded__file} onClick={handleImageSliderModal(itm.uploadedFiles)}>
-                                                            <p>{file.name}</p>
-                                                            {/* Add icons for different file types */}
+                                                    {itm.uploadedFiles && itm.uploadedFiles.length > 0 && (
+                                                        <div className={classes.uploadedFiles}>
+                                                            {itm.uploadedFiles.map((file, fileIndex) => (
+                                                                <div key={fileIndex} className={classes.uploadedFile}>
+                                                                    <p>
+                                                                        {getFileIcon(file.type)}
+                                                                    </p>
+                                                                    <a href={file.content} download={file.name} target="_blank" rel="noopener noreferrer">
+                                                                        {file.name}
+                                                                    </a>
+                                                                </div>
+                                                            ))}
                                                         </div>
-                                                    ))}
+                                                    )}
                                                     <ImageModal ref={ImageModalRef} />
                                                 </div>
                                                 <div className={classes.chat__meta}>
