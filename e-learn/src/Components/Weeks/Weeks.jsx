@@ -49,7 +49,7 @@ export default function Weeks({ role }) {
     }, [groupId]);
 
     function handleAdd() {
-        setWeeks((prevWeeks) => [...prevWeeks, [prevWeeks.length + 1, { lectures: [], sections: [] }]]);
+        setWeeks((prevWeeks) => [...prevWeeks, [`${prevWeeks.length + 1}`, { lectures: [], sections: [] }]]);
         setOpenWeeks((prevOpenWeeks) => [...prevOpenWeeks, false]); // Initialize the new week as closed
     }
 
@@ -80,36 +80,34 @@ export default function Weeks({ role }) {
 
     function handleAddMaterial(newMaterial) {
         setWeeks((prevWeeks) => {
-            const updatedWeeks = prevWeeks.map(([weekNum, materials]) => {
-                if (weekNum === newMaterial.week.toString()) {
-                    if (newMaterial.type === 0) {
-                        return [weekNum, { ...materials, lectures: [...materials.lectures, newMaterial] }];
-                    } else {
-                        return [weekNum, { ...materials, sections: [...materials.sections, newMaterial] }];
+            const weekIndex = prevWeeks.findIndex(([weekNum]) => weekNum === newMaterial.week.toString());
+            if (weekIndex !== -1) {
+                return prevWeeks.map(([weekNum, materials], index) => {
+                    if (index === weekIndex) {
+                        if (newMaterial.type === 0) {
+                            return [weekNum, { ...materials, lectures: [...materials.lectures, newMaterial] }];
+                        } else {
+                            return [weekNum, { ...materials, sections: [...materials.sections, newMaterial] }];
+                        }
                     }
-                }
-                return [weekNum, materials];
-            });
-
-            const weekExists = updatedWeeks.some(([weekNum]) => weekNum === newMaterial.week.toString());
-            if (!weekExists) {
+                    return [weekNum, materials];
+                });
+            } else {
                 const newWeek = [newMaterial.week.toString(), newMaterial.type === 0 ? { lectures: [newMaterial], sections: [] } : { lectures: [], sections: [newMaterial] }];
-                updatedWeeks.push(newWeek);
+                return [...prevWeeks, newWeek];
             }
-
-            return updatedWeeks;
         });
 
         // Ensure the newly added material's week is open
         setOpenWeeks(prevOpenWeeks => {
-            const updatedOpenWeeks = [...prevOpenWeeks];
             const weekIndex = weeks.findIndex(([weekNum]) => weekNum === newMaterial.week.toString());
             if (weekIndex !== -1) {
+                const updatedOpenWeeks = [...prevOpenWeeks];
                 updatedOpenWeeks[weekIndex] = true; // Open the week where the material is added
+                return updatedOpenWeeks;
             } else {
-                updatedOpenWeeks.push(true); // Open the new week
+                return [...prevOpenWeeks, true]; // Open the new week
             }
-            return updatedOpenWeeks;
         });
     }
 
