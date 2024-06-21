@@ -1,17 +1,24 @@
-import classes from './QSNavBar.module.css'
+// QSNavBar.jsx
+import classes from './QSNavBar.module.css';
 import * as FaIcons from "react-icons/fa6";
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next';
 import { useRef, useState, useEffect } from 'react';
-import AddQSModal from './AddQSModal'
+import AddQSModal from './AddQSModal';
+import { httpRequest } from '../../HTTP';
+import { getAuthToken } from '../../Helpers/AuthHelper';
+import Edit from '../Button/Edit';
+import Delete from '../Button/Delete'; // Correct import statement
+
 export default function QSNavBar({ VSQData }) {
     const { t } = useTranslation();
     const addVSDialog = useRef();
+    
+    const [returnFormData, setReturnFormData] = useState([]);
+    const [isMobile, setIsMobile] = useState(false); // State to track screen size
+
     function handleOpenAddVSModal() {
         addVSDialog.current.open();
     }
-    const [returnFormData, setReturnFormData] = useState([])
-
-    const [isMobile, setIsMobile] = useState(false); // State to track screen size
 
     useEffect(() => {
         const checkScreenSize = () => {
@@ -26,7 +33,7 @@ export default function QSNavBar({ VSQData }) {
 
     function collectData(data) {
         setReturnFormData(prevData => [...prevData, data]);
-        VSQData(data)
+        VSQData(data);
     }
 
     const role = getRole();
@@ -40,46 +47,71 @@ export default function QSNavBar({ VSQData }) {
         wid = "changeWidth";
     }
 
+    async function DeleteSurvey(id) {
+        try {
+            const token = getAuthToken();
+            const response = await httpRequest('DELETE', `https://elearnapi.runasp.net/api/Survey/Delete/${id}`, token);
+            console.log(response);
+            if (response.statusCode === 200) {
+                fetchSurveys();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+    async function fetchSurveys() {
+        try {
+            const token = getAuthToken();
+            const response = await httpRequest('GET', 'https://elearnapi.runasp.net/api/Survey/GetFromUserGroups', token);
+            console.log(response);
+            if (response.statusCode === 200) {
+                setReturnFormData(response.data);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        fetchSurveys();
+    }, [VSQData]);
+
     return (
         <div className={isMobile ? classes.vs_navigation_bar_responsive : classes.vs_navigation_bar}>
-            <AddQSModal
-                ref={addVSDialog}
-                collectFormData={collectData} />
-            <div
-                className={classes.add_survey}
-                onClick={handleOpenAddVSModal}>
-                <FaIcons.FaPlus
-                    className={classes.icon} />
+            <AddQSModal ref={addVSDialog} collectFormData={collectData} />
+            <div className={classes.add_survey} onClick={handleOpenAddVSModal}>
+                <FaIcons.FaPlus className={classes.icon} />
                 <p>{t("add-survey")}</p>
             </div>
             <ul className={isMobile ? classes.titles_wrapper : ""}>
                 {returnFormData.map((data) => (
-                    <div key={vote.id} className={classes.box_wrapper}>
-                        <li className={wid} key={data.endTime}>
+                    <div key={data.id} className={classes.box_wrapper}>
+                        <li className={wid} key={data.id}>
                             {isMobile ? (
                                 <div className={classes.box}>
-                                    <p>{data.title}</p>
-                                    <p>name</p>
+                                    <p>{data.text}</p>
+                                    <p>{data.creatorName}</p>
                                 </div>
                             ) : (
                                 <div className={classes.title_wrapper}>
                                     <FaIcons.FaSquare className={classes.icon} />
                                     <div className={classes.info}>
-                                        <span className={classes.title}>{data.title}</span>
-                                        <span className={classes.name}>by name</span>
+                                        <span className={classes.title}>{data.text}</span>
+                                        <span className={classes.name}>{data.creatorName}</span>
                                     </div>
                                 </div>
                             )}
                         </li>
-                        {role === 'Staff' && (
-                            <div className={classes.edit_delete}>
-                                <Edit icon={FaIcons.FaPenClip} />
-                                <Delete onClick={() => DeleteVote(vote.id)} />
+                        {role === "Staff" && (
+                            <div className={classes.control_buttons}>
+                                <Edit />
+                                <Delete onClick={() => DeleteSurvey(data.id)} />
                             </div>
                         )}
                     </div>
                 ))}
             </ul>
         </div>
-    )
+    );
 }
