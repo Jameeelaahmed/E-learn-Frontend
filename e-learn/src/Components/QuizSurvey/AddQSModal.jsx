@@ -6,6 +6,9 @@ import Questions from "./Questions";
 import { useTranslation } from 'react-i18next';
 import InputContainer from './InputContainer';
 import { log } from "../../log";
+import { httpRequest } from '../../HTTP';
+import { getAuthToken } from '../../Helpers/AuthHelper';
+
 const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
     log('<ADDVSModal /> rendered');
     const { t } = useTranslation();
@@ -53,10 +56,66 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
         }));
     }, []);
 
-    const handleSubmit = useCallback(e => {
+    const handleSubmit = useCallback(async (e) => {
+        e.preventDefault();
         const fd = new FormData(e.target);
         const formValues = Object.fromEntries(fd.entries());
-        const selectedGroups = checkboxDropdownRef.current.selectedGroups.map(group => group.value);
+    
+        const selectedGroups = checkboxDropdownRef.current.getSelectedGroups().map(group => group.value);
+    
+        if (!formValues.title || formValues.title.trim() === '') {
+            console.error('Validation Error: Title is required.');
+            return;
+        }
+        
+        if (!formValues.date || !formValues.time) {
+            console.error('Validation Error: End date and time are required.');
+            return;
+        }
+    
+        if (selectedGroups.length === 0) {
+            console.error('Validation Error: At least one group must be selected.');
+            return;
+        }
+    
+        const formattedQuestions = formData.questions.map(question => {
+            const options = question.questionOptions;
+            return {
+                text: question.questionTitle || 'Untitled Question',
+                option1: options[0] || "",
+                option2: options[1] || "",
+                option3: options[2] || "",
+                option4: options[3] || "",
+                option5: options[4] || ""
+            };
+        });
+    
+        const requestBody = {
+            text: formValues.title,
+            start: new Date().toISOString(),
+            end: `${formValues.date}T${formValues.time}`,
+            groupIds: selectedGroups,
+            questions: formattedQuestions
+        };
+    
+        try {
+            const token = getAuthToken();
+            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Survey/CreateSurvey', token, requestBody);
+            console.log(requestBody);
+            console.log(response);
+            if (response.statusCode === 200) {
+                console.log('Survey created successfully', response.data);
+                ref.current.close();
+            } else {
+                console.error('Failed to create survey', response);
+                if (response.statusCode === 400 && response.errors) {
+                    console.error('Validation Errors:', response.errors);
+                }
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    
         setFormData(prevData => ({
             ...prevData,
             title: formValues.title,
@@ -65,14 +124,15 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
             endDate: formValues.date,
         }));
         e.target.reset();
-        setFormSubmitted(true)
-    }, []);
+        setFormSubmitted(true);
+    }, [formData, checkboxDropdownRef]);
+    
 
     useEffect(() => {
         if (formSubmitted) {
-            collectFormData(formData)
-            console.log(formData)
-            setFormSubmitted(false)
+            collectFormData(formData);
+            console.log(formData);
+            setFormSubmitted(false);
         }
     }, [formSubmitted]);
 

@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
 import Select from 'react-select';
 import { httpRequest } from '../../HTTP';
 import { getAuthToken } from '../../Helpers/AuthHelper';
-import classes from './CheckboxDropdown.module.css'; // Ensure you have a CSS file for additional styling if needed
+import classes from './CheckboxDropdown.module.css';
 
 const customStyles = {
     control: (provided, state) => ({
         ...provided,
         borderColor: 'transparent',
-        boxShadow: 'var(--inset-input-shadow)', // Match the box shadow
+        boxShadow: 'var(--inset-input-shadow)',
         borderRadius: '20px',
         padding: '9px 10px',
-        width: '100%', // Ensure it takes the full width of the container
+        width: '100%',
         outline: state.isFocused ? 'transparent' : null
     }),
     menu: (provided) => ({
@@ -20,8 +20,9 @@ const customStyles = {
     })
 };
 
-const CheckboxDropdown = React.forwardRef((props, ref) => {
+const CheckboxDropdown = forwardRef((props, ref) => {
     const [options, setOptions] = useState([]);
+    const [selectedGroups, setSelectedGroups] = useState([]);
 
     // Fetch groups from the API
     async function fetchGroups() {
@@ -44,18 +45,26 @@ const CheckboxDropdown = React.forwardRef((props, ref) => {
     }
 
     useEffect(() => {
-        fetchGroups(); // Call fetchGroups when the component mounts
+        fetchGroups();
     }, []);
+
+    useImperativeHandle(ref, () => ({
+        getSelectedGroups: () => selectedGroups
+    }));
+
+    const handleChange = (selectedOptions) => {
+        setSelectedGroups(selectedOptions || []);
+    };
 
     return (
         <div className={classes.checkboxDropdown}>
             <Select
-                ref={ref}
                 styles={customStyles}
                 options={options}
                 isMulti
                 placeholder="Select groups"
                 classNamePrefix="select"
+                onChange={handleChange}
             />
         </div>
     );
