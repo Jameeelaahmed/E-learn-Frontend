@@ -134,21 +134,25 @@ export default function Weeks({ role }) {
                             <div className={classes.main}>
                                 <LecSec
                                     role={role}
-                                    materialType={t("Lecture")}
+                                    materialTypeName={t("Lecture")}
+                                    materialType="lecture"
                                     materials={materials.lectures}
                                     onDelete={(materialId) => handleDelete(weekIndex, materialId)}
                                     weekNum={weekNum}
                                     onAddMaterial={handleAddMaterial}
+                                    id="fileInputLecture"
                                 />
                             </div>
                             <div className={classes.main}>
                                 <LecSec
                                     role={role}
-                                    materialType={t("Section")}
+                                    materialTypeName={t("Section")}
+                                    materialType="section"
                                     materials={materials.sections}
                                     onDelete={(materialId) => handleDelete(weekIndex, materialId)}
                                     weekNum={weekNum}
                                     onAddMaterial={handleAddMaterial}
+                                    id="fileInputSection"
                                 />
                             </div>
                         </div>
