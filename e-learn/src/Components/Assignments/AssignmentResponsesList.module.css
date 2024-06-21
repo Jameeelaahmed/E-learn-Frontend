@@ -315,3 +315,16 @@
         margin-top: 10px;
     }
 }
+
+/*! ADMIN GROUP*/
+
+.hoverd {
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.hoverd:hover {
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 10px;
+}

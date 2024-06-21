@@ -4,7 +4,6 @@ img.logo {
 
 img.logo_responsive {
     width: 120px;
-    ;
 }
 
 
@@ -426,7 +425,15 @@ img.logo_responsive {
         display: none;
     }
 
+    img.logo_responsive {
+        display: none;
+    }
+
     .sidebar_active {
+        display: none;
+    }
+
+    .sidebar_container_active {
         display: none;
     }
 }

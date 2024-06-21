@@ -58,19 +58,19 @@ export default function Sidebar({ isOpened }) {
             title: t('Voting'),
             icon: <FaIcons.FaSquarePollVertical className={classes.icon} />,
             link: '/voting',
-            roles: ['Staff', 'Student'] // This item is visible to Staff and Student
+            roles: ['Admin', 'Staff', 'Student'] // This item is visible to Staff and Student
         },
         {
             title: t('Survey'),
             icon: <FaIcons.FaClipboard className={classes.icon} />,
             link: '/survey',
-            roles: ['Staff', 'Student'] // This item is visible to Staff and Student
+            roles: ['Admin', 'Staff', 'Student'] // This item is visible to Staff and Student
         },
         {
             title: t('Announcements'),
             icon: <FaIcons.FaBullhorn className={classes.icon} />,
             link: '/announcements',
-            roles: ['Staff', 'Student'] // This item is visible to Staff and Student
+            roles: ['Admin', 'Staff', 'Student'] // This item is visible to Staff and Student
         },
         {
             title: t('Community'),

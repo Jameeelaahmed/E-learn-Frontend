@@ -111,5 +111,8 @@
     "Total Marks": "الدرجة الكلية",
     "Quiz Title": "عنوان الاختبار",
     "Name": "الاسم",
-    "Level": "Level"
+    "Level": "Level",
+    "Week Number": "رقم الاسبوع",
+    "File Type": "تصنيف الملف",
+    "group-name": "اسم المجموعه"
 }

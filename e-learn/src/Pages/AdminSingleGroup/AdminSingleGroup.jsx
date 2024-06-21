@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import classes from './AdminSingleGroup.module.css';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams, useLocation } from 'react-router-dom'
+import { useNavigate, useParams, useLocation, Link } from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa6'
 import AddModal from './AddModal';
 export default function AdminSingleGroup() {
@@ -12,21 +12,17 @@ export default function AdminSingleGroup() {
     const [activeSection, setActiveSection] = useState('material');
     const [direction, setDirection] = useState('left');
     const sections = ['Material', 'Assignments', 'Quizzes', 'Participants'];
-    const { admingroupID } = useParams();
+    const { admingroupID, assignmentId } = useParams();
     const [searchTerm, setSearchTerm] = useState('');
-
-
     // const filteredResponses = responses.filter(response =>
     //     response.name.toLowerCase().includes(searchTerm.toLowerCase())
     // );
 
     const AddModalRef = useRef();
 
-
     function handleAddModal() {
         AddModalRef.current.open();
     }
-
 
     // Define paths for each section with correct interpolation
     const sectionPaths = {
@@ -36,22 +32,21 @@ export default function AdminSingleGroup() {
         Participants: `/admingroups/${admingroupID}/participants`
     };
 
-
-
     const handleClick = (section) => {
         const newSectionIndex = sections.indexOf(section);
         const oldSectionIndex = sections.indexOf(activeSection);
-
         if (newSectionIndex > oldSectionIndex) {
             setDirection('right');
         } else if (newSectionIndex < oldSectionIndex) {
             setDirection('left');
         }
-
         setActiveSection(section);
-
         navigate(sectionPaths[section]);
     };
+
+    function handleOpen(id) {
+        navigate(`assignments/assignment${id}`);
+    }
 
     return (
         <>
@@ -90,14 +85,17 @@ export default function AdminSingleGroup() {
                                 <p>Number</p>
                                 <p>{t("Material name")}</p>
                                 <p>{t("Instructor Name")}</p>
+                                <p>{t("Week Number")}</p>
                                 <p>{t("Material Type")}</p>
                                 <p>{t("Date")}</p>
                             </div>
                             {/* MAP  */}
                             <li>
                                 <p>num</p>
-                                <p>material name</p>
+
+                                <p className={classes.hoverd}>material name</p>
                                 <p>ins name</p>
+                                <p>week num</p>
                                 <p>material type</p>
                                 <p>date</p>
                             </li>
@@ -105,6 +103,7 @@ export default function AdminSingleGroup() {
                                 <p>num</p>
                                 <p>material name</p>
                                 <p>ins name</p>
+                                <p>week num</p>
                                 <p>material type</p>
                                 <p>date</p>
                             </li>
@@ -112,6 +111,7 @@ export default function AdminSingleGroup() {
                                 <p>num</p>
                                 <p>material name</p>
                                 <p>ins name</p>
+                                <p>week num</p>
                                 <p>material type</p>
                                 <p>date</p>
                             </li>
@@ -119,6 +119,7 @@ export default function AdminSingleGroup() {
                                 <p>num</p>
                                 <p>material name</p>
                                 <p>ins name</p>
+                                <p>week num</p>
                                 <p>material type</p>
                                 <p>date</p>
                             </li>
@@ -126,6 +127,7 @@ export default function AdminSingleGroup() {
                                 <p>num</p>
                                 <p>material name</p>
                                 <p>ins name</p>
+                                <p>week num</p>
                                 <p>material type</p>
                                 <p>date</p>
                             </li>
@@ -133,6 +135,7 @@ export default function AdminSingleGroup() {
                                 <p>num</p>
                                 <p>material name</p>
                                 <p>ins name</p>
+                                <p>week num</p>
                                 <p>material type</p>
                                 <p>date</p>
                             </li>
@@ -140,6 +143,7 @@ export default function AdminSingleGroup() {
                                 <p>num</p>
                                 <p>material name</p>
                                 <p>ins name</p>
+                                <p>week num</p>
                                 <p>material type</p>
                                 <p>date</p>
                             </li>
@@ -147,6 +151,7 @@ export default function AdminSingleGroup() {
                                 <p>num</p>
                                 <p>material name</p>
                                 <p>ins name</p>
+                                <p>week num</p>
                                 <p>material type</p>
                                 <p>date</p>
                             </li>
@@ -154,6 +159,7 @@ export default function AdminSingleGroup() {
                                 <p>num</p>
                                 <p>material name</p>
                                 <p>ins name</p>
+                                <p>week num</p>
                                 <p>material type</p>
                                 <p>date</p>
                             </li>
@@ -161,6 +167,7 @@ export default function AdminSingleGroup() {
                                 <p>num</p>
                                 <p>material name</p>
                                 <p>ins name</p>
+                                <p>week num</p>
                                 <p>material type</p>
                                 <p>date</p>
                             </li>
@@ -178,7 +185,7 @@ export default function AdminSingleGroup() {
                             {/* MAP  */}
                             <li>
                                 <p>num</p>
-                                <p>name</p>
+                                <p onClick={(id) => handleOpen(item.id)} className={classes.hoverd}>name</p>
                                 <p>creator</p>
                                 <p>mark</p>
                                 <p>date</p>
@@ -189,7 +196,7 @@ export default function AdminSingleGroup() {
                         <>
                             <div className={classes.table_head}>
                                 <p>Number</p>
-                                <p>{t("Quiz Title")}</p>
+                                <p className={classes.hoverd}>{t("Quiz Title")}</p>
                                 <p>{t("Instructor Name")}</p>
                                 <p>{t("Total Marks")}</p>
                                 <p>{t("Date")}</p>
@@ -198,7 +205,7 @@ export default function AdminSingleGroup() {
                             {/* MAP  */}
                             <li>
                                 <p>num</p>
-                                <p>name</p>
+                                <p className={classes.hoverd}>name</p>
                                 <p>creator</p>
                                 <p>degree</p>
                                 <p>date</p>

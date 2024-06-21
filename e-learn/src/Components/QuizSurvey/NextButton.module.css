@@ -1,10 +1,13 @@
-.button {
-    padding: 15px 25px;
+.button,
+.back_button,
+.submit {
+    padding: 15px 5px;
+    width: 100px;
     border: unset;
     border-radius: 15px;
     color: var(--main-color);
     z-index: 1;
-    background:var(--light-grey);
+    background: var(--light-grey);
     position: relative;
     font-weight: 1000;
     font-size: 17px;
@@ -12,36 +15,60 @@
     box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
     transition: all 250ms;
     overflow: hidden;
+    text-align: center;
 }
 
-.button p:hover{
+.button:hover p,
+.back_button:hover p,
+.submit:hover p {
     color: var(--light-grey);
 }
 
-.button::before {
+.submit:hover {
+    background: var(--main-color);
+}
+
+.button::before,
+.back_button::before {
     content: "";
     position: absolute;
     top: 0;
     height: 100%;
     width: 0;
     border-radius: 15px;
-    background-color:var(--main-color);
+    background-color: var(--main-color);
     z-index: -1;
     -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
     box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
     transition: all 250ms
 }
 
-[dir="ltr"] .button::before{
+[dir="ltr"] .button::before,
+[dir="rtl"] .back_button::before {
     left: 0;
 }
-[dir="rtl"] .button::before{
+
+[dir="rtl"] .button::before,
+[dir="ltr"] .back_button::before {
     right: 0;
 }
+
 /* .button p:hover {
     color: #e8e8e8;
 } */
 
-.button:hover::before {
+.button:hover::before,
+.back_button:hover::before {
     width: 100%;
+    color: var(--light-grey);
+}
+
+[dir="ltr"] .back_button,
+[dir="ltr"] .button {
+    margin-right: 10px;
+}
+
+[dir="rtl"] .back_button,
+[dir="rtl"] .button {
+    margin-left: 10px;
 }

@@ -41,12 +41,12 @@ const AddModal = forwardRef(function AddModal(_, ref) {
                             <div className={classes.input_container}>
                                 <label htmlFor="filetype">{t("File Type")}</label>
                                 <select>
-                                    <option value="lecture">{t("lecture")}</option>
-                                    <option value="section">{t("section")}</option>
+                                    <option value="lecture">{t("Lecture")}</option>
+                                    <option value="section">{t("Section")}</option>
                                 </select>
                             </div>
                             <div className={classes.input_container}>
-                                <label htmlFor="WeekNum">{t("Week Num")}</label>
+                                <label htmlFor="WeekNum">{t("Week Number")}</label>
                                 <input type="number" />
                             </div>
                         </div>
