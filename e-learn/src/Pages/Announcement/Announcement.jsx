@@ -231,47 +231,32 @@ export default function Announcement() {
                                         </div>
                                     )}
                                     <div
-                                        className={`${classes.chat__item} ${itm.type === 'sender' ? classes.sender : ''} ${itm.type === 'receiver' ? classes.receiver : ''}`}
+                                        className={`${classes.chat__item} ${itm.type === "sender" ? classes.sender : ""} ${itm.type === "receiver" ? classes.receiver : ""}`}
                                     >
-                                        <div
-                                            className={`${classes.chat__item__content} ${itm.uploadedImage ? classes.img_message : ''}`}
-                                            onContextMenu={(e) => handleContextMessageMenu(e, itm.key, itm.type)}
-                                        >
-                                            <div className={classes.chat__msg}>{itm.msg}</div>
-                                            {
-                                                itm.uploadedImage && (
-                                                    <div
-                                                        className={classes.uploaded_image}
-                                                        onClick={() =>
-                                                            handleImageSliderModal([
-                                                                {
-                                                                    url: itm.uploadedImage,
-                                                                    caption: itm.msg,
-                                                                },
-                                                            ])
-                                                        }
-                                                    >
-                                                        <img src={itm.uploadedImage} alt="Uploaded" />
+                                        <div className={`${classes.chat__item__content} ${itm.uploadedImage ? classes.img_message : ""}`} onContextMenu={(e) => handleContextMessageMenu(e, itm.key, itm.type)}>
+                                            <div className={`${classes.chat__msg}`}>
+                                                <p dir='auto' className={classes.chat__msg__text}>{itm.msg}</p>
+                                                {itm.uploadedImage && (
+                                                    <img
+                                                        className={classes.uploaded__image}
+                                                        src={itm.uploadedImage}
+                                                        alt="Uploaded"
+
+                                                    />
+                                                )}
+                                                {itm.uploadedFiles && itm.uploadedFiles.map((file, index) => (
+                                                    <div key={index} className={classes.uploaded__file} onClick={handleImageSliderModal(itm.uploadedFiles)}>
+                                                        <p>{file.name}</p>
+                                                        {/* Add icons for different file types */}
                                                     </div>
-                                                )
-                                            }
-                                            {itm.uploadedFiles && itm.uploadedFiles.length > 0 && (
-                                                <div className={classes.uploaded_files}>
-                                                    {itm.uploadedFiles.map((file, idx) => (
-                                                        <div
-                                                            key={idx}
-                                                            className={classes.uploaded_file}
-                                                        >
-                                                            <img src={file.url} alt="Uploaded" />
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            )}
-                                            <div className={classes.message__timestamp}>{formattedTime}</div>
+                                                ))}
+                                                <ImageModal ref={ImageModalRef} />
+                                            </div>
+                                            <div className={classes.chat__meta}>
+                                                <span>{formattedTime}</span>
+                                            </div>
                                         </div>
-                                        <div className={classes.avatar}>
-                                            <img src={itm.profileImage} alt="Profile" />
-                                        </div>
+                                        <img className={classes.img} src={img} alt="Profile" />
                                     </div>
                                 </div>
                             );
@@ -336,7 +321,6 @@ export default function Announcement() {
                                 {editMode.isEditing ? <FaIcons.FaCheck /> : <FaIcons.FaPaperPlane />}
                             </button>
                         </div>
-
                     </div>
                 </div>
             </div>

@@ -16,7 +16,7 @@ export default function GroupNavCardRespo() {
         <div className={classes.group_navigation_card_responsive}>
             <Link onClick={() => handleActive("material")} className={`${active === "material" ? classes.active : ''}`} to=":groupId">{t('Material')}</Link>
             <Link onClick={() => handleActive("assignment")} className={`${active === "assignment" ? classes.active : ''}`} to="assignments">{t('Assignments')}</Link>
-            <Link onClick={() => handleActive("quiz")} className={`${active === "quiz" ? classes.active : ''}`} to="">{t('Quizzes')}</Link>
+            <Link onClick={() => handleActive("quiz")} className={`${active === "quiz" ? classes.active : ''}`} to="quizzes">{t('Quizzes')}</Link>
             <Link onClick={() => handleActive("participants")} className={`${active === "participants" ? classes.active : ''}`} to="participants">{t('Participants')}</Link>
         </div>
     )

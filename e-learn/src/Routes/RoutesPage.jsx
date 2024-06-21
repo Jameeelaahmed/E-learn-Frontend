@@ -12,7 +12,7 @@ import Voting from '../Pages/Voting/Voting';
 import Groups from '../Pages/Groups/Groups';
 import CourseDetails from '../Pages/CourseDetails/CourseDetails';
 import Weeks from '../Components/Weeks/Weeks';
-import Assignments from '../Pages/Assignments/Assignments';
+import ViewCards from '../Pages/ViewCards/ViewCards';
 import AssignmentDetails from '../Components/Assignments/AssignmentDetails';
 import AssignmentsResponsesList from '../Components/Assignments/AssignmentResponsesList';
 import Participants from '../Components/Participants/Paricipants';
@@ -27,6 +27,7 @@ import AdminSingleGroup from '../Pages/AdminSingleGroup/AdminSingleGroup';
 import QSContainer from '../Pages/QuizSurvey/QSContainer';
 import Vote from '../Components/Voting/Vote';
 import Announcement from '../Pages/Announcement/Announcement';
+import QuestionView from '../Components/QuizSurvey/QuestionView';
 // Import necessary components and functions
 function RoleBasedRoutes() {
     const role = getRole();
@@ -71,7 +72,9 @@ const instructorRoutes = [
         element: <CourseDetails />,
         children: [
             { path: '', element: <Weeks role={getRole()} /> },
-            { path: 'assignments', element: <Assignments /> },
+            { path: 'assignments', element: <ViewCards /> },
+            { path: 'quizzes', element: <ViewCards /> },
+            { path: 'quizzes/:quizId', element: <QuestionView /> },
             { path: 'assignments/:assignmentId', element: <AssignmentDetails /> },
             { path: 'assignments/:assignmentId/responses-list', element: <AssignmentsResponsesList /> },
             { path: 'assignments/:assignmentId/responses-list', element: <AssignmentsResponsesList /> },
@@ -84,6 +87,8 @@ const instructorRoutes = [
     { path: 'voting', element: <Voting /> },
     { path: 'voting/:voteId', element: <Vote /> },
     { path: 'survey', element: <QSContainer /> },
+    { path: 'survey/:surveyId', element: <QuestionView /> },
+    { path: 'announcements', element: <Announcement /> },
     { path: 'chat', element: <Container /> },
 ];
 
@@ -96,7 +101,8 @@ const studentRoutes = [
         element: <CourseDetails />,
         children: [
             { path: '', element: <Weeks role={getRole()} /> },
-            { path: 'assignments', element: <Assignments /> },
+            { path: 'assignments', element: <ViewCards /> },
+            { path: 'quizzes', element: <ViewCards /> },
             { path: 'assignments/:assignmentId', element: <AssignmentDetails /> },
             { path: 'assignments/:assignmentId/responses-list', element: <AssignmentsResponsesList /> },
             { path: 'assignments/:assignmentId/responses-list' },
@@ -107,6 +113,7 @@ const studentRoutes = [
         ]
     },
     { path: 'voting', element: <Voting /> },
+    { path: 'voting/:voteId', element: <Vote /> },
     { path: 'chat', element: <Container /> },
 ];
 
