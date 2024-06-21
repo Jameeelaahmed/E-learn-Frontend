@@ -3,6 +3,8 @@ import * as FaIcons from "react-icons/fa6";
 import { useTranslation } from 'react-i18next'
 import { useRef, useState, useEffect } from 'react';
 import AddQSModal from './AddQSModal'
+import Edit from '../Button/Edit';
+import Delete from '../Button/Delete';
 export default function QSNavBar({ VSQData }) {
     const { t } = useTranslation();
     const addVSDialog = useRef();
@@ -54,7 +56,7 @@ export default function QSNavBar({ VSQData }) {
             </div>
             <ul className={isMobile ? classes.titles_wrapper : ""}>
                 {returnFormData.map((data) => (
-                    <div key={vote.id} className={classes.box_wrapper}>
+                    <div key={data.id} className={classes.box_wrapper}>
                         <li className={wid} key={data.endTime}>
                             {isMobile ? (
                                 <div className={classes.box}>
@@ -74,7 +76,7 @@ export default function QSNavBar({ VSQData }) {
                         {role === 'Staff' && (
                             <div className={classes.edit_delete}>
                                 <Edit icon={FaIcons.FaPenClip} />
-                                <Delete onClick={() => DeleteVote(vote.id)} />
+                                <Delete onClick={() => DeleteVote(data.id)} />
                             </div>
                         )}
                     </div>
