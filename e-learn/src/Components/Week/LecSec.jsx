@@ -45,8 +45,10 @@ export default function LecSec({ role, materialType, materials, weekNum, onDelet
                 const formData = new FormData();
                 formData.append('Week', weekNum);
                 formData.append('File', file);
-                formData.append('Type', materialType.includes(t("Lecture")) ? 0 : 1); // Correctly set the type
-                console.log(`Week: ${weekNum}, Type: ${materialType.includes(t("Lecture")) ? 0 : 1}`);
+                const type = materialType === t("Lecture") ? 0 : 1;
+                formData.append('Type', type);
+                console.log(materialType);
+                console.log(`Week: ${weekNum}, Type: ${type}`); // Debugging line
 
                 try {
                     const response = await httpRequest('POST', `https://elearnapi.runasp.net/api/Material/${groupId}/AddMaterial`, token, formData, 'multipart/form-data');
