@@ -6,11 +6,13 @@ import { getAuthToken } from '../../Helpers/AuthHelper';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-export default function LecSec({ role, materialType, materials, weekNum, onDelete, onAddMaterial }) {
+export default function LecSec({ role, materialTypeName, materialType, materials, weekNum, onDelete, onAddMaterial, id }) {
     const [openFiles, setOpenFiles] = useState(false);
     const [selectedFiles, setSelectedFiles] = useState([]);
     const params = useParams();
     const groupId = params.groupId;
+
+
     const { t } = useTranslation();
 
     const isInstructor = role === 'Staff';
@@ -45,10 +47,8 @@ export default function LecSec({ role, materialType, materials, weekNum, onDelet
                 const formData = new FormData();
                 formData.append('Week', weekNum);
                 formData.append('File', file);
-                const type = materialType === t("Lecture") ? 0 : 1;
-                formData.append('Type', type);
-                console.log(materialType);
-                console.log(`Week: ${weekNum}, Type: ${type}`); // Debugging line
+                formData.append('Type', materialType === "lecture" ? 0 : materialType === "section" ? 1 : ""); // Correctly set the type
+                console.log(`Week: ${weekNum}, Type: ${materialType === "lecture" ? "lec" : materialType === "section" ? "sec" : ""}`);
 
                 try {
                     const response = await httpRequest('POST', `https://elearnapi.runasp.net/api/Material/${groupId}/AddMaterial`, token, formData, 'multipart/form-data');
@@ -71,12 +71,12 @@ export default function LecSec({ role, materialType, materials, weekNum, onDelet
     return (
         <div className={`${classes.lec_sec_container} ${openFiles ? classes.active_slide : ''}`}>
             <div className={`${classes.lec_sec} ${openFiles ? classes.active : ''}`}>
-                <p>{materialType}</p>
+                <p>{materialTypeName}</p>
                 <div className={classes.icons}>
                     {isInstructor &&
-                        <label htmlFor="fileInput" className={classes.customFileInput}>
+                        <label htmlFor={id} className={classes.customFileInput}>
                             <FaIcons.FaCirclePlus className={classes.leftIcon} />
-                            <input type="file" id="fileInput" className={classes.fileInput} multiple onChange={handleFileChange} />
+                            <input type="file" id={id} className={classes.fileInput} multiple onChange={handleFileChange} />
                         </label>
                     }
                     <FaIcons.FaCaretDown className={classes.icon} onClick={toggleOpenFiles} />
