@@ -1,85 +1,90 @@
-import classes from './AddQSModal.module.css'
-import Question from "./Question";
-import Option from "./Option";
+import classes from './AddQSModal.module.css';
 import { useState, useEffect, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as FaIcons from "react-icons/fa6";
 import { log } from '../../log';
+import Question from "./Question";
+import Option from "./Option";
+import { v4 as uuidv4 } from 'uuid';  // Import UUID for generating unique IDs
 
 const Questions = memo(function Questions({ onQuestionChange }) {
     log('<Questions /> rendered');
     const { t } = useTranslation();
-    const [questions, setQuestions] = useState([{ description: "", options: ["", ""] }]);
+    const [questions, setQuestions] = useState([{ id: uuidv4(), description: "", options: ["", ""] }]);
 
-
-    function handleAddOption(questionIndex, optionValue = "") {
+    // Function to handle adding an option to a question
+    const handleAddOption = (questionIndex, optionValue = "") => {
         const updatedQuestions = [...questions];
-        if (updatedQuestions[questionIndex].options.length < 5) {
-            updatedQuestions[questionIndex].options.push(optionValue);
-            setQuestions(updatedQuestions);
-        }
-    }
+        updatedQuestions[questionIndex].options.push(optionValue);
+        setQuestions(updatedQuestions);
+    };
 
-    function handleDeleteOption(questionIndex, optionIndex) {
+    // Function to handle deleting an option from a question
+    const handleDeleteOption = (questionIndex, optionIndex) => {
         const updatedQuestions = [...questions];
         updatedQuestions[questionIndex].options.splice(optionIndex, 1);
         setQuestions(updatedQuestions);
-    }
+    };
 
+    // Function to handle adding a new question
+    const handleAddQuestion = () => {
+        setQuestions([...questions, { id: uuidv4(), description: "", options: ["", ""] }]);
+    };
 
-    function handleAddQuestion() {
-        setQuestions([...questions, { description: "", options: ["", ""] }]);
-    }
+    // Function to handle deleting a question
+    const handleDeleteQuestion = (questionIndex) => {
+        const updatedQuestions = questions.filter((_, index) => index !== questionIndex);
+        setQuestions(updatedQuestions);
+    };
 
-
-    function handleDeleteQuestion(questionIndex) {
-        const updatedQuestions = [...questions];
-        updatedQuestions.splice(questionIndex, 1)
-        setQuestions(updatedQuestions)
-    }
-
-    function handleOptionChange(questionIndex, optionIndex, newOptionValue) {
+    // Function to handle changing an option's value
+    const handleOptionChange = (questionIndex, optionIndex, newOptionValue) => {
         const updatedQuestions = [...questions];
         updatedQuestions[questionIndex].options[optionIndex] = newOptionValue;
         setQuestions(updatedQuestions);
-    }
+    };
 
-
-    function handleQuestionChange(questionIndex, newQuestionValue) {
+    // Function to handle changing a question's description
+    const handleQuestionChange = (questionIndex, newQuestionValue) => {
         const updatedQuestions = [...questions];
         updatedQuestions[questionIndex].description = newQuestionValue;
-        setQuestions(updatedQuestions)
-    }
+        setQuestions(updatedQuestions);
+    };
 
+    // Effect to call the onQuestionChange callback when questions state changes
     useEffect(() => {
-        onQuestionChange(questions)
-        console.log(questions)
-    })
+        onQuestionChange(questions);
+        console.log(questions);
+    }, [questions, onQuestionChange]);
 
-    // console.log(questions)
-
-    const questionId = Math.floor(Math.random() * 100000);
-    const optionId = Math.floor(Math.random() * 100000);
     return (
         <div className={classes.questions}>
             {questions.map((question, questionIndex) => (
-                <div className={classes.question_container} key={questionIndex}>
-                    {questionIndex > 0 && <p className={classes.x_icon_ques} onClick={() => handleDeleteQuestion(questionIndex)}><FaIcons.FaCircleXmark /></p>}
+                <div className={classes.question_container} key={question.id}>
+                    {questionIndex > 0 && (
+                        <p className={classes.x_icon_ques} onClick={() => handleDeleteQuestion(questionIndex)}>
+                            <FaIcons.FaCircleXmark />
+                        </p>
+                    )}
                     <p className={classes.question_index}>{t("Question")} {questionIndex + 1}</p>
                     <Question
-                        key={questionIndex}
+                        key={question.id}
                         onLoseFocus={(newQuestionValue) => handleQuestionChange(questionIndex, newQuestionValue)}
-                        questionIndex={questionIndex}>
+                        questionIndex={questionIndex}
+                    >
                         {question.options.map((option, optionIndex) => (
-                            <div className={classes.option} key={`${questionIndex}-${optionIndex}`}>
+                            <div className={classes.option} key={`${question.id}-${optionIndex}`}>
                                 <Option
                                     index={optionIndex}
                                     value={option}
                                     onBlur={(newOptionValue) => handleOptionChange(questionIndex, optionIndex, newOptionValue)}
                                 />
-                                {optionIndex > 1 &&
-                                    <FaIcons.FaCircleXmark className={classes.x_icon} onClick={() => handleDeleteOption(questionIndex, optionIndex)} />
-                                }
+                                {optionIndex > 1 && (
+                                    <FaIcons.FaCircleXmark
+                                        className={classes.x_icon}
+                                        onClick={() => handleDeleteOption(questionIndex, optionIndex)}
+                                    />
+                                )}
                             </div>
                         ))}
                         <div className={classes.add_button} onClick={() => handleAddOption(questionIndex)}>
@@ -94,7 +99,7 @@ const Questions = memo(function Questions({ onQuestionChange }) {
                 <p>{t("Add-Question")}</p>
             </div>
         </div>
-    )
-})
+    );
+});
 
 export default Questions;
