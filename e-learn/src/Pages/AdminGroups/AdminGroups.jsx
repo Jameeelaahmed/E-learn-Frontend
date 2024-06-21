@@ -61,7 +61,7 @@ export default function AdminGroups() {
                             <tr>
                                 <td>{t("id")}</td>
                                 <td>{t("group-name")}</td>
-                                <td>{t("instructor-name")}</td>
+                                <td>{t("Instructor Name")}</td>
                                 <td>{t("department")}</td>
                                 <td>{t("actions")}</td>
                             </tr>
@@ -71,7 +71,7 @@ export default function AdminGroups() {
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
                                     {/* <Link to="" > */}
-                                    <td onClick={(id) => handleGroupClick(item.id)}>{item.name}</td>
+                                    <td onClick={(id) => handleGroupClick(item.id)} className={classes.hoverd}>{item.name}</td>
                                     {/* </Link> */}
                                     <td>{item.ins_name}</td>
                                     <td>{item.department}</td>

@@ -22,7 +22,7 @@ export default function CourseDetails() {
             <Outlet />
             <div className={classes.col}>
                 <GroupNavCard />
-                {role === 'Staff' && (
+                {(role === 'Staff' || role === "Admin") && (
                     (path.endsWith(`assignments`) && <AddAssignment />) ||
                     (path.includes(`assignments/${assignmentId}`) && <ShowRespones />)
                 )}

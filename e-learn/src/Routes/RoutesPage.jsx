@@ -26,6 +26,7 @@ import AddEditGroup from '../Pages/AddEditGroup/AddEditGroup';
 import AdminSingleGroup from '../Pages/AdminSingleGroup/AdminSingleGroup';
 import QSContainer from '../Pages/QuizSurvey/QSContainer';
 import Vote from '../Components/Voting/Vote';
+import Announcement from '../Pages/Announcement/Announcement';
 // Import necessary components and functions
 function RoleBasedRoutes() {
     const role = getRole();
@@ -55,7 +56,10 @@ const adminRoutes = [
     { path: 'admingroups/:admingroupID/assignments', element: <AdminSingleGroup /> },
     { path: 'admingroups/:admingroupID/quiz', element: <AdminSingleGroup /> },
     { path: 'admingroups/:admingroupID/participants', element: <AdminSingleGroup /> },
+    { path: 'assignments/:assignmentId', element: <AssignmentDetails /> },
     { path: 'chat', element: <Container /> },
+    { path: 'survey', element: <QSContainer /> },
+    { path: 'announcements', element: <Announcement /> }
 ];
 
 const instructorRoutes = [

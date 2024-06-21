@@ -9,7 +9,9 @@ export default function QSContainer() {
     }
     return (
         <div className={classes.QS_conatiner}>
-            <QSNavBar VSQData={collectData}></QSNavBar>
+            <div className={classes.nav_container}>
+                <QSNavBar VSQData={collectData}></QSNavBar>
+            </div>
             <QuestionView questionData={VSQData}></QuestionView>
         </div>
     )
