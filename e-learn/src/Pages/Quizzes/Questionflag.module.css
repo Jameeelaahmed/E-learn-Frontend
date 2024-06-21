@@ -1,0 +1,11 @@
+.Questionflag {
+    width: 275px;
+    background-color: var(--light-grey);
+    padding: 15px 30px;
+    margin-top: 30px;
+    border-radius: 19px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

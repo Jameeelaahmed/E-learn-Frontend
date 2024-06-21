@@ -1,4 +1,4 @@
-import classes from './Assignments.module.css';
+import classes from './ViewCards.module.css';
 import { log } from "../../log";
 import Groups from '../Groups/Groups';
 import { useParams } from 'react-router-dom';
@@ -6,18 +6,15 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
-export default function Assignments() {
+export default function ViewCards() {
     const { t } = useTranslation();
     const { groupId } = useParams();
     log('<Assignments /> rendered', 1);
     const location = useLocation();
     const path = location.pathname;
-    console.log("assignments here");
-
-    console.log("iam here")
     return (
         <div className={classes.assignments}>
-            {path.endsWith(`assignments`) && <Groups />}
+            {path.endsWith(`assignments`) || path.endsWith('quizzes') && <Groups />}
         </div>
     );
 }

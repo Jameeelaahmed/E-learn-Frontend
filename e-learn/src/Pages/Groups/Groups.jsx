@@ -63,6 +63,9 @@ export default function Groups() {
         navigate(`/groups/${groupId}/assignments/${id}`);
     }
 
+    function handleQuizClick(id) {
+        navigate(`/groups/${groupId}/quizzes/quiz${id}`)
+    }
     return (
         <ul className={classes.classes}>
             {location.pathname.endsWith("/groups") &&
@@ -85,6 +88,11 @@ export default function Groups() {
                     />
                 ))
             }
+            {location.pathname.endsWith("/quizzes") &&
+                <Group
+                    onClick={(id) => handleQuizClick(id)}
+                    subTitle="Quiz"
+                    insName="Instructor" />}
         </ul>
     );
 }

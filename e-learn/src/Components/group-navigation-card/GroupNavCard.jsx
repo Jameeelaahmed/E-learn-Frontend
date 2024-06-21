@@ -54,7 +54,7 @@ export default function GroupNavCard() {
                     {t('Assignments')}
                 </NavLink>
                 <NavLink
-                    to=""
+                    to="quizzes"
                     end
                     className={({ isActive }) => `${isActive ? classes.active : ''}`}
                 >
