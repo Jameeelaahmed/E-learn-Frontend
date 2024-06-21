@@ -1,0 +1,10 @@
+.announcement {
+    position: relative;
+    background-color: var(--light-grey);
+    width: 100%;
+    height: 580px;
+    border-radius: 32px;
+    border: 4px solid var(--secondry-color);
+    display: flex;
+    z-index: 1000000;
+}

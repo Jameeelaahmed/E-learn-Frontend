@@ -1,21 +1,17 @@
-import classes from './QSNavBar.module.css';
+import classes from './QSNavBar.module.css'
 import * as FaIcons from "react-icons/fa6";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 import { useRef, useState, useEffect } from 'react';
-import AddQSModal from './AddQSModal';
-import { httpRequest } from '../../HTTP';
-import { getAuthToken } from '../../Helpers/AuthHelper';
-
+import AddQSModal from './AddQSModal'
 export default function QSNavBar({ VSQData }) {
     const { t } = useTranslation();
     const addVSDialog = useRef();
-    
-    const [returnFormData, setReturnFormData] = useState([]);
-    const [isMobile, setIsMobile] = useState(false); // State to track screen size
-
     function handleOpenAddVSModal() {
         addVSDialog.current.open();
     }
+    const [returnFormData, setReturnFormData] = useState([])
+
+    const [isMobile, setIsMobile] = useState(false); // State to track screen size
 
     useEffect(() => {
         const checkScreenSize = () => {
@@ -30,25 +26,19 @@ export default function QSNavBar({ VSQData }) {
 
     function collectData(data) {
         setReturnFormData(prevData => [...prevData, data]);
-        VSQData(data);
+        VSQData(data)
     }
 
-    async function fetchSurveys() {
-        try {
-            const token = getAuthToken();
-            const response = await httpRequest('GET', 'https://elearnapi.runasp.net/api/Survey/GetFromUserGroups', token);
-            console.log(response);
-            if (response.statusCode === 200) {
-                setReturnFormData(response.data);
-            }
-        } catch (error) {
-            console.log(error);
-        }
+    const role = getRole();
+
+    function getRole() {
+        return localStorage.getItem('role');
     }
 
-    useEffect(() => {
-        fetchSurveys();
-    }, [VSQData]);
+    let wid = "";
+    if (role === "Staff") {
+        wid = "changeWidth";
+    }
 
     return (
         <div className={isMobile ? classes.vs_navigation_bar_responsive : classes.vs_navigation_bar}>
@@ -64,24 +54,32 @@ export default function QSNavBar({ VSQData }) {
             </div>
             <ul className={isMobile ? classes.titles_wrapper : ""}>
                 {returnFormData.map((data) => (
-                    <li key={data.id}>
-                        {isMobile ? (
-                            <div className={classes.box}>
-                                <p>{data.text}</p>
-                                <p>{data.creatorName}</p>
-                            </div>
-                        ) : (
-                            <div className={classes.title_wrapper}>
-                                <FaIcons.FaSquare className={classes.icon} />
-                                <div className={classes.info}>
-                                    <span className={classes.title}>{data.text}</span>
-                                    <span className={classes.name}>by {data.creatorName}</span>
+                    <div key={vote.id} className={classes.box_wrapper}>
+                        <li className={wid} key={data.endTime}>
+                            {isMobile ? (
+                                <div className={classes.box}>
+                                    <p>{data.title}</p>
+                                    <p>name</p>
                                 </div>
+                            ) : (
+                                <div className={classes.title_wrapper}>
+                                    <FaIcons.FaSquare className={classes.icon} />
+                                    <div className={classes.info}>
+                                        <span className={classes.title}>{data.title}</span>
+                                        <span className={classes.name}>by name</span>
+                                    </div>
+                                </div>
+                            )}
+                        </li>
+                        {role === 'Staff' && (
+                            <div className={classes.edit_delete}>
+                                <Edit icon={FaIcons.FaPenClip} />
+                                <Delete onClick={() => DeleteVote(vote.id)} />
                             </div>
                         )}
-                    </li>
+                    </div>
                 ))}
             </ul>
         </div>
-    );
+    )
 }

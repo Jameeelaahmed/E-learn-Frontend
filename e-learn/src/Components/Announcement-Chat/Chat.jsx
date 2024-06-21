@@ -265,9 +265,9 @@ export default function Chat({ selectedChat, setViewMode }) {
                                         <div
                                             className={`${classes.chat__item} ${itm.type === "sender" ? classes.sender : ""} ${itm.type === "receiver" ? classes.receiver : ""}`}
                                         >
-                                            <div className={`${classes.chat__item__content} ${itm.uploadedImage ? classes.img_message : ""}`}>
+                                            <div className={`${classes.chat__item__content} ${itm.uploadedImage ? classes.img_message : ""}`} onContextMenu={(e) => handleContextMessageMenu(e, itm.key, itm.type)}>
                                                 <div className={`${classes.chat__msg}`}>
-                                                    <p className={classes.chat__msg__text}>{itm.msg}</p>
+                                                    <p dir='auto' className={classes.chat__msg__text}>{itm.msg}</p>
                                                     {itm.uploadedImage && (
                                                         <img
                                                             className={classes.uploaded__image}
