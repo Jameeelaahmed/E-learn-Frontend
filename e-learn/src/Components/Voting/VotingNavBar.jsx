@@ -13,7 +13,6 @@ export default function VSNavBar({ onVoteSelected }) { // Add onVoteSelected pro
     const [votes, setVotes] = useState([]);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
-    const [selectedVote, setSelectedVote] = useState(null);
 
     const { voteId } = useParams();
     const navigate = useNavigate();
@@ -87,24 +86,26 @@ export default function VSNavBar({ onVoteSelected }) { // Add onVoteSelected pro
     }
 
     async function handleVoteClick(voteId) {
+        setLoading(true); // Set loading state to true before the request
         try {
             const token = localStorage.getItem('token');
             console.log('Getting vote with id:', voteId);
             const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Voting/GetVoting/${voteId}`, token);
             console.log(response);
             if (response.statusCode === 200) {
-                setSelectedVote(response.data);
                 onVoteSelected(response.data); // Notify parent component about the selected vote
                 navigate(`/voting/${voteId}`);
             }
         } catch (error) {
             console.log('An error occurred:', error);
+        } finally {
+            setLoading(false); // Set loading state to false after the request
         }
     }
 
     return (
         <div className={isMobile ? classes.vs_navigation_bar_responsive : classes.vs_navigation_bar}>
-            {loading && <p>Deleting vote...</p>}
+            {loading && <p>Loading...</p>} {/* Display loading message */}
             {message && <p>{message}</p>}
             <VotingModal ref={addVSDialog} onVotingCreated={GetUserGroupsVotes} />
             {role === 'Staff' &&

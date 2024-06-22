@@ -2,27 +2,50 @@ import React, { useState, useEffect, useRef } from 'react';
 import classes from './Vote.module.css';
 import VotingListModal from './VotingResponsesModal';
 import { useParams } from 'react-router-dom';
-export default function Vote({ vote }) {
-    const [options, setOptions] = useState([]);
+import { httpRequest } from '../../HTTP'; // Import httpRequest
 
-    const { voteId } = useParams()
+export default function Vote({ vote, voteId: propVoteId }) {
+    const [options, setOptions] = useState([]);
+    const [voteData, setVoteData] = useState(vote);
+
+    const { voteId: paramVoteId } = useParams();
+    const voteId = propVoteId || paramVoteId;
+
     useEffect(() => {
-        if (vote) {
+        async function fetchVote() {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Voting/GetVoting/${voteId}`, token);
+                if (response.statusCode === 200) {
+                    setVoteData(response.data);
+                }
+            } catch (error) {
+                console.log('An error occurred:', error);
+            }
+        }
+
+        if (!vote && voteId) {
+            fetchVote();
+        }
+    }, [vote, voteId]);
+
+    useEffect(() => {
+        if (voteData) {
             const voteOptions = [
-                { id: 1, description: vote.option1, percentage: 0 },
-                { id: 2, description: vote.option2, percentage: 0 },
-                { id: 3, description: vote.option3, percentage: 0 },
-                { id: 4, description: vote.option4, percentage: 0 },
-                { id: 5, description: vote.option5, percentage: 0 }
+                { id: 1, description: voteData.option1, percentage: 0 },
+                { id: 2, description: voteData.option2, percentage: 0 },
+                { id: 3, description: voteData.option3, percentage: 0 },
+                { id: 4, description: voteData.option4, percentage: 0 },
+                { id: 5, description: voteData.option5, percentage: 0 }
             ].filter(option => option.description !== null);
             setOptions(voteOptions);
-            console.log('Vote received:', vote);
+            console.log('Vote received:', voteData);
             console.log('Vote Options:', voteOptions);
-            console.log('Vote title:', vote.title);
+            console.log('Vote title:', voteData.title);
         } else {
             console.log('No vote data available');
         }
-    }, [vote]);
+    }, [voteData]);
 
     const handleVote = (id) => {
         const totalPercentage = options.reduce((total, option) => total + option.percentage, 0);
@@ -44,9 +67,9 @@ export default function Vote({ vote }) {
 
     return (
         <div className={classes.question_container}>
-            {vote ? (
+            {voteData ? (
                 <>
-                    <p className={classes.description}>{vote.description}</p>
+                    <p className={classes.description}>{voteData.description}</p>
                     {options.map(option => (
                         <label key={option.id}>
                             <p>{option.description}</p>
@@ -64,8 +87,8 @@ export default function Vote({ vote }) {
                         <p onClick={handleOpenResponses}>Open Responses</p>
                     </div>
                     <div className="date_question_container">
-                        <p>Start Date: {new Date(vote.start).toLocaleString()}</p>
-                        <p>End Date: {new Date(vote.end).toLocaleString()}</p>
+                        <p>Start Date: {new Date(voteData.start).toLocaleString()}</p>
+                        <p>End Date: {new Date(voteData.end).toLocaleString()}</p>
                     </div>
                 </>
             ) : (
