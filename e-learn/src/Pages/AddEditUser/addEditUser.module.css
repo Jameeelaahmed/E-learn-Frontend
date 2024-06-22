@@ -158,6 +158,24 @@
     display: none;
 }
 
+.select select {
+    width: 100%;
+    padding: 10px;
+    box-shadow: 5px 5px 10px 0 rgba(22, 27, 29, 0.12)inset,
+        -5px -5px 10px 0 rgba(250, 251, 255, 0.8) inset;
+    border: solid 1px #084661;
+    caret-color: #084661;
+    border-radius: 20px;
+    height: 52px;
+    margin-bottom: 10px;
+}
+
+.select select option {
+    padding: 10px;
+    color: var(--main-color);
+}
+
+
 
 @media (max-width:700px) {
     .row {
