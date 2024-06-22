@@ -116,5 +116,8 @@
     "File Type": "تصنيف الملف",
     "group-name": "اسم المجموعه",
     "Start-Date": "موعد البدء",
-    "End-Date": "موعد الانتهاء"
+    "End-Date": "موعد الانتهاء",
+    "total-mark": "الدرجه الكليه",
+    "question-title": "عنوان السؤال",
+    "Create Quiz": "اضافة اختبار"
 }

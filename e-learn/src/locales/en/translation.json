@@ -108,5 +108,8 @@
     "File Type": "File Type",
     "group-name": "Group Name",
     "Start-Date": "Start Date",
-    "End-Date": "End Date"
+    "End-Date": "End Date",
+    "total-mark": "Total Mark",
+    "question-title": "Question title",
+    "Create Quiz": "Create Quiz"
 }

@@ -12,9 +12,14 @@ const Question = memo(function Question({ children, onLoseFocus }) {
     return (
         <div className={classes.question}>
             <div className={classes.input}>
-                <label htmlFor="description">{t("survey-description")}</label>
+                <label htmlFor="description">{t("question-title")}</label>
                 <input onBlur={handleBlur} type="text" name="description" dir='auto' />
             </div>
+            <div className={classes.mark}>
+                <label htmlFor="mark">{t("mark")}</label>
+                <input onBlur={handleBlur} type="number" name="mark" dir='auto' />
+            </div>
+
             {children}
         </div>
     )
