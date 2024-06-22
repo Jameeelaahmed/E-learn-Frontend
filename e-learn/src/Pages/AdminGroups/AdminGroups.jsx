@@ -4,45 +4,36 @@ import * as FaIcons from 'react-icons/fa6'
 import { useTranslation } from 'react-i18next'
 import classes from '../../Components/Assignments/AssignmentResponsesList.module.css'
 import { useState } from 'react'
+import {httpRequest} from '../../HTTP';
+import { useEffect } from 'react';
+import {getAuthToken} from '../../Helpers/AuthHelper';
+import { use } from 'i18next'
+
 export default function AdminGroups() {
     const { t } = useTranslation();
-    const [group, setGroups] = useState([
-        {
-            id: 1,
-            name: "group name",
-            ins_name: "ins name",
-            department: "department"
-        },
-        {
-            id: 2,
-            name: "group name",
-            ins_name: "ins name",
-            department: "department"
-        },
-        {
-            id: 3,
-            name: "group name",
-            ins_name: "ins name",
-            department: "department"
-        },
-        {
-            id: 4,
-            name: "group name",
-            ins_name: "ins name",
-            department: "department"
-        },
-        {
-            id: 5,
-            name: "group name",
-            ins_name: "ins name",
-            department: "department"
-        },
-    ])
+    const [group, setGroups] = useState([])
 
     const navigate = useNavigate()
 
+    async function getGroups() {
+        try{
+            const token = getAuthToken();
+            const response = await httpRequest('GET', 'https://elearnapi.runasp.net/api/Group/GetAll', token);
+            console.log(response);
+            if(response.statusCode === 200){
+                setGroups(response.data);
+            }else{
+                console.log(response);
+            }
+        }catch(error){
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        getGroups();
+    }, [])
     function handleGroupClick(id) {
-        navigate(`/admingroups/admingroup${id}`);
+        navigate(`/admingroups/${id}`);
     }
     return (
         <>
@@ -73,8 +64,8 @@ export default function AdminGroups() {
                                     {/* <Link to="" > */}
                                     <td onClick={(id) => handleGroupClick(item.id)} className={classes.hoverd}>{item.name}</td>
                                     {/* </Link> */}
-                                    <td>{item.ins_name}</td>
-                                    <td>{item.department}</td>
+                                    <td>{item.instructorName}</td>
+                                    <td>{item.departmentName}</td>
                                     <td className={classes.actions}>
                                         <Link to="/admingroups/editgroup" className={classes.icon} >
                                             <div>
