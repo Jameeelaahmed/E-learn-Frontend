@@ -114,5 +114,7 @@
     "Level": "Level",
     "Week Number": "رقم الاسبوع",
     "File Type": "تصنيف الملف",
-    "group-name": "اسم المجموعه"
+    "group-name": "اسم المجموعه",
+    "Start-Date": "موعد البدء",
+    "End-Date": "موعد الانتهاء"
 }

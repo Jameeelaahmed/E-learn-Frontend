@@ -25,7 +25,7 @@ const Option = memo(function Option({ index, value, onBlur }) {
 
     return (
         <div className={classes.option}>
-            <div className={classes.input_container}>
+            <div className={classes.input}>
                 <label htmlFor={`option-${index}`}>{t("option")} {optionNumber}</label>
                 <textarea
                     type="text"

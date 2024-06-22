@@ -21,15 +21,6 @@ export default function Chat({ selectedChat, setViewMode }) {
     const [inputValue, setInputValue] = useState('');
     const [originalMessage, setOriginalMessage] = useState('');
 
-    const ImageModalRef = useRef();
-    const handleImageSliderModal = (uploadedFiles) => {
-        const slideImages = uploadedFiles.map((file) => ({
-            url: file.url,
-            caption: file.caption,
-        }));
-        ImageModalRef.current.open(slideImages);
-    };
-
 
     useEffect(() => {
         if (selectedChat) {
@@ -68,33 +59,6 @@ export default function Chat({ selectedChat, setViewMode }) {
             window.removeEventListener("click", handleClick);
         };
     }, [chat, editMode]);
-
-    const addMessage = () => {
-        if (inputRef.current.value !== "" || chat.some(item => item.uploadedFiles)) {
-            const newChatItem = {
-                key: chat.length + 1,
-                type: "sender",
-                msg: inputValue,
-                uploadedImage: null, // Reset uploadedImage to null
-                uploadedFiles: [], // New array to hold uploaded files
-                profileImage: "https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg",
-                timestamp: new Date().toISOString(),  // Ensure ISO format
-            };
-
-            if (chat.some((item) => item.uploadedFiles)) {
-                chat.forEach((item) => {
-                    if (item.uploadedFiles) {
-                        newChatItem.uploadedFiles.push(item.uploadedFiles);
-                    }
-                });
-            }
-
-
-            setChat(prevChat => [...prevChat, newChatItem]);
-            setInputValue('');
-            scrollToBottom();
-        }
-    };
 
     const handleContextMenu = (e) => {
         e.preventDefault();
@@ -179,6 +143,34 @@ export default function Chat({ selectedChat, setViewMode }) {
         setOriginalMessage(''); // Clear the original message state
     };
 
+
+    const addMessage = () => {
+        if (inputRef.current.value !== '' || chat.some((item) => item.uploadedFiles && item.uploadedFiles.length > 0)) {
+            const newChatItem = {
+                key: chat.length + 1,
+                type: 'sender',
+                msg: inputValue,
+                uploadedImage: null,
+                uploadedFiles: [], // Initialize uploadedFiles as an empty array
+                profileImage: { img },
+                timestamp: new Date().toISOString(),
+                receivers: ['receiver1', 'receiver2'],
+            };
+
+            // Flattening any arrays in chat uploadedFiles to ensure it's a flat array
+            chat.forEach((item) => {
+                if (item.uploadedFiles && item.uploadedFiles.length > 0) {
+                    newChatItem.uploadedFiles = newChatItem.uploadedFiles.concat(item.uploadedFiles);
+                }
+            });
+
+            setChat((prevChat) => [...prevChat, newChatItem]);
+
+            setInputValue('');
+            scrollToBottom();
+        }
+    };
+
     const handleFileInputChange = (event) => {
         const files = event.target.files;
         const newChatItems = [];
@@ -208,6 +200,12 @@ export default function Chat({ selectedChat, setViewMode }) {
         }
     };
 
+    const ImageModalRef = useRef();
+    const handleImageClick = (imageUrl) => {
+        // if (ImageModalRef.current) {
+        ImageModalRef.current.open(imageUrl);
+        // }
+    };
 
     const getFileIcon = (fileType) => {
         switch (fileType) {
@@ -286,7 +284,7 @@ export default function Chat({ selectedChat, setViewMode }) {
                                 try {
                                     if (!isNaN(date)) {
                                         if (index === 0 || !isSameWeek(date, new Date(chat[index - 1].timestamp))) {
-                                            formattedDate = format(date, 'P'); // Format as date if new week
+                                            formattedDate = getFormattedDate(itm.timestamp); // Use getFormattedDate function here
                                         } else {
                                             formattedDate = format(date, 'EEEE'); // Format as day name if same week
                                         }
@@ -314,6 +312,7 @@ export default function Chat({ selectedChat, setViewMode }) {
                                                             className={classes.uploaded__image}
                                                             src={itm.uploadedImage}
                                                             alt="Uploaded"
+                                                            onClick={() => handleImageClick(itm.uploadedImage)}
                                                         />
                                                     )}
                                                     {itm.uploadedFiles && itm.uploadedFiles.length > 0 && (
@@ -341,6 +340,7 @@ export default function Chat({ selectedChat, setViewMode }) {
                                     </div>
                                 );
                             })}
+
                             <div ref={messagesEndRef} />
                         </div>
                         {contextMenu.visible && (
@@ -412,7 +412,9 @@ export default function Chat({ selectedChat, setViewMode }) {
                     </div>
                 </>
             ) : (
-                <Empty />
+                <div className={classes.empty}>
+                    <Empty />
+                </div>
             )}
         </div>
     );

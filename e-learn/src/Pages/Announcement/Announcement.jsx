@@ -21,23 +21,11 @@ export default function Announcement() {
     const [inputValue, setInputValue] = useState('');
     const [originalMessage, setOriginalMessage] = useState('');
 
-    const ImageModalRef = useRef();
-    const handleImageSliderModal = (uploadedFiles) => {
-        const slideImages = uploadedFiles.map((file) => ({
-            url: file.url,
-            caption: file.caption,
-        }));
-        ImageModalRef.current.open(slideImages);
-    };
-
-
-
     const scrollToBottom = () => {
         if (messagesEndRef.current) {
             messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
         }
     };
-
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.keyCode === 13 && inputRef.current.value !== "") {
@@ -48,6 +36,7 @@ export default function Announcement() {
                 }
             }
         };
+
 
         const handleClick = () => {
             setContextMessageMenu({ visible: false, x: 0, y: 0, messageKey: null });
@@ -135,6 +124,7 @@ export default function Announcement() {
         setOriginalMessage(''); // Clear the original message state
     };
 
+
     const handleFileInputChange = (event) => {
         const files = event.target.files;
         const newChatItems = [];
@@ -165,13 +155,8 @@ export default function Announcement() {
         }
     };
 
-
-    useEffect(() => {
-        scrollToBottom();
-    }, [chat]);
-
     const addMessage = () => {
-        if (inputRef.current.value !== '' || chat.some((item) => item.uploadedFiles)) {
+        if (inputRef.current.value !== '' || chat.some((item) => item.uploadedFiles.length > 0)) {
             const newChatItem = {
                 key: chat.length + 1,
                 type: 'sender',
@@ -183,18 +168,29 @@ export default function Announcement() {
                 receivers: ['receiver1', 'receiver2'],
             };
 
-            if (chat.some((item) => item.uploadedFiles)) {
-                chat.forEach((item) => {
-                    if (item.uploadedFiles) {
-                        newChatItem.uploadedFiles.push(item.uploadedFiles);
-                    }
-                });
-            }
+            // Flattening any arrays in chat uploadedFiles to ensure it's a flat array
+            chat.forEach((item) => {
+                if (item.uploadedFiles.length > 0) {
+                    newChatItem.uploadedFiles = newChatItem.uploadedFiles.concat(item.uploadedFiles);
+                }
+            });
 
             setChat((prevChat) => [...prevChat, newChatItem]);
             setInputValue('');
             scrollToBottom();
         }
+    };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [chat]);
+
+
+    const ImageModalRef = useRef();
+    const handleImageClick = (imageUrl) => {
+        // if (ImageModalRef.current) {
+        ImageModalRef.current.open(imageUrl);
+        // }
     };
 
     const getFileIcon = (fileType) => {
@@ -231,8 +227,6 @@ export default function Announcement() {
         }
     };
 
-
-
     return (
         <div className={accnounceclasses.announcement}>
             <div className={classes.main__chatcontent}>
@@ -243,7 +237,7 @@ export default function Announcement() {
                             let formattedTime = 'Invalid time';
                             try {
                                 if (!isNaN(date)) {
-                                    formattedTime = format(date, 'h:mm a');
+                                    formattedTime = format(date, 'h:mm a'); // Non-digital time format
                                 }
                             } catch (e) {
                                 console.error('Error parsing date:', e);
@@ -254,9 +248,9 @@ export default function Announcement() {
                             try {
                                 if (!isNaN(date)) {
                                     if (index === 0 || !isSameWeek(date, new Date(chat[index - 1].timestamp))) {
-                                        formattedDate = format(date, 'P');
+                                        formattedDate = getFormattedDate(itm.timestamp); // Use getFormattedDate function here
                                     } else {
-                                        formattedDate = format(date, 'EEEE');
+                                        formattedDate = format(date, 'EEEE'); // Format as day name if same week
                                     }
                                 }
                             } catch (e) {
@@ -266,7 +260,9 @@ export default function Announcement() {
                                 <div key={itm.key}>
                                     {showDate && formattedDate && (
                                         <div className={classes.chat__date}>
-                                            <p>{formattedDate}</p>
+                                            <p>
+                                                {formattedDate}
+                                            </p>
                                         </div>
                                     )}
                                     <div
@@ -280,6 +276,7 @@ export default function Announcement() {
                                                         className={classes.uploaded__image}
                                                         src={itm.uploadedImage}
                                                         alt="Uploaded"
+                                                        onClick={() => handleImageClick(itm.uploadedImage)}
                                                     />
                                                 )}
                                                 {itm.uploadedFiles && itm.uploadedFiles.length > 0 && (
