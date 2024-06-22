@@ -7,6 +7,7 @@ import * as FaIcons from 'react-icons/fa6';
 import img from '../../assets/avatar.jpg'
 import ImageModal from '../../Components/Announcement-Chat/ImageModal';
 import { FaFileAlt, FaFileImage, FaFilePdf, FaFileWord, FaFileExcel, FaFilePowerpoint, FaFileArchive, FaFileAudio, FaFileVideo, FaFileCode } from 'react-icons/fa';
+import ChoseGroupModal from './ChoseGroupModal';
 
 export default function Announcement() {
     const messagesEndRef = useRef(null);
@@ -20,6 +21,8 @@ export default function Announcement() {
     const [editMode, setEditMode] = useState({ isEditing: false, messageKey: null });
     const [inputValue, setInputValue] = useState('');
     const [originalMessage, setOriginalMessage] = useState('');
+    const [groupChosen, setGroupChosen] = useState(false);
+
 
     const scrollToBottom = () => {
         if (messagesEndRef.current) {
@@ -181,6 +184,17 @@ export default function Announcement() {
         }
     };
 
+
+    const handleSendMessage = () => {
+        if (!groupChosen) {
+            chooseGroupRef.current.open();
+            return;
+        }
+        addMessage();
+        chooseGroupRef.current.resetSelectedGroup();
+        setGroupChosen(false);
+    };
+
     useEffect(() => {
         scrollToBottom();
     }, [chat]);
@@ -226,6 +240,12 @@ export default function Announcement() {
                 return <FaFileAlt className={classes.fileIconDefault} />;
         }
     };
+
+    const chooseGroupRef = useRef()
+
+    function handleChooseGroupModal() {
+        chooseGroupRef.current.open();
+    }
 
     return (
         <div className={accnounceclasses.announcement}>
@@ -327,9 +347,10 @@ export default function Announcement() {
                             </div>
                         )}
                         <div className={classes.write_message}>
-                            <button className={classes.addFiles} onClick={() => document.getElementById('fileInput').click()}>
+                            <button className={classes.addFiles} onClick={handleSendMessage} >
                                 <i className="fa fa-plus"></i>
                             </button>
+                            <ChoseGroupModal ref={chooseGroupRef}></ChoseGroupModal>
                             <input
                                 id="fileInput"
                                 type="file"
@@ -361,7 +382,7 @@ export default function Announcement() {
                                 </button>
                             )}
                             <button className={classes.sendMessage} onClick={editMode.isEditing ? saveEditedMessage : addMessage}>
-                                {editMode.isEditing ? <FaIcons.FaCheck /> : <FaIcons.FaPaperPlane />}
+                                {editMode.isEditing ? <FaIcons.FaCheck /> : <FaIcons.FaPaperPlane onClick={handleSendMessage} />}
                             </button>
                         </div>
                     </div>

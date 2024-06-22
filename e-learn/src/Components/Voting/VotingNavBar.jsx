@@ -95,7 +95,7 @@ export default function VSNavBar({ onVoteSelected }) { // Add onVoteSelected pro
             if (response.statusCode === 200) {
                 setSelectedVote(response.data);
                 onVoteSelected(response.data); // Notify parent component about the selected vote
-                navigate(`/voting/${voteId}`);
+                navigate(`/voting/vote${voteId}`);
             }
         } catch (error) {
             console.log('An error occurred:', error);

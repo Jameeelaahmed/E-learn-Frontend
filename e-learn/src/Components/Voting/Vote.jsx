@@ -64,12 +64,13 @@ export default function Vote({ vote }) {
                         <p onClick={handleOpenResponses}>Open Responses</p>
                     </div>
                     <div className="date_question_container">
-                        <p>Start Date: {new Date(vote.start).toLocaleString()}</p>
-                        <p>End Date: {new Date(vote.end).toLocaleString()}</p>
+                        <p>{t("Start-Date")}: {new Date(vote.start).toLocaleString()}</p>
+                        <p>{t("End Date")}: {new Date(vote.end).toLocaleString()}</p>
                     </div>
                 </>
             ) : (
-                <p>No vote selected</p>
+
+                <p>No vote selected </p>
             )}
         </div>
     );
