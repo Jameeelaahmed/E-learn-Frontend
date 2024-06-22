@@ -141,8 +141,8 @@ span.title {
         display: flex;
         box-shadow: var(--main-shadow);
         overflow-x: auto;
-        height: 110px;
-        margin-top: 60px;
+        height: 155px;
+        /* margin-top: 60px; */
         width: 88%;
         border-radius: 20px;
         padding-top: 15px;
@@ -153,7 +153,6 @@ span.title {
         display: flex;
         overflow-x: auto;
         height: 110px;
-        margin-top: 60px;
         width: 88%;
         border-radius: 20px;
         padding-top: 15px;

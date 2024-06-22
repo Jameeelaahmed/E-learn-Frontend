@@ -3,11 +3,11 @@ import classes from './Vote.module.css';
 import VotingListModal from './VotingResponsesModal';
 import { useParams } from 'react-router-dom';
 import { httpRequest } from '../../HTTP'; // Import httpRequest
-
+import { useTranslation } from 'react-i18next';
 export default function Vote({ vote, voteId: propVoteId }) {
     const [options, setOptions] = useState([]);
     const [voteData, setVoteData] = useState(vote);
-
+    const { t } = useTranslation();
     const { voteId: paramVoteId } = useParams();
     const voteId = propVoteId || paramVoteId;
 
@@ -87,12 +87,13 @@ export default function Vote({ vote, voteId: propVoteId }) {
                         <p onClick={handleOpenResponses}>Open Responses</p>
                     </div>
                     <div className="date_question_container">
-                        <p>Start Date: {new Date(voteData.start).toLocaleString()}</p>
-                        <p>End Date: {new Date(voteData.end).toLocaleString()}</p>
+                        <p>{t("Start-Date")}: {new Date(voteData.start).toLocaleString()}</p>
+                        <p>{t("End Date")}: {new Date(voteData.end).toLocaleString()}</p>
                     </div>
                 </>
             ) : (
-                <p>No vote selected</p>
+
+                <p>No vote selected </p>
             )}
         </div>
     );
