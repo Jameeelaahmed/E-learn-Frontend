@@ -2,19 +2,21 @@ import classes from './QSNavBar.module.css';
 import * as FaIcons from "react-icons/fa6";
 import { useTranslation } from 'react-i18next';
 import { useRef, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import AddQSModal from './AddQSModal';
 import { httpRequest } from '../../HTTP';
 import { getAuthToken } from '../../Helpers/AuthHelper';
 import Edit from '../Button/Edit';
-import Delete from '../Button/Delete'; // Correct import statement
+import Delete from '../Button/Delete';
 
 export default function QSNavBar({ VSQData }) {
     const { t } = useTranslation();
     const addVSDialog = useRef();
-    
+    const navigate = useNavigate(); // Initialize useNavigate
+
     const [returnFormData, setReturnFormData] = useState([]);
-    const [isMobile, setIsMobile] = useState(false); // State to track screen size
-    const [noSurveys, setNoSurveys] = useState(false); // State to track if there are no surveys
+    const [isMobile, setIsMobile] = useState(false);
+    const [noSurveys, setNoSurveys] = useState(false);
 
     function handleOpenAddVSModal() {
         addVSDialog.current.open();
@@ -59,7 +61,7 @@ export default function QSNavBar({ VSQData }) {
             console.log(error);
         }
     }
-    
+
     async function fetchSurveys() {
         try {
             const token = getAuthToken();
@@ -67,9 +69,9 @@ export default function QSNavBar({ VSQData }) {
             console.log(response);
             if (response.statusCode === 200) {
                 setReturnFormData(response.data);
-                setNoSurveys(false); // Reset noSurveys state if surveys are fetched successfully
+                setNoSurveys(false);
             } else if (response.statusCode === 404) {
-                setNoSurveys(true); // Set noSurveys state to true if status code is 404
+                setNoSurveys(true);
             }
         } catch (error) {
             console.log(error);
@@ -80,6 +82,10 @@ export default function QSNavBar({ VSQData }) {
         fetchSurveys();
     }, [VSQData]);
 
+    const handleSurveyClick = (surveyId) => {
+        navigate(`/survey/${surveyId}`); // Navigate to the survey page with the surveyId
+    };
+
     return (
         <div className={isMobile ? classes.vs_navigation_bar_responsive : classes.vs_navigation_bar}>
             <AddQSModal ref={addVSDialog} collectFormData={collectData} />
@@ -88,12 +94,12 @@ export default function QSNavBar({ VSQData }) {
                 <p>{t("add-survey")}</p>
             </div>
             {noSurveys ? (
-                <p>{t("no-surveys")}</p> // Render a message if no surveys are available
+                <p>{t("no-surveys")}</p>
             ) : (
                 <ul className={isMobile ? classes.titles_wrapper : ""}>
                     {returnFormData.map((data) => (
                         <div key={data.id} className={classes.box_wrapper}>
-                            <li className={wid} key={data.id}>
+                            <li className={wid} key={data.id} onClick={() => handleSurveyClick(data.id)}>
                                 {isMobile ? (
                                     <div className={classes.box}>
                                         <p>{data.text}</p>
