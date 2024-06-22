@@ -9,9 +9,12 @@ import { useEffect, useState } from 'react';
 export default function Groups() {
     const navigate = useNavigate();
     const location = useLocation();
-    const { groupId } = useParams();
+    const Params = useParams();
+    const groupId = Params.groupId;
+    console.log(groupId);
     const [group, setGroup] = useState([]); // Initialize group state
     const [assignments, setAssignments] = useState([]); // Initialize assignments state
+    const [quizzes, setQuizzes] = useState([]); // Initialize quizzes state
 
     // Fetch groups from the API
     async function fetchGroups() {
@@ -36,12 +39,13 @@ export default function Groups() {
     // Fetch assignments from the API
     async function fetchAssignments() {
         try {
+            console.log('fetching Assignment');
             const token = getAuthToken();
             const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Assignment/GetByGroupId/${groupId}`, token);
             console.log(response);
             if (response.statusCode === 200) {
                 console.log('Assignments fetched successfully');
-                setAssignments(response.data); // Update the assignments state with the fetched data
+                setAssignments(response.data);
             } else {
                 console.log(response);
             }
@@ -49,9 +53,34 @@ export default function Groups() {
             console.log('An error occurred:', error);
         }
     }
+
     useEffect(() => {
-        fetchAssignments(); // Call fetchAssignments when the component mounts
-    }, []);
+        if (groupId) {
+            fetchAssignments(); // Call fetchAssignments when the component mounts or groupId changes
+        }
+    }, [groupId]);
+
+    async function fetchQuizzes() {
+        try {
+            const token = getAuthToken();
+            const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Quiz/GetQuizzesFromGroup?groupId=${groupId}`, token);
+            console.log(response);
+            if (response.statusCode === 200) {
+                console.log('Quizzes fetched successfully');
+                setQuizzes(response.data);
+            } else {
+                console.log(response);
+            }
+        } catch (error) {
+            console.log('An error occurred:', error);
+        }
+    }
+
+    useEffect(() => {
+        if (groupId) {
+            fetchQuizzes(); // Call fetchQuizzes when the component mounts or groupId changes
+        }
+    }, [groupId]);
 
     // Handle group click event
     function handleGroupClick(id) {
@@ -64,8 +93,10 @@ export default function Groups() {
     }
 
     function handleQuizClick(id) {
-        navigate(`/groups/${groupId}/quizzes/quiz${id}`)
+        navigate(`/groups/${groupId}/quizzes/quiz${id}`);
     }
+    console.log(location.pathname);
+    console.log('hello');
     return (
         <ul className={classes.classes}>
             {location.pathname.endsWith("/groups") &&
@@ -74,7 +105,7 @@ export default function Groups() {
                         key={index}
                         subTitle={item.name}
                         insName={item.instructorName}
-                        onClick={() => handleGroupClick(item.id)} // Ensure onClick is properly handled
+                        onClick={() => handleGroupClick(item.id)}
                     />
                 ))
             }
@@ -84,15 +115,20 @@ export default function Groups() {
                         key={index}
                         subTitle={item.title}
                         insName={item.creatorName}
-                        onClick={() => handleAssignmentClick(item.id)} // Ensure onClick is properly handled
+                        onClick={() => handleAssignmentClick(item.id)}
                     />
                 ))
             }
             {location.pathname.endsWith("/quizzes") &&
-                <Group
-                    onClick={(id) => handleQuizClick(id)}
-                    subTitle="Quiz"
-                    insName="Instructor" />}
+                quizzes.map((item, index) => (
+                    <Group
+                        key={index}
+                        subTitle={item.title}
+                        insName={item.creatorName}
+                        onClick={() => handleQuizClick(item.id)}
+                    />
+                ))
+            }
         </ul>
     );
 }
