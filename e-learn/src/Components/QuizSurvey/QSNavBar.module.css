@@ -151,6 +151,7 @@ span.title {
         border-radius: 20px;
         padding-top: 15px;
         flex-direction: column;
+        overflow-y: scroll;
     }
 
     .titles_wrapper {
@@ -171,7 +172,8 @@ span.title {
     .vs_navigation_bar_responsive .box {
         width: 200px;
         /* Fixed width for boxes */
-        height: 80px;
+        /* height: 80px; */
+        word-wrap: break-word;
         background-color: var(--light-grey);
         padding: 15px;
         border-radius: 20px;
