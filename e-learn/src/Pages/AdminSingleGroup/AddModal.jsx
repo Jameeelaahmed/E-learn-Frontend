@@ -3,7 +3,6 @@ import classes from './AddModal.module.css'
 import { useLocation, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import FileUpload from "../../Components/Files/FileUpload";
-import Button from "../../Components/Button/Button";
 import SubmitButton from "../../Components/Button/SubmitButton";
 const AddModal = forwardRef(function AddModal(_, ref) {
 

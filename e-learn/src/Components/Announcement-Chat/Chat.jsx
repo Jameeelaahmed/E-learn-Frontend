@@ -21,15 +21,6 @@ export default function Chat({ selectedChat, setViewMode }) {
     const [inputValue, setInputValue] = useState('');
     const [originalMessage, setOriginalMessage] = useState('');
 
-    const ImageModalRef = useRef();
-    const handleImageSliderModal = (uploadedFiles) => {
-        const slideImages = uploadedFiles.map((file) => ({
-            url: file.url,
-            caption: file.caption,
-        }));
-        ImageModalRef.current.open(slideImages);
-    };
-
 
     useEffect(() => {
         if (selectedChat) {
@@ -209,6 +200,12 @@ export default function Chat({ selectedChat, setViewMode }) {
         }
     };
 
+    const ImageModalRef = useRef();
+    const handleImageClick = (imageUrl) => {
+        // if (ImageModalRef.current) {
+        ImageModalRef.current.open(imageUrl);
+        // }
+    };
 
     const getFileIcon = (fileType) => {
         switch (fileType) {
@@ -287,7 +284,7 @@ export default function Chat({ selectedChat, setViewMode }) {
                                 try {
                                     if (!isNaN(date)) {
                                         if (index === 0 || !isSameWeek(date, new Date(chat[index - 1].timestamp))) {
-                                            formattedDate = format(date, 'P'); // Format as date if new week
+                                            formattedDate = getFormattedDate(itm.timestamp); // Use getFormattedDate function here
                                         } else {
                                             formattedDate = format(date, 'EEEE'); // Format as day name if same week
                                         }
@@ -315,6 +312,7 @@ export default function Chat({ selectedChat, setViewMode }) {
                                                             className={classes.uploaded__image}
                                                             src={itm.uploadedImage}
                                                             alt="Uploaded"
+                                                            onClick={() => handleImageClick(itm.uploadedImage)}
                                                         />
                                                     )}
                                                     {itm.uploadedFiles && itm.uploadedFiles.length > 0 && (
@@ -342,6 +340,7 @@ export default function Chat({ selectedChat, setViewMode }) {
                                     </div>
                                 );
                             })}
+
                             <div ref={messagesEndRef} />
                         </div>
                         {contextMenu.visible && (
@@ -413,7 +412,9 @@ export default function Chat({ selectedChat, setViewMode }) {
                     </div>
                 </>
             ) : (
-                <Empty />
+                <div className={classes.empty}>
+                    <Empty />
+                </div>
             )}
         </div>
     );
