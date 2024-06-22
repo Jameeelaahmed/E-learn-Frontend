@@ -68,7 +68,8 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
             return;
         }
 
-        if (!formValues.date || !formValues.time) {
+        if (!formValues.endDate || !formValues.endTime) {
+            console.log(formValues.endDate, formValues.endTime);
             console.error('Validation Error: End date and time are required.');
             return;
         }
@@ -93,7 +94,7 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
         const requestBody = {
             text: formValues.title,
             start: new Date().toISOString(),
-            end: `${formValues.date}T${formValues.time}`,
+            end: `${formValues.endDate}T${formValues.endTime}`,
             groupIds: selectedGroups,
             questions: formattedQuestions
         };
@@ -120,8 +121,8 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
             ...prevData,
             title: formValues.title,
             groups: selectedGroups,
-            endTime: formValues.time,
-            endDate: formValues.date,
+            endTime: formValues.endTime,
+            endDate: formValues.endDate,
         }));
         e.target.reset();
         setFormSubmitted(true);
@@ -151,12 +152,12 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
                 </div>
                 <div className={classes.row}>
                     <div className={classes.input_container}>
-                        <label htmlFor="time">{t("end-time")}</label>
-                        <input type="time" id="time" dir='auto' name="endTime" />
+                        <label htmlFor="endTime">{t("end-time")}</label>
+                        <input type="time" id="endTime" dir='auto' name="endTime" />
                     </div>
                     <div className={classes.input_container}>
-                        <label htmlFor="date">{t("end-date")}</label>
-                        <input type="date" dir='auto' name="endDate" />
+                        <label htmlFor="endDate">{t("end-date")}</label>
+                        <input type="date" id="endDate" dir='auto' name="endDate" />
                     </div>
                 </div>
                 <Questions onQuestionChange={handleQuestions} onStateChange={setFormData} />
