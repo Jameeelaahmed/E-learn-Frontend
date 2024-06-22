@@ -10,48 +10,49 @@ import { v4 as uuidv4 } from 'uuid';  // Import UUID for generating unique IDs
 const Questions = memo(function Questions({ onQuestionChange }) {
     log('<Questions /> rendered');
     const { t } = useTranslation();
-    const [questions, setQuestions] = useState([{ id: uuidv4(), description: "", options: ["", ""] }]);
+    const [questions, setQuestions] = useState([{ id: uuidv4(), description: "", options: [{ id: uuidv4(), value: "", isCorrect: false }, { id: uuidv4(), value: "", isCorrect: false }] }]);
 
-    // Function to handle adding an option to a question
-    const handleAddOption = (questionIndex, optionValue = "") => {
+    const handleAddOption = (questionIndex) => {
         const updatedQuestions = [...questions];
-        updatedQuestions[questionIndex].options.push(optionValue);
+        updatedQuestions[questionIndex].options.push({ id: uuidv4(), value: "", isCorrect: false });
         setQuestions(updatedQuestions);
     };
 
-    // Function to handle deleting an option from a question
     const handleDeleteOption = (questionIndex, optionIndex) => {
         const updatedQuestions = [...questions];
         updatedQuestions[questionIndex].options.splice(optionIndex, 1);
         setQuestions(updatedQuestions);
     };
 
-    // Function to handle adding a new question
     const handleAddQuestion = () => {
-        setQuestions([...questions, { id: uuidv4(), description: "", options: ["", ""] }]);
+        setQuestions([...questions, { id: uuidv4(), description: "", options: [{ id: uuidv4(), value: "", isCorrect: false }, { id: uuidv4(), value: "", isCorrect: false }] }]);
     };
 
-    // Function to handle deleting a question
     const handleDeleteQuestion = (questionIndex) => {
         const updatedQuestions = questions.filter((_, index) => index !== questionIndex);
         setQuestions(updatedQuestions);
     };
 
-    // Function to handle changing an option's value
     const handleOptionChange = (questionIndex, optionIndex, newOptionValue) => {
         const updatedQuestions = [...questions];
-        updatedQuestions[questionIndex].options[optionIndex] = newOptionValue;
+        updatedQuestions[questionIndex].options[optionIndex].value = newOptionValue;
         setQuestions(updatedQuestions);
     };
 
-    // Function to handle changing a question's description
     const handleQuestionChange = (questionIndex, newQuestionValue) => {
         const updatedQuestions = [...questions];
         updatedQuestions[questionIndex].description = newQuestionValue;
         setQuestions(updatedQuestions);
     };
 
-    // Effect to call the onQuestionChange callback when questions state changes
+    const handleCorrectOptionChange = (questionIndex, optionIndex) => {
+        const updatedQuestions = [...questions];
+        updatedQuestions[questionIndex].options.forEach((option, idx) => {
+            option.isCorrect = idx === optionIndex;
+        });
+        setQuestions(updatedQuestions);
+    };
+
     useEffect(() => {
         onQuestionChange(questions);
         console.log(questions);
@@ -76,8 +77,11 @@ const Questions = memo(function Questions({ onQuestionChange }) {
                             <div className={classes.option} key={`${question.id}-${optionIndex}`}>
                                 <Option
                                     index={optionIndex}
-                                    value={option}
+                                    value={option.value}
+                                    isCorrect={option.isCorrect}
                                     onBlur={(newOptionValue) => handleOptionChange(questionIndex, optionIndex, newOptionValue)}
+                                    onCorrectChange={() => handleCorrectOptionChange(questionIndex, optionIndex)}
+                                    name={`question-${questionIndex}`}
                                 />
                                 {optionIndex > 1 && (
                                     <FaIcons.FaCircleXmark

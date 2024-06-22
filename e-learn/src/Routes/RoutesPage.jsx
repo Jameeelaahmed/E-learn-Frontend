@@ -106,6 +106,7 @@ const studentRoutes = [
             { path: '', element: <Weeks role={getRole()} /> },
             { path: 'assignments', element: <ViewCards /> },
             { path: 'quizzes', element: <ViewCards /> },
+            { path: 'quizzes/:quizId', element: <QuestionView /> },
             { path: 'assignments/:assignmentId', element: <AssignmentDetails /> },
             { path: 'assignments/:assignmentId/responses-list', element: <AssignmentsResponsesList /> },
             { path: 'assignments/:assignmentId/responses-list' },

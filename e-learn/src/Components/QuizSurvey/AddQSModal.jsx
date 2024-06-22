@@ -8,7 +8,7 @@ import InputContainer from './InputContainer';
 import { log } from "../../log";
 import { httpRequest } from '../../HTTP';
 import { getAuthToken } from '../../Helpers/AuthHelper';
-
+import { useLocation } from "react-router-dom";
 const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
     log('<ADDVSModal /> rendered');
     const { t } = useTranslation();
@@ -27,9 +27,10 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
         ]
     });
     const [formSubmitted, setFormSubmitted] = useState(false);
-
     const checkboxDropdownRef = useRef();
     const addVSDialog = useRef();
+    const location = useLocation();
+    const path = location.pathname;
 
     useImperativeHandle(ref, () => ({
         open: () => {
@@ -146,26 +147,31 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
                         <input type="text" id="title" dir='auto' name="title" />
                     </div>
                     <div className={classes.input_container}>
-                        <label htmlFor="group">{t("Group")}</label>
-                        <CheckboxDropdown name="group" ref={checkboxDropdownRef}></CheckboxDropdown>
+                        <label htmlFor="endDate">{t("end-date")}</label>
+                        <input type="date" id="endDate" dir='auto' name="endDate" />
                     </div>
+
                 </div>
                 <div className={classes.row}>
+                    <div className={classes.input_container}>
+                        <label htmlFor="startTime">{t("start-time")}</label>
+                        <input type="time" id="startTime" dir='auto' name="startTime" />
+                    </div>
                     <div className={classes.input_container}>
                         <label htmlFor="endTime">{t("end-time")}</label>
                         <input type="time" id="endTime" dir='auto' name="endTime" />
                     </div>
-                    <div className={classes.input_container}>
-                        <label htmlFor="endDate">{t("end-date")}</label>
-                        <input type="date" id="endDate" dir='auto' name="endDate" />
-                    </div>
                 </div>
-                <div className={classes.mark}>
-                    <label htmlFor="total-mark">{t("total-mark")}</label>
-                    <input type="number" name="total-mark" />
+                <div className={classes.input}>
+                    <label htmlFor="group">{t("Group")}</label>
+                    <CheckboxDropdown name="group" ref={checkboxDropdownRef}></CheckboxDropdown>
                 </div>
+                {path.includes("/quizzes") &&
+                    <div className={classes.mark}>
+                        <label htmlFor="total-mark">{t("total-mark")}</label>
+                        <input type="number" name="total-mark" />
+                    </div>}
                 <Questions onQuestionChange={handleQuestions} onStateChange={setFormData} />
-
                 <div className={classes.actions}>
                     <button type="button" onClick={handleCancelClick}>{t("Cancel")}</button>
                     <button type="submit">{t("Create")}</button>
