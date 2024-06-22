@@ -2,7 +2,7 @@
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    background-color:var(--main-color);
+    background-color: var(--main-color);
     border: none;
     font-weight: 600;
     display: flex;
@@ -32,11 +32,16 @@
     align-items: center;
     gap: 0;
 }
+
 .edit_button:hover {
     transition-duration: 0.3s;
     background-color: var(--secondary-color);
     align-items: center;
     gap: 0;
+}
+
+.edit_button {
+    margin-bottom: 8px;
 }
 
 .bin_top {
@@ -48,13 +53,13 @@
     transform: rotate(160deg);
 }
 
-.edit_icon{
+.edit_icon {
     width: 15px;
     height: 15px;
     fill: white;
     transition: 0.4S;
 }
 
-.edit_button:hover .edit_icon{
+.edit_button:hover .edit_icon {
     transform: scale(1.2);
 }
