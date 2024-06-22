@@ -40,17 +40,20 @@ const VotingModal = forwardRef(function VotingModal({ onVotingCreated }, ref) {
         const description = formData.get('description');
         const endDate = formData.get('endDate');
         const endTime = formData.get('endTime');
-        const selectedGroups = checkboxDropdownRef.current.state.selectValue.map(group => group.value);
+        const selectedGroups = checkboxDropdownRef.current.getSelectedGroups().map(group => group.value);
 
         console.log("Selected groups: ", selectedGroups);
         console.log("Options: ", options);
 
         const end = `${endDate}T${endTime}:00`;
 
+        const start = new Date();
+        start.setSeconds(start.getMinutes() + 1);
+
         const requestBody = {
             title,
             description,
-            start: new Date().toISOString(),
+            start: start.toISOString(),
             end,
             groups: selectedGroups,
             options
