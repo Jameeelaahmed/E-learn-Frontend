@@ -1,4 +1,3 @@
-// QSNavBar.jsx
 import classes from './QSNavBar.module.css';
 import * as FaIcons from "react-icons/fa6";
 import { useTranslation } from 'react-i18next';
@@ -15,6 +14,7 @@ export default function QSNavBar({ VSQData }) {
     
     const [returnFormData, setReturnFormData] = useState([]);
     const [isMobile, setIsMobile] = useState(false); // State to track screen size
+    const [noSurveys, setNoSurveys] = useState(false); // State to track if there are no surveys
 
     function handleOpenAddVSModal() {
         addVSDialog.current.open();
@@ -67,6 +67,9 @@ export default function QSNavBar({ VSQData }) {
             console.log(response);
             if (response.statusCode === 200) {
                 setReturnFormData(response.data);
+                setNoSurveys(false); // Reset noSurveys state if surveys are fetched successfully
+            } else if (response.statusCode === 404) {
+                setNoSurveys(true); // Set noSurveys state to true if status code is 404
             }
         } catch (error) {
             console.log(error);
@@ -84,34 +87,38 @@ export default function QSNavBar({ VSQData }) {
                 <FaIcons.FaPlus className={classes.icon} />
                 <p>{t("add-survey")}</p>
             </div>
-            <ul className={isMobile ? classes.titles_wrapper : ""}>
-                {returnFormData.map((data) => (
-                    <div key={data.id} className={classes.box_wrapper}>
-                        <li className={wid} key={data.id}>
-                            {isMobile ? (
-                                <div className={classes.box}>
-                                    <p>{data.text}</p>
-                                    <p>{data.creatorName}</p>
-                                </div>
-                            ) : (
-                                <div className={classes.title_wrapper}>
-                                    <FaIcons.FaSquare className={classes.icon} />
-                                    <div className={classes.info}>
-                                        <span className={classes.title}>{data.text}</span>
-                                        <span className={classes.name}>{data.creatorName}</span>
+            {noSurveys ? (
+                <p>{t("no-surveys")}</p> // Render a message if no surveys are available
+            ) : (
+                <ul className={isMobile ? classes.titles_wrapper : ""}>
+                    {returnFormData.map((data) => (
+                        <div key={data.id} className={classes.box_wrapper}>
+                            <li className={wid} key={data.id}>
+                                {isMobile ? (
+                                    <div className={classes.box}>
+                                        <p>{data.text}</p>
+                                        <p>{data.creatorName}</p>
                                     </div>
+                                ) : (
+                                    <div className={classes.title_wrapper}>
+                                        <FaIcons.FaSquare className={classes.icon} />
+                                        <div className={classes.info}>
+                                            <span className={classes.title}>{data.text}</span>
+                                            <span className={classes.name}>{data.creatorName}</span>
+                                        </div>
+                                    </div>
+                                )}
+                            </li>
+                            {role === "Staff" && (
+                                <div className={classes.control_buttons}>
+                                    <Edit />
+                                    <Delete onClick={() => DeleteSurvey(data.id)} />
                                 </div>
                             )}
-                        </li>
-                        {role === "Staff" && (
-                            <div className={classes.control_buttons}>
-                                <Edit />
-                                <Delete onClick={() => DeleteSurvey(data.id)} />
-                            </div>
-                        )}
-                    </div>
-                ))}
-            </ul>
+                        </div>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 }
