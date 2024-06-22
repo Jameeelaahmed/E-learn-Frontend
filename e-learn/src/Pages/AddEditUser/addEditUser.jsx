@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import user from '../../assets/user.png';
-import upload from '../../assets/upload.png'
+import upload from '../../assets/upload.png';
 import classes from './addEditUser.module.css';
 import { useTranslation } from 'react-i18next';
 import FileUpload from '../../Components/Files/FileUpload';
 import Button from '../../Components/Button/Button';
 import { useLocation } from 'react-router-dom';
-const AddEditUser = () => {
 
+const AddEditUser = () => {
     const location = useLocation();
     const path = location.pathname;
     const [imagePreviewUrl, setImagePreviewUrl] = useState(user);
     const [isHovered, setIsHovered] = useState(false); // State for hover
+    const [role, setRole] = useState('Instructor'); // State for selected role
     const { t } = useTranslation();
 
     const handleProfileImageUpload = e => {
@@ -22,6 +23,10 @@ const AddEditUser = () => {
             setImagePreviewUrl(reader.result);
         };
         reader.readAsDataURL(file);
+    };
+
+    const handleRoleChange = (e) => {
+        setRole(e.target.value);
     };
 
     function handleCollectFiles(files) {
@@ -103,6 +108,12 @@ const AddEditUser = () => {
                             <input dir='auto' type="number" />
                         </div>
                     </div>
+                    <div className={classes.select}>
+                        <select value={role} onChange={handleRoleChange}>
+                            <option value="Instructor">{t("Instructor")}</option>
+                            <option value="Student">{t("Student")}</option>
+                        </select>
+                    </div>
                     {path === "/users/adduser" &&
                         <>
                             <FileUpload
@@ -110,16 +121,16 @@ const AddEditUser = () => {
                                 singleFile={true}
                                 fileTypes={['text/csv', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']}
                             />
-                            <Button text={t("add")} customClass="fit" ></Button>
+                            <Button text={t("add")} customClass="fit" />
                         </>
                     }
                     {path === "/users/edituser" &&
-                        <Button text={t("save-changes")} customClass="fit" ></Button>
+                        <Button text={t("save-changes")} customClass="fit" />
                     }
                 </form>
             </div>
         </div>
     );
-}
+};
 
 export default AddEditUser;
