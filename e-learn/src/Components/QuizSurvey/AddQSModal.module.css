@@ -257,6 +257,13 @@ textarea:focus {
     width: 48%;
 }
 
+.mark {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    width: 100%;
+}
+
 @media (max-width: 530px) {
     .row {
         flex-direction: column;
@@ -269,7 +276,8 @@ textarea:focus {
 
 .input_container input,
 .input_container select,
-.input input {
+.input input,
+.mark input {
     padding: 9px 10PX;
     caret-color: var(--main-color);
     margin-top: 5px;
@@ -281,7 +289,9 @@ textarea:focus {
 }
 
 .input_container input[type="number"]::-webkit-inner-spin-button,
-.input_container input[type="number"]::-webkit-outter-spin-button {
+.input_container input[type="number"]::-webkit-outter-spin-button,
+.mark input[type="number"]::-webkit-inner-spin-button,
+.mark input[type="number"]::-webkit-outter-spin-button {
     display: none;
 }
 

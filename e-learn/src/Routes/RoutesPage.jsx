@@ -59,6 +59,7 @@ const adminRoutes = [
     { path: 'admingroups/:admingroupID/participants', element: <AdminSingleGroup /> },
     { path: 'assignments/:assignmentId', element: <AssignmentDetails /> },
     { path: 'chat', element: <Container /> },
+    { path: 'chat/:chatId', element: <Container /> }, // Add this route for chat with ID
     { path: 'survey', element: <QSContainer /> },
     { path: 'announcements', element: <Announcement /> }
 ];
@@ -90,6 +91,8 @@ const instructorRoutes = [
     { path: 'survey/:surveyId', element: <QuestionView /> },
     { path: 'announcements', element: <Announcement /> },
     { path: 'chat', element: <Container /> },
+    { path: 'chat/:chatId', element: <Container /> }, // Add this route for chat with ID
+
 ];
 
 const studentRoutes = [
@@ -115,6 +118,8 @@ const studentRoutes = [
     { path: 'voting', element: <Voting /> },
     { path: 'voting/:voteId', element: <Vote /> },
     { path: 'chat', element: <Container /> },
+    { path: 'chat/:chatId', element: <Container /> }, // Add this route for chat with ID
+
 ];
 
 const router = createBrowserRouter([

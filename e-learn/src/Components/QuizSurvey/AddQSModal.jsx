@@ -160,6 +160,10 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
                         <input type="date" id="endDate" dir='auto' name="endDate" />
                     </div>
                 </div>
+                <div className={classes.mark}>
+                    <label htmlFor="total-mark">{t("total-mark")}</label>
+                    <input type="number" name="total-mark" />
+                </div>
                 <Questions onQuestionChange={handleQuestions} onStateChange={setFormData} />
 
                 <div className={classes.actions}>
