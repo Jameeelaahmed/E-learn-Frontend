@@ -11,7 +11,7 @@ const Question = memo(function Question({ children, onLoseFocus }) {
 
     return (
         <div className={classes.question}>
-            <div className={classes.input_container}>
+            <div className={classes.input}>
                 <label htmlFor="description">{t("survey-description")}</label>
                 <input onBlur={handleBlur} type="text" name="description" dir='auto' />
             </div>

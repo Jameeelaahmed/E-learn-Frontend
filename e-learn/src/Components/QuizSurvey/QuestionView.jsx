@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './QuestionView.module.css';
 import NextButton from './NextButton';
 import BackButton from './BackButton';
@@ -38,9 +38,20 @@ export default function QuestionView() {
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
+    const today = new Date();
+    const endDate = new Date(questionData[0].endDate);
+    endDate.setHours(23, 59, 59); // Set the end time to 23:59:59 of the end date
+
+    useEffect(() => {
+        if (today > endDate) {
+            setCurrentQuestionIndex(-1); // Time is ended
+        } else if (currentQuestionIndex === -1) {
+            setCurrentQuestionIndex(0); // Reset index if time was previously ended and now it's not
+        }
+    }, [currentQuestionIndex, today, endDate]);
+
     const handleNext = () => {
         if (currentQuestionIndex < questionData.length - 1) {
-            console.log("iam here")
             setCurrentQuestionIndex(currentQuestionIndex + 1);
         }
     };
@@ -55,32 +66,46 @@ export default function QuestionView() {
         console.log('Submit');
     };
 
-    const currentQuestion = questionData[currentQuestionIndex];
+    const currentQuestion = currentQuestionIndex !== -1 ? questionData[currentQuestionIndex] : null;
 
     return (
-        <div className={classes.question_container}>
-            <div className={classes.question}>
-                <p dir='auto' className={classes.description}>{currentQuestion.description}</p>
-                <div className={classes.options}>
-                    {currentQuestion.options.map((option, index) => (
-                        <p dir='auto' key={index} className={classes.option}>{option}</p>
-                    ))}
+        <>
+            {currentQuestion !== null ? (
+                <div className={classes.question_container}>
+                    <div className={classes.question}>
+                        <p dir='auto' className={classes.description}>{currentQuestion.description}</p>
+                        <div className={classes.options}>
+                            {currentQuestion.options.map((option, index) => (
+                                <p dir='auto' key={index} className={classes.option}>{option}</p>
+                            ))}
+                        </div>
+                        <div className={classes.question_footer}>
+                            <div className={classes.date_question_container}>
+                                <div className={classes.date}>
+                                    <p>{t("Start-Date")}:</p>
+                                    <p>{currentQuestion.startDate}</p>
+                                </div>
+                                <div className={classes.date}>
+                                    <p>{t("End-Date")}:</p>
+                                    <p>{currentQuestion.endDate}</p>
+                                </div>
+                            </div>
+                            <div className={classes.buttons}>
+                                {currentQuestionIndex > 0 && <BackButton onClick={handleBack}>Back</BackButton>}
+                                {currentQuestionIndex < questionData.length - 1 ? (
+                                    <NextButton onClick={handleNext}>Next</NextButton>
+                                ) : (
+                                    <Submit text={t("Submit")} onClick={handleSubmit}>Submit</Submit>
+                                )}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div className={classes.question_footer}>
-                <div className={classes.date_question_container}>
-                    <p>Start Date: {currentQuestion.startDate}</p>
-                    <p>End Date: {currentQuestion.endDate}</p>
+            ) : (
+                <div className={classes.question}>
+                    <p>{t("Time is ended.")}</p>
                 </div>
-                <div className={classes.buttons}>
-                    {currentQuestionIndex > 0 && <BackButton onClick={handleBack}>Back</BackButton>}
-                    {currentQuestionIndex < questionData.length - 1 ? (
-                        <NextButton onClick={handleNext}>Next</NextButton>
-                    ) : (
-                        <Submit text={t("Submit")} onClick={handleSubmit}>Submit</Submit>
-                    )}
-                </div>
-            </div>
-        </div>
+            )}
+        </>
     );
 }

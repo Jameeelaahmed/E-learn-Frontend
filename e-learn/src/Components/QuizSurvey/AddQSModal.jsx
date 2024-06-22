@@ -60,24 +60,24 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
         e.preventDefault();
         const fd = new FormData(e.target);
         const formValues = Object.fromEntries(fd.entries());
-    
+
         const selectedGroups = checkboxDropdownRef.current.getSelectedGroups().map(group => group.value);
-    
+
         if (!formValues.title || formValues.title.trim() === '') {
             console.error('Validation Error: Title is required.');
             return;
         }
-        
+
         if (!formValues.date || !formValues.time) {
             console.error('Validation Error: End date and time are required.');
             return;
         }
-    
+
         if (selectedGroups.length === 0) {
             console.error('Validation Error: At least one group must be selected.');
             return;
         }
-    
+
         const formattedQuestions = formData.questions.map(question => {
             const options = question.questionOptions;
             return {
@@ -89,7 +89,7 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
                 option5: options[4] || ""
             };
         });
-    
+
         const requestBody = {
             text: formValues.title,
             start: new Date().toISOString(),
@@ -97,7 +97,7 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
             groupIds: selectedGroups,
             questions: formattedQuestions
         };
-    
+
         try {
             const token = getAuthToken();
             const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Survey/CreateSurvey', token, requestBody);
@@ -115,7 +115,7 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
         } catch (error) {
             console.error('An error occurred:', error);
         }
-    
+
         setFormData(prevData => ({
             ...prevData,
             title: formValues.title,
@@ -126,7 +126,7 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
         e.target.reset();
         setFormSubmitted(true);
     }, [formData, checkboxDropdownRef]);
-    
+
 
     useEffect(() => {
         if (formSubmitted) {
@@ -139,7 +139,33 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
     return createPortal(
         <dialog ref={addVSDialog} className={classes.modal}>
             <form method='dialog' onSubmit={handleSubmit}>
-                <div className={classes.col}>
+                <div className={classes.row}>
+                    <div className={classes.input_container}>
+                        <label htmlFor="title">{t("title")}</label>
+                        <input type="text" id="title" dir='auto' name="title" />
+                    </div>
+                    <div className={classes.input_container}>
+                        <label htmlFor="group">{t("Group")}</label>
+                        <CheckboxDropdown name="group" ref={checkboxDropdownRef}></CheckboxDropdown>
+                    </div>
+                </div>
+                <div className={classes.row}>
+                    <div className={classes.input_container}>
+                        <label htmlFor="time">{t("end-time")}</label>
+                        <input type="time" id="time" dir='auto' name="endTime" />
+                    </div>
+                    <div className={classes.input_container}>
+                        <label htmlFor="date">{t("end-date")}</label>
+                        <input type="date" dir='auto' name="endDate" />
+                    </div>
+                </div>
+                <Questions onQuestionChange={handleQuestions} onStateChange={setFormData} />
+
+                <div className={classes.actions}>
+                    <button type="button" onClick={handleCancelClick}>{t("Cancel")}</button>
+                    <button type="submit">{t("Create")}</button>
+                </div>
+                {/* <div className={classes.col}>
                     <InputContainer label={t("survey-title")} type="text" nameFor="title" />
                     <div className={classes.input_container}>
                         <label htmlFor="group">{t("Group")}</label>
@@ -147,14 +173,9 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
                     </div>
                     <InputContainer label={t("end-time")} type="time" nameFor="time" />
                     <InputContainer label={t("end-date")} type="date" nameFor="date" />
-                </div>
-                <Questions onQuestionChange={handleQuestions} onStateChange={setFormData} />
-                <div className={classes.actions}>
-                    <button type="button" onClick={handleCancelClick}>{t("Cancel")}</button>
-                    <button type="submit">{t("Create")}</button>
-                </div>
+                </div> */}
             </form>
-        </dialog>,
+        </dialog >,
         document.getElementById('vs-Modal')
     );
 });
