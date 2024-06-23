@@ -21,18 +21,14 @@ export default function Header({ opened }) {
 
     async function HandleLogOut() {
         try {
-            const token = getAuthToken();
-            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/LogOut', token, null);
-            if (response.statusCode === 200) {
-                localStorage.removeItem('token');
-                localStorage.removeItem('role');
-                localStorage.removeItem('userName');
-                localStorage.removeItem('email');
-                console.log('Logout successful');
-                navigate('/auth');
-            } else {
-                console.log(response);
-            }
+            localStorage.removeItem('token');
+            localStorage.removeItem('role');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('email');
+            localStorage.removeItem('fullName');
+            localStorage.removeItem('profilePicture');
+            console.log('Logout successful');
+            navigate('/auth');
         }
         catch (error) {
             console.log('An error occurred:', error);
