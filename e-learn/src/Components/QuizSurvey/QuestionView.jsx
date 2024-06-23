@@ -1,57 +1,37 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import classes from './QuestionView.module.css';
 import NextButton from './NextButton';
 import BackButton from './BackButton';
-import SubmitButton from '../Button/SubmitButton';
-import Button from '../Button/Button';
-import { t } from 'i18next';
-import UpButton from '../Button/UpButton';
 import Submit from './Submit';
+import { httpRequest } from '../../HTTP';
+import { getAuthToken } from '../../Helpers/AuthHelper';
+import { t } from 'i18next';
 
 export default function QuestionView() {
-    const questionData = [
-        {
-            description: 'What is the capital of France?',
-            options: ['Paris', 'London', 'Berlin', 'Madrid'],
-            startDate: '2024-06-01',
-            endDate: '2024-06-30'
-        },
-        {
-            description: 'What is 2 + 2?',
-            options: ['3', '4', '5', '6'],
-            startDate: '2024-06-01',
-            endDate: '2024-06-30'
-        },
-        {
-            description: 'Which planet is known as the Red Planet?',
-            options: ['Earth', 'Mars', 'Jupiter', 'Saturn'],
-            startDate: '2024-06-01',
-            endDate: '2024-06-30'
-        },
-        {
-            description: 'What is the largest ocean on Earth?',
-            options: ['Atlantic Ocean', 'Indian Ocean', 'Arctic Ocean', 'Pacific Ocean'],
-            startDate: '2024-06-01',
-            endDate: '2024-06-30'
-        }
-    ];
-
+    const location = useLocation();
+    const navigate = useNavigate();
+    const quiz = location.state?.quiz; // Safely access quiz from location state
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-
+    const [answers, setAnswers] = useState(
+        quiz?.questions ? quiz.questions.map(question => ({ questionId: question.Id, option: '' })) : []
+    );
     const today = new Date();
-    const endDate = new Date(questionData[0].endDate);
-    endDate.setHours(23, 59, 59); // Set the end time to 23:59:59 of the end date
+    const endDate = quiz ? new Date(quiz.end) : null;
+    if (endDate) {
+        endDate.setHours(23, 59, 59); // Set the end time to 23:59:59 of the end date
+    }
 
     useEffect(() => {
-        if (today > endDate) {
+        if (quiz && today > endDate) {
             setCurrentQuestionIndex(-1); // Time is ended
-        } else if (currentQuestionIndex === -1) {
+        } else if (quiz && currentQuestionIndex === -1) {
             setCurrentQuestionIndex(0); // Reset index if time was previously ended and now it's not
         }
-    }, [currentQuestionIndex, today, endDate]);
+    }, [currentQuestionIndex, today, endDate, quiz]);
 
     const handleNext = () => {
-        if (currentQuestionIndex < questionData.length - 1) {
+        if (currentQuestionIndex < quiz.questions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
         }
     };
@@ -62,49 +42,82 @@ export default function QuestionView() {
         }
     };
 
-    const handleSubmit = () => {
-        console.log('Submit');
+    const handleOptionClick = (option) => {
+        const newAnswers = [...answers];
+        newAnswers[currentQuestionIndex] = { questionId: quiz.questions[currentQuestionIndex].Id, option };
+        setAnswers(newAnswers);
     };
 
-    const currentQuestion = currentQuestionIndex !== -1 ? questionData[currentQuestionIndex] : null;
+    const handleSubmit = async () => {
+        try {
+            const token = getAuthToken();
+            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Quiz/SubmitResponse', token, {
+                QuizId: quiz.id,
+                Answers: answers
+            });
+
+            if (response.statusCode === 200) {
+                console.log('Quiz submitted successfully');
+                const result = response.data;
+                navigate(`/groups/${location.state.groupId}/quizzes/result`, { state: { result } });
+            } else {
+                console.log(response);
+            }
+        } catch (error) {
+            console.log('An error occurred:', error);
+        }
+    };
+
+    if (!quiz) {
+        return <p>Quiz data is not available.</p>;
+    }
+
+    const currentQuestion = currentQuestionIndex !== -1 ? quiz.questions[currentQuestionIndex] : null;
 
     return (
         <>
             {currentQuestion !== null ? (
                 <div className={classes.question_container}>
                     <div className={classes.question}>
-                        <p dir='auto' className={classes.description}>{currentQuestion.description}</p>
+                        <p dir='auto' className={classes.description}>{currentQuestion.text}</p>
                         <div className={classes.options}>
-                            {currentQuestion.options.map((option, index) => (
-                                <p dir='auto' key={index} className={classes.option}>{option}</p>
-                            ))}
+                            {[currentQuestion.option1, currentQuestion.option2, currentQuestion.option3, currentQuestion.option4, currentQuestion.option5]
+                                .filter(option => option)
+                                .map((option, index) => (
+                                    <p
+                                        dir='auto'
+                                        key={index}
+                                        className={`${classes.option} ${answers[currentQuestionIndex].option === option ? classes.selected : ''}`}
+                                        onClick={() => handleOptionClick(option)}
+                                    >
+                                        {option}
+                                    </p>
+                                ))}
                         </div>
                         <div className={classes.question_footer}>
                             <div className={classes.date_question_container}>
                                 <div className={classes.date}>
                                     <p>{t("Start-Date")}:</p>
-                                    <p>{currentQuestion.startDate}</p>
+                                    <p>{quiz.start}</p>
                                 </div>
                                 <div className={classes.date}>
                                     <p>{t("End-Date")}:</p>
-                                    <p>{currentQuestion.endDate}</p>
+                                    <p>{quiz.end}</p>
                                 </div>
                             </div>
                             <div className={classes.buttons}>
-                                {currentQuestionIndex > 0 && <BackButton onClick={handleBack}>Back</BackButton>}
-                                {currentQuestionIndex < questionData.length - 1 ? (
-                                    <NextButton onClick={handleNext}>Next</NextButton>
+                                {currentQuestionIndex > 0 && <BackButton onClick={handleBack}>{t("Back")}</BackButton>}
+                                {currentQuestionIndex < quiz.questions.length - 1 ? (
+                                    <NextButton onClick={handleNext}>{t("Next")}</NextButton>
                                 ) : (
-                                    <Submit text={t("Submit")} onClick={handleSubmit}>Submit</Submit>
+                                    <Submit text={t("Submit")} onClick={handleSubmit} />
                                 )}
                             </div>
                         </div>
                     </div>
                 </div>
             ) : (
-                <div className={classes.question}>
-                    <p>{t("Time is ended.")}</p>
-                </div>
+                <p>{t("Quiz time is ended.")}</p>
             )}
         </>
     );

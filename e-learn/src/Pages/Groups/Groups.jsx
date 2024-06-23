@@ -1,6 +1,5 @@
 import classes from './groups.module.css';
 import Group from '../../Components/Group/group';
-import AddAssignment from '../../Components/Assignments/Add-Assignment';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { httpRequest } from '../../HTTP';
 import { getAuthToken } from '../../Helpers/AuthHelper';
@@ -94,9 +93,25 @@ export default function Groups() {
         navigate(`/groups/${groupId}/assignments/assignm${id}`);
     }
 
-    function handleQuizClick(id) {
-        navigate(`/groups/${groupId}/quizzes/quiz${id}`);
+    // Handle quiz click event and fetch quiz details
+    async function handleQuizClick(id) {
+        try {
+            const token = getAuthToken();
+            const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Quiz/GetById/${id}`, token);
+            console.log('Quiz Id:', id);
+            console.log(response);
+            if (response.statusCode === 200) {
+                console.log('Quiz details fetched successfully');
+                const quizData = response.data;
+                navigate(`/groups/${groupId}/quizzes/quiz${id}`, { state: { quiz: quizData } });
+            } else {
+                console.log(response);
+            }
+        } catch (error) {
+            console.log('An error occurred:', error);
+        }
     }
+
     console.log(location.pathname);
     console.log('hello');
     return (
