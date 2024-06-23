@@ -28,6 +28,7 @@ import QSContainer from '../Pages/QuizSurvey/QSContainer';
 import Vote from '../Components/Voting/Vote';
 import Announcement from '../Pages/Announcement/Announcement';
 import QuestionView from '../Components/QuizSurvey/QuestionView';
+import StudentsRespondedList from '../Pages/QuizSurvey/StudentsRespondedList';
 // Import necessary components and functions
 function RoleBasedRoutes() {
     const role = getRole();
@@ -61,7 +62,13 @@ const adminRoutes = [
     { path: 'chat', element: <Container /> },
     { path: 'chat/:chatId', element: <Container /> }, // Add this route for chat with ID
     { path: 'survey', element: <QSContainer /> },
-    { path: 'announcements', element: <Announcement /> }
+    { path: 'announcements', element: <Announcement /> },
+    { path: 'voting', element: <Voting /> },
+    { path: 'voting/:voteId', element: <Vote /> },
+    { path: 'survey', element: <QSContainer /> },
+    { path: 'survey/:surveyId', element: <QuestionView /> },
+    { path: 'survey/:surveyId/responses', element: <StudentsRespondedList /> },
+    { path: 'announcements', element: <Announcement /> },
 ];
 
 const instructorRoutes = [
@@ -76,6 +83,7 @@ const instructorRoutes = [
             { path: 'assignments', element: <ViewCards /> },
             { path: 'quizzes', element: <ViewCards /> },
             { path: 'quizzes/:quizId', element: <QuestionView /> },
+            { path: 'quizzes/:quizId/quizResponses', element: <QuestionView /> },
             { path: 'assignments/:assignmentId', element: <AssignmentDetails /> },
             { path: 'assignments/:assignmentId/responses-list', element: <AssignmentsResponsesList /> },
             { path: 'assignments/:assignmentId/responses-list', element: <AssignmentsResponsesList /> },
@@ -89,6 +97,7 @@ const instructorRoutes = [
     { path: 'voting/:voteId', element: <Vote /> },
     { path: 'survey', element: <QSContainer /> },
     { path: 'survey/:surveyId', element: <QuestionView /> },
+    { path: 'survey/:surveyId/responses', element: <StudentsRespondedList /> },
     { path: 'announcements', element: <Announcement /> },
     { path: 'chat', element: <Container /> },
     { path: 'chat/:chatId', element: <Container /> }, // Add this route for chat with ID

@@ -6,14 +6,14 @@ import { httpRequest } from '../../HTTP';
 import { getAuthToken } from '../../Helpers/AuthHelper';
 import { useParams } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa6'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Participants() {
     const { t } = useTranslation();
     const [users, setUsers] = useState([]);
     const params = useParams();
     const groupId = params.groupId;
-
+    const navigate = useNavigate();
     function getRole() {
         return localStorage.getItem('role');
     }
@@ -32,6 +32,13 @@ export default function Participants() {
         } catch (err) {
             console.log(err);
         }
+    }
+
+    function handleOpenProfile() {
+        navigate(`/profile`);
+    }
+    function handleOpenChat() {
+        navigate(`/chat`);
     }
 
     useEffect(() => {
@@ -61,7 +68,11 @@ export default function Participants() {
                                     <td>{user.grade}</td>
                                     <td>
                                         {/* ADD FILE AS A PARAMETER IN THE OPEN FILE IN BROWSER FUNCTION AND THE FILE NAME THE TEXT */}
-                                        <Button text={t("attachment")} />
+                                        <Button onSelect={handleOpenProfile} text={t("profile")} />
+                                    </td>
+                                    <td>
+                                        {/* ADD FILE AS A PARAMETER IN THE OPEN FILE IN BROWSER FUNCTION AND THE FILE NAME THE TEXT */}
+                                        <Button onSelect={handleOpenChat} text={t("chat")} />
                                     </td>
                                     <td className={classes.mark}>
                                         {/* {mark[index] ? <input type='number' ref={getMark} placeholder={t('enter-mark')} className={classes.input} /> :

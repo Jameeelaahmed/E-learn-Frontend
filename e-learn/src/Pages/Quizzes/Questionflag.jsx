@@ -6,7 +6,7 @@ export default function Questionflag() {
     console.log("flaaag")
     return (
         <div className={classes.Questionflag}>
-            <ul>
+            <ul dir='ltr'>
                 {numbers.map((number) => (
                     <li key={number}>
                         {number}

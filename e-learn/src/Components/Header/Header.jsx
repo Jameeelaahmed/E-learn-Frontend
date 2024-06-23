@@ -3,16 +3,15 @@ import { useTranslation } from 'react-i18next';
 import i18n from '../../i18n';
 import Logo from '../Logo/Logo';
 import { httpRequest } from '../../HTTP';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { getAuthToken } from '../../Helpers/AuthHelper';
 import { Link } from 'react-router-dom';
+
 export default function Header({ opened }) {
     const { i18n } = useTranslation();
     const navigate = useNavigate();
-    // const handleLanguageChange = (lang) => {
-    //     i18n.changeLanguage(lang);
-    //     document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    // };
+    const location = useLocation();
+    const currentPath = location.pathname;
 
     const handleLanguageChange = (lang) => {
         document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
@@ -44,15 +43,18 @@ export default function Header({ opened }) {
             <Logo open={opened} />
             <header>
                 <div className={classes.current_page}>
-                    <p>Classes</p>
+                    <p>{currentPath}</p>
                 </div>
                 <div className={classes.icons}>
-                    {i18n.language === 'ar' ? (<button onClick={() => handleLanguageChange('en')}>
-                        en
-                    </button>) :
-                        (<button onClick={() => handleLanguageChange('ar')}>
+                    {i18n.language === 'ar' ? (
+                        <button onClick={() => handleLanguageChange('en')}>
+                            en
+                        </button>
+                    ) : (
+                        <button onClick={() => handleLanguageChange('ar')}>
                             ar
-                        </button>)}
+                        </button>
+                    )}
                     <Link to="chat">
                         <i className={`${"fa-solid fa-message"} ${classes.icon}`}></i>
                     </Link>

@@ -1,0 +1,160 @@
+.table {
+    position: relative;
+    background-color: var(--light-grey);
+    /* padding: 0 10px 10px 10px; */
+    z-index: 100000;
+    box-shadow: var(--main-shadow);
+    border-radius: 32px;
+    max-height: 480px;
+    overflow-y: scroll;
+    width: 100%;
+    overflow-x: scroll;
+    /* Enables horizontal scrolling */
+}
+
+.table_content {
+    position: relative;
+}
+
+.table_head {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: var(--main-color);
+    color: white;
+    /* border-radius: 15px; */
+    position: sticky;
+    /* Changed from fixed to sticky */
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Ensure it stays on top of the other table content */
+    border-top-right-radius: 32px;
+    border-top-left-radius: 32px;
+}
+
+.table_head p {
+    width: 20%;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.table ul {
+    min-width: 600px;
+}
+
+.table ul li {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+}
+
+
+.table ul li p {
+    width: 20%;
+    text-align: center;
+    word-wrap: break-word;
+    padding: 10px;
+    transition: 0.4s;
+    color: var(--main-color);
+}
+
+.table ul li a {
+    display: contents;
+}
+
+.hoverd {
+    cursor: pointer;
+}
+
+.hoverd:hover {
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 10px;
+}
+
+
+.table ul li:not(:last-child) {
+    border-bottom: 1px solid var(--main-color);
+}
+
+.add_button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.search input {
+    width: 100px;
+    padding: 10px;
+    border-radius: 8px;
+    border-radius: 20px;
+    box-shadow: var(--inset-input-shadow);
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+    transition: 0.4s;
+    width: 250px;
+}
+
+/* .search input.active {} */
+
+.search input:focus {
+    outline: none;
+    transition: opacity 0.4s;
+}
+
+.search input:focus:placeholder {
+    opacity: 0;
+}
+
+
+.add {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    padding: 0;
+    border-radius: 5px;
+    line-height: 36px;
+    transition: all 0.3s cubic-bezier(0.88, 0.19, 0.37, 1.11);
+    background-color: #ecefff;
+    color: var(--main-color);
+    margin-bottom: 10px;
+}
+
+.add:hover {
+    transform: scale(1.2);
+}
+
+.button {
+    margin-top: 20px;
+}
+
+
+@media (max-width: 768px) {
+    .table ul {
+        display: block;
+        /* Stack the items vertically */
+    }
+
+    .table li {
+        display: block;
+    }
+
+    .head {
+        font-size: 11px;
+    }
+}

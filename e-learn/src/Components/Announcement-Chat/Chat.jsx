@@ -411,11 +411,13 @@ export default function Chat({ selectedChat, setViewMode }) {
                         </div>
                     </div>
                 </>
-            ) : (
-                <div className={classes.empty}>
-                    <Empty />
-                </div>
-            )}
+            )
+                : (
+                    <div className={classes.empty}>
+                        <Empty />
+                    </div>
+                )
+            }
         </div>
     );
 }
