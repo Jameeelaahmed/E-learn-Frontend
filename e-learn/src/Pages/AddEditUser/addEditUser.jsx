@@ -5,7 +5,9 @@ import classes from './addEditUser.module.css';
 import { useTranslation } from 'react-i18next';
 import FileUpload from '../../Components/Files/FileUpload';
 import Button from '../../Components/Button/Button';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { httpRequest } from '../../HTTP';
+import { getAuthToken } from '../../Helpers/AuthHelper';
 
 const AddEditUser = () => {
     const location = useLocation();
@@ -13,7 +15,23 @@ const AddEditUser = () => {
     const [imagePreviewUrl, setImagePreviewUrl] = useState(user);
     const [isHovered, setIsHovered] = useState(false); // State for hover
     const [role, setRole] = useState('Instructor'); // State for selected role
+    const navigate = useNavigate();
     const { t } = useTranslation();
+
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        birthDate: '',
+        address: '',
+        nationality: '',
+        relegion: '',
+        faculty: '',
+        nId: '',
+        userName: '',
+        grade: '',
+        phoneNumber: '',
+        departmentId: ''
+    });
 
     const handleProfileImageUpload = e => {
         e.preventDefault();
@@ -27,6 +45,50 @@ const AddEditUser = () => {
 
     const handleRoleChange = (e) => {
         setRole(e.target.value);
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const requestBody = {
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            birthDate: formData.birthDate,
+            address: formData.address,
+            nationality: formData.nationality,
+            relegion: formData.relegion,
+            faculty: formData.faculty,
+            nId: formData.nId,
+            userName: 123456789,
+            role: role,
+            grade: 'الفرقة الرابعة',
+            email: formData.email,
+            address: 'قنا',
+            departmentId: 1
+        };
+
+        try {
+            const token = getAuthToken();
+            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/ApplicationUser/AddSignleUser', token, requestBody);
+            console.log(requestBody);
+            console.log(response);
+            if (response.statusCode === 201) {
+                console.log('User added successfully');
+                navigate('/users');
+                window.location.reload();
+            } else {
+                console.log(response.message);
+            }
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     function handleCollectFiles(files) {
@@ -84,8 +146,8 @@ const AddEditUser = () => {
                             <input dir='auto' type="text" />
                         </div>
                         <div className={classes.input_container}>
-                            <label>{t("email")}</label>
-                            <input dir='auto' type="email" />
+                            <label>{t("Relegion")}</label>
+                            <input dir='auto' type="text" />
                         </div>
                     </div>
                     <div className={classes.row}>
@@ -100,8 +162,8 @@ const AddEditUser = () => {
                     </div>
                     <div className={classes.row}>
                         <div className={classes.input_container}>
-                            <label>{t("Phone-Num")}</label>
-                            <input dir='auto' type="number" />
+                            <label>{t("Address")}</label>
+                            <input dir='auto' type="text" />
                         </div>
                         <div className={classes.input_container}>
                             <label>{t("ID")}</label>
@@ -121,11 +183,11 @@ const AddEditUser = () => {
                                 singleFile={true}
                                 fileTypes={['text/csv', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']}
                             />
-                            <Button text={t("add")} customClass="fit" />
+                            <Button text={t("add")} customClass="fit" onSelect={handleSubmit} />
                         </>
                     }
                     {path === "/users/edituser" &&
-                        <Button text={t("save-changes")} customClass="fit" />
+                        <Button text={t("save-changes")} customClass="fit" onSelect={handleSubmit}/>
                     }
                 </form>
             </div>

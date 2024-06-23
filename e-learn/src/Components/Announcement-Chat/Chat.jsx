@@ -7,6 +7,8 @@ import * as FaIcons from 'react-icons/fa6';
 import img from '../../assets/avatar.jpg'
 import ImageModal from './ImageModal';
 import { FaFileAlt, FaFileImage, FaFilePdf, FaFileWord, FaFileExcel, FaFilePowerpoint, FaFileArchive, FaFileAudio, FaFileVideo, FaFileCode } from 'react-icons/fa';
+import {httpRequest} from '../../HTTP';
+import {getAuthToken} from '../../Helpers/AuthHelper';
 
 export default function Chat({ selectedChat, setViewMode }) {
     const messagesEndRef = useRef(null);
@@ -21,6 +23,19 @@ export default function Chat({ selectedChat, setViewMode }) {
     const [inputValue, setInputValue] = useState('');
     const [originalMessage, setOriginalMessage] = useState('');
 
+    async function getAnnouncement(){
+        try{
+            const token = getAuthToken();
+            const response = await httpRequest('GET', 'https://elearnapi.runasp.net/api/Announcement/Get-All-From-Groups', token);
+            console.log(response);
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    useEffect(() => {
+        getAnnouncement();
+    }, []);
 
     useEffect(() => {
         if (selectedChat) {

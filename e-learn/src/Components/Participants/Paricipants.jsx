@@ -19,10 +19,14 @@ export default function Participants() {
     }
 
     const role = getRole();
-
+    
     async function getGroupParticipants() {
         try {
-            const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Group/GetGroupParticipants/${groupId}`, getAuthToken());
+            var url = `https://elearnapi.runasp.net/api/Group/GetGroupParticipants/${groupId}`;
+            if(role === "Admin") {
+                url = `https://elearnapi.runasp.net/api/ApplicationUser/GetAll`;
+            }
+            const response = await httpRequest('GET', url, getAuthToken());
             if (response.statusCode === 200) {
                 console.log(response);
                 setUsers(response.data);
@@ -47,8 +51,8 @@ export default function Participants() {
                             <td>{t("id")}</td>
                             <td>{t("Student-Name")}</td>
                             <td>{t("grade")}</td>
-                            <td>{t("profile")}</td>
-                            <td>{t("chat")}</td>
+                            <td>{t("Student-ID")}</td>
+                            <td>{t("national-id")}</td>
                             {role === "Admin" && <td>{t("actions")}</td>}
                         </tr>
                     </thead>
@@ -57,11 +61,12 @@ export default function Participants() {
                             users.map((user, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
-                                    <td>{user.name}</td>
-                                    <td>{user.grade}</td>
+                                    <td>{role ==='Admin'? user.firstName + ' ' + user.lastName : user.name}</td>
+                                    <td>{user.grade? user.grade : 'عضو هيئة تدريس'}</td>
                                     <td>
                                         {/* ADD FILE AS A PARAMETER IN THE OPEN FILE IN BROWSER FUNCTION AND THE FILE NAME THE TEXT */}
-                                        <Button text={t("attachment")} />
+                                        {/* <Button text={t("attachment")} /> */}
+                                        {user.userName}
                                     </td>
                                     <td className={classes.mark}>
                                         {/* {mark[index] ? <input type='number' ref={getMark} placeholder={t('enter-mark')} className={classes.input} /> :
@@ -71,6 +76,7 @@ export default function Participants() {
                                                 <FaIcons.FaCheck className={classes.icon}></FaIcons.FaCheck>
                                             </button>
                                         } */}
+                                        {user.nId}
                                     </td>
                                 </tr>
                             ))
