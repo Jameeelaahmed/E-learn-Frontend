@@ -8,6 +8,8 @@ import { useEffect, useState } from 'react';
 export default function Groups() {
     const navigate = useNavigate();
     const location = useLocation();
+    const path = location.pathname;
+    console.log(path)
     const Params = useParams();
     const groupId = Params.groupId;
     console.log(groupId);
@@ -63,7 +65,7 @@ export default function Groups() {
         try {
             const token = getAuthToken();
             const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Quiz/GetQuizzesFromGroup?groupId=${groupId}`, token);
-            console.log(response);
+            // console.log(response);
             if (response.statusCode === 200) {
                 console.log('Quizzes fetched successfully');
                 setQuizzes(response.data);
@@ -88,7 +90,7 @@ export default function Groups() {
 
     // Handle assignment click event
     function handleAssignmentClick(id) {
-        navigate(`/groups/${groupId}/assignments/${id}`);
+        navigate(`/groups/${groupId}/assignments/assignm${id}`);
     }
 
     // Handle quiz click event and fetch quiz details
@@ -125,14 +127,40 @@ export default function Groups() {
                 ))
             }
             {location.pathname.endsWith("/assignments") &&
-                assignments.map((item, index) => (
+                // assignments.map((item, index) => (
+                //     <Group
+                //         key={index}
+                //         subTitle={item.title}
+                //         insName={item.creatorName}
+                //         onClick={() => handleAssignmentClick(item.id)}
+                //     />
+                // ))
+                <>
+                    <Group
+                        key={index}
+                        subTitle="cc"
+                        insName="ff"
+                    // onClick={() => handleAssignmentClick(item.id)}
+                    />
                     <Group
                         key={index}
                         subTitle={item.title}
                         insName={item.creatorName}
                         onClick={() => handleAssignmentClick(item.id)}
                     />
-                ))
+                    <Group
+                        key={index}
+                        subTitle={item.title}
+                        insName={item.creatorName}
+                        onClick={() => handleAssignmentClick(item.id)}
+                    />
+                    <Group
+                        key={index}
+                        subTitle={item.title}
+                        insName={item.creatorName}
+                        onClick={() => handleAssignmentClick(item.id)}
+                    />
+                </>
             }
             {location.pathname.endsWith("/quizzes") &&
                 quizzes.map((item, index) => (

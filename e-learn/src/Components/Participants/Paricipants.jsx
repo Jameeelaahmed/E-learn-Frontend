@@ -6,27 +6,23 @@ import { httpRequest } from '../../HTTP';
 import { getAuthToken } from '../../Helpers/AuthHelper';
 import { useParams } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa6'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Participants() {
     const { t } = useTranslation();
     const [users, setUsers] = useState([]);
     const params = useParams();
     const groupId = params.groupId;
-
+    const navigate = useNavigate();
     function getRole() {
         return localStorage.getItem('role');
     }
 
     const role = getRole();
-    
+
     async function getGroupParticipants() {
         try {
-            var url = `https://elearnapi.runasp.net/api/Group/GetGroupParticipants/${groupId}`;
-            if(role === "Admin") {
-                url = `https://elearnapi.runasp.net/api/ApplicationUser/GetAll`;
-            }
-            const response = await httpRequest('GET', url, getAuthToken());
+            const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Group/GetGroupParticipants/${groupId}`, getAuthToken());
             if (response.statusCode === 200) {
                 console.log(response);
                 setUsers(response.data);
@@ -36,6 +32,13 @@ export default function Participants() {
         } catch (err) {
             console.log(err);
         }
+    }
+
+    function handleOpenProfile() {
+        navigate(`/profile`);
+    }
+    function handleOpenChat() {
+        navigate(`/chat`);
     }
 
     useEffect(() => {
@@ -51,8 +54,8 @@ export default function Participants() {
                             <td>{t("id")}</td>
                             <td>{t("Student-Name")}</td>
                             <td>{t("grade")}</td>
-                            <td>{t("Student-ID")}</td>
-                            <td>{t("national-id")}</td>
+                            <td>{t("profile")}</td>
+                            <td>{t("chat")}</td>
                             {role === "Admin" && <td>{t("actions")}</td>}
                         </tr>
                     </thead>
@@ -61,12 +64,15 @@ export default function Participants() {
                             users.map((user, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
-                                    <td>{role ==='Admin'? user.firstName + ' ' + user.lastName : user.name}</td>
-                                    <td>{user.grade? user.grade : 'عضو هيئة تدريس'}</td>
+                                    <td>{user.name}</td>
+                                    <td>{user.grade}</td>
                                     <td>
                                         {/* ADD FILE AS A PARAMETER IN THE OPEN FILE IN BROWSER FUNCTION AND THE FILE NAME THE TEXT */}
-                                        {/* <Button text={t("attachment")} /> */}
-                                        {user.userName}
+                                        <Button onSelect={handleOpenProfile} text={t("profile")} />
+                                    </td>
+                                    <td>
+                                        {/* ADD FILE AS A PARAMETER IN THE OPEN FILE IN BROWSER FUNCTION AND THE FILE NAME THE TEXT */}
+                                        <Button onSelect={handleOpenChat} text={t("chat")} />
                                     </td>
                                     <td className={classes.mark}>
                                         {/* {mark[index] ? <input type='number' ref={getMark} placeholder={t('enter-mark')} className={classes.input} /> :
@@ -76,7 +82,6 @@ export default function Participants() {
                                                 <FaIcons.FaCheck className={classes.icon}></FaIcons.FaCheck>
                                             </button>
                                         } */}
-                                        {user.nId}
                                     </td>
                                 </tr>
                             ))

@@ -1,12 +1,9 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import classes from './AdminSingleGroup.module.css';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams, useLocation, Link } from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa6'
 import AddModal from './AddModal';
-import { httpRequest } from '../../HTTP';
-import { getAuthToken } from '../../Helpers/AuthHelper';
-
 export default function AdminSingleGroup() {
     const { t } = useTranslation();
     const navigate = useNavigate(); // Initialize useHistory hook
@@ -17,12 +14,9 @@ export default function AdminSingleGroup() {
     const sections = ['Material', 'Assignments', 'Quizzes', 'Participants'];
     const { admingroupID, assignmentId } = useParams();
     const [searchTerm, setSearchTerm] = useState('');
-    const [material, setMaterial] = useState([]);
-    const [assignments, setAssignments] = useState([]);
-    const [quizzes, setQuizzes] = useState([]);
-    const [participants, setParticipants] = useState([]);
-    const param = useParams();
-    const groupId = param.admingroupID;
+    // const filteredResponses = responses.filter(response =>
+    //     response.name.toLowerCase().includes(searchTerm.toLowerCase())
+    // );
 
     const AddModalRef = useRef();
 
@@ -50,83 +44,10 @@ export default function AdminSingleGroup() {
         navigate(sectionPaths[section]);
     };
 
-    function handleOpen(viewUrl) {
-        const officeUrl = `https://view.officeapps.live.com/op/view.aspx?src=${encodeURIComponent(viewUrl)}`;
-        window.open(officeUrl, '_blank');
+    function handleOpen(id) {
+        navigate(`assignments/assignment${id}`);
     }
 
-    async function getMaterial() {
-        try {
-            const token = getAuthToken();
-            const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Material/GetAllFromGroup/${groupId}`, token);
-            console.log(response);
-            if (response.statusCode === 200) {
-                setMaterial(response.data);
-            } else {
-                console.log(response);
-            }
-        } catch (error) {
-            console.log('an error occurred:', error);
-        }
-    }
-
-    useEffect(() => {
-        getMaterial();
-    }, [groupId])
-
-    async function getAssignments() {
-        try {
-            const token = getAuthToken();
-            const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Assignment/GetByGroupId/${groupId}`, token);
-            console.log(response);
-            if (response.statusCode === 200) {
-                setAssignments(response.data);
-            } else {
-                console.log(response);
-            }
-        } catch (error) {
-            console.log('an error occurred:', error);
-        }
-    }
-    useEffect(() => {
-        getAssignments();
-    }, [groupId])
-
-    async function getQuizzes() {
-        try {
-            const token = getAuthToken();
-            const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Quiz/GetQuizzesFromGroup?groupId=${groupId}`, token);
-            console.log(response);
-            if (response.statusCode === 200) {
-                setQuizzes(response.data);
-            } else {
-                console.log(response);
-            }
-        } catch (error) {
-            console.log('an error occurred:', error);
-        }
-    }
-    useEffect(() => {
-        getQuizzes();
-    }, [path, groupId, admingroupID])
-
-    async function getParticipants() {
-        try {
-            const token = getAuthToken();
-            const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Group/GetGroupParticipants/${groupId}`, token);
-            console.log(response);
-            if (response.statusCode === 200) {
-                setParticipants(response.data);
-            } else {
-                console.log(response);
-            }
-        } catch (error) {
-            console.log('an error occurred:', error);
-        }
-    }
-    useEffect(() => {
-        getParticipants();
-    }, [groupId])
     return (
         <>
             <div className={classes.add_button}>
@@ -135,7 +56,9 @@ export default function AdminSingleGroup() {
                         type="text"
                         placeholder={t("search")}
                         value={searchTerm}
+                        // onChange={e => setSearchTerm(e.target.value)}
                         className={`${classes.search_input}`}
+                    // onFocus={handleSearchActive}
                     />
                 </div>
                 <div onClick={handleAddModal} className={classes.add}>
@@ -166,16 +89,88 @@ export default function AdminSingleGroup() {
                                 <p>{t("Material Type")}</p>
                                 <p>{t("Date")}</p>
                             </div>
-                            {material.map((item, index) => (
-                                <li key={item.id}>
-                                    <p>{index + 1}</p>
-                                    <p onClick={() => handleOpen(item.viewUrl)} className={classes.hoverd}>{item.title}</p>
-                                    <p>{item.creatorName}</p>
-                                    <p>{item.week}</p>
-                                    <p>{item.type === 0 ? t("Lecture") : t("Section")}</p>
-                                    <p>{new Date(item.creationDate).toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</p>
-                                </li>
-                            ))}
+                            {/* MAP  */}
+                            <li>
+                                <p>num</p>
+
+                                <p className={classes.hoverd}>material name</p>
+                                <p>ins name</p>
+                                <p>week num</p>
+                                <p>material type</p>
+                                <p>date</p>
+                            </li>
+                            <li>
+                                <p>num</p>
+                                <p>material name</p>
+                                <p>ins name</p>
+                                <p>week num</p>
+                                <p>material type</p>
+                                <p>date</p>
+                            </li>
+                            <li>
+                                <p>num</p>
+                                <p>material name</p>
+                                <p>ins name</p>
+                                <p>week num</p>
+                                <p>material type</p>
+                                <p>date</p>
+                            </li>
+                            <li>
+                                <p>num</p>
+                                <p>material name</p>
+                                <p>ins name</p>
+                                <p>week num</p>
+                                <p>material type</p>
+                                <p>date</p>
+                            </li>
+                            <li>
+                                <p>num</p>
+                                <p>material name</p>
+                                <p>ins name</p>
+                                <p>week num</p>
+                                <p>material type</p>
+                                <p>date</p>
+                            </li>
+                            <li>
+                                <p>num</p>
+                                <p>material name</p>
+                                <p>ins name</p>
+                                <p>week num</p>
+                                <p>material type</p>
+                                <p>date</p>
+                            </li>
+                            <li>
+                                <p>num</p>
+                                <p>material name</p>
+                                <p>ins name</p>
+                                <p>week num</p>
+                                <p>material type</p>
+                                <p>date</p>
+                            </li>
+                            <li>
+                                <p>num</p>
+                                <p>material name</p>
+                                <p>ins name</p>
+                                <p>week num</p>
+                                <p>material type</p>
+                                <p>date</p>
+                            </li>
+                            <li>
+                                <p>num</p>
+                                <p>material name</p>
+                                <p>ins name</p>
+                                <p>week num</p>
+                                <p>material type</p>
+                                <p>date</p>
+                            </li>
+                            <li>
+                                <p>num</p>
+                                <p>material name</p>
+                                <p>ins name</p>
+                                <p>week num</p>
+                                <p>material type</p>
+                                <p>date</p>
+                            </li>
                         </div>
                     }
                     {path === `/admingroups/${admingroupID}/assignments` &&
@@ -188,16 +183,13 @@ export default function AdminSingleGroup() {
                                 <p>{t("Date")}</p>
                             </div>
                             {/* MAP  */}
-                            {assignments.map((item, index) => (
-                                <li key={item.id}>
-                                    <p>{index + 1}</p>
-                                    <p className={classes.hoverd}>{item.title}</p>
-                                    <p>{item.creatorName}</p>
-                                    <p>{item.grade || 0}</p>
-                                    <p>{new Date(item.end).toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</p>
-                                </li>
-                            ))}
-
+                            <li>
+                                <p>num</p>
+                                <p onClick={(id) => handleOpen(item.id)} className={classes.hoverd}>name</p>
+                                <p>creator</p>
+                                <p>mark</p>
+                                <p>date</p>
+                            </li>
                         </>
                     }
                     {path === `/admingroups/${admingroupID}/quiz` &&
@@ -211,15 +203,13 @@ export default function AdminSingleGroup() {
                             </div>
 
                             {/* MAP  */}
-                            {quizzes.map((item, index) => (
-                                <li key={item.id}>
-                                    <p>{index + 1}</p>
-                                    <p>{item.title}</p>
-                                    <p>{item.creatorName}</p>
-                                    <p>{item.grade || 0}</p>
-                                    <p>{new Date(item.end).toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</p>
-                                </li>
-                            ))}
+                            <li>
+                                <p>num</p>
+                                <p className={classes.hoverd}>name</p>
+                                <p>creator</p>
+                                <p>degree</p>
+                                <p>date</p>
+                            </li>
                         </>
                     }
                     {path === `/admingroups/${admingroupID}/participants` &&
@@ -232,15 +222,13 @@ export default function AdminSingleGroup() {
                                 <p>{t("Level")}</p>
                             </div>
                             {/* MAP  */}
-                            {participants.map((item, index) => (
-                                <li key={item.id}>
-                                    <p>{index + 1}</p>
-                                    <p>{item.userName}</p>
-                                    <p>{item.name}</p>
-                                    <p>{item.departmentName}</p>
-                                    <p>{item.grade}</p>
-                                </li>
-                            ))}
+                            <li>
+                                <p>num</p>
+                                <p>id</p>
+                                <p>name</p>
+                                <p>department</p>
+                                <p>level</p>
+                            </li>
                         </>
                     }
                 </ul>
