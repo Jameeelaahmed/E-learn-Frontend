@@ -74,15 +74,6 @@ export default function Participants() {
                                         {/* ADD FILE AS A PARAMETER IN THE OPEN FILE IN BROWSER FUNCTION AND THE FILE NAME THE TEXT */}
                                         <Button onSelect={handleOpenChat} text={t("chat")} />
                                     </td>
-                                    <td className={classes.mark}>
-                                        {/* {mark[index] ? <input type='number' ref={getMark} placeholder={t('enter-mark')} className={classes.input} /> :
-                                            <Button onSelect={() => handleMark(index)} text={markValue} />}
-                                        {mark[index] &&
-                                            <button onClick={() => handleSave(index)} className={classes.button}>
-                                                <FaIcons.FaCheck className={classes.icon}></FaIcons.FaCheck>
-                                            </button>
-                                        } */}
-                                    </td>
                                 </tr>
                             ))
                         ) : (
