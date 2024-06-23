@@ -6,11 +6,13 @@ import Button from "../Button/Button";
 import { useTranslation } from "react-i18next";
 import { httpRequest } from "../../HTTP";
 import { useNavigate } from "react-router-dom";
+
 export default function ForgetPassword() {
   const { t } = useTranslation();
   const email = useRef();
   const [isEdit, setIsEdit] = useState(false);
   const [isResponseOk, setIsResponseOk] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
   const emailIsInValid = isEdit && !email.current.value.includes("@");
 
@@ -19,7 +21,7 @@ export default function ForgetPassword() {
     const Email = email.current.value;
 
     if (!Email) {
-      console.error("Email is required");
+      setErrorMessage("Email is required");
       return;
     }
 
@@ -34,10 +36,12 @@ export default function ForgetPassword() {
         console.log(response);
         navigate("/auth/otp", { state: { Email } });
       } else {
-        console.log("an error occurred", response);
+        console.log("An error occurred", response);
+        setErrorMessage("حدث خطأ خلال ارسال الرسالة, تأكد من ان البيانات صحيحة");
       }
     } catch (error) {
       console.log("An error occurred:", error);
+      setErrorMessage("حطأ غير متوقع, برجاء المحاولة مرة اخرى");
     }
   }
 
@@ -47,7 +51,9 @@ export default function ForgetPassword() {
 
   function handleChange() {
     setIsEdit(false);
+    setErrorMessage(''); // Clear error message when the user starts typing
   }
+
   return (
     <div className={classes.authentication}>
       <FormContainer h1Value="هل تواجه مشكلة في تسجيل الدخول؟">
@@ -63,6 +69,9 @@ export default function ForgetPassword() {
           </div>
           {emailIsInValid && (
             <p className={classes.control_error}>enter valid email</p>
+          )}
+          {errorMessage && (
+            <p className={classes.control_error}>{errorMessage}</p>
           )}
           <div className={classes.action}>
             <Button text={t("ارسل الرمز السري")} id="submit" />

@@ -61,8 +61,8 @@ export default function Participants() {
                             users.map((user, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
-                                    <td>{user.firstName + ' ' + user.lastName}</td>
-                                    <td>{user.role === "Student" ? user.grade : user.role}</td>
+                                    <td>{role ==='Admin'? user.firstName + ' ' + user.lastName : user.name}</td>
+                                    <td>{user.grade? user.grade : 'عضو هيئة تدريس'}</td>
                                     <td>
                                         {/* ADD FILE AS A PARAMETER IN THE OPEN FILE IN BROWSER FUNCTION AND THE FILE NAME THE TEXT */}
                                         {/* <Button text={t("attachment")} /> */}

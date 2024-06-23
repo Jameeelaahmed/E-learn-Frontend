@@ -10,6 +10,7 @@ import { useLocation } from "react-router-dom";
 const Otp = () => {
   const { t } = useTranslation();
   const [finalInput, setFinalInput] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
   const inputRefs = Array.from({ length: 6 }, () => useRef(null));
@@ -76,9 +77,11 @@ const Otp = () => {
         });
       } else {
         console.log(response);
+        setErrorMessage("بيانات غير صحيحة");
       }
     } catch (error) {
       console.log("An Error Occurred: ", error);
+      setErrorMessage("حدث خطأ برجاء المحاولة مرة اخرى");
     }
   }
 
@@ -98,6 +101,9 @@ const Otp = () => {
           />
         ))}
       </div>
+      {errorMessage && (
+        <p className={classes.control_error}>{errorMessage}</p>
+      )}
       <div className={classes.action}>
         <Button text={t("continue")} id="submit" onSelect={handleSubmit} />
       </div>

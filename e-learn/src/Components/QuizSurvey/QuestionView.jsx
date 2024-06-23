@@ -13,8 +13,9 @@ export default function QuestionView() {
     const navigate = useNavigate();
     const quiz = location.state?.quiz; // Safely access quiz from location state
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [answers, setAnswers] = useState(quiz?.questions ? Array(quiz.questions.length).fill('') : []);
-    console.log(quiz);
+    const [answers, setAnswers] = useState(
+        quiz?.questions ? quiz.questions.map(question => ({ questionId: question.Id, option: '' })) : []
+    );
     const today = new Date();
     const endDate = quiz ? new Date(quiz.end) : null;
     if (endDate) {
@@ -43,21 +44,16 @@ export default function QuestionView() {
 
     const handleOptionClick = (option) => {
         const newAnswers = [...answers];
-        newAnswers[currentQuestionIndex] = option;
+        newAnswers[currentQuestionIndex] = { questionId: quiz.questions[currentQuestionIndex].Id, option };
         setAnswers(newAnswers);
     };
 
     const handleSubmit = async () => {
         try {
             const token = getAuthToken();
-            const userAnswers = quiz.questions.map((question, index) => ({
-                QuestionId: question.Id,
-                Option: answers[index]
-            }));
-
             const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Quiz/SubmitResponse', token, {
                 QuizId: quiz.id,
-                Answers: userAnswers
+                Answers: answers
             });
 
             if (response.statusCode === 200) {
@@ -83,7 +79,7 @@ export default function QuestionView() {
             {currentQuestion !== null ? (
                 <div className={classes.question_container}>
                     <div className={classes.question}>
-                        <p dir='auto' className={classes.description}>{currentQuestion.Text}</p>
+                        <p dir='auto' className={classes.description}>{currentQuestion.text}</p>
                         <div className={classes.options}>
                             {[currentQuestion.option1, currentQuestion.option2, currentQuestion.option3, currentQuestion.option4, currentQuestion.option5]
                                 .filter(option => option)
@@ -91,7 +87,7 @@ export default function QuestionView() {
                                     <p
                                         dir='auto'
                                         key={index}
-                                        className={`${classes.option} ${answers[currentQuestionIndex] === option ? classes.selected : ''}`}
+                                        className={`${classes.option} ${answers[currentQuestionIndex].option === option ? classes.selected : ''}`}
                                         onClick={() => handleOptionClick(option)}
                                     >
                                         {option}
