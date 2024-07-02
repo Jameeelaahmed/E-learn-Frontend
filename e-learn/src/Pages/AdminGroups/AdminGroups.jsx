@@ -30,6 +30,7 @@ export default function AdminGroups() {
     async function handleDeleteGroup(groupId) {
         try {
             const token = getAuthToken();
+            console.log(groupId);
             const response = await httpRequest('DELETE', `https://elearnapi.runasp.net/api/Group/Delete/${groupId}`, token);
             if (response.statusCode === 200) {
                 console.log('Deleted');

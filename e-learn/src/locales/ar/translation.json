@@ -122,5 +122,10 @@
     "Create Quiz": "اضافة اختبار",
     "Next": "التالي",
     "Back": "السابق",
-    "Open Responses": "عرض الردود"
+    "Open Responses": "عرض الردود",
+    "ins-name": "اسم المحاضر",
+    "select-instructor": "اختر المحاضر",
+    "select-group": "اختر المجموعه",
+    "select-level": "اختر المستوي",
+    "select-department": "اختر القسم"
 }

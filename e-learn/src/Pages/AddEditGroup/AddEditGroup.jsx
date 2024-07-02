@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import classes from '../AddEditUser/addEditUser.module.css';
 import { useTranslation } from 'react-i18next';
-import FileUpload from '../../Components/Files/FileUpload';
 import Button from '../../Components/Button/Button';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { httpRequest } from '../../HTTP';
@@ -12,18 +11,12 @@ export default function AddEditGroup() {
     const navigate = useNavigate();
     const path = location.pathname;
     const { t } = useTranslation();
-    const [files, setFiles] = useState([]);
     const [instructors, setInstructors] = useState([]);
     const [departments, setDepartments] = useState([]);
     const [groupName, setGroupName] = useState('');
     const [description, setDescription] = useState('');
     const [selectedInstructor, setSelectedInstructor] = useState('');
     const [selectedDepartment, setSelectedDepartment] = useState('');
-
-    // Function to handle collected files from FileUpload component
-    function handleCollectFiles(files) {
-        setFiles(files);
-    }
 
     // Function to handle form submission
     async function handleSubmit(event) {
@@ -37,12 +30,9 @@ export default function AddEditGroup() {
         };
 
         try {
-            console.log(requestBody);
             const token = getAuthToken();
             const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Group/CreateNew', token, requestBody);
-            console.log(response);
             if (response.statusCode === 201) {
-                console.log('navigating ..')
                 navigate('/admingroups');
             }
         } catch (err) {
@@ -88,7 +78,7 @@ export default function AddEditGroup() {
                             <label>{t('group-name')}</label>
                             <input dir='auto' type="text" value={groupName} onChange={(e) => setGroupName(e.target.value)} />
                         </div>
-                        <div className={classes.input_container}>
+                        <div className={classes.select_container}>
                             <label>{t('ins-name')}</label>
                             <select dir='auto' value={selectedInstructor} onChange={(e) => setSelectedInstructor(e.target.value)}>
                                 <option value="">{t('select-instructor')}</option>
@@ -105,7 +95,7 @@ export default function AddEditGroup() {
                             <label>{t('description')}</label>
                             <input dir='auto' type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
                         </div>
-                        <div className={classes.input_container}>
+                        <div className={classes.select_container}>
                             <label>{t('department')}</label>
                             <select dir='auto' value={selectedDepartment} onChange={(e) => setSelectedDepartment(e.target.value)}>
                                 <option value="">{t('select-department')}</option>
@@ -118,9 +108,7 @@ export default function AddEditGroup() {
                         </div>
                     </div>
                     {path === '/admingroups/addgroup' && (
-                        <>
-                            <Button text={t('add')} type="submit" customClass="fit" />
-                        </>
+                        <Button text={t('add')} type="submit" customClass="fit" />
                     )}
                     {path === '/admingroups/editgroup' && (
                         <Button text={t('save-changes')} type="submit" customClass="fit" />
