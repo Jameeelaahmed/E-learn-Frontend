@@ -1,12 +1,15 @@
 .delete_button {
     padding: 15px 20px;
+    background-color: white;
     border: rgb(255, 69, 69) solid 3px;
     border-radius: 8PX;
     color: rgb(255, 69, 69);
     transition: 0.4s;
+    cursor: pointer;
 }
 
 .delete_button:hover {
     background-color: rgb(255, 69, 69);
     color: white;
+    scale: 1.1;
 }

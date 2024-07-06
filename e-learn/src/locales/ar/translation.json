@@ -127,5 +127,7 @@
     "select-instructor": "اختر المحاضر",
     "select-group": "اختر المجموعه",
     "select-level": "اختر المستوي",
-    "select-department": "اختر القسم"
+    "select-department": "اختر القسم",
+    "deleteconfirm": "هل انت متأكد من حذف هذا",
+    "file": "الملف"
 }
