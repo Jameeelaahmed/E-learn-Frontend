@@ -85,6 +85,10 @@
     margin-left: 15px;
 }
 
+.sen {
+    color: #e84242;
+    margin-top: 15px;
+}
 
 .cancel:hover {
     background-color: var(--main-color);

@@ -24,7 +24,7 @@ const DeleteModal = forwardRef(function DeleteModal({ onDelete, deletedItem }, r
                         <FaIcons.FaExclamation className={classes.icon} />
                     </p>
                 </div>
-                <p>{t("deleteconfirm")} {deletedItem}!</p>
+                <p className={classes.sen}>{t("deleteconfirm")} {deletedItem}!</p>
                 <div className={classes.buttons}>
                     <DeleteButton onDelete={onDelete} text="Delete"></DeleteButton>
                     <button onClick={() => deletemodalref.current.close()} className={classes.cancel}>{t("cancel")}</button>

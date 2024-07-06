@@ -14,7 +14,7 @@ export default function Weeks({ role }) {
     const [openWeeks, setOpenWeeks] = useState([]);
     const params = useParams();
     const groupId = params.groupId;
-    const [loading, setLoading] = useState(false); // Loading state for delete operation
+
     const isInstructor = getRole() === 'Staff';
 
     useEffect(() => {
