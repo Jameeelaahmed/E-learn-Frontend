@@ -8,13 +8,12 @@ import { useLocation } from 'react-router-dom';
 
 export default function ViewCards() {
     const { t } = useTranslation();
-    const { groupId } = useParams();
-    log('<Assignments /> rendered', 1);
     const location = useLocation();
     const path = location.pathname;
     return (
         <div className={classes.assignments}>
-            {path.endsWith(`assignments`) || path.endsWith('quizzes') && <Groups />}
+            {path.endsWith('quizzes') && <Groups />}
+            {path.endsWith('assignments') && <Groups />}
         </div>
     );
 }

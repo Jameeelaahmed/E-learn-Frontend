@@ -9,10 +9,10 @@ export default function Groups() {
     const navigate = useNavigate();
     const location = useLocation();
     const path = location.pathname;
-    console.log(path)
+    console.log('Current Path:', path);
     const Params = useParams();
     const groupId = Params.groupId;
-    console.log(groupId);
+    console.log('Group ID:', groupId);
     const [group, setGroup] = useState([]); // Initialize group state
     const [assignments, setAssignments] = useState([]); // Initialize assignments state
     const [quizzes, setQuizzes] = useState([]); // Initialize quizzes state
@@ -57,6 +57,7 @@ export default function Groups() {
 
     useEffect(() => {
         if (groupId) {
+            console.log('Fetching assignments for group ID:', groupId);
             fetchAssignments(); // Call fetchAssignments when the component mounts or groupId changes
         }
     }, [groupId]);
@@ -112,7 +113,7 @@ export default function Groups() {
         }
     }
 
-    console.log(location.pathname);
+    console.log('Final Path:', location.pathname);
     console.log('hello');
     return (
         <ul className={classes.classes}>
@@ -126,41 +127,15 @@ export default function Groups() {
                     />
                 ))
             }
-            {location.pathname.endsWith("/assignments") &&
-                // assignments.map((item, index) => (
-                //     <Group
-                //         key={index}
-                //         subTitle={item.title}
-                //         insName={item.creatorName}
-                //         onClick={() => handleAssignmentClick(item.id)}
-                //     />
-                // ))
-                <>
-                    <Group
-                        key={index}
-                        subTitle="cc"
-                        insName="ff"
-                    // onClick={() => handleAssignmentClick(item.id)}
-                    />
+            {location.pathname.includes("/assignments") &&
+                assignments.map((item, index) => (
                     <Group
                         key={index}
                         subTitle={item.title}
                         insName={item.creatorName}
                         onClick={() => handleAssignmentClick(item.id)}
                     />
-                    <Group
-                        key={index}
-                        subTitle={item.title}
-                        insName={item.creatorName}
-                        onClick={() => handleAssignmentClick(item.id)}
-                    />
-                    <Group
-                        key={index}
-                        subTitle={item.title}
-                        insName={item.creatorName}
-                        onClick={() => handleAssignmentClick(item.id)}
-                    />
-                </>
+                ))
             }
             {location.pathname.endsWith("/quizzes") &&
                 quizzes.map((item, index) => (
