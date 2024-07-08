@@ -65,11 +65,21 @@
     height: 550px;
     overflow-y: auto;
     position: relative;
+    background-color: var(--light-grey);
+    border-radius: 32px;
+}
+
+
+[dir="rtl"] .table_wrapper {
+    box-shadow: var(--main-arabic-shadow)
+}
+
+[dir="ltr"] .table_wrapper {
+    box-shadow: var(--main-shadow);
 }
 
 .table {
     margin-top: 15px;
-    background-color: var(--light-grey);
     border-radius: 32px;
     width: 98%;
     /* height: %; */
@@ -117,14 +127,6 @@
 
 .table tbody tr:last-child {
     background-color: none;
-}
-
-[dir="rtl"] .table {
-    box-shadow: var(--main-arabic-shadow)
-}
-
-[dir="ltr"] .table {
-    box-shadow: var(--main-shadow);
 }
 
 

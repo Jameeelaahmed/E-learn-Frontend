@@ -10,13 +10,14 @@
     justify-content: space-between;
     transition: var(--transition);
     position: relative;
-    padding:20px 20px;
+    padding: 20px 20px;
 }
 
 [dir='ltr'] .class {
     border-top-right-radius: 50px;
     box-shadow: var(--main-shadow);
 }
+
 [dir='rtl'] .class {
     border-top-left-radius: 50px;
     box-shadow: var(--main-arabic-shadow);
@@ -24,7 +25,7 @@
 
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
-.class::before{
+.class::before {
     content: "";
     position: absolute;
     height: 25px;
@@ -34,12 +35,13 @@
     transition: var(--transition);
 }
 
-[dir='ltr'] .class::before{
+[dir='ltr'] .class::before {
     border-top-left-radius: 50px;
     border-top-right-radius: 25px;
     left: 0;
 }
-[dir='rtl'] .class::before{
+
+[dir='rtl'] .class::before {
     border-top-right-radius: 50px;
     border-top-left-radius: 25px;
     right: 0;
@@ -52,12 +54,13 @@
     background-color: var(--main-color);
 }
 
-.class:hover::before{
+.class:hover::before {
     background-color: var(--main-color);
 }
+
 /* *HOVER */
 
-.class p:first-child {
+.class p.title {
     position: relative;
     top: 20px;
     font-weight: bold;
@@ -66,7 +69,7 @@
 }
 
 /* !!!!!!!!!!!!!!!!!!!!!! */
-
+/* 
 .class p:last-child {
     position: relative;
     bottom: 15px;
@@ -79,8 +82,23 @@
 [dir='ltr'] .class p:last-child {
     margin-right: 10px;
 }
+
 [dir='rtl'] .class p:last-child {
     margin-left: 10px;
+} */
+
+.groupfoot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 10px;
+    gap: 10px;
+    color: var(--main-color);
+}
+
+.name {
+    width: 100px;
+    word-wrap: break-word;
 }
 
 /* !!!!!!!!!!!!!!!!! */
@@ -91,13 +109,15 @@
 .class:hover p {
     color: var(--white) !important;
 }
+
 /* *HOVER */
 
 
 /* ! START CLASSES RESPONISIVE */
-@media(max-width:767px){
-    .class{
+@media(max-width:767px) {
+    .class {
         height: 150px;
     }
 }
+
 /* ! END CLASSES RESPONISIVE */

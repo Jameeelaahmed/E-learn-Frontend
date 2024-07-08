@@ -7,7 +7,7 @@ import { getAuthToken } from '../../Helpers/AuthHelper';
 import { useParams } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa6'
 import { Link, useNavigate } from 'react-router-dom';
-
+import tableClasses from '../../Pages/AdminSingleGroup/AdminSingleGroup.module.css'
 export default function Participants() {
     const { t } = useTranslation();
     const [users, setUsers] = useState([]);
@@ -48,41 +48,38 @@ export default function Participants() {
     return (
         <div className={classes.track_responses}>
             <div className={classes.table_wrapper}>
-                <table className={classes.table}>
-                    <thead>
-                        <tr>
-                            <td>{t("id")}</td>
-                            <td>{t("Student-Name")}</td>
-                            <td>{t("grade")}</td>
-                            <td>{t("profile")}</td>
-                            <td>{t("chat")}</td>
-                            {role === "Admin" && <td>{t("actions")}</td>}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {users.length > 0 ? (
+                <div className={tableClasses.table_content}>
+                    <div className={tableClasses.table_head}>
+                        <p>Number</p>
+                        <p>{t("id")}</p>
+                        <p>{t("Student-Name")}</p>
+                        <p>{t("grade")}</p>
+                        <p>{t("profile")}</p>
+                        <p>{t("chat")}</p>
+                        {role === "Admin" && <p>{t("actions")}</p>}
+                    </div>
+                    {
+                        users.length > 0 ? (
                             users.map((user, index) => (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>{user.name}</td>
-                                    <td>{user.grade}</td>
-                                    <td>
-                                        {/* ADD FILE AS A PARAMETER IN THE OPEN FILE IN BROWSER FUNCTION AND THE FILE NAME THE TEXT */}
+                                <li key={index}>
+                                    <p>{index + 1}</p>
+                                    <p>{user.name}</p>
+                                    <p>{user.grade}</p>
+                                    <p>
                                         <Button onSelect={handleOpenProfile} text={t("profile")} />
-                                    </td>
-                                    <td>
-                                        {/* ADD FILE AS A PARAMETER IN THE OPEN FILE IN BROWSER FUNCTION AND THE FILE NAME THE TEXT */}
+                                    </p>
+                                    <p>
                                         <Button onSelect={handleOpenChat} text={t("chat")} />
-                                    </td>
-                                </tr>
+                                    </p>
+                                </li>
                             ))
                         ) : (
-                            <tr>
-                                <td colSpan="5">No participants found</td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
+                            <p>
+                                No participants found
+                            </p>
+                        )
+                    }
+                </div>
             </div>
         </div>
     );

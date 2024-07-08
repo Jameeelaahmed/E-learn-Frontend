@@ -1,13 +1,14 @@
 import classes from './AssignmentDetails.module.css';
 import * as FaIcons from "react-icons/fa6";
 import { useTranslation } from 'react-i18next';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import InputText from '../InputText/InputText';
 import Button from '../Button/Button';
 import DeleteButton from '../Button/DeleteButton';
 import { httpRequest } from '../../HTTP';
 import { getAuthToken } from '../../Helpers/AuthHelper';
 import { useParams, useNavigate } from 'react-router-dom';
+import DeleteModal from '../DeleteModal/DeleteModal';
 
 export default function AssignmentDetails() {
     const { t } = useTranslation();
@@ -22,6 +23,7 @@ export default function AssignmentDetails() {
     const assignmentId = params.assignmentId;
     const groupId = params.groupId;
     const navigate = useNavigate();
+    const deleteModal = useRef();
 
     const role = getRole();
     function getRole() {
@@ -90,6 +92,9 @@ export default function AssignmentDetails() {
             }
         } catch (error) {
             console.log('an error occurred, ', error);
+        } finally {
+            deleteModal.current.close(); // Close the modal
+            navigate(`/groups/${groupId}/assignments`);
         }
     }
 
@@ -166,7 +171,8 @@ export default function AssignmentDetails() {
             {role === 'Staff' && (
                 <div className={classes.button_container}>
                     {isEdit ? <Button onSelect={handleSave} text={t("save")} /> : <Button onSelect={handleEdit} text={t("edit")} />}
-                    <DeleteButton text={t("delete")} delete_button={classes.delete_button} onDelete={handleDelete}></DeleteButton>
+                    <DeleteButton text={t("delete")} delete_button={classes.delete_button} onDelete={() => { deleteModal.current.open(); }}></DeleteButton>
+                    <DeleteModal ref={deleteModal} deletedItem={t("assignment")} onDelete={handleDelete} />
                 </div>
             )}
         </div>
