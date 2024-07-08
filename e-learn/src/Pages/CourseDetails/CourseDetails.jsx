@@ -27,7 +27,7 @@ export default function CourseDetails() {
                 {(role === 'Staff' || role === "Admin") && (
                     (path.endsWith(`assignments`) && <AddAssignment />) ||
                     (path.endsWith(`quizzes`) && <AddQuiz />) ||
-                    (path.includes(`assignments/${assignmentId}`) && <ShowRespones />)
+                    (path.endsWith(`assignments/${assignmentId}`) && <ShowRespones />)
                 )}
                 {role === 'Student' && (path.includes(`assignments/${assignmentId}`) && <AddWork />)}
                 {path.includes(`quizzes/${quizId}`) && <Questionflag />}

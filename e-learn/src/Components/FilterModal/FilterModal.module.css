@@ -1,0 +1,36 @@
+/* ! START MAIN MODAL  */
+.modal {
+    padding: 2%;
+    width: 35%;
+    border: none;
+    border-radius: 10px;
+    box-shadow: var(grey-shadow);
+    animation: fade-slide-in-from-top 0.3s ease-in-out;
+    margin: auto;
+    position: relative;
+    color: var(--main-color);
+}
+
+@media (max-width:1100px) {
+    .modal {
+        width: 50%;
+    }
+}
+
+@media (max-width:768px) {
+    .modal {
+        width: 85%;
+    }
+}
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* flex-wrap: wrap; */
+}
+
+.modal::backdrop {
+    background: rgba(0, 0, 0, 0.65);
+}

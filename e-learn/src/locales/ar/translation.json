@@ -129,5 +129,6 @@
     "select-level": "اختر المستوي",
     "select-department": "اختر القسم",
     "deleteconfirm": "هل انت متأكد من حذف هذا",
-    "file": "الملف"
+    "file": "الملف",
+    "assignment": "التكليف"
 }

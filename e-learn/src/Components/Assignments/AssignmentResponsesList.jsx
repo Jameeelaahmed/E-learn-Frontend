@@ -6,7 +6,8 @@ import classes from './AssignmentResponsesList.module.css';
 import * as FaIcons from 'react-icons/fa6';
 import { httpRequest } from '../../HTTP';
 import { getAuthToken } from '../../Helpers/AuthHelper';
-
+import tableClasses from '../../Pages/AdminSingleGroup/AdminSingleGroup.module.css';
+import FilterModal from '../FilterModal/FilterModal';
 export default function AssignmentsResponsesList() {
     const [responses, setResponses] = useState([]);
     const [filteredResponses, setFilteredResponses] = useState([]);
@@ -14,7 +15,7 @@ export default function AssignmentsResponsesList() {
     const [searchTerm, setSearchTerm] = useState('');
     const { t } = useTranslation();
     const getMark = useRef();
-
+    const filterModalRef = useRef()
     const { groupId, assignmentId } = useParams();
     const location = useLocation();
     const navigate = useNavigate();
@@ -120,27 +121,28 @@ export default function AssignmentsResponsesList() {
                     className={`${classes.search_input}`}
                 />
             </div>
+            {/* <FaIcons.FaFilter onClick={() => { filterModalRef.current.open(); }} />
+            <FilterModal ref={filterModalRef} /> */}
             <div className={classes.table_wrapper}>
-                <table className={classes.table}>
-                    <thead>
-                        <tr>
-                            <td>{t("Student-Name")}</td>
-                            <td>{t("date")}</td>
-                            <td>{t("time")}</td>
-                            <td>{t("attachment")}</td>
-                            <td>{t("mark")}</td>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <ul>
+                    <div className={tableClasses.table_content}>
+                        <div className={tableClasses.table_head}>
+                            <p>Number</p>
+                            <p>{t("Student-Name")}</p>
+                            <p>{t("date")}</p>
+                            <p>{t("time")}</p>
+                            <p>{t("attachment")}</p>
+                            <p>{t("mark")}</p>
+                        </div>
                         {filteredResponses.length > 0 ? filteredResponses.map((response, index) => (
-                            <tr key={index}>
-                                <td>{response.fullName}</td>
-                                <td>{response.uploadDate}</td>
-                                <td>{response.uploadTime}</td>
-                                <td>
+                            <li key={response.id}>
+                                <p>{response.fullName}</p>
+                                <p>{response.uploadDate}</p>
+                                <p>{response.uploadTime}</p>
+                                <p>
                                     <Button onSelect={() => openFileInBrowser(response.fileURL)} text={t("attachment")} />
-                                </td>
-                                <td className={classes.mark}>
+                                </p>
+                                <p className={classes.mark}>
                                     {response.mark ? (
                                         <span>{response.mark}</span>
                                     ) : (
@@ -155,15 +157,14 @@ export default function AssignmentsResponsesList() {
                                             <FaIcons.FaCheck className={classes.icon} />
                                         </button>
                                     )}
-                                </td>
-                            </tr>
+                                </p>
+                                <p>{new Date(item.creationDate).toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</p>
+                            </li>
                         )) : (
-                            <tr>
-                                <td colSpan="5">{t("No responses found")}</td>
-                            </tr>
+                            <p>{t("No responses found")}</p>
                         )}
-                    </tbody>
-                </table>
+                    </div>
+                </ul>
             </div>
         </div>
     );

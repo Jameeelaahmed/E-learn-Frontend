@@ -9,10 +9,10 @@ export default function Group({ subTitle, insName, onClick }) {
     const path = location.pathname;
     return (
         <div onClick={onClick} className={classes.class}>
-            <p>{subTitle}</p>
+            <p className={classes.title}>{subTitle}</p>
             {role === 'Student' &&
-                <div>
-                    <p>{insName}</p>
+                <div className={classes.groupfoot}>
+                    <p className={classes.name}>{insName}</p>
                     {path.includes('assignments') &&
                         <p>grade</p>
                     }
