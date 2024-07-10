@@ -4,11 +4,11 @@ import CheckboxDropdown from '../MultipleChoiceCheckMark/CheckboxDropdown';
 import classes from './AddQSModal.module.css';
 import Questions from "./Questions";
 import { useTranslation } from 'react-i18next';
-import InputContainer from './InputContainer';
 import { log } from "../../log";
 import { httpRequest } from '../../HTTP';
 import { getAuthToken } from '../../Helpers/AuthHelper';
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+
 const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
     log('<ADDVSModal /> rendered');
     const { t } = useTranslation();
@@ -31,6 +31,8 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
     const addVSDialog = useRef();
     const location = useLocation();
     const path = location.pathname;
+    const params = useParams();
+    const groupId = params.groupId;
 
     useImperativeHandle(ref, () => ({
         open: () => {
@@ -52,17 +54,20 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
             ...prevData,
             questions: updatedQuestions.map(question => ({
                 questionTitle: question.description,
-                questionOptions: question.options
+                questionOptions: question.options.map(option => option.value),
+                correctOption: question.options.find(option => option.isCorrect)?.value || "",
+                grade: question.mark ? parseFloat(question.mark) : null // Ensure grade is a number or null
             }))
         }));
     }, []);
+    
 
     const handleSubmit = useCallback(async (e) => {
         e.preventDefault();
         const fd = new FormData(e.target);
         const formValues = Object.fromEntries(fd.entries());
 
-        const selectedGroups = checkboxDropdownRef.current.getSelectedGroups().map(group => group.value);
+        const selectedGroups = path.endsWith("/quizzes") ? 0 : checkboxDropdownRef.current.getSelectedGroups().map(group => group.value);
 
         if (!formValues.title || formValues.title.trim() === '') {
             console.error('Validation Error: Title is required.');
@@ -75,7 +80,7 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
             return;
         }
 
-        if (selectedGroups.length === 0) {
+        if (selectedGroups.length === 0 && !path.endsWith("/quizzes")) { // Modified line
             console.error('Validation Error: At least one group must be selected.');
             return;
         }
@@ -84,32 +89,42 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
             const options = question.questionOptions;
             return {
                 text: question.questionTitle || 'Untitled Question',
-                option1: options[0] || "",
-                option2: options[1] || "",
-                option3: options[2] || "",
-                option4: options[3] || "",
-                option5: options[4] || ""
+                option1: options[0] || "", // Modified line
+                option2: options[1] || "", // Modified line
+                option3: options[2] || "", // Modified line
+                option4: options[3] || "", // Modified line
+                option5: options[4] || "", // Modified line
+                correctOption: question.correctOption, // Added line
+                grade: question.grade ? parseFloat(question.grade) : null // Ensure grade is a number or null
             };
         });
 
         const requestBody = {
-            text: formValues.title,
-            start: new Date().toISOString(),
+            title: formValues.title,
+            start: `${formValues.endDate}T${formValues.startTime}`,
             end: `${formValues.endDate}T${formValues.endTime}`,
-            groupIds: selectedGroups,
             questions: formattedQuestions
         };
 
+        if (!path.endsWith("/quizzes")) { // Modified line
+            requestBody.groupIds = selectedGroups; // Modified line
+        } else { // Added block
+            requestBody.grade = formValues["total-mark"];
+        }
+
         try {
             const token = getAuthToken();
-            const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Survey/CreateSurvey', token, requestBody);
+            const url = path.endsWith("/quizzes") // Modified line
+                ? `https://elearnapi.runasp.net/api/Quiz/CreateNewQuiz?groupID=${groupId}` // Modified line
+                : 'https://elearnapi.runasp.net/api/Survey/CreateSurvey';
+            const response = await httpRequest('POST', url, token, requestBody);
             console.log(requestBody);
             console.log(response);
-            if (response.statusCode === 200) {
-                console.log('Survey created successfully', response.data);
+            if (response.statusCode === 200 || response.statusCode === 201) {
+                console.log('Survey/Quiz created successfully', response.data); // Modified line
                 ref.current.close();
             } else {
-                console.error('Failed to create survey', response);
+                console.error('Failed to create survey/quiz', response); // Modified line
                 if (response.statusCode === 400 && response.errors) {
                     console.error('Validation Errors:', response.errors);
                 }
@@ -162,10 +177,11 @@ const AddQSModal = forwardRef(function AddQSModal({ collectFormData }, ref) {
                         <input type="time" id="endTime" dir='auto' name="endTime" />
                     </div>
                 </div>
+                {path.includes("/survey") &&
                 <div className={classes.input}>
                     <label htmlFor="group">{t("Group")}</label>
                     <CheckboxDropdown name="group" ref={checkboxDropdownRef}></CheckboxDropdown>
-                </div>
+                </div>}
                 {path.includes("/quizzes") &&
                     <div className={classes.mark}>
                         <label htmlFor="total-mark">{t("total-mark")}</label>
