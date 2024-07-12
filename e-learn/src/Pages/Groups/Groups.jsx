@@ -91,7 +91,7 @@ export default function Groups() {
 
     // Handle assignment click event
     function handleAssignmentClick(id) {
-        navigate(`/groups/${groupId}/assignments/assignm${id}`);
+        navigate(`/groups/${groupId}/assignments/${id}`);
     }
 
     // Handle quiz click event and fetch quiz details
