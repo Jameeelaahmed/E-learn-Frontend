@@ -64,6 +64,7 @@ export default function AssignmentDetails() {
 
     async function fetchAssignmentDetails() {
         try {
+            console.log('Fetching Assignment Details...', assignmentId);
             const token = getAuthToken();
             const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Assignment/GetById/${assignmentId}`, token);
             console.log(response);

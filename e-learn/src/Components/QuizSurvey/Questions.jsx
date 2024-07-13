@@ -5,12 +5,12 @@ import * as FaIcons from "react-icons/fa6";
 import { log } from '../../log';
 import Question from "./Question";
 import Option from "./Option";
-import { v4 as uuidv4 } from 'uuid';  // Import UUID for generating unique IDs
+import { v4 as uuidv4 } from 'uuid';
 
 const Questions = memo(function Questions({ onQuestionChange }) {
     log('<Questions /> rendered');
     const { t } = useTranslation();
-    const [questions, setQuestions] = useState([{ id: uuidv4(), description: "", options: [{ id: uuidv4(), value: "", isCorrect: false }, { id: uuidv4(), value: "", isCorrect: false }] }]);
+    const [questions, setQuestions] = useState([{ id: uuidv4(), description: "", mark: "", options: [{ id: uuidv4(), value: "", isCorrect: false }, { id: uuidv4(), value: "", isCorrect: false }] }]);
 
     const handleAddOption = (questionIndex) => {
         const updatedQuestions = [...questions];
@@ -25,7 +25,7 @@ const Questions = memo(function Questions({ onQuestionChange }) {
     };
 
     const handleAddQuestion = () => {
-        setQuestions([...questions, { id: uuidv4(), description: "", options: [{ id: uuidv4(), value: "", isCorrect: false }, { id: uuidv4(), value: "", isCorrect: false }] }]);
+        setQuestions([...questions, { id: uuidv4(), description: "", mark: "", options: [{ id: uuidv4(), value: "", isCorrect: false }, { id: uuidv4(), value: "", isCorrect: false }] }]);
     };
 
     const handleDeleteQuestion = (questionIndex) => {
@@ -53,6 +53,12 @@ const Questions = memo(function Questions({ onQuestionChange }) {
         setQuestions(updatedQuestions);
     };
 
+    const handleMarkChange = (questionIndex, newMarkValue) => {
+        const updatedQuestions = [...questions];
+        updatedQuestions[questionIndex].mark = newMarkValue;
+        setQuestions(updatedQuestions);
+    };
+
     useEffect(() => {
         onQuestionChange(questions);
         console.log(questions);
@@ -71,6 +77,7 @@ const Questions = memo(function Questions({ onQuestionChange }) {
                     <Question
                         key={question.id}
                         onLoseFocus={(newQuestionValue) => handleQuestionChange(questionIndex, newQuestionValue)}
+                        onMarkChange={(newMarkValue) => handleMarkChange(questionIndex, newMarkValue)}
                         questionIndex={questionIndex}
                     >
                         {question.options.map((option, optionIndex) => (
