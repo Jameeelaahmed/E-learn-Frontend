@@ -7,13 +7,14 @@ import AddAssignment from "../../Components/Assignments/Add-Assignment";
 import ShowRespones from '../../Components/Assignments/ShowRespones';
 import AddQuiz from "./AddQuiz";
 import Questionflag from "../Quizzes/Questionflag";
-
+import openResponses from '../../Pages/QuizSurvey/openResponses'
+import OpenResponses from "../../Pages/QuizSurvey/openResponses";
 export default function CourseDetails() {
     const location = useLocation();
     const path = location.pathname;
-    const { assignmentId, quizId } = useParams();
+    const { assignmentId, quizId, groupId } = useParams();
     const role = getRole();
-
+    console.log(path)
     function getRole() {
         return localStorage.getItem('role');
     }
@@ -30,7 +31,8 @@ export default function CourseDetails() {
                     (path.endsWith(`assignments/${assignmentId}`) && <ShowRespones />)
                 )}
                 {role === 'Student' && (path.includes(`assignments/${assignmentId}`) && <AddWork />)}
-                {path.includes(`quizzes/${quizId}`) && <Questionflag />}
+                {role === 'Student' && (path.includes(`quizzes/${quizId}`) && <Questionflag />)}
+                {role === 'Staff' && ((path === (`/groups/${groupId}/quizzes/${quizId}`)) && <OpenResponses />)}
             </div>
         </div>
     );

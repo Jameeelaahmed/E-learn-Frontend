@@ -130,5 +130,7 @@
     "select-department": "اختر القسم",
     "deleteconfirm": "هل انت متأكد من حذف هذا",
     "file": "الملف",
-    "assignment": "التكليف"
+    "assignment": "التكليف",
+    "Answers": "الاجابات",
+    "view": "عرض"
 }
