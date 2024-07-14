@@ -78,11 +78,11 @@
     box-shadow: var(--main-shadow);
 }
 
+/* 
 .table {
     margin-top: 15px;
     border-radius: 32px;
     width: 98%;
-    /* height: %; */
     z-index: 100;
     border-collapse: collapse;
 }
@@ -100,11 +100,8 @@
     border-top-left-radius: 20px;
     position: sticky;
     top: 0;
-    /* Keep the header at the top */
     background-color: white;
-    /* Ensure the background is opaque */
     z-index: 1;
-    /* Ensure the header is above the table rows */
 }
 
 .table th {
@@ -127,6 +124,88 @@
 
 .table tbody tr:last-child {
     background-color: none;
+} */
+
+
+
+.table {
+    position: relative;
+    background-color: var(--light-grey);
+    padding: 0 10px 10px 10px;
+    z-index: 100000;
+    box-shadow: var(--main-shadow);
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    max-height: 480px;
+    overflow-y: scroll;
+    width: 100%;
+    overflow-x: scroll;
+    /* Enables horizontal scrolling */
+}
+
+.table_content {
+    position: relative;
+}
+
+.table_head {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: var(--main-color);
+    color: white;
+    /* border-radius: 15px; */
+    position: sticky;
+    /* Changed from fixed to sticky */
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Ensure it stays on top of the other table content */
+    border-top-right-radius: 32px;
+    border-top-left-radius: 32px;
+}
+
+.table_head p {
+    width: 20%;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.table ul {
+    min-width: 600px;
+}
+
+.table ul li {
+    display: flex;
+    padding: 10px;
+}
+
+
+.table ul li p {
+    width: 20%;
+    text-align: center;
+    word-wrap: break-word;
+    padding: 10px;
+    transition: 0.4s;
+    color: var(--main-color);
+}
+
+.table ul li a {
+    display: contents;
+}
+
+.hoverd {
+    cursor: pointer;
+}
+
+.hoverd:hover {
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 10px;
+}
+
+
+.table ul li:not(:last-child) {
+    border-bottom: 1px solid var(--main-color);
 }
 
 

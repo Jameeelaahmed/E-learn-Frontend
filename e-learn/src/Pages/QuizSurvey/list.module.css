@@ -3,7 +3,6 @@
     background-color: var(--light-grey);
     /* padding: 0 10px 10px 10px; */
     z-index: 100000;
-    box-shadow: var(--main-shadow);
     border-radius: 32px;
     max-height: 480px;
     overflow-y: scroll;
@@ -11,6 +10,17 @@
     overflow-x: scroll;
     /* Enables horizontal scrolling */
 }
+
+[dir="rtl"] .table {
+    margin-left: 10px;
+    box-shadow: var(--main-arabic-shadow);
+}
+
+[dir="ltr"] .table {
+    margin-right: 10px;
+    box-shadow: var(--main-shadow);
+}
+
 
 .table_content {
     position: relative;
@@ -39,18 +49,18 @@
     word-wrap: break-word;
 }
 
-.table ul {
+.table .ul {
     min-width: 600px;
 }
 
-.table ul li {
+.table .ul .li {
     display: flex;
     padding: 10px;
     align-items: center;
 }
 
 
-.table ul li p {
+.table .ul .li p {
     width: 20%;
     text-align: center;
     word-wrap: break-word;
@@ -59,7 +69,7 @@
     color: var(--main-color);
 }
 
-.table ul li a {
+.table .ul .li a {
     display: contents;
 }
 
@@ -74,7 +84,7 @@
 }
 
 
-.table ul li:not(:last-child) {
+.table .ul .li:not(:last-child) {
     border-bottom: 1px solid var(--main-color);
 }
 
@@ -145,12 +155,12 @@
 
 
 @media (max-width: 768px) {
-    .table ul {
+    .table .ul {
         display: block;
         /* Stack the items vertically */
     }
 
-    .table li {
+    .table .li {
         display: block;
     }
 

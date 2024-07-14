@@ -83,7 +83,7 @@ const instructorRoutes = [
             { path: 'assignments', element: <ViewCards /> },
             { path: 'quizzes', element: <ViewCards /> },
             { path: 'quizzes/:quizId', element: <QuestionView /> },
-            { path: 'quizzes/:quizId/quizResponses', element: <QuestionView /> },
+            { path: 'quizzes/:quizId/quizResponses', element: <StudentsRespondedList /> },
             { path: 'assignments/:assignmentId', element: <AssignmentDetails /> },
             { path: 'assignments/:assignmentId/responses-list', element: <AssignmentsResponsesList /> },
             { path: 'assignments/:assignmentId/responses-list', element: <AssignmentsResponsesList /> },

@@ -30,6 +30,7 @@ export default function GroupNavCard() {
     useEffect(() => {
         getGroupInfo();
     }, [groupId]);
+    const isPathActive = (path) => location.pathname.includes(path);
 
     return (
         <div className={classes.group_navigation_card}>
@@ -42,28 +43,28 @@ export default function GroupNavCard() {
                 <NavLink
                     to=""
                     end
-                    className={({ isActive }) => `${isActive ? classes.active : ''}`}
+                    className={({ isActive }) => `${isActive || isPathActive('material') ? classes.active : ''}`}
                 >
                     {t('Material')}
                 </NavLink>
                 <NavLink
                     to="assignments"
                     end
-                    className={({ isActive }) => `${isActive ? classes.active : ''}`}
+                    className={({ isActive }) => `${isActive || isPathActive('assignments') ? classes.active : ''}`}
                 >
                     {t('Assignments')}
                 </NavLink>
                 <NavLink
                     to="quizzes"
                     end
-                    className={({ isActive }) => `${isActive ? classes.active : ''}`}
+                    className={({ isActive }) => `${isActive || isPathActive('quizzes') ? classes.active : ''}`}
                 >
                     {t('Quizzes')}
                 </NavLink>
                 <NavLink
                     to="participants"
                     end
-                    className={({ isActive }) => `${isActive ? classes.active : ''}`}
+                    className={({ isActive }) => `${isActive || isPathActive('participants') ? classes.active : ''}`}
                 >
                     {t('Participants')}
                 </NavLink>
