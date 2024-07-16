@@ -8,6 +8,9 @@ import img from '../../assets/avatar.jpg'
 import ImageModal from '../../Components/Announcement-Chat/ImageModal';
 import { FaFileAlt, FaFileImage, FaFilePdf, FaFileWord, FaFileExcel, FaFilePowerpoint, FaFileArchive, FaFileAudio, FaFileVideo, FaFileCode } from 'react-icons/fa';
 import ChoseGroupModal from './ChoseGroupModal';
+import { httpRequest } from '../../HTTP';
+import { getAuthToken } from '../../Helpers/AuthHelper';
+import { use } from 'i18next';
 
 export default function Announcement() {
     const messagesEndRef = useRef(null);
@@ -247,6 +250,34 @@ export default function Announcement() {
         chooseGroupRef.current.open();
     }
 
+    async function fetchAnnouncements() {
+        const token = getAuthToken();
+        const response = await httpRequest('GET', 'https://elearnapi.runasp.net/api/Announcement/Get-All-From-Groups?sort_by=date', token);
+        console.log(response);
+        if (response.statusCode === 200) {
+            const formattedData = response.data.map((announcement) => ({
+                key: announcement.id,  // Use the provided 'id' as the unique key
+                msg: announcement.text,  // Map 'text' to 'msg'
+                type: announcement.userName == localStorage.userName? 'sender' : 'receiver',
+                timestamp: announcement.creationDate,  // Map 'creationDate' to 'timestamp'
+                uploadedFiles: announcement.filesUrls ? announcement.filesUrls.map(url => ({
+                    name: url.split('/').pop(),
+                    type: url.split('.').pop(),  // Simplistic approach to determine file type
+                    content: url
+                })) : [],
+                uploadedImage: announcement.filesUrls && announcement.filesUrls.some(url => url.match(/\.(jpeg|jpg|png)$/)) ? announcement.filesUrls.find(url => url.match(/\.(jpeg|jpg|png)$/)) : null,
+                profileImage: announcement.userProfilePictureUrl || 'https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg',  // Use 'userProfilePictureUrl' or a default image
+                receivers: ['receiver1', 'receiver2']  // Static receivers for now
+            }));
+            setChat(formattedData);
+        } else {
+            console.error('Failed to fetch announcements:', response);
+        }
+    }
+    useEffect(() => {
+        fetchAnnouncements();
+    }, []);
+    
     return (
         <div className={accnounceclasses.announcement}>
             <div className={classes.main__chatcontent}>
