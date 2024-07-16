@@ -1,4 +1,4 @@
-import classes from './ResponesList.module.css'
+import classes from './ResponsesList.module.css'
 import { useTranslation } from 'react-i18next'
 import response from '../../response';
 export default function ResponsesList() {

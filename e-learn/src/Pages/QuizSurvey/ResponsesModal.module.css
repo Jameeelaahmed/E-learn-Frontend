@@ -1,6 +1,7 @@
 /* ! START MAIN MODAL  */
 .modal {
-    padding: 2%;
+    height: 500px;
+    padding: 3%;
     width: 35%;
     border: none;
     border-radius: 10px;
@@ -26,4 +27,34 @@
 
 .modal::backdrop {
     background: rgba(0, 0, 0, 0.65);
+}
+
+.name {
+    width: 100%;
+}
+
+.title {
+    width: 100%;
+    /* border-bottom: 2px solid var(--main-color); */
+    margin-top: 10px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+.option {
+    padding: 10px;
+    border: 2px var(--secondry-color) solid;
+    margin-bottom: 13px;
+    border-radius: 15px;
+}
+
+.true {
+    background-color: var(--main-color);
+    color: white;
+    box-shadow: var(--main-shadow);
+}
+
+
+.modal li:not(:last-child) {
+    border-bottom: 2px solid var(--main-color);
 }
