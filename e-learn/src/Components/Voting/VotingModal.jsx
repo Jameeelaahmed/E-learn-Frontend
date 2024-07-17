@@ -4,14 +4,12 @@ import { createPortal } from 'react-dom';
 import classes from './VotingModal.module.css';
 import CheckboxDropdown from '../MultipleChoiceCheckMark/CheckboxDropdown';
 import { useTranslation } from 'react-i18next';
-import { log } from '../../log';
 import VotingQuestion from './VotingQuestion';
 import SubmitButton from '../Button/SubmitButton';
 import { httpRequest } from '../../HTTP';
 import { getAuthToken } from '../../Helpers/AuthHelper';
 
 const VotingModal = forwardRef(function VotingModal({ onVotingCreated }, ref) {
-    log('<ADDVSModal /> rendered');
     const { t } = useTranslation();
     const checkboxDropdownRef = useRef();
     const votingModal = useRef();
@@ -66,7 +64,7 @@ const VotingModal = forwardRef(function VotingModal({ onVotingCreated }, ref) {
                 console.log('Voting created successfully');
                 ref.current.close();
                 onVotingCreated();
-                
+
             } else {
                 console.log(response);
             }
@@ -93,7 +91,7 @@ const VotingModal = forwardRef(function VotingModal({ onVotingCreated }, ref) {
                     </div>
                     <div className={classes.input_container}>
                         <label htmlFor="date">{t("end-date")}</label>
-                        <input type="date" dir='auto' name="endDate" /> 
+                        <input type="date" dir='auto' name="endDate" />
                     </div>
                 </div>
                 <div className={classes.description}>

@@ -29,6 +29,7 @@ import Vote from '../Components/Voting/Vote';
 import Announcement from '../Pages/Announcement/Announcement';
 import QuestionView from '../Components/QuizSurvey/QuestionView';
 import StudentsRespondedList from '../Pages/QuizSurvey/StudentsRespondedList';
+import Community from '../Pages/Community/Community';
 // Import necessary components and functions
 function RoleBasedRoutes() {
     const role = getRole();
@@ -129,6 +130,7 @@ const studentRoutes = [
     { path: 'voting/:voteId', element: <Vote /> },
     { path: 'chat', element: <Container /> },
     { path: 'chat/:chatId', element: <Container /> }, // Add this route for chat with ID
+    { path: 'community', element: <Community /> }
 
 ];
 

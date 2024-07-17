@@ -42,7 +42,7 @@ const Error = () => {
 
     return (
         <section className={classes.error_section}>
-            <p className={classes.error_section_subtitle}>Thanks. You just broke it all !</p>
+            <p dir='auto' className={classes.error_section_subtitle}>Thanks. You just broke it all !</p>
             <h1 ref={titleRef} className={classes.error_title}>
                 <p>404</p>
                 404
