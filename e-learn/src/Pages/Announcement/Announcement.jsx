@@ -100,8 +100,17 @@ export default function Announcement() {
         }
     };
 
-    const deleteMessage = (key) => {
-        setChat((prevChat) => prevChat.filter((msg) => msg.key !== key));
+    const deleteMessage = async (key) => {
+        try{
+            const token = getAuthToken();
+            var response = await httpRequest('DELETE', `https://elearnapi.runasp.net/api/Announcement/Delete/${key}`, token);
+            console.log('Deleting Message:', key);
+            if(response.statusCode === 200){
+                setChat((prevChat) => prevChat.filter((msg) => msg.key !== key));
+            }
+        } catch (e) {
+            console.error('Failed to delete message:', e);
+        }
     };
 
     const getFormattedDate = (timestamp) => {
