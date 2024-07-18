@@ -21,7 +21,8 @@ const ChoseGroupModal = forwardRef(function ChoseGroupModal({ onChooseGroup }, r
         onChooseGroup(selectedGroup);
         ChoseGroupModalRef.current.close();
     };
-
+    const selectedGroups = groupRef.current?.getSelectedGroups().map(group => group.value);
+    console.log("Selected group: ", selectedGroups);
     return (
         <dialog ref={ChoseGroupModalRef} className={classes.modal}>
             <h1>Choose Group</h1>

@@ -170,7 +170,13 @@ export default function Announcement() {
         }
     };
 
-    const addMessage = () => {
+    const chooseGroupRef = useRef()
+
+    function handleChooseGroupModal() {
+        chooseGroupRef.current.open();
+    }
+
+    const addMessage = async () => {
         if (inputRef.current.value !== '' || chat.some((item) => item.uploadedFiles.length > 0)) {
             const newChatItem = {
                 key: chat.length + 1,
@@ -189,10 +195,27 @@ export default function Announcement() {
                     newChatItem.uploadedFiles = newChatItem.uploadedFiles.concat(item.uploadedFiles);
                 }
             });
-
-            setChat((prevChat) => [...prevChat, newChatItem]);
-            setInputValue('');
-            scrollToBottom();
+            try{
+                const fd = new FormData();
+                fd.append('text', inputValue);
+                chat.forEach((item) => {
+                    item.uploadedFiles.forEach((file) => {
+                        fd.append('files', file.content);
+                    });
+                });
+                fd.append('groups', 1); // Hardcoded group ID for now
+                const token = getAuthToken();
+                const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Announcement/CreateNew', token, fd, 'multipart/form-data');
+                console.log('Sending Announcement:', response);
+                if(response.statusCode === 201){
+                    setChat((prevChat) => [...prevChat, newChatItem]);
+                    setInputValue('');
+                    scrollToBottom();
+                }
+            }
+            catch(err){
+                console.log('Failed To Send Announncement: ', err);
+            }
         }
     };
 
@@ -253,11 +276,7 @@ export default function Announcement() {
         }
     };
 
-    const chooseGroupRef = useRef()
-
-    function handleChooseGroupModal() {
-        chooseGroupRef.current.open();
-    }
+    
 
     async function fetchAnnouncements() {
         const token = getAuthToken();
