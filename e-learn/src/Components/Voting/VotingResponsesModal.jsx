@@ -9,7 +9,7 @@ const VotingListModal = forwardRef(function VotingListModal(_, ref) {
     const { t } = useTranslation();
     const votingResponsesModal = useRef();
     const params = useParams();
-    const voteId = params.votingId || 1003; // Use params.voteId if available
+    const voteId = params.voteId;
     const [responses, setResponses] = useState([]);
 
     useImperativeHandle(ref, () => ({
@@ -31,6 +31,7 @@ const VotingListModal = forwardRef(function VotingListModal(_, ref) {
     async function fetchVoteResponses() {
         try {
             const response = await httpRequest('GET', `https://elearnapi.runasp.net/api/Voting/GetVotingResponses/${voteId}`, localStorage.getItem('token'));
+            console.log(voteId);
             console.log(response);
             if (response.statusCode === 200) {
                 setResponses(response.data);
