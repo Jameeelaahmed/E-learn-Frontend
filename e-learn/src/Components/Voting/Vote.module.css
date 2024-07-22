@@ -58,6 +58,10 @@
     box-shadow: inset 0 0 0 0.4375em var(--main-color);
 }
 
+.question_container label .radio_circle.voted::before {
+    box-shadow: inset 0 0 0 0.4375em var(--main-color);
+}
+
 
 .question_container label .radio_circle::before {
     display: flex;
