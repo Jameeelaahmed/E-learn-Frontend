@@ -57,8 +57,8 @@ const VotingListModal = forwardRef(function VotingListModal(_, ref) {
                                         <span>{response.fullName}</span>
                                     </div>
                                     <div className={classes.vote_data}>
-                                        <span dir="ltr">{new Date().toLocaleDateString()}</span> {/* Assuming date */}
-                                        <span dir="ltr">{new Date().toLocaleTimeString()}</span> {/* Assuming time */}
+                                    <span dir="ltr">{new Date(response.created).toLocaleDateString()}</span>
+                                    <span dir="ltr">{new Date(response.created).toLocaleTimeString()}</span>
                                     </div>
                                 </div>
                             </li>
