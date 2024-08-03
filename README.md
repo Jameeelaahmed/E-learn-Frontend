@@ -77,12 +77,11 @@ Once the application is running, you can interact with the UI to manage users, c
 
 
 ## Technologies Used
-Backend:
+Frontend:
 - **React**
 - **React Router**
 - **Fetch**
 - **SignalR**
-- **Material UI**
 
 ## Contact
 Jameela Ahmed - jameelaabdlruhman@gmail.com
