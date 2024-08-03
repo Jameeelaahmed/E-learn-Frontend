@@ -85,7 +85,7 @@ Backend:
 - **Material UI**
 
 ## Contact
-Jameela Ahmed - moa.mohamedosama@gmail.com
+Jameela Ahmed - jameelaabdlruhman@gmail.com
 
 ## Contributers
 This project exists thanks to all the people who contributed. A special thanks to our FrontEnd Developers:
