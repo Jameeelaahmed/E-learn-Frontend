@@ -65,20 +65,14 @@
 .table {
     position: relative;
     background-color: var(--light-grey);
-    padding: 0 10px 10px 10px;
     z-index: 100000;
     box-shadow: var(--main-shadow);
-    border-bottom-left-radius: 32px;
-    border-bottom-right-radius: 32px;
+    border-radius: 32px;
     max-height: 480px;
     overflow-y: scroll;
     width: 100%;
     overflow-x: scroll;
     /* Enables horizontal scrolling */
-}
-
-.table_content {
-    position: relative;
 }
 
 .table_head {

@@ -50,6 +50,7 @@ export default function VotingQuestion({ options, setOptions }) {
                         <div className={classes.input_container}>
                             <label htmlFor={`option-${optionIndex + 1}`}>{t("option")}{optionIndex + 1}</label>
                             <textarea
+                                className={classes.textarea}
                                 type="text"
                                 name={`option-${optionIndex}`}
                                 id={`option-${optionIndex}`}

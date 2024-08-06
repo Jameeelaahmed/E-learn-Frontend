@@ -1,11 +1,11 @@
 /* Variables */
 :root {
-    --primary-color: #32C983;
-    --secondary-color: #25F193;
+    --primary-color: #084c61;
+    --secondary-color: #084c61;
     --black: #343434;
     --dark-black: #1A1A1A;
     --gradient: linear-gradient(to top, var(--primary-color), var(--secondary-color));
-    --black-gradient: linear-gradient(-225deg, var(--dark-black), var(--black));
+    --black-gradient: linear-gradient(-225deg, white 0%, #f1f2f7 100%);
 }
 
 /* Error Section */
@@ -15,7 +15,7 @@
     align-items: center;
     flex-direction: column;
     height: 100vh;
-    background-image: var(--black-gradient);
+    /* background-image: var(--black-gradient); */
 }
 
 .error_section_subtitle {
@@ -40,20 +40,26 @@
 
 .error_section .error_title:hover {
     transition: all 0.2s ease;
-    text-shadow: var(--x-shadow) var(--y-shadow) 10px var(--dark-black);
+    text-shadow: var(--x-shadow) var(--y-shadow) 10px #084c61;
 }
 
 .error_section .error_title p {
     position: absolute;
     top: 2rem;
     left: 2rem;
-    background-image: radial-gradient(circle closest-side, rgba(255, 255, 255, 0.05), transparent);
+    color: #084c61;
+    /* background-image: radial-gradient(circle closest-side, rgba(255, 255, 255, 0.05), transparent); */
     background-position: var(--x) var(--y);
     background-repeat: no-repeat;
     text-shadow: none;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: all 0.1s ease;
+}
+
+
+.error_section h1 {
+    color: #084c61;
 }
 
 /* Button */
@@ -64,7 +70,7 @@
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.2), inset 0px -2px 5px 0px rgba(0, 0, 0, 0.2);
     border: none;
     cursor: pointer;
-    text-shadow: 0px 1px var(--black);
+    text-shadow: 0px 1px #084c61;
     color: white;
     text-transform: uppercase;
     letter-spacing: 1.5pt;
@@ -75,7 +81,7 @@
 }
 
 .btn:hover {
-    text-shadow: 0px 1px 1px var(--black);
+    text-shadow: 0px 1px 1px #084c61;
     transform: translateY(-5px);
     box-shadow: 0px 4px 15px 2px rgba(0, 0, 0, 0.1), inset 0px -3px 7px 0px rgba(0, 0, 0, 0.2);
     transition: ease-out 0.2s all;

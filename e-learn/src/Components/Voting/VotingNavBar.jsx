@@ -3,7 +3,6 @@ import * as FaIcons from "react-icons/fa6";
 import { useTranslation } from 'react-i18next';
 import { useRef, useState, useEffect } from 'react';
 import VotingModal from './VotingModal';
-import { log } from '../../log';
 import Delete from '../Button/Delete';
 import Edit from '../Button/Edit';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -21,8 +20,6 @@ export default function VSNavBar({ onVoteSelected }) { // Add onVoteSelected pro
     function getRole() {
         return localStorage.getItem('role');
     }
-
-    log('<vsNavbar /> rendered');
     const { t } = useTranslation();
     const addVSDialog = useRef();
 
