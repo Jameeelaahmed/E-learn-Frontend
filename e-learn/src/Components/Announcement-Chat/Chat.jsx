@@ -7,8 +7,9 @@ import * as FaIcons from 'react-icons/fa6';
 import img from '../../assets/avatar.jpg'
 import ImageModal from './ImageModal';
 import { FaFileAlt, FaFileImage, FaFilePdf, FaFileWord, FaFileExcel, FaFilePowerpoint, FaFileArchive, FaFileAudio, FaFileVideo, FaFileCode } from 'react-icons/fa';
-import {httpRequest} from '../../HTTP';
-import {getAuthToken} from '../../Helpers/AuthHelper';
+import { httpRequest } from '../../HTTP';
+import { getAuthToken } from '../../Helpers/AuthHelper';
+import DeleteModal from '../DeleteModal/DeleteModal';
 
 export default function Chat({ selectedChat, setViewMode }) {
     const messagesEndRef = useRef(null);
@@ -23,13 +24,13 @@ export default function Chat({ selectedChat, setViewMode }) {
     const [inputValue, setInputValue] = useState('');
     const [originalMessage, setOriginalMessage] = useState('');
 
-    async function getAnnouncement(){
-        try{
+    async function getAnnouncement() {
+        try {
             const token = getAuthToken();
             const response = await httpRequest('GET', 'https://elearnapi.runasp.net/api/Announcement/Get-All-From-Groups', token);
             console.log(response);
         }
-        catch(err){
+        catch (err) {
             console.log(err);
         }
     }
@@ -256,6 +257,11 @@ export default function Chat({ selectedChat, setViewMode }) {
         }
     };
 
+    const deleteModal = useRef()
+
+    function handleopenDeleteModal() {
+        deleteModal.current.open();
+    }
 
 
     useEffect(() => {
@@ -361,13 +367,15 @@ export default function Chat({ selectedChat, setViewMode }) {
                         {contextMenu.visible && (
                             <ul className={`${classes.contextMenu} ${classes.show}`} style={{ top: `${contextMenu.y}px`, left: `${contextMenu.x}px` }}>
                                 <li>{t("delete")}</li>
-                                <li>{t("Contact-info")}</li>
+                                <li >{t("Contact-info")}</li>
                             </ul>
                         )}
                         {contextMessageMenu.visible && (
                             <ul className={`${classes.contextMenu} ${classes.show}`} style={{ top: `${contextMessageMenu.y}px`, left: `${contextMessageMenu.x}px` }}>
                                 <li onClick={() => startEditingMessage(contextMessageMenu.messageKey)}>{t('Edit-message')}</li>
-                                <li onClick={() => deleteMessage(contextMessageMenu.messageKey)}>{t('delete')}</li>
+                                {/* <li onClick={() => deleteMessage(contextMessageMenu.messageKey)}>{t('delete')}</li> */}
+                                <li onClick={handleopenDeleteModal}>{t('delete')}</li>
+                                <DeleteModal />
                             </ul>
                         )}
                     </div>

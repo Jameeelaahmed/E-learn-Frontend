@@ -96,7 +96,7 @@ const VotingModal = forwardRef(function VotingModal({ onVotingCreated }, ref) {
                 </div>
                 <div className={classes.description}>
                     <label htmlFor="description">{t('description')}</label>
-                    <textarea id="description" name="description"></textarea>
+                    <textarea id="description" name="description" className={classes.textarea}></textarea>
                 </div>
                 <VotingQuestion options={options} setOptions={setOptions} /> {/* Pass options and setOptions as props */}
                 <SubmitButton cancel={handleCancelClick} />

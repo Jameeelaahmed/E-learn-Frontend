@@ -161,7 +161,7 @@ const AddModal = forwardRef(function AddModal(_, ref) {
                         </div>
                         <div className={classes.description}>
                             <label htmlFor="description">{t('Description')}</label>
-                            <textarea id="description" name="description" onChange={handleInputChange}></textarea>
+                            <textarea id="description" name="description" onChange={handleInputChange} className={classes.textarea}></textarea>
                         </div>
                         <FileUpload collectFiles={handleCollectFiles} />
                     </>

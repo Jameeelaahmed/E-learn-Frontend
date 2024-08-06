@@ -1,3 +1,29 @@
 .community {
     margin: 0 150px;
 }
+
+.add_post {
+    border: 2px solid var(--main-color);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.add_post p {
+    color: var(--main-color);
+}
+
+.img {
+    width: 40px;
+    border-radius: 50%;
+}
+
+[dir="rtl"] .img {
+    margin-left: 10px;
+}
+
+[dir="ltr"] .img {
+    margin-right: 10px;
+}
