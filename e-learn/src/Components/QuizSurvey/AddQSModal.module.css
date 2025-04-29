@@ -176,7 +176,7 @@
 }
 
 
-textarea {
+.textarea {
     width: 100%;
     resize: none;
     padding: 20px 10PX;
@@ -188,7 +188,7 @@ textarea {
 }
 
 
-textarea:focus {
+.textarea:focus {
     outline: none;
 }
 

@@ -48,37 +48,40 @@ export default function Participants() {
     return (
         <div className={classes.track_responses}>
             <div className={classes.table_wrapper}>
-                <div className={tableClasses.table_content}>
-                    <div className={tableClasses.table_head}>
-                        <p>Number</p>
-                        <p>{t("id")}</p>
-                        <p>{t("Student-Name")}</p>
-                        <p>{t("grade")}</p>
-                        <p>{t("profile")}</p>
-                        <p>{t("chat")}</p>
-                        {role === "Admin" && <p>{t("actions")}</p>}
-                    </div>
-                    {
-                        users.length > 0 ? (
-                            users.map((user, index) => (
-                                <li key={index}>
-                                    <p>{index + 1}</p>
-                                    <p>{user.name}</p>
-                                    <p>{user.grade}</p>
-                                    <p>
-                                        <Button onSelect={handleOpenProfile} text={t("profile")} />
-                                    </p>
-                                    <p>
-                                        <Button onSelect={handleOpenChat} text={t("chat")} />
-                                    </p>
-                                </li>
-                            ))
-                        ) : (
-                            <p>
-                                No participants found
-                            </p>
-                        )
-                    }
+                <div className={tableClasses.table}>
+                    <ul>
+                        <div className={tableClasses.table_head}>
+                            <p>Number</p>
+                            <p>{t("id")}</p>
+                            <p>{t("Student-Name")}</p>
+                            <p>{t("grade")}</p>
+                            <p>{t("profile")}</p>
+                            <p>{t("chat")}</p>
+                            {role === "Admin" && <p>{t("actions")}</p>}
+                        </div>
+                        {
+                            users.length > 0 ? (
+                                users.map((user, index) => (
+                                    <li key={index}>
+                                        <p>{index + 1}</p>
+                                        <p>id</p>
+                                        <p>{user.name}</p>
+                                        <p>{user.grade}</p>
+                                        <p>
+                                            <Button onSelect={handleOpenProfile} text={t("profile")} />
+                                        </p>
+                                        <p>
+                                            <Button onSelect={handleOpenChat} text={t("chat")} />
+                                        </p>
+                                    </li>
+                                ))
+                            ) : (
+                                <p>
+                                    No participants found
+                                </p>
+                            )
+                        }
+                    </ul>
                 </div>
             </div>
         </div>

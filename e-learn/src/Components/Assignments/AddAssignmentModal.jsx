@@ -54,7 +54,7 @@ const AddAssignmentModal = forwardRef(function AddAssignmentModal({ onSuccess },
 
         fd.append('GroupId', groupId);
         fd.append('End', endDateTime);  // Ensure this matches the backend DTO field name
-        
+
         assignmentData.files.forEach(file => {
             fd.append('Attachements', file);  // Ensure this matches the backend DTO field name
         });
@@ -105,7 +105,7 @@ const AddAssignmentModal = forwardRef(function AddAssignmentModal({ onSuccess },
                 </div>
                 <div className={classes.description}>
                     <label htmlFor="description">{t('description')}</label>
-                    <textarea id="description" name="Description" required></textarea>
+                    <textarea id="description" name="Description" required className={classes.textarea}></textarea>
                 </div>
                 <FileUpload collectFiles={handleCollectFiles} />
                 <SubmitButton cancel={handleCancelClick} />

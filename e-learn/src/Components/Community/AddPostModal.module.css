@@ -1,0 +1,72 @@
+.modal {
+    padding: 2%;
+    width: 50%;
+    border: none;
+    border-radius: 10px;
+    box-shadow: var(grey-shadow);
+    animation: fade-slide-in-from-top 0.3s ease-in-out;
+    margin: auto;
+    position: relative;
+    color: var(--main-color);
+    /* height: 550px;w  */
+}
+
+/* 
+@media (max-width:1100px) {
+    .modal {
+        width: 50%;
+    }
+} */
+
+@media (max-width:768px) {
+    .modal {
+        width: 85%;
+    }
+}
+
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.img {
+    width: 40px;
+    border-radius: 50%;
+}
+
+[dir="rtl"] .img {
+    margin-left: 10px;
+}
+
+[dir="ltr"] .img {
+    margin-right: 10px;
+}
+
+.textarea {
+    /* border: none; */
+    /* padding: 10px;
+    width: 100%;
+    height: fit-content; */
+    resize: none;
+    /* Prevent manual resizing */
+    overflow: hidden;
+    /* Hide scroll bars */
+    min-height: 40px;
+    /* Set a minimum height */
+}
+
+.editable {
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
+    min-height: 30px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.editable:focus {
+    outline: none;
+    border-color: #66afe9;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+}
