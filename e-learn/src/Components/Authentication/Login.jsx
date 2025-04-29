@@ -35,6 +35,7 @@ export default function Login() {
 
         try {
             const response = await httpRequest('POST', 'https://elearnapi.runasp.net/api/Account/LogIn', null, requestBody);
+            console.log(response);
             if (response.statusCode === 200) {
                 // Successful login
                 console.log('Login successful');

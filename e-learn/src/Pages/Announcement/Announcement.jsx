@@ -87,16 +87,31 @@ export default function Announcement() {
         }
     };
 
-    const saveEditedMessage = () => {
+    const saveEditedMessage = async () => {
         if (inputValue) {
-            setChat((prevChat) =>
-                prevChat.map((msg) =>
-                    msg.key === editMode.messageKey ? { ...msg, msg: inputValue } : msg
-                )
-            );
-            setEditMode({ isEditing: false, messageKey: null });
-            setInputValue('');
-            setOriginalMessage('');
+            try {
+                const token = getAuthToken();
+                const response = await httpRequest(
+                    'PUT',`https://elearnapi.runasp.net/api/Announcement/EditAnnouncement/${editMode.messageKey}`,
+                    token, {text: inputValue, groups: [1]}
+                );
+    
+                if (response.statusCode === 200) {
+                    console.log('Announcement updated successfully');
+                    setChat((prevChat) =>
+                        prevChat.map((msg) =>
+                            msg.key === editMode.messageKey ? { ...msg, msg: inputValue } : msg
+                        )
+                    );
+                    setEditMode({ isEditing: false, messageKey: null });
+                    setInputValue('');
+                    setOriginalMessage('');
+                } else {
+                    console.error('Failed to update announcement:', response);
+                }
+            } catch (error) {
+                console.error('An error occurred while updating the announcement:', error);
+            }
         }
     };
 
