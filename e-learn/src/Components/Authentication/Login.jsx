@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { httpRequest } from '../../HTTP';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 import '../../App.css';
 export default function Login() {
     const { t } = useTranslation();
@@ -53,10 +54,11 @@ export default function Login() {
 
                 if (role === 'Student') {
                     navigate('/stuMain');
+                    return redirect("/stuMain")
                 } else if (role === 'Staff') {
-                    navigate('/InsMain');
+                    return redirect("/InsMain")
                 } else if (role === "Admin") {
-                    navigate('/users');
+                    return redirect("/users")
                 }
 
             } else {
